@@ -10,7 +10,7 @@ description: A new Flutter application.
 # Read more about Android versioning at https://developer.android.com/studio/publish/versioning
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
-# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/AuthStates/CoreFoundationKeys.html
 version: 1.0.0+1
 
 environment:
@@ -20,7 +20,12 @@ dependencies:
   flutter:
     sdk: flutter
   sembast: ^2.1.1
+  redux_thunk: ^0.2.1
   path_provider: ^1.4.4
+  built_collection: "4.2.2"
+  flutter_map: ^0.7.3
+  built_value: "6.8.2"
+  user_location: ^0.0.6
   redux: ^3.0.0
   flutter_redux: ^0.5.4
   flutter_launcher_icons: ^0.7.4
@@ -32,7 +37,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  build_runner: "1.7.1"
+  built_value_generator: "6.8.2"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
