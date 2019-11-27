@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bolha_musical/model/AuthState.dart';
 import 'package:bolha_musical/redux/app_state.dart';
-import 'package:bolha_musical/redux/store.dart';
+import 'package:bolha_musical/utils/noAuthRedirect.dart';
 import 'package:bolha_musical/widgets/dialogPerfil.dart';
 import 'package:bolha_musical/widgets/drawer.dart';
 import 'package:flutter/material.dart';
@@ -35,13 +35,7 @@ class _MapaState extends State<Mapa> {
   @override
   void initState() {
     super.initState();
-    print("EU SOU O MAP MUAHAHAHHAHAHAH");
-    if (store.state.token.token == null) {
-//      Navigator.push(
-//        context,
-//        MaterialPageRoute(builder: (context) => Mapa(store: store)),
-//      );
-    }
+    noAuthRedirect();
     _marker = _markers[_markerIndex];
     markers.add(_marker);
     _timer = Timer.periodic(Duration(seconds: 10), (_) {

@@ -1,5 +1,5 @@
-import 'package:bolha_musical/api/me.dart';
 import 'package:bolha_musical/redux/app_state.dart';
+import 'package:bolha_musical/utils/UsersSessaoUtils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
@@ -61,8 +61,7 @@ class _HomeDrawerState extends State<HomeDrawer>
                           color: Colors.white,
                         ),
                         onPressed: () {
-                          print(state.me);
-                          getMe();
+                          UsersSessaoUtils.getMeFromTokenAndStore();
                         },
                       ),
                     ),
