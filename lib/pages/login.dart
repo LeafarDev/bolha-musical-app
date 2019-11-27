@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'mapa.dart';
 
@@ -42,6 +43,7 @@ class _LoginState extends State<Login> {
 
   @override
   void initState() {
+    _getLocalToken();
     flutterWebviewPlugin.close();
     _geAuthState();
     // Add a listener to on url changed
@@ -118,9 +120,21 @@ class _LoginState extends State<Login> {
       ),
     );
   }
+  Future<void> _getLocalToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    String tokenStr = prefs.getString('token') ?? null;
+    if (tokenStr != null) {
+      Token tokenDto = Token.fromJson(tokenStr);
+      store.dispatch(SetToken(tokenDto));
+      getMe();
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Mapa()),
+      );
+    }
+  }
 
   void _getToken() async {
-
     final res = await http.get(
         "http://10.0.0.108:3001/api/spotify/state/trocar/token?state=${store.state.authState.id}");
     if (res.statusCode == 200) {
@@ -128,6 +142,16 @@ class _LoginState extends State<Login> {
       print(res.body);
       Token tokenDto = Token.fromJson(res.body);
       store.dispatch(SetToken(tokenDto));
+      // obtain shared preferences
+      final prefs = await SharedPreferences.getInstance();
+      try {
+        prefs.setString('token', tokenDto.toJson());
+      } catch (error) {
+        print("FALHA AO SERIALIZARRRRRRRRRRRRRRRRRRRRR");
+        print(error);
+      }
+
+
       getMe();
     } else {
       _geAuthState();
@@ -137,7 +161,6 @@ class _LoginState extends State<Login> {
   }
 
   void _geAuthState() async {
-
     final res =
         await http.get("http://10.0.0.108:3001/api/spotify/login/codigo/novo");
     if (res.statusCode == 200) {

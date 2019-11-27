@@ -3,7 +3,6 @@ import 'package:bolha_musical/redux/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
-
 class HomeDrawer extends StatefulWidget {
   @override
   _HomeDrawerState createState() => _HomeDrawerState();
@@ -69,7 +68,11 @@ class _HomeDrawerState extends State<HomeDrawer>
                     ),
                   ],
                 ),
-                getListTile('Mapa', onTap: () {
+                getListTile(
+                    'Mapa',
+                    Icon(
+                      Icons.map,
+                    ), onTap: () {
                   Navigator.pushReplacementNamed(context, '/mapa');
                 })
               ],
@@ -78,8 +81,9 @@ class _HomeDrawerState extends State<HomeDrawer>
         });
   }
 
-  Widget getListTile(title, {Function onTap}) {
+  Widget getListTile(title, icon, {Function onTap}) {
     return ListTile(
+      leading: icon,
       title: Text(title),
       onTap: onTap,
     );
