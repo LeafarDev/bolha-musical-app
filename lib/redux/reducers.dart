@@ -1,5 +1,5 @@
-import 'package:bolha_musical/model/app_state.dart';
 import 'package:bolha_musical/redux/actions.dart';
+import 'package:bolha_musical/redux/app_state.dart';
 
 AppState reducer(AppState prevState, dynamic action) {
   AppState newState = AppState.fromAppState(prevState);

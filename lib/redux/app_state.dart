@@ -1,8 +1,7 @@
 import 'package:bolha_musical/model/AuthState.dart';
-import 'package:flutter/material.dart';
 
-import 'Me.dart';
-import 'Token.dart';
+import '../model/Me.dart';
+import '../model/Token.dart';
 
 class AppState {
   AuthState authState = new AuthState();

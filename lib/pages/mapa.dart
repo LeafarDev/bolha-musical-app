@@ -1,7 +1,8 @@
 import 'dart:async';
 
 import 'package:bolha_musical/model/AuthState.dart';
-import 'package:bolha_musical/model/app_state.dart';
+import 'package:bolha_musical/redux/app_state.dart';
+import 'package:bolha_musical/redux/store.dart';
 import 'package:bolha_musical/widgets/dialogPerfil.dart';
 import 'package:bolha_musical/widgets/drawer.dart';
 import 'package:flutter/material.dart';
@@ -9,27 +10,19 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:latlong/latlong.dart';
-import 'package:redux/redux.dart';
 import 'package:user_location/user_location.dart';
 
 class Mapa extends StatefulWidget {
-  final Store<AppState> store;
-
-  Mapa({this.store});
-
   @override
-  _MapaState createState() => new _MapaState(store: store);
+  _MapaState createState() => new _MapaState();
 }
 
 class _MapaState extends State<Mapa> {
-  final Store<AppState> store;
   Marker _marker;
   Timer _timer;
   int _markerIndex = 0;
   MapController mapController = MapController();
   List<Marker> markers = [];
-
-  _MapaState({this.store});
 
   final flutterWebviewPlugin = new FlutterWebviewPlugin();
   Future<AuthState> authState;
@@ -73,7 +66,7 @@ class _MapaState extends State<Mapa> {
         title: Text('Mapa'),
         backgroundColor: Colors.teal,
       ),
-      drawer: HomeDrawer(store: store),
+      drawer: HomeDrawer(),
       body: StoreConnector<AppState, AppState>(
         converter: (store) => store.state,
         builder: (context, state) {
@@ -117,7 +110,6 @@ class _MapaState extends State<Mapa> {
       ),
     );
   }
-
 }
 
 List<Marker> _markers = [

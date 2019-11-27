@@ -1,13 +1,10 @@
 import 'dart:async';
 
 import 'package:bolha_musical/model/AuthState.dart';
-import 'package:bolha_musical/model/Token.dart';
-import 'package:bolha_musical/model/app_state.dart';
-import 'package:bolha_musical/redux/actions.dart';
+import 'package:bolha_musical/redux/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
-import 'package:http/http.dart' as http;
 import 'package:redux/redux.dart';
 
 class Esqueleto extends StatefulWidget {
