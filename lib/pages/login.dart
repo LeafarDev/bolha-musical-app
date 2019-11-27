@@ -14,7 +14,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:http/http.dart' as http;
 
-import 'mapa.dart';
+import 'mapa/mapa.dart';
 
 class Login extends StatefulWidget {
   @override

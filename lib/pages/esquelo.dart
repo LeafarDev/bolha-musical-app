@@ -8,29 +8,17 @@ import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:redux/redux.dart';
 
 class Esqueleto extends StatefulWidget {
-  final Store<AppState> store;
-
-  Esqueleto({this.store});
 
   @override
-  _EsqueletoState createState() => new _EsqueletoState(store: store);
+  _EsqueletoState createState() => new _EsqueletoState();
 }
 
 class _EsqueletoState extends State<Esqueleto> {
-  final Store<AppState> store;
-
-  _EsqueletoState({this.store});
 
   @override
   State<StatefulWidget> createState() {
     return null;
   }
-
-  final flutterWebviewPlugin = new FlutterWebviewPlugin();
-  StreamSubscription _onDestroy;
-  StreamSubscription<String> _onUrlChanged;
-  StreamSubscription<WebViewStateChanged> _onStateChanged;
-  Future<AuthState> authState;
 
   @override
   void dispose() {

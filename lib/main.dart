@@ -1,5 +1,6 @@
+import 'package:bolha_musical/pages/bolhas/bolha.dart';
 import 'package:bolha_musical/pages/login.dart';
-import 'package:bolha_musical/pages/mapa.dart';
+import 'package:bolha_musical/pages/mapa/mapa.dart';
 import 'package:bolha_musical/redux/store.dart';
 import 'package:bolha_musical/utils/NavigationService.dart';
 import 'package:bolha_musical/utils/SetupLocator.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (context) => Login(),
           '/mapa': (context) => Mapa(),
+          '/bolhas': (context) => Bolha(),
         },
       ),
     );
