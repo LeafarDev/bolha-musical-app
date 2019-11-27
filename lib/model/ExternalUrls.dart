@@ -1,5 +1,8 @@
 library external_urls;
 
+import 'dart:convert';
+
+import 'package:bolha_musical/model/serializers.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -16,4 +19,9 @@ abstract class ExternalUrls
   String get spotify;
 
   static Serializer<ExternalUrls> get serializer => _$externalUrlsSerializer;
+
+  String toJson() {
+    return json
+        .encode(serializers.serializeWith(ExternalUrls.serializer, this));
+  }
 }

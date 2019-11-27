@@ -1,6 +1,6 @@
 library image_user;
 
-import 'dart:convert' as json;
+import 'dart:convert';
 
 import 'package:bolha_musical/model/serializers.dart';
 import 'package:built_value/built_value.dart';
@@ -28,15 +28,13 @@ abstract class UserImage implements Built<UserImage, UserImageBuilder> {
   String get width;
 
   static UserImage fromJson(String jsonString) {
-    final parsed = json.jsonDecode(jsonString);
+    final parsed = jsonDecode(jsonString);
     UserImage token =
         standardSerializers.deserializeWith(UserImage.serializer, parsed);
     return token;
   }
 
   String toJson() {
-    final parsed = json.jsonEncode(this);
-    return standardSerializers.serializeWith(UserImage.serializer, parsed);
+    return json.encode(serializers.serializeWith(UserImage.serializer, this));
   }
-
 }

@@ -1,4 +1,4 @@
-import 'dart:convert' as json;
+import 'dart:convert';
 
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -21,14 +21,13 @@ abstract class Token implements Built<Token, TokenBuilder> {
   Token._();
 
   static Token fromJson(String jsonString) {
-    final parsed = json.jsonDecode(jsonString);
+    final parsed = jsonDecode(jsonString);
     Token token = standardSerializers.deserializeWith(Token.serializer, parsed);
     return token;
   }
 
   String toJson() {
-    final parsed = json.jsonEncode(this);
-    return standardSerializers.serializeWith(Token.serializer, parsed);
+    return json.encode(serializers.serializeWith(Token.serializer, this));
   }
 
   factory Token([void Function(TokenBuilder) updates]) = _$Token;

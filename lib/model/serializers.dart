@@ -7,6 +7,7 @@ library serializers;
 import 'package:bolha_musical/model/ExplicitContent.dart';
 import 'package:bolha_musical/model/ExternalUrls.dart';
 import 'package:bolha_musical/model/UserImage.dart';
+import 'package:bolha_musical/redux/app_state.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
@@ -36,7 +37,8 @@ part 'serializers.g.dart';
   ExplicitContent,
   ExternalUrls,
   Token,
-  UserImage
+  UserImage,
+  AppState
 ])
 Serializers serializers = _$serializers;
 Serializers standardSerializers =

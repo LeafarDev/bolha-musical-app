@@ -1,6 +1,6 @@
 library me;
 
-import 'dart:convert' as json;
+import 'dart:convert';
 
 import 'package:bolha_musical/model/UserImage.dart';
 import 'package:bolha_musical/model/serializers.dart';
@@ -68,14 +68,14 @@ abstract class Me implements Built<Me, MeBuilder> {
   String get href;
 
   static Me fromJson(String jsonString) {
-    final parsed = json.jsonDecode(jsonString);
+    final parsed = jsonDecode(jsonString);
     Me me = standardSerializers.deserializeWith(Me.serializer, parsed);
     return me;
   }
 
+
   String toJson() {
-    final parsed = json.jsonEncode(this);
-    return standardSerializers.serializeWith(Me.serializer, parsed);
+    return json.encode(serializers.serializeWith(Me.serializer, this));
   }
 
   static Serializer<Me> get serializer => _$meSerializer;

@@ -1,5 +1,8 @@
 library explicit_content;
 
+import 'dart:convert';
+
+import 'package:bolha_musical/model/serializers.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -20,4 +23,8 @@ abstract class ExplicitContent
 
   static Serializer<ExplicitContent> get serializer =>
       _$explicitContentSerializer;
+
+  String toJson() {
+    return json.encode(serializers.serializeWith(ExplicitContent.serializer, this));
+  }
 }

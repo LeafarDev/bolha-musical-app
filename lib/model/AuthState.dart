@@ -1,4 +1,4 @@
-import 'dart:convert' as json;
+import 'dart:convert';
 
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -29,14 +29,14 @@ abstract class AuthState implements Built<AuthState, AuthStateBuilder> {
   AuthState._();
 
   static AuthState fromJson(String jsonString) {
-    final parsed = json.jsonDecode(jsonString);
-    AuthState me = standardSerializers.deserializeWith(AuthState.serializer, parsed);
+    final parsed = jsonDecode(jsonString);
+    AuthState me =
+        standardSerializers.deserializeWith(AuthState.serializer, parsed);
     return me;
   }
 
   String toJson() {
-    final parsed = json.jsonEncode(this);
-    return standardSerializers.serializeWith(AuthState.serializer, parsed);
+    return json.encode(serializers.serializeWith(AuthState.serializer, this));
   }
 
   factory AuthState([void Function(AuthStateBuilder) updates]) = _$AuthState;
