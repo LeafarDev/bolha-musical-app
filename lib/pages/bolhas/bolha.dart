@@ -46,8 +46,7 @@ class Bolha extends StatelessWidget {
               // action button
               IconButton(
                 icon: Icon(Icons.refresh),
-                onPressed: () {
-                },
+                onPressed: () {},
               ),
             ]),
         body: SafeArea(

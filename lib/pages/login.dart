@@ -5,16 +5,10 @@ import 'package:bolha_musical/model/AuthState.dart';
 import 'package:bolha_musical/redux/actions.dart';
 import 'package:bolha_musical/redux/app_state.dart';
 import 'package:bolha_musical/redux/store.dart';
-import 'package:bolha_musical/utils/NavigationService.dart';
 import 'package:bolha_musical/utils/UsersSessaoUtils.dart';
-import 'package:bolha_musical/utils/noAuthRedirect.dart';
-import 'package:bolha_musical/utils/SetupLocator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
-import 'package:http/http.dart' as http;
-
-import 'mapa/mapa.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -50,13 +44,13 @@ class _LoginState extends State<Login> {
     _geAuthState();
     // Add a listener to on url changed
     _onUrlChanged = flutterWebviewPlugin.onUrlChanged.listen((String url) {
-      if (url.startsWith("http://10.0.0.108:3001/api/spotify/login/callback?code")) {
+      if (url.startsWith(
+          "http://10.0.0.108:3001/api/spotify/login/callback?code")) {
         flutterWebviewPlugin.close();
         UsersSessaoUtils.inicializarSessaoComState();
       }
-      if (url.startsWith("http://10.0.0.108:3001/api/spotify/login/callback?code")) {
-
-      }
+      if (url.startsWith(
+          "http://10.0.0.108:3001/api/spotify/login/callback?code")) {}
     });
   }
 

@@ -20,7 +20,6 @@ abstract class Bolha implements Built<Bolha, BolhaBuilder> {
   @BuiltValueField(wireName: 'id')
   int get id;
 
-
   @BuiltValueField(wireName: 'apelido')
   String get apelido;
 
@@ -47,6 +46,10 @@ abstract class Bolha implements Built<Bolha, BolhaBuilder> {
   @nullable
   @BuiltValueField(wireName: 'longitude')
   double get longitude;
+
+  @nullable
+  @BuiltValueField(wireName: 'distancia_metros')
+  double get distancia_metros;
 
   @nullable
   @BuiltValueField(wireName: 'user_lider_id')

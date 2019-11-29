@@ -4,15 +4,13 @@ import 'package:bolha_musical/api/BolhaApi.dart';
 import 'package:bolha_musical/api/UsersApi.dart';
 import 'package:bolha_musical/model/AuthState.dart';
 import 'package:bolha_musical/model/Bolha.dart';
-import 'package:bolha_musical/model/BolhaMembro.dart';
 import 'package:bolha_musical/model/Localizacao.dart';
+import 'package:bolha_musical/pages/mapa/widgets/CircleMarker.dart';
+import 'package:bolha_musical/pages/mapa/widgets/MarkerMembro.dart';
 import 'package:bolha_musical/redux/actions.dart';
 import 'package:bolha_musical/redux/app_state.dart';
 import 'package:bolha_musical/redux/store.dart';
-import 'package:bolha_musical/utils/NavigationService.dart';
-import 'package:bolha_musical/utils/SetupLocator.dart';
 import 'package:bolha_musical/widgets/bottomBar.dart';
-import 'package:bolha_musical/widgets/dialogPerfil.dart';
 import 'package:bolha_musical/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -27,15 +25,13 @@ class Mapa extends StatefulWidget {
 }
 
 class _MapaState extends State<Mapa> {
-
   Bolha _bolhaAtual = null;
-
   double _progressValue = 0.0;
   Timer _timer;
   MapController mapController = MapController();
-  List<Marker> locationMarker = [];
   int _currentBottomBarIndex = 0;
   Future<AuthState> authState;
+  List<Marker> locationMarker = [];
 
   @override
   State<StatefulWidget> createState() {
@@ -108,28 +104,16 @@ class _MapaState extends State<Mapa> {
                         urlTemplate:
                             'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                         subdomains: ['a', 'b', 'c']),
-                    CircleLayerOptions(circles: [
-                      CircleMarker(
-                          //radius marker
-                          point: LatLng(
-                              _bolhaAtual != null
-                                  ? _bolhaAtual.latitude
-                                  : 0,
-                              _bolhaAtual != null
-                                  ? _bolhaAtual.longitude
-                                  : 0),
-                          color: Colors.lightGreenAccent.withOpacity(0.1),
-                          borderStrokeWidth: 3.0,
-                          borderColor: Colors.green,
-                          useRadiusInMeter: true,
-                          radius: _bolhaAtual != null ? _bolhaAtual.raio : 300// metros
-                          )
-                    ]),
+                    CircleLayerOptions(
+                        circles: [CircleMarkerMapa(_bolhaAtual)]),
                     MarkerLayerOptions(
                         markers: _bolhaAtual != null
-                            ? [..._bolhaAtual.membros
-                                .map((membro) => _buildMarker(membro))
-                                .toList(), ...locationMarker]
+                            ? [
+                                ..._bolhaAtual.membros
+                                    .map((membro) => MarkerMembro(membro))
+                                    .toList(),
+                                ...locationMarker
+                              ]
                             : []),
                     UserLocationOptions(
                       context: context,
@@ -182,26 +166,4 @@ class _MapaState extends State<Mapa> {
       ),
     );
   }
-
-  Marker _buildMarker(BolhaMembro membro) {
-    return Marker(
-      width: 34.0,
-      height: 34.0,
-      point: LatLng(membro.latitude, membro.longitude),
-      builder: (ctx) => GestureDetector(
-          behavior: HitTestBehavior.translucent,
-          onTap: () {
-            showCustomDialogWithImage(ctx);
-          },
-          child: Container(
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: NetworkImage(membro.me.images != null
-                          ? membro.me.images[0].url
-                          : store.state.padraoPerfilFoto))))),
-    );
-  }
-
 }

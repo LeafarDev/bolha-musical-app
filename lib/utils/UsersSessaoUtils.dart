@@ -11,15 +11,14 @@ import 'NavigationService.dart';
 import 'getLocalToken.dart';
 
 class UsersSessaoUtils {
-
-  static inicializarSessaoComToken () async {
+  static inicializarSessaoComToken() async {
     Token localToken = await getLocalToken() as Token;
     if (localToken != null) {
       _setSessionToken(localToken);
     }
   }
 
-  static _setSessionToken (token) async {
+  static _setSessionToken(token) async {
     try {
       final prefs = await SharedPreferences.getInstance();
       store.dispatch(SetToken(token));
@@ -39,6 +38,7 @@ class UsersSessaoUtils {
       locator<NavigationService>().navigateTo('/login');
     }
   }
+
   static inicializarSessaoComState() async {
     if (store.state.authState.id != null) {
       Token token = await UsersApi.getToken();

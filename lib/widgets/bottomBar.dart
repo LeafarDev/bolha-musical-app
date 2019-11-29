@@ -1,5 +1,3 @@
-
-
 import 'package:bolha_musical/redux/actions.dart';
 import 'package:bolha_musical/redux/store.dart';
 import 'package:bolha_musical/utils/NavigationService.dart';
@@ -8,15 +6,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 List<BottomNavigationBarItem> bottomBarList() {
-  return [BottomNavigationBarItem(
-      title: Text(
-        "Mapa",
-        style: TextStyle(color: _ItemBottomColor(0)),
-      ),
-      icon: Icon(
-        Icons.map,
-        color: _ItemBottomColor(0),
-      )),
+  return [
+    BottomNavigationBarItem(
+        title: Text(
+          "Mapa",
+          style: TextStyle(color: _ItemBottomColor(0)),
+        ),
+        icon: Icon(
+          Icons.map,
+          color: _ItemBottomColor(0),
+        )),
     BottomNavigationBarItem(
         title: Text(
           "Chat",
@@ -43,10 +42,11 @@ List<BottomNavigationBarItem> bottomBarList() {
         icon: Icon(
           Icons.playlist_play,
           color: _ItemBottomColor(3),
-        )),];
+        )),
+  ];
 }
 
-handleBottomTap (index) {
+handleBottomTap(index) {
   store.dispatch(SetCurrentBottomBarIndex(index));
 
   if (index == 0) {
@@ -57,7 +57,9 @@ handleBottomTap (index) {
     locator<NavigationService>().navigateTo('/bolhas');
   } else {}
 }
-_ItemBottomColor(index) {
 
-  return store.state.currentBottomBarIndex == index ? Colors.yellowAccent : Colors.white;
+_ItemBottomColor(index) {
+  return store.state.currentBottomBarIndex == index
+      ? Colors.yellowAccent
+      : Colors.white;
 }

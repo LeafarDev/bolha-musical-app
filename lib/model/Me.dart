@@ -71,20 +71,15 @@ abstract class Me implements Built<Me, MeBuilder> {
     return " ";
   }
 
-  String g() {
+  String g() {}
 
-  }
-
-  String b() {
-
-  }
+  String b() {}
 
   static Me fromJson(String jsonString) {
     final parsed = jsonDecode(jsonString);
     Me me = standardSerializers.deserializeWith(Me.serializer, parsed);
     return me;
   }
-
 
   String toJson() {
     return json.encode(standardSerializers.serializeWith(Me.serializer, this));

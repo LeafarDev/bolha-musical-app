@@ -38,8 +38,7 @@ class BolhasFormState extends State<BolhasForm> {
                 }
                 return null;
               },
-            )
-        ),
+            )),
       ),
     );
   }

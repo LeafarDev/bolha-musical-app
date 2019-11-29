@@ -39,7 +39,9 @@ class _ChatScreenState extends State<ChatScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            message.sender.displayName != null ? "${message.sender.displayName} disse:" : "Gman disse:",
+            message.sender.displayName != null
+                ? "${message.sender.displayName} disse:"
+                : "Gman disse:",
             style: TextStyle(
               color: Colors.black,
               fontSize: 14.0,
@@ -77,9 +79,8 @@ class _ChatScreenState extends State<ChatScreen> {
               ? Icon(Icons.favorite)
               : Icon(Icons.favorite_border),
           iconSize: 30.0,
-          color: message.isLiked
-              ? Theme.of(context).primaryColor
-              : Colors.black,
+          color:
+              message.isLiked ? Theme.of(context).primaryColor : Colors.black,
           onPressed: () {},
         )
       ],

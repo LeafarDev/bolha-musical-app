@@ -21,7 +21,7 @@ abstract class ExternalUrls
   static Serializer<ExternalUrls> get serializer => _$externalUrlsSerializer;
 
   String toJson() {
-    return json
-        .encode(standardSerializers.serializeWith(ExternalUrls.serializer, this));
+    return json.encode(
+        standardSerializers.serializeWith(ExternalUrls.serializer, this));
   }
 }

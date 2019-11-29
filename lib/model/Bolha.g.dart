@@ -60,6 +60,12 @@ class _$BolhaSerializer implements StructuredSerializer<Bolha> {
         ..add(serializers.serialize(object.longitude,
             specifiedType: const FullType(double)));
     }
+    if (object.distancia_metros != null) {
+      result
+        ..add('distancia_metros')
+        ..add(serializers.serialize(object.distancia_metros,
+            specifiedType: const FullType(double)));
+    }
     if (object.userLiderId != null) {
       result
         ..add('user_lider_id')
@@ -149,6 +155,10 @@ class _$BolhaSerializer implements StructuredSerializer<Bolha> {
           result.longitude = serializers.deserialize(value,
               specifiedType: const FullType(double)) as double;
           break;
+        case 'distancia_metros':
+          result.distancia_metros = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double;
+          break;
         case 'user_lider_id':
           result.userLiderId = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
@@ -204,6 +214,8 @@ class _$Bolha extends Bolha {
   @override
   final double longitude;
   @override
+  final double distancia_metros;
+  @override
   final int userLiderId;
   @override
   final String createdBy;
@@ -230,6 +242,7 @@ class _$Bolha extends Bolha {
       this.latitude,
       this.raio,
       this.longitude,
+      this.distancia_metros,
       this.userLiderId,
       this.createdBy,
       this.createdAt,
@@ -265,6 +278,7 @@ class _$Bolha extends Bolha {
         latitude == other.latitude &&
         raio == other.raio &&
         longitude == other.longitude &&
+        distancia_metros == other.distancia_metros &&
         userLiderId == other.userLiderId &&
         createdBy == other.createdBy &&
         createdAt == other.createdAt &&
@@ -289,14 +303,22 @@ class _$Bolha extends Bolha {
                                             $jc(
                                                 $jc(
                                                     $jc(
-                                                        $jc($jc(0, id.hashCode),
-                                                            apelido.hashCode),
-                                                        cor.hashCode),
-                                                    ehFixa.hashCode),
-                                                userIdReferenciaRaio.hashCode),
-                                            latitude.hashCode),
-                                        raio.hashCode),
-                                    longitude.hashCode),
+                                                        $jc(
+                                                            $jc(
+                                                                $jc(
+                                                                    0,
+                                                                    id
+                                                                        .hashCode),
+                                                                apelido
+                                                                    .hashCode),
+                                                            cor.hashCode),
+                                                        ehFixa.hashCode),
+                                                    userIdReferenciaRaio
+                                                        .hashCode),
+                                                latitude.hashCode),
+                                            raio.hashCode),
+                                        longitude.hashCode),
+                                    distancia_metros.hashCode),
                                 userLiderId.hashCode),
                             createdBy.hashCode),
                         createdAt.hashCode),
@@ -317,6 +339,7 @@ class _$Bolha extends Bolha {
           ..add('latitude', latitude)
           ..add('raio', raio)
           ..add('longitude', longitude)
+          ..add('distancia_metros', distancia_metros)
           ..add('userLiderId', userLiderId)
           ..add('createdBy', createdBy)
           ..add('createdAt', createdAt)
@@ -364,6 +387,11 @@ class BolhaBuilder implements Builder<Bolha, BolhaBuilder> {
   double get longitude => _$this._longitude;
   set longitude(double longitude) => _$this._longitude = longitude;
 
+  double _distancia_metros;
+  double get distancia_metros => _$this._distancia_metros;
+  set distancia_metros(double distancia_metros) =>
+      _$this._distancia_metros = distancia_metros;
+
   int _userLiderId;
   int get userLiderId => _$this._userLiderId;
   set userLiderId(int userLiderId) => _$this._userLiderId = userLiderId;
@@ -405,6 +433,7 @@ class BolhaBuilder implements Builder<Bolha, BolhaBuilder> {
       _latitude = _$v.latitude;
       _raio = _$v.raio;
       _longitude = _$v.longitude;
+      _distancia_metros = _$v.distancia_metros;
       _userLiderId = _$v.userLiderId;
       _createdBy = _$v.createdBy;
       _createdAt = _$v.createdAt;
@@ -444,6 +473,7 @@ class BolhaBuilder implements Builder<Bolha, BolhaBuilder> {
               latitude: latitude,
               raio: raio,
               longitude: longitude,
+              distancia_metros: distancia_metros,
               userLiderId: userLiderId,
               createdBy: createdBy,
               createdAt: createdAt,

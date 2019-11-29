@@ -13,18 +13,19 @@ abstract class ExplicitContent
   ExplicitContent._();
 
   factory ExplicitContent([updates(ExplicitContentBuilder b)]) =
-  _$ExplicitContent;
+      _$ExplicitContent;
 
   @BuiltValueField(wireName: 'filter_enabled')
   bool get filterEnabled;
+
   @BuiltValueField(wireName: 'filter_locked')
   bool get filterLocked;
-
 
   static Serializer<ExplicitContent> get serializer =>
       _$explicitContentSerializer;
 
   String toJson() {
-    return json.encode(standardSerializers.serializeWith(ExplicitContent.serializer, this));
+    return json.encode(
+        standardSerializers.serializeWith(ExplicitContent.serializer, this));
   }
 }

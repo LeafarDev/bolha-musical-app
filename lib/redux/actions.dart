@@ -28,10 +28,13 @@ class SetMessage {
 
   SetMessage(this.payload);
 }
+
 class SetBolhaAtual {
-  final Bolha  payload;
+  final Bolha payload;
+
   SetBolhaAtual(this.payload);
 }
+
 class SetLocalizacaoAtual {
   final Localizacao payload;
 

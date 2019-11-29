@@ -117,7 +117,9 @@ class AppState {
   "uri":"spotify:user:wizzler"
 }}''')
   ];
-  String padraoPerfilFoto = "https://profile-images.scdn.co/images/userprofile/default/817641f61b9543e2a0faf1e43ab86b447bd86c1d";
+  String padraoPerfilFoto =
+      "https://profile-images.scdn.co/images/userprofile/default/817641f61b9543e2a0faf1e43ab86b447bd86c1d";
+
   AppState();
 
   AppState.fromAppState(AppState another) {
