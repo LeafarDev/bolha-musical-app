@@ -36,7 +36,7 @@ abstract class AuthState implements Built<AuthState, AuthStateBuilder> {
   }
 
   String toJson() {
-    return json.encode(serializers.serializeWith(AuthState.serializer, this));
+    return json.encode(standardSerializers.serializeWith(AuthState.serializer, this));
   }
 
   factory AuthState([void Function(AuthStateBuilder) updates]) = _$AuthState;

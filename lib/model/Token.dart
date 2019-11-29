@@ -27,7 +27,7 @@ abstract class Token implements Built<Token, TokenBuilder> {
   }
 
   String toJson() {
-    return json.encode(serializers.serializeWith(Token.serializer, this));
+    return json.encode(standardSerializers.serializeWith(Token.serializer, this));
   }
 
   factory Token([void Function(TokenBuilder) updates]) = _$Token;

@@ -8,12 +8,20 @@ part of serializers;
 
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(AuthState.serializer)
+      ..add(Bolha.serializer)
+      ..add(BolhaMembro.serializer)
       ..add(ExplicitContent.serializer)
       ..add(ExternalUrls.serializer)
       ..add(Followers.serializer)
+      ..add(Localizacao.serializer)
       ..add(Me.serializer)
+      ..add(Message.serializer)
       ..add(Token.serializer)
+      ..add(User.serializer)
       ..add(UserImage.serializer)
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(BolhaMembro)]),
+          () => new ListBuilder<BolhaMembro>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(UserImage)]),
           () => new ListBuilder<UserImage>()))

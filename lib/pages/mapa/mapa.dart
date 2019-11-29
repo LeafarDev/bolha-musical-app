@@ -1,16 +1,23 @@
 import 'dart:async';
 
+import 'package:bolha_musical/api/BolhaApi.dart';
+import 'package:bolha_musical/api/UsersApi.dart';
 import 'package:bolha_musical/model/AuthState.dart';
+import 'package:bolha_musical/model/Bolha.dart';
+import 'package:bolha_musical/model/BolhaMembro.dart';
+import 'package:bolha_musical/model/Localizacao.dart';
+import 'package:bolha_musical/redux/actions.dart';
 import 'package:bolha_musical/redux/app_state.dart';
+import 'package:bolha_musical/redux/store.dart';
 import 'package:bolha_musical/utils/NavigationService.dart';
 import 'package:bolha_musical/utils/SetupLocator.dart';
-import 'package:bolha_musical/utils/noAuthRedirect.dart';
+import 'package:bolha_musical/widgets/bottomBar.dart';
 import 'package:bolha_musical/widgets/dialogPerfil.dart';
 import 'package:bolha_musical/widgets/drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:latlong/latlong.dart';
 import 'package:user_location/user_location.dart';
 
@@ -20,14 +27,14 @@ class Mapa extends StatefulWidget {
 }
 
 class _MapaState extends State<Mapa> {
+
+  Bolha _bolhaAtual = null;
+
   double _progressValue = 0.0;
-  Marker _marker;
   Timer _timer;
-  int _markerIndex = 0;
   MapController mapController = MapController();
-  List<Marker> markers = [];
+  List<Marker> locationMarker = [];
   int _currentBottomBarIndex = 0;
-  final flutterWebviewPlugin = new FlutterWebviewPlugin();
   Future<AuthState> authState;
 
   @override
@@ -36,21 +43,26 @@ class _MapaState extends State<Mapa> {
   }
 
   @override
-  void initState() {
+  Future<void> initState() {
     super.initState();
-    noAuthRedirect();
-    _marker = _markers[_markerIndex];
-    markers.add(_marker);
-    _timer = Timer.periodic(Duration(seconds: 1), (_) {
+    _timer = Timer.periodic(Duration(seconds: 10), (_) {
       setState(() {
+        _bolhaAtual = store.state.bolhaAtual;
+        BolhaApi.getBolhaAtual();
+        // print(mapController.center.latitude);
+        // print(mapController.center.longitude);
+        Localizacao _localizacao = new Localizacao((b) => b
+          ..latitude = mapController.center.latitude
+          ..longitude = mapController.center.longitude);
+        store.dispatch(SetLocalizacaoAtual(_localizacao));
+        UsersApi.enviarLocalizacaoAtual();
+        print(_localizacao);
+
         if (_progressValue > 0.7) {
           _progressValue = 0.0;
         } else {
           _progressValue += 0.1;
         }
-        _marker = _markers[_markerIndex];
-        _markerIndex = (_markerIndex + 1) % _markers.length;
-        markers[markers.indexOf(_marker)] = _markers[_markerIndex];
       });
     });
   }
@@ -63,6 +75,10 @@ class _MapaState extends State<Mapa> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return Scaffold(
       appBar: AppBar(
         title: Text('Mapa'),
@@ -95,19 +111,30 @@ class _MapaState extends State<Mapa> {
                     CircleLayerOptions(circles: [
                       CircleMarker(
                           //radius marker
-                          point: LatLng(-23.4220974, -46.499184718),
+                          point: LatLng(
+                              _bolhaAtual != null
+                                  ? _bolhaAtual.latitude
+                                  : 0,
+                              _bolhaAtual != null
+                                  ? _bolhaAtual.longitude
+                                  : 0),
                           color: Colors.lightGreenAccent.withOpacity(0.1),
                           borderStrokeWidth: 3.0,
                           borderColor: Colors.green,
                           useRadiusInMeter: true,
-                          radius: 500 // metros
+                          radius: _bolhaAtual != null ? _bolhaAtual.raio : 300// metros
                           )
                     ]),
-                    MarkerLayerOptions(markers: markers),
+                    MarkerLayerOptions(
+                        markers: _bolhaAtual != null
+                            ? [..._bolhaAtual.membros
+                                .map((membro) => _buildMarker(membro))
+                                .toList(), ...locationMarker]
+                            : []),
                     UserLocationOptions(
                       context: context,
                       mapController: mapController,
-                      markers: markers,
+                      markers: locationMarker,
                     ),
                   ],
                   mapController: mapController,
@@ -148,106 +175,33 @@ class _MapaState extends State<Mapa> {
         type: BottomNavigationBarType.fixed,
         backgroundColor: Color.fromRGBO(1, 41, 51, 1),
         currentIndex: _currentBottomBarIndex,
-        items: [
-          BottomNavigationBarItem(
-              title: Text(
-                "Mapa",
-                style: TextStyle(color: _ItemBottomColor(0)),
-              ),
-              icon: Icon(
-                Icons.map,
-                color: _ItemBottomColor(0),
-              )),
-          BottomNavigationBarItem(
-              title: Text(
-                "Chat",
-                style: TextStyle(color: _ItemBottomColor(1)),
-              ),
-              icon: Icon(
-                Icons.chat,
-                color: _ItemBottomColor(1),
-              )),
-          BottomNavigationBarItem(
-              title: Text(
-                "Bolhas",
-                style: TextStyle(color: _ItemBottomColor(2)),
-              ),
-              icon: Icon(
-                Icons.bubble_chart,
-                color: _ItemBottomColor(2),
-              )),
-          BottomNavigationBarItem(
-              title: Text(
-                "Playlist",
-                style: TextStyle(color: _ItemBottomColor(3)),
-              ),
-              icon: Icon(
-                Icons.playlist_play,
-                color: _ItemBottomColor(3),
-              )),
-        ],
+        items: bottomBarList(),
         onTap: (index) {
-          if (index == 2) {
-            locator<NavigationService>().navigateTo('/bolhas');
-          } else {}
+          handleBottomTap(index);
         },
       ),
     );
   }
 
-  _ItemBottomColor(index) {
-    return _currentBottomBarIndex == index ? Colors.yellowAccent : Colors.white;
+  Marker _buildMarker(BolhaMembro membro) {
+    return Marker(
+      width: 34.0,
+      height: 34.0,
+      point: LatLng(membro.latitude, membro.longitude),
+      builder: (ctx) => GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () {
+            showCustomDialogWithImage(ctx);
+          },
+          child: Container(
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: NetworkImage(membro.me.images != null
+                          ? membro.me.images[0].url
+                          : store.state.padraoPerfilFoto))))),
+    );
   }
-}
 
-List<Marker> _markers = [
-  Marker(
-    width: 34.0,
-    height: 34.0,
-    point: LatLng(-23.4220974, -46.499184718),
-    builder: (ctx) => Container(
-        child: GestureDetector(
-      behavior: HitTestBehavior.translucent,
-      onTap: () {
-        showCustomDialogWithImage(ctx);
-      },
-      child: FlutterLogo(
-        colors: Colors.green,
-      ),
-    )),
-  ),
-  Marker(
-    width: 34.0,
-    height: 34.0,
-    point: LatLng(-23.422565, -46.498943318),
-    builder: (ctx) => GestureDetector(
-        behavior: HitTestBehavior.translucent,
-        onTap: () {
-          showCustomDialogWithImage(ctx);
-        },
-        child: Container(
-            decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                    fit: BoxFit.fill,
-                    image: NetworkImage(
-                        "https://profile-images.scdn.co/images/userprofile/default/817641f61b9543e2a0faf1e43ab86b447bd86c1d"))))),
-  ),
-  Marker(
-    width: 34.0,
-    height: 34.0,
-    point: LatLng(-23.4235455, -46.497802318),
-    builder: (ctx) => GestureDetector(
-        behavior: HitTestBehavior.translucent,
-        onTap: () {
-          showCustomDialogWithImage(ctx);
-        },
-        child: Container(
-            decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                    fit: BoxFit.fill,
-                    image: NetworkImage(
-                        "https://profile-images.scdn.co/images/userprofile/default/817641f61b9543e2a0faf1e43ab86b447bd86c1d"))))),
-  ),
-];
+}

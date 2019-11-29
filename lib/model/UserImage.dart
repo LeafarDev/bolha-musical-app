@@ -35,6 +35,6 @@ abstract class UserImage implements Built<UserImage, UserImageBuilder> {
   }
 
   String toJson() {
-    return json.encode(serializers.serializeWith(UserImage.serializer, this));
+    return json.encode(standardSerializers.serializeWith(UserImage.serializer, this));
   }
 }

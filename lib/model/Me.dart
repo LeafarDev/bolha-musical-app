@@ -67,6 +67,18 @@ abstract class Me implements Built<Me, MeBuilder> {
   @BuiltValueField(wireName: 'href')
   String get href;
 
+  String r() {
+    return " ";
+  }
+
+  String g() {
+
+  }
+
+  String b() {
+
+  }
+
   static Me fromJson(String jsonString) {
     final parsed = jsonDecode(jsonString);
     Me me = standardSerializers.deserializeWith(Me.serializer, parsed);
@@ -75,7 +87,7 @@ abstract class Me implements Built<Me, MeBuilder> {
 
 
   String toJson() {
-    return json.encode(serializers.serializeWith(Me.serializer, this));
+    return json.encode(standardSerializers.serializeWith(Me.serializer, this));
   }
 
   static Serializer<Me> get serializer => _$meSerializer;

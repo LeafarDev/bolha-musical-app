@@ -22,7 +22,7 @@ abstract class Followers implements Built<Followers, FollowersBuilder> {
   static Serializer<Followers> get serializer => _$followersSerializer;
 
   String toJson() {
-    return json.encode(serializers.serializeWith(Followers.serializer, this));
+    return json.encode(standardSerializers.serializeWith(Followers.serializer, this));
   }
 
 }

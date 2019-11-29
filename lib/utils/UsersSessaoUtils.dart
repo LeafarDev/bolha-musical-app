@@ -25,13 +25,17 @@ class UsersSessaoUtils {
       store.dispatch(SetToken(token));
       UsersSessaoUtils.getMeFromTokenAndStore();
       prefs.setString('token', token.toJson());
+      print("/mapa, fodasi kakakak");
       locator<NavigationService>().navigateTo('/mapa');
     } catch (error) {
       // TODO AVISAR USUÁRIO QUE DEU ERRO
+      final prefs = await SharedPreferences.getInstance();
+      print("TODO AVISAR USUÁRIO QUE DEU ERRO");
       print(error.toString());
       store.dispatch(SetAuthState(new AuthState()));
       store.dispatch(SetME(new Me()));
       store.dispatch(SetToken(new Token()));
+      prefs.setString('token', null);
       locator<NavigationService>().navigateTo('/login');
     }
   }
@@ -49,7 +53,7 @@ class UsersSessaoUtils {
     if (me != null) {
       store.dispatch(SetME(me));
     } else {
-      locator<NavigationService>().navigateTo('/login');
+      throw "Impossivel acioar me: getMeFromTokenAndStore";
     }
   }
 }

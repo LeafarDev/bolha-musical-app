@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:bolha_musical/model/AuthState.dart';
+import 'package:bolha_musical/model/Localizacao.dart';
 import 'package:bolha_musical/model/Me.dart';
 import 'package:bolha_musical/model/Token.dart';
 import 'package:bolha_musical/redux/store.dart';
@@ -33,9 +34,24 @@ class UsersApi {
         headers: {HttpHeaders.authorizationHeader: store.state.token.token});
     if (resMe.statusCode == 200) {
       Me me = Me.fromJson(resMe.body);
+      print("sucesso me");
+      print(store.state.token.token);
+      print(resMe.body);
       return me;
     } else {
+      print(resMe.body);
       return null;
+    }
+  }
+
+  static Future<bool> enviarLocalizacaoAtual() async {
+    String localizacaoJson = store.state.localizacaoAtual.toJson();
+    final res = await http.post("http://10.0.0.108:3001/api/users/localizacao/atual",
+        headers: {HttpHeaders.authorizationHeader: store.state.token.token, HttpHeaders.contentTypeHeader: "application/json"}, body: localizacaoJson);
+    if (res.statusCode == 200) {
+      return true;
+    } else {
+      return false;
     }
   }
 }

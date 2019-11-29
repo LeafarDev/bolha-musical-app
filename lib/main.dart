@@ -1,4 +1,5 @@
 import 'package:bolha_musical/pages/bolhas/bolha.dart';
+import 'package:bolha_musical/pages/chat/chat_screen.dart';
 import 'package:bolha_musical/pages/login.dart';
 import 'package:bolha_musical/pages/mapa/mapa.dart';
 import 'package:bolha_musical/redux/store.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
           '/': (context) => Login(),
           '/mapa': (context) => Mapa(),
           '/bolhas': (context) => Bolha(),
+          '/chat': (context) => ChatScreen()
         },
       ),
     );

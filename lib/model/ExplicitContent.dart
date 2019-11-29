@@ -25,6 +25,6 @@ abstract class ExplicitContent
       _$explicitContentSerializer;
 
   String toJson() {
-    return json.encode(serializers.serializeWith(ExplicitContent.serializer, this));
+    return json.encode(standardSerializers.serializeWith(ExplicitContent.serializer, this));
   }
 }

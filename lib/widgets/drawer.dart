@@ -1,4 +1,6 @@
+import 'package:bolha_musical/redux/actions.dart';
 import 'package:bolha_musical/redux/app_state.dart';
+import 'package:bolha_musical/redux/store.dart';
 import 'package:bolha_musical/utils/UsersSessaoUtils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -10,8 +12,6 @@ class HomeDrawer extends StatefulWidget {
 
 class _HomeDrawerState extends State<HomeDrawer>
     with SingleTickerProviderStateMixin {
-  final String defaultImg =
-      "https://scontent-gru1-1.xx.fbcdn.net/v/t1.0-1/c47.0.160.160a/p160x160/10354686_10150004552801856_220367501106153455_n.jpg?_nc_cat=1&_nc_ohc=yoc41iKTvLwAQkIPJ8r21Wl11o94LKJn-_adr_TnfzkVzYUkwD6AT5f5g&_nc_ht=scontent-gru1-1.xx&oh=42fa88bbe2d8542b4d10587935b4da09&oe=5E4EDE1E";
   AnimationController _refreshController;
 
   @override
@@ -43,7 +43,7 @@ class _HomeDrawerState extends State<HomeDrawer>
                       child: CircleAvatar(
                         backgroundImage: NetworkImage(state.me.images != null
                             ? state.me.images[0].url
-                            : defaultImg),
+                            : state.padraoPerfilFoto),
                       ),
                     ),
                   ),
@@ -72,6 +72,7 @@ class _HomeDrawerState extends State<HomeDrawer>
                     Icon(
                       Icons.map,
                     ), onTap: () {
+                  store.dispatch(SetCurrentBottomBarIndex(0));
                   Navigator.pushReplacementNamed(context, '/mapa');
                 })
               ],

@@ -4,8 +4,11 @@
 
 library serializers;
 
+import 'package:bolha_musical/model/BolhaMembro.dart';
 import 'package:bolha_musical/model/ExplicitContent.dart';
 import 'package:bolha_musical/model/ExternalUrls.dart';
+import 'package:bolha_musical/model/Localizacao.dart';
+import 'package:bolha_musical/model/Message.dart';
 import 'package:bolha_musical/model/UserImage.dart';
 import 'package:bolha_musical/redux/app_state.dart';
 import 'package:built_collection/built_collection.dart';
@@ -13,9 +16,11 @@ import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
 
 import 'AuthState.dart';
+import 'Bolha.dart';
 import 'Followers.dart';
 import 'Me.dart';
 import 'Token.dart';
+import 'User.dart';
 
 part 'serializers.g.dart';
 
@@ -38,7 +43,12 @@ part 'serializers.g.dart';
   ExternalUrls,
   Token,
   UserImage,
-  AppState
+  AppState,
+  Localizacao,
+  Bolha,
+  BolhaMembro,
+  User,
+  Message
 ])
 Serializers serializers = _$serializers;
 Serializers standardSerializers =
