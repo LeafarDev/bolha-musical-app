@@ -46,3 +46,9 @@ class SetCurrentBottomBarIndex {
 
   SetCurrentBottomBarIndex(this.payload);
 }
+
+class SetBolhasDisponiveis {
+  final List<Bolha> payload;
+
+  SetBolhasDisponiveis(this.payload);
+}

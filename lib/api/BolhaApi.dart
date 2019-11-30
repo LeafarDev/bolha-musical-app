@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:bolha_musical/model/Bolha.dart';
@@ -17,5 +18,20 @@ class BolhaApi {
     } else {
       return null;
     }
+  }
+
+  static Future<bool> getBolhasDisponiveis() async {
+    print("u ?");
+    final res = await http.get(
+        "http://10.0.0.108:3001/api/spotify/bolhas/disponiveis",
+        headers: {HttpHeaders.authorizationHeader: store.state.token.token});
+    if (res.statusCode == 200) {
+      var bolhasRaw = jsonDecode(res.body);
+
+      store.dispatch(SetBolhasDisponiveis(new List<Bolha>.from(
+          bolhasRaw.map((model) => Bolha.fromJson(jsonEncode(model))))));
+      return true;
+    }
+    return false;
   }
 }

@@ -12,6 +12,7 @@ class AppState {
   int currentBottomBarIndex = 0;
   Bolha bolhaAtual = null;
   Token token = new Token();
+  List<Bolha> bolhasDisponiveis = [];
   Localizacao localizacaoAtual = new Localizacao((b) => b
     ..latitude = 0.0
     ..longitude = 0.0);
@@ -126,5 +127,9 @@ class AppState {
     authState = another.authState;
     me = another.me;
     token = another.token;
+    bolhasDisponiveis = another.bolhasDisponiveis;
+    currentBottomBarIndex  = another.currentBottomBarIndex;
+    bolhaAtual  = another.bolhaAtual;
+    localizacaoAtual  = another.localizacaoAtual;
   }
 }

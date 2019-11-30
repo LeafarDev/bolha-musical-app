@@ -1,4 +1,4 @@
-import 'package:bolha_musical/pages/bolhas/bolha.dart';
+import 'package:bolha_musical/pages/bolhas/bolhas.dart';
 import 'package:bolha_musical/pages/chat/chat_screen.dart';
 import 'package:bolha_musical/pages/login.dart';
 import 'package:bolha_musical/pages/mapa/mapa.dart';
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (context) => Login(),
           '/mapa': (context) => Mapa(),
-          '/bolhas': (context) => Bolha(),
+          '/bolhas': (context) => Bolhas(),
           '/chat': (context) => ChatScreen()
         },
       ),
