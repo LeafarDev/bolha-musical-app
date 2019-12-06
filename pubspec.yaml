@@ -25,7 +25,9 @@ dependencies:
   built_collection: "4.2.2"
   flutter_map: ^0.7.3
   built_value: "6.8.2"
-  user_location: ^0.0.6
+  user_location:
+    git:
+      url: https://github.com/LeafarDev/user_location_plugin
   shared_preferences: ^0.5.4+6
   flutter_staggered_animations: ^0.1.2
   fancy_dialog: ^1.0.3
@@ -91,5 +93,7 @@ flutter:
 
   assets:
     - assets/login/l03.jpg
+    - assets/gifs/error-500.gif
+    - assets/gifs/vetorizado-cat-bolha.gif
     - assets/login/04.jpg
     - assets/spotify-logo/Spotify_Icon_CMYK_White.png

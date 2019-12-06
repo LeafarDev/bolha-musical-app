@@ -8,14 +8,12 @@ import 'package:bolha_musical/model/Localizacao.dart';
 import 'package:bolha_musical/pages/mapa/widgets/CircleMarker.dart';
 import 'package:bolha_musical/pages/mapa/widgets/MarkerMembro.dart';
 import 'package:bolha_musical/redux/actions.dart';
-import 'package:bolha_musical/redux/app_state.dart';
 import 'package:bolha_musical/redux/store.dart';
 import 'package:bolha_musical/widgets/bottomBar.dart';
 import 'package:bolha_musical/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 import 'package:latlong/latlong.dart';
 import 'package:user_location/user_location.dart';
 
@@ -29,7 +27,6 @@ class _MapaState extends State<Mapa> {
   double _progressValue = 0.0;
   Timer _timer;
   MapController mapController = MapController();
-  int _currentBottomBarIndex = 0;
   Future<AuthState> authState;
   List<Marker> locationMarker = [];
 
@@ -39,20 +36,32 @@ class _MapaState extends State<Mapa> {
   }
 
   @override
-  Future<void> initState() {
+  void setState(fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
+
+  @override
+  initState() {
     super.initState();
-    _timer = Timer.periodic(Duration(seconds: 10), (_) {
+
+    _timer = Timer.periodic(Duration(seconds: 2), (_) {
       setState(() {
         _bolhaAtual = store.state.bolhaAtual;
         BolhaApi.getBolhaAtual();
-        // print(mapController.center.latitude);
-        // print(mapController.center.longitude);
-        Localizacao _localizacao = new Localizacao((b) => b
-          ..latitude = mapController.center.latitude
-          ..longitude = mapController.center.longitude);
-        store.dispatch(SetLocalizacaoAtual(_localizacao));
-        UsersApi.enviarLocalizacaoAtual();
-        print(_localizacao);
+        if (locationMarker.length > 0) {
+          if (store.state.localizacaoAtual.latitude !=
+                  locationMarker[0].point.latitude &&
+              store.state.localizacaoAtual.longitude !=
+                  locationMarker[0].point.longitude) {
+            Localizacao _localizacao = new Localizacao((b) => b
+              ..latitude = locationMarker[0].point.latitude
+              ..longitude = locationMarker[0].point.longitude);
+            store.dispatch(SetLocalizacaoAtual(_localizacao));
+            UsersApi.enviarLocalizacaoAtual();
+          }
+        }
 
         if (_progressValue > 0.7) {
           _progressValue = 0.0;
@@ -65,8 +74,8 @@ class _MapaState extends State<Mapa> {
 
   @override
   void dispose() {
-    super.dispose();
     _timer.cancel();
+    super.dispose();
   }
 
   @override
@@ -75,16 +84,15 @@ class _MapaState extends State<Mapa> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Mapa'),
-        backgroundColor: Color.fromRGBO(1, 41, 51, 1),
-      ),
-      drawer: HomeDrawer(),
-      body: StoreConnector<AppState, AppState>(
-        converter: (store) => store.state,
-        builder: (context, state) {
-          return Column(
+    return new WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text('Mapa'),
+            backgroundColor: Color.fromRGBO(1, 41, 51, 1),
+          ),
+          drawer: HomeDrawer(),
+          body: Column(
             children: <Widget>[
               Container(
                 height: 610,
@@ -92,8 +100,8 @@ class _MapaState extends State<Mapa> {
                   options: MapOptions(
                     center: LatLng(51.5, -0.09),
                     maxZoom: 16.0,
-                    minZoom: 16.0,
-                    zoom: 16.0,
+                    minZoom: 15.0,
+                    zoom: 15.0,
                     plugins: [
                       // ADD THIS
                       UserLocationPlugin(),
@@ -112,9 +120,8 @@ class _MapaState extends State<Mapa> {
                                 ..._bolhaAtual.membros
                                     .map((membro) => MarkerMembro(membro))
                                     .toList(),
-                                ...locationMarker
                               ]
-                            : []),
+                            : locationMarker),
                     UserLocationOptions(
                       context: context,
                       mapController: mapController,
@@ -152,18 +159,16 @@ class _MapaState extends State<Mapa> {
                 ),
               )
             ],
-          );
-        },
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Color.fromRGBO(1, 41, 51, 1),
-        currentIndex: _currentBottomBarIndex,
-        items: bottomBarList(),
-        onTap: (index) {
-          handleBottomTap(index);
-        },
-      ),
-    );
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: Color.fromRGBO(1, 41, 51, 1),
+            currentIndex: 0,
+            items: bottomBarList(),
+            onTap: (index) {
+              handleBottomTap(index);
+            },
+          ),
+        ));
   }
 }

@@ -47,15 +47,21 @@ List<BottomNavigationBarItem> bottomBarList() {
 }
 
 handleBottomTap(index) {
+//  context.dispose();
   store.dispatch(SetCurrentBottomBarIndex(index));
-
   if (index == 0) {
-    locator<NavigationService>().navigateTo('/mapa');
+    Navigator.pushReplacementNamed(
+        locator<NavigationService>().navigatorKey.currentState.overlay.context,
+        '/mapa');
   } else if (index == 1) {
-    locator<NavigationService>().navigateTo('/chat');
+    Navigator.pushReplacementNamed(
+        locator<NavigationService>().navigatorKey.currentState.overlay.context,
+        '/chat');
   } else if (index == 2) {
-    locator<NavigationService>().navigateTo('/bolhas');
-  } else {}
+    Navigator.pushReplacementNamed(
+        locator<NavigationService>().navigatorKey.currentState.overlay.context,
+        '/bolhas');
+  }
 }
 
 _ItemBottomColor(index) {

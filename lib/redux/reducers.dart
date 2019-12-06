@@ -27,10 +27,6 @@ AppState reducer(AppState prevState, dynamic action) {
     newState.currentBottomBarIndex = action.payload;
   }
   if (action is SetBolhasDisponiveis) {
-    print("current");
-    print(prevState.bolhasDisponiveis);
-    print("SetBolhasDisponiveis");
-    print( action.payload);
     newState.bolhasDisponiveis = action.payload;
   }
 

@@ -1,4 +1,5 @@
 // Define a custom Form widget.
+import 'package:bolha_musical/api/BolhaApi.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,6 @@ class BolhasForm extends StatefulWidget {
 }
 
 class BolhasFormState extends State<BolhasForm> {
-
   TextEditingController _textFieldController = TextEditingController();
 
   @override
@@ -43,6 +43,7 @@ class BolhasFormState extends State<BolhasForm> {
         new FlatButton(
           child: new Text('Criar'),
           onPressed: () {
+            BolhaApi.criarBolha(_textFieldController.value.text);
             Navigator.of(context).pop();
           },
         )

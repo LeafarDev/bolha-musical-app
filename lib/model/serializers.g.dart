@@ -8,6 +8,7 @@ part of serializers;
 
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(AuthState.serializer)
+      ..add(BackendMessage.serializer)
       ..add(Bolha.serializer)
       ..add(BolhaMembro.serializer)
       ..add(ExplicitContent.serializer)

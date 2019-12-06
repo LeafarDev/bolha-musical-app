@@ -1,5 +1,6 @@
+import 'package:bolha_musical/api/BolhaApi.dart';
 import 'package:bolha_musical/model/Bolha.dart';
-import 'package:fancy_dialog/FancyGif.dart';
+import 'package:bolha_musical/redux/store.dart';
 import 'package:fancy_dialog/fancy_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,39 +32,90 @@ class BolhaItem extends StatelessWidget {
       ),
       child: ListTile(
         onTap: () {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) => FancyDialog(
-                ok: "Entrar",
-                cancel: "Canelar...",
-                gifPath: FancyGif.MOVE_FORWARD,
-                title: "Entrar na bolha?",
-                descreption: "Ao entrar nessa bolha você sairá de qualquer bolha caso, esteja em uma.",
-                okFun: () {
-                  print("okk");
-                },
-                cancelFun: () {
-                  print("cancelFun");
-                },
-              )
-          );
+          if (store.state.bolhaAtual.id != bolha.id) {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) => desejaEntrar(context));
+          }
         },
         leading: Icon(
           Icons.bubble_chart,
           color: Colors.greenAccent,
         ),
         title: Text(bolha.apelido, style: Theme.of(context).textTheme.body1),
-        trailing: Column(
-          children: <Widget>[
-            Text("1/∞"),
-            Icon(
-              Icons.people,
-              color: Colors.black,
-            )
-          ],
+        subtitle: Text("1/∞"),
+        trailing: PopupMenuButton<int>(
+          onSelected: (selectedDropDownItem) {
+            if (selectedDropDownItem == 1) {
+              print("só entrar");
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) => desejaEntrar(context));
+            } else if (selectedDropDownItem == 2) {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) => desejaSair(context));
+            }
+          },
+          itemBuilder: (context) => popupList(bolha),
         ),
       ),
     );
+  }
 
+  popupList(bolha) {
+    var atual = store.state.bolhaAtual;
+    List<PopupMenuEntry<int>> lista = [];
+
+    if (atual == null || (atual != null ? atual.id != bolha.id : false)) {
+      lista.add(
+        PopupMenuItem(
+          value: 1,
+          child: Text("Entrar"),
+        ),
+      );
+    }
+    if (atual != null ? atual.id == bolha.id : false) {
+      lista.add(PopupMenuItem(
+        value: 2,
+        child: Text("Sair"),
+      ));
+    }
+    return lista;
+  }
+
+  desejaSair(BuildContext context) {
+    return FancyDialog(
+      ok: "Sim",
+      cancel: "Cancelar...",
+      gifPath: "./assets/gifs/vetorizado-cat-bolha.gif",
+      title: "Sair da Bolha?",
+      descreption: "Deseja realmente sair??",
+      okFun: () async {
+        BolhaApi.sairBolha();
+        print("okfun!");
+      },
+      cancelFun: () {
+        print("cancelFun");
+      },
+    );
+  }
+
+  desejaEntrar(BuildContext context) {
+    return FancyDialog(
+      ok: "Entrar",
+      cancel: "Cancelar...",
+      gifPath: "./assets/gifs/vetorizado-cat-bolha.gif",
+      title: "Entrar na bolha?",
+      descreption:
+          "Ao entrar nessa bolha você sairá da bolha atual, caso esteja em uma.",
+      okFun: () async {
+        BolhaApi.entrarBolha(bolha.id);
+        print("okfun!");
+      },
+      cancelFun: () {
+        print("cancelFun");
+      },
+    );
   }
 }

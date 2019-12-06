@@ -4,6 +4,7 @@
 
 library serializers;
 
+import 'package:bolha_musical/model/BackendMessage.dart';
 import 'package:bolha_musical/model/BolhaMembro.dart';
 import 'package:bolha_musical/model/ExplicitContent.dart';
 import 'package:bolha_musical/model/ExternalUrls.dart';
@@ -48,6 +49,7 @@ part 'serializers.g.dart';
   Bolha,
   BolhaMembro,
   User,
+  BackendMessage,
   Message
 ])
 Serializers serializers = _$serializers;

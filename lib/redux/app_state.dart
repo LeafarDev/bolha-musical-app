@@ -128,8 +128,8 @@ class AppState {
     me = another.me;
     token = another.token;
     bolhasDisponiveis = another.bolhasDisponiveis;
-    currentBottomBarIndex  = another.currentBottomBarIndex;
-    bolhaAtual  = another.bolhaAtual;
-    localizacaoAtual  = another.localizacaoAtual;
+    currentBottomBarIndex = another.currentBottomBarIndex;
+    bolhaAtual = another.bolhaAtual;
+    localizacaoAtual = another.localizacaoAtual;
   }
 }

@@ -5,6 +5,7 @@ import 'package:bolha_musical/model/Token.dart';
 import 'package:bolha_musical/redux/actions.dart';
 import 'package:bolha_musical/redux/store.dart';
 import 'package:bolha_musical/utils/SetupLocator.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'NavigationService.dart';
@@ -22,20 +23,36 @@ class UsersSessaoUtils {
     try {
       final prefs = await SharedPreferences.getInstance();
       store.dispatch(SetToken(token));
-      UsersSessaoUtils.getMeFromTokenAndStore();
+      var me = await UsersSessaoUtils.getMeFromTokenAndStore();
       prefs.setString('token', token.toJson());
-      print("/mapa, fodasi kakakak");
-      locator<NavigationService>().navigateTo('/mapa');
+      // state só pode ser utilizado uma vez
+      AuthState authstate = await UsersApi.getAuthState();
+      if (authstate != null) {
+        store.dispatch(SetAuthState(authstate));
+      }
+      Navigator.pushNamed(
+          locator<NavigationService>()
+              .navigatorKey
+              .currentState
+              .overlay
+              .context,
+          '/mapa');
     } catch (error) {
       // TODO AVISAR USUÁRIO QUE DEU ERRO
       final prefs = await SharedPreferences.getInstance();
-      print("TODO AVISAR USUÁRIO QUE DEU ERRO");
       print(error.toString());
       store.dispatch(SetAuthState(new AuthState()));
       store.dispatch(SetME(new Me()));
       store.dispatch(SetToken(new Token()));
-      prefs.setString('token', null);
-      locator<NavigationService>().navigateTo('/login');
+      store.dispatch(SetAuthState(new AuthState()));
+      prefs.remove('token');
+      Navigator.popAndPushNamed(
+          locator<NavigationService>()
+              .navigatorKey
+              .currentState
+              .overlay
+              .context,
+          '/');
     }
   }
 
@@ -53,7 +70,7 @@ class UsersSessaoUtils {
     if (me != null) {
       store.dispatch(SetME(me));
     } else {
-      throw "Impossivel acioar me: getMeFromTokenAndStore";
+      throw "Impossivel acionar me: getMeFromTokenAndStore";
     }
   }
 }

@@ -1,6 +1,7 @@
 import 'package:bolha_musical/model/Message.dart';
 import 'package:bolha_musical/redux/actions.dart';
 import 'package:bolha_musical/redux/store.dart';
+import 'package:bolha_musical/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -132,63 +133,67 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
-      appBar: AppBar(
-        title: Text(
-          store.state.me.displayName != null
-              ? store.state.me.displayName
-              : "Carregando...",
-          style: TextStyle(
-            fontSize: 28.0,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        elevation: 0.0,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.more_horiz),
-            iconSize: 30.0,
-            color: Colors.white,
-            onPressed: () {},
-          ),
-        ],
-      ),
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30.0),
-                    topRight: Radius.circular(30.0),
-                  ),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30.0),
-                    topRight: Radius.circular(30.0),
-                  ),
-                  child: ListView.builder(
-                    reverse: true,
-                    padding: EdgeInsets.only(top: 15.0),
-                    itemCount: store.state.messages.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final Message message = store.state.messages[index];
-                      final bool isMe = message.sender.id == store.state.me.id;
-                      return _buildMessage(message, isMe);
-                    },
-                  ),
-                ),
+    return new WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+          drawer: HomeDrawer(),
+          backgroundColor: Theme.of(context).primaryColor,
+          appBar: AppBar(
+            title: Text(
+              store.state.me.displayName != null
+                  ? store.state.me.displayName
+                  : "Carregando...",
+              style: TextStyle(
+                fontSize: 28.0,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            _buildMessageComposer(),
-          ],
-        ),
-      ),
-    );
+            elevation: 0.0,
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.more_horiz),
+                iconSize: 30.0,
+                color: Colors.white,
+                onPressed: () {},
+              ),
+            ],
+          ),
+          body: GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30.0),
+                        topRight: Radius.circular(30.0),
+                      ),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30.0),
+                        topRight: Radius.circular(30.0),
+                      ),
+                      child: ListView.builder(
+                        reverse: true,
+                        padding: EdgeInsets.only(top: 15.0),
+                        itemCount: store.state.messages.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final Message message = store.state.messages[index];
+                          final bool isMe =
+                              message.sender.id == store.state.me.id;
+                          return _buildMessage(message, isMe);
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+                _buildMessageComposer(),
+              ],
+            ),
+          ),
+        ));
   }
 }

@@ -117,15 +117,21 @@ class UserImageBuilder implements Builder<UserImage, UserImageBuilder> {
   _$UserImage _$v;
 
   String _height;
+
   String get height => _$this._height;
+
   set height(String height) => _$this._height = height;
 
   String _url;
+
   String get url => _$this._url;
+
   set url(String url) => _$this._url = url;
 
   String _width;
+
   String get width => _$this._width;
+
   set width(String width) => _$this._width = width;
 
   UserImageBuilder();

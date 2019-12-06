@@ -40,17 +40,16 @@ class _LoginState extends State<Login> {
   @override
   void initState() {
     UsersSessaoUtils.inicializarSessaoComToken();
-    flutterWebviewPlugin.close();
     _geAuthState();
     // Add a listener to on url changed
     _onUrlChanged = flutterWebviewPlugin.onUrlChanged.listen((String url) {
       if (url.startsWith(
-          "http://10.0.0.108:3001/api/spotify/login/callback?code")) {
+          "http://10.0.0.108:3001/api/v1/spotify/login/callback?code")) {
         flutterWebviewPlugin.close();
         UsersSessaoUtils.inicializarSessaoComState();
       }
       if (url.startsWith(
-          "http://10.0.0.108:3001/api/spotify/login/callback?code")) {}
+          "http://10.0.0.108:3001/api/v1/spotify/login/callback?code")) {}
     });
   }
 
@@ -73,8 +72,9 @@ class _LoginState extends State<Login> {
                     width: 300,
                     child: FlatButton(
                       onPressed: () async {
+                        var result = await _geAuthState();
                         String url =
-                            "https://accounts.spotify.com/authorize?client_id=c03736df76424cde8deda585b4bfbad8&response_type=code&redirect_uri=http://10.0.0.108:3001/api/spotify/login/callback&scope=user-read-private playlist-read-private user-top-read user-follow-modify user-library-modify user-modify-playback-state user-read-playback-state user-read-currently-playing app-remote-control user-follow-read user-read-recently-played streaming user-library-read user-read-email&state=${state.authState.id}";
+                            "https://accounts.spotify.com/authorize?client_id=c03736df76424cde8deda585b4bfbad8&response_type=code&redirect_uri=http://10.0.0.108:3001/api/v1/spotify/login/callback&scope=user-read-private playlist-read-private user-top-read user-follow-modify user-library-modify user-modify-playback-state user-read-playback-state user-read-currently-playing app-remote-control user-follow-read user-read-recently-played streaming user-library-read user-read-email&state=${state.authState.id}";
                         if (state.authState.id != null) {
                           flutterWebviewPlugin.launch(url);
                         }
@@ -115,6 +115,7 @@ class _LoginState extends State<Login> {
 
   void _geAuthState() async {
     if (store.state.authState.id == null) {
+      print("get state");
       AuthState authstate = await UsersApi.getAuthState();
       if (authstate != null) {
         store.dispatch(SetAuthState(authstate));
