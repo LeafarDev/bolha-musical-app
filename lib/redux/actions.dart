@@ -3,7 +3,9 @@ import 'package:bolha_musical/model/Bolha.dart';
 import 'package:bolha_musical/model/Localizacao.dart';
 import 'package:bolha_musical/model/Me.dart';
 import 'package:bolha_musical/model/Message.dart';
+import 'package:bolha_musical/model/SearchTrackResult.dart';
 import 'package:bolha_musical/model/Token.dart';
+import 'package:bolha_musical/model/Track.dart';
 
 class SetAuthState {
   final AuthState payload;
@@ -51,4 +53,22 @@ class SetBolhasDisponiveis {
   final List<Bolha> payload;
 
   SetBolhasDisponiveis(this.payload);
+}
+
+class setLastSearchResult {
+  final SearchTrackResult payload;
+
+  setLastSearchResult(this.payload);
+}
+
+class SetSearchingTrack {
+  final bool payload;
+
+  SetSearchingTrack(this.payload);
+}
+
+class SetPlaylist {
+  final List<Track> payload;
+
+  SetPlaylist(this.payload);
 }

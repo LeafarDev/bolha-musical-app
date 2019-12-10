@@ -93,9 +93,7 @@ class BackendMessageBuilder
   _$BackendMessage _$v;
 
   String _message;
-
   String get message => _$this._message;
-
   set message(String message) => _$this._message = message;
 
   BackendMessageBuilder();

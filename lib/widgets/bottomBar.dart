@@ -61,6 +61,10 @@ handleBottomTap(index) {
     Navigator.pushReplacementNamed(
         locator<NavigationService>().navigatorKey.currentState.overlay.context,
         '/bolhas');
+  } else if (index == 3) {
+    Navigator.pushReplacementNamed(
+        locator<NavigationService>().navigatorKey.currentState.overlay.context,
+        '/playlist');
   }
 }
 

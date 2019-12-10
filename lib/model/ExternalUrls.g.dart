@@ -90,9 +90,7 @@ class ExternalUrlsBuilder
   _$ExternalUrls _$v;
 
   String _spotify;
-
   String get spotify => _$this._spotify;
-
   set spotify(String spotify) => _$this._spotify = spotify;
 
   ExternalUrlsBuilder();

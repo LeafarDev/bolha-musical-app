@@ -61,9 +61,9 @@ abstract class BolhaMembro implements Built<BolhaMembro, BolhaMembroBuilder> {
 
   static BolhaMembro fromJson(String jsonString) {
     final parsed = jsonDecode(jsonString);
-    BolhaMembro localizacao =
+    BolhaMembro bolhaMembro =
         standardSerializers.deserializeWith(BolhaMembro.serializer, parsed);
-    return localizacao;
+    return bolhaMembro;
   }
 
   String toJson() {

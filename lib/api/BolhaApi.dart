@@ -10,7 +10,7 @@ import 'package:bolha_musical/utils/SetupLocator.dart';
 import 'package:fancy_dialog/fancy_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
+import 'ApiDialogs.dart';
 class BolhaApi {
   static Future<Bolha> getBolhaAtual() async {
     final res = await http.get(
@@ -58,46 +58,6 @@ class BolhaApi {
     }
   }
 
-  static errorDialog(message) {
-    showDialog(
-        context: locator<NavigationService>()
-            .navigatorKey
-            .currentState
-            .overlay
-            .context,
-        builder: (BuildContext context) => FancyDialog(
-              cancel: "Cancelar...",
-              gifPath: "./assets/gifs/vetorizado-cat-bolha.gif",
-              title: "Erro...",
-              descreption: message != null
-                  ? message
-                  : "Não consegui realizar esta operação...",
-              cancelFun: () {
-                print("cancelFun");
-              },
-            ));
-  }
-
-  static sucessoDialog(message) {
-    showDialog(
-        context: locator<NavigationService>()
-            .navigatorKey
-            .currentState
-            .overlay
-            .context,
-        builder: (BuildContext context) => FancyDialog(
-              cancel: "Cancelar...",
-              gifPath: "./assets/gifs/vetorizado-cat-bolha.gif",
-              title: "Feito!",
-              descreption: message != null
-                  ? message
-                  : "Não consegui realizar esta operação...",
-              cancelFun: () {
-                print("cancelFun");
-              },
-            ));
-  }
-
   static entrarBolha(id) async {
     String data = jsonEncode({'id': id});
     final res =
@@ -109,13 +69,13 @@ class BolhaApi {
             body: data);
     var body = res.body;
     if (res.statusCode == 200) {
-      sucessoDialog("Agora você faz parte de uma nova bolha :D");
+      ApiDialogs.sucessoDialog("Agora você faz parte de uma nova bolha :D");
       Bolha bolha = Bolha.fromJson(res.body);
       store.dispatch(SetBolhaAtual(bolha));
       return bolha;
     } else {
       var backendMessage = BackendMessage.fromJson(body);
-      errorDialog(backendMessage.message);
+      ApiDialogs.errorDialog(backendMessage.message);
       return backendMessage;
     }
   }
@@ -128,10 +88,10 @@ class BolhaApi {
     });
     var body = res.body;
     if (res.statusCode == 200) {
-      sucessoDialog("Saiu com sucesso da bolha :)");
+      ApiDialogs.sucessoDialog("Saiu com sucesso da bolha :)");
     } else {
       var backendMessage = BackendMessage.fromJson(body);
-      errorDialog(backendMessage.message);
+      ApiDialogs.errorDialog(backendMessage.message);
       return backendMessage;
     }
   }

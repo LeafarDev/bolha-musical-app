@@ -6,23 +6,24 @@ part of image_user;
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<UserImage> _$userImageSerializer = new _$UserImageSerializer();
+Serializer<SpotifyImage> _$spotifyImageSerializer =
+    new _$SpotifyImageSerializer();
 
-class _$UserImageSerializer implements StructuredSerializer<UserImage> {
+class _$SpotifyImageSerializer implements StructuredSerializer<SpotifyImage> {
   @override
-  final Iterable<Type> types = const [UserImage, _$UserImage];
+  final Iterable<Type> types = const [SpotifyImage, _$SpotifyImage];
   @override
-  final String wireName = 'UserImage';
+  final String wireName = 'SpotifyImage';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, UserImage object,
+  Iterable<Object> serialize(Serializers serializers, SpotifyImage object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[];
     if (object.height != null) {
       result
         ..add('height')
         ..add(serializers.serialize(object.height,
-            specifiedType: const FullType(String)));
+            specifiedType: const FullType(int)));
     }
     if (object.url != null) {
       result
@@ -34,15 +35,15 @@ class _$UserImageSerializer implements StructuredSerializer<UserImage> {
       result
         ..add('width')
         ..add(serializers.serialize(object.width,
-            specifiedType: const FullType(String)));
+            specifiedType: const FullType(int)));
     }
     return result;
   }
 
   @override
-  UserImage deserialize(Serializers serializers, Iterable<Object> serialized,
+  SpotifyImage deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new UserImageBuilder();
+    final result = new SpotifyImageBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -52,7 +53,7 @@ class _$UserImageSerializer implements StructuredSerializer<UserImage> {
       switch (key) {
         case 'height':
           result.height = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(int)) as int;
           break;
         case 'url':
           result.url = serializers.deserialize(value,
@@ -60,7 +61,7 @@ class _$UserImageSerializer implements StructuredSerializer<UserImage> {
           break;
         case 'width':
           result.width = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(int)) as int;
           break;
       }
     }
@@ -69,30 +70,30 @@ class _$UserImageSerializer implements StructuredSerializer<UserImage> {
   }
 }
 
-class _$UserImage extends UserImage {
+class _$SpotifyImage extends SpotifyImage {
   @override
-  final String height;
+  final int height;
   @override
   final String url;
   @override
-  final String width;
+  final int width;
 
-  factory _$UserImage([void Function(UserImageBuilder) updates]) =>
-      (new UserImageBuilder()..update(updates)).build();
+  factory _$SpotifyImage([void Function(SpotifyImageBuilder) updates]) =>
+      (new SpotifyImageBuilder()..update(updates)).build();
 
-  _$UserImage._({this.height, this.url, this.width}) : super._();
+  _$SpotifyImage._({this.height, this.url, this.width}) : super._();
 
   @override
-  UserImage rebuild(void Function(UserImageBuilder) updates) =>
+  SpotifyImage rebuild(void Function(SpotifyImageBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  UserImageBuilder toBuilder() => new UserImageBuilder()..replace(this);
+  SpotifyImageBuilder toBuilder() => new SpotifyImageBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is UserImage &&
+    return other is SpotifyImage &&
         height == other.height &&
         url == other.url &&
         width == other.width;
@@ -105,7 +106,7 @@ class _$UserImage extends UserImage {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('UserImage')
+    return (newBuiltValueToStringHelper('SpotifyImage')
           ..add('height', height)
           ..add('url', url)
           ..add('width', width))
@@ -113,30 +114,25 @@ class _$UserImage extends UserImage {
   }
 }
 
-class UserImageBuilder implements Builder<UserImage, UserImageBuilder> {
-  _$UserImage _$v;
+class SpotifyImageBuilder
+    implements Builder<SpotifyImage, SpotifyImageBuilder> {
+  _$SpotifyImage _$v;
 
-  String _height;
-
-  String get height => _$this._height;
-
-  set height(String height) => _$this._height = height;
+  int _height;
+  int get height => _$this._height;
+  set height(int height) => _$this._height = height;
 
   String _url;
-
   String get url => _$this._url;
-
   set url(String url) => _$this._url = url;
 
-  String _width;
+  int _width;
+  int get width => _$this._width;
+  set width(int width) => _$this._width = width;
 
-  String get width => _$this._width;
+  SpotifyImageBuilder();
 
-  set width(String width) => _$this._width = width;
-
-  UserImageBuilder();
-
-  UserImageBuilder get _$this {
+  SpotifyImageBuilder get _$this {
     if (_$v != null) {
       _height = _$v.height;
       _url = _$v.url;
@@ -147,22 +143,22 @@ class UserImageBuilder implements Builder<UserImage, UserImageBuilder> {
   }
 
   @override
-  void replace(UserImage other) {
+  void replace(SpotifyImage other) {
     if (other == null) {
       throw new ArgumentError.notNull('other');
     }
-    _$v = other as _$UserImage;
+    _$v = other as _$SpotifyImage;
   }
 
   @override
-  void update(void Function(UserImageBuilder) updates) {
+  void update(void Function(SpotifyImageBuilder) updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$UserImage build() {
+  _$SpotifyImage build() {
     final _$result =
-        _$v ?? new _$UserImage._(height: height, url: url, width: width);
+        _$v ?? new _$SpotifyImage._(height: height, url: url, width: width);
     replace(_$result);
     return _$result;
   }

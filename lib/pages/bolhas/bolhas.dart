@@ -36,6 +36,7 @@ class BolhasState extends State<Bolhas> {
   @override
   initState() {
     super.initState();
+    BolhaApi.getBolhasDisponiveis();
     _timer = Timer.periodic(Duration(seconds: 5), (_) {
       setState(() {
         cont = cont + 1;

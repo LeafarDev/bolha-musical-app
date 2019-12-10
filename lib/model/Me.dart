@@ -2,7 +2,7 @@ library me;
 
 import 'dart:convert';
 
-import 'package:bolha_musical/model/UserImage.dart';
+import 'package:bolha_musical/model/SpotifyImage.dart';
 import 'package:bolha_musical/model/serializers.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
@@ -33,7 +33,7 @@ abstract class Me implements Built<Me, MeBuilder> {
 
   @nullable
   @BuiltValueField(wireName: 'images')
-  BuiltList<UserImage> get images;
+  BuiltList<SpotifyImage> get images;
 
   @nullable
   @BuiltValueField(wireName: 'explicit_content')
@@ -70,10 +70,6 @@ abstract class Me implements Built<Me, MeBuilder> {
   String r() {
     return " ";
   }
-
-  String g() {}
-
-  String b() {}
 
   static Me fromJson(String jsonString) {
     final parsed = jsonDecode(jsonString);

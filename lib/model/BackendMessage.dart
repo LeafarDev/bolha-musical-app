@@ -20,9 +20,9 @@ abstract class BackendMessage
 
   static BackendMessage fromJson(String jsonString) {
     final parsed = jsonDecode(jsonString);
-    BackendMessage localizacao =
+    BackendMessage backendMessage =
         standardSerializers.deserializeWith(BackendMessage.serializer, parsed);
-    return localizacao;
+    return backendMessage;
   }
 
   String toJson() {

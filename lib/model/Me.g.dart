@@ -40,8 +40,8 @@ class _$MeSerializer implements StructuredSerializer<Me> {
       result
         ..add('images')
         ..add(serializers.serialize(object.images,
-            specifiedType:
-                const FullType(BuiltList, const [const FullType(UserImage)])));
+            specifiedType: const FullType(
+                BuiltList, const [const FullType(SpotifyImage)])));
     }
     if (object.explicitContent != null) {
       result
@@ -120,7 +120,7 @@ class _$MeSerializer implements StructuredSerializer<Me> {
         case 'images':
           result.images.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
-                      BuiltList, const [const FullType(UserImage)]))
+                      BuiltList, const [const FullType(SpotifyImage)]))
               as BuiltList<dynamic>);
           break;
         case 'explicit_content':
@@ -171,7 +171,7 @@ class _$Me extends Me {
   @override
   final ExternalUrls externalUrls;
   @override
-  final BuiltList<UserImage> images;
+  final BuiltList<SpotifyImage> images;
   @override
   final ExplicitContent explicitContent;
   @override
@@ -281,81 +281,57 @@ class MeBuilder implements Builder<Me, MeBuilder> {
   _$Me _$v;
 
   String _email;
-
   String get email => _$this._email;
-
   set email(String email) => _$this._email = email;
 
   String _type;
-
   String get type => _$this._type;
-
   set type(String type) => _$this._type = type;
 
   ExternalUrlsBuilder _externalUrls;
-
   ExternalUrlsBuilder get externalUrls =>
       _$this._externalUrls ??= new ExternalUrlsBuilder();
-
   set externalUrls(ExternalUrlsBuilder externalUrls) =>
       _$this._externalUrls = externalUrls;
 
-  ListBuilder<UserImage> _images;
-
-  ListBuilder<UserImage> get images =>
-      _$this._images ??= new ListBuilder<UserImage>();
-
-  set images(ListBuilder<UserImage> images) => _$this._images = images;
+  ListBuilder<SpotifyImage> _images;
+  ListBuilder<SpotifyImage> get images =>
+      _$this._images ??= new ListBuilder<SpotifyImage>();
+  set images(ListBuilder<SpotifyImage> images) => _$this._images = images;
 
   ExplicitContentBuilder _explicitContent;
-
   ExplicitContentBuilder get explicitContent =>
       _$this._explicitContent ??= new ExplicitContentBuilder();
-
   set explicitContent(ExplicitContentBuilder explicitContent) =>
       _$this._explicitContent = explicitContent;
 
   String _product;
-
   String get product => _$this._product;
-
   set product(String product) => _$this._product = product;
 
   String _id;
-
   String get id => _$this._id;
-
   set id(String id) => _$this._id = id;
 
   String _uri;
-
   String get uri => _$this._uri;
-
   set uri(String uri) => _$this._uri = uri;
 
   String _displayName;
-
   String get displayName => _$this._displayName;
-
   set displayName(String displayName) => _$this._displayName = displayName;
 
   FollowersBuilder _followers;
-
   FollowersBuilder get followers =>
       _$this._followers ??= new FollowersBuilder();
-
   set followers(FollowersBuilder followers) => _$this._followers = followers;
 
   String _country;
-
   String get country => _$this._country;
-
   set country(String country) => _$this._country = country;
 
   String _href;
-
   String get href => _$this._href;
-
   set href(String href) => _$this._href = href;
 
   MeBuilder();

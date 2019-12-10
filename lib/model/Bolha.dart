@@ -81,9 +81,8 @@ abstract class Bolha implements Built<Bolha, BolhaBuilder> {
 
   static Bolha fromJson(String jsonString) {
     final parsed = jsonDecode(jsonString);
-    Bolha localizacao =
-        standardSerializers.deserializeWith(Bolha.serializer, parsed);
-    return localizacao;
+    Bolha bolha = standardSerializers.deserializeWith(Bolha.serializer, parsed);
+    return bolha;
   }
 
   String toJson() {

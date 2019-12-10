@@ -29,6 +29,16 @@ AppState reducer(AppState prevState, dynamic action) {
   if (action is SetBolhasDisponiveis) {
     newState.bolhasDisponiveis = action.payload;
   }
+  if (action is setLastSearchResult) {
+    newState.lastSearchResult = action.payload;
+  }
 
+  if (action is SetSearchingTrack) {
+    newState.searchingTrack = action.payload;
+  }
+
+  if (action is SetPlaylist) {
+    newState.playlist = action.payload;
+  }
   return newState;
 }

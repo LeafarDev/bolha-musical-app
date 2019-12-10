@@ -355,102 +355,70 @@ class BolhaBuilder implements Builder<Bolha, BolhaBuilder> {
   _$Bolha _$v;
 
   int _id;
-
   int get id => _$this._id;
-
   set id(int id) => _$this._id = id;
 
   String _apelido;
-
   String get apelido => _$this._apelido;
-
   set apelido(String apelido) => _$this._apelido = apelido;
 
   String _cor;
-
   String get cor => _$this._cor;
-
   set cor(String cor) => _$this._cor = cor;
 
   bool _ehFixa;
-
   bool get ehFixa => _$this._ehFixa;
-
   set ehFixa(bool ehFixa) => _$this._ehFixa = ehFixa;
 
   int _userIdReferenciaRaio;
-
   int get userIdReferenciaRaio => _$this._userIdReferenciaRaio;
-
   set userIdReferenciaRaio(int userIdReferenciaRaio) =>
       _$this._userIdReferenciaRaio = userIdReferenciaRaio;
 
   double _latitude;
-
   double get latitude => _$this._latitude;
-
   set latitude(double latitude) => _$this._latitude = latitude;
 
   double _raio;
-
   double get raio => _$this._raio;
-
   set raio(double raio) => _$this._raio = raio;
 
   double _longitude;
-
   double get longitude => _$this._longitude;
-
   set longitude(double longitude) => _$this._longitude = longitude;
 
   double _distancia_metros;
-
   double get distancia_metros => _$this._distancia_metros;
-
   set distancia_metros(double distancia_metros) =>
       _$this._distancia_metros = distancia_metros;
 
   int _userLiderId;
-
   int get userLiderId => _$this._userLiderId;
-
   set userLiderId(int userLiderId) => _$this._userLiderId = userLiderId;
 
   String _createdBy;
-
   String get createdBy => _$this._createdBy;
-
   set createdBy(String createdBy) => _$this._createdBy = createdBy;
 
   String _createdAt;
-
   String get createdAt => _$this._createdAt;
-
   set createdAt(String createdAt) => _$this._createdAt = createdAt;
 
   String _updatedAt;
-
   String get updatedAt => _$this._updatedAt;
-
   set updatedAt(String updatedAt) => _$this._updatedAt = updatedAt;
 
   int _bolhaId;
-
   int get bolhaId => _$this._bolhaId;
-
   set bolhaId(int bolhaId) => _$this._bolhaId = bolhaId;
 
   ListBuilder<BolhaMembro> _membros;
-
   ListBuilder<BolhaMembro> get membros =>
       _$this._membros ??= new ListBuilder<BolhaMembro>();
-
   set membros(ListBuilder<BolhaMembro> membros) => _$this._membros = membros;
 
   UserBuilder _lider;
-
   UserBuilder get lider => _$this._lider ??= new UserBuilder();
-
   set lider(UserBuilder lider) => _$this._lider = lider;
 
   BolhaBuilder();

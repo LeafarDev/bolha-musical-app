@@ -1,0 +1,357 @@
+[
+  {
+    "disc_number": 1,
+    "current_playing": 1,
+    "popularity": 62,
+    "deleted_at": null,
+    "duration_ms": 65314,
+    "started_at": "2019-12-09T21:33:21Z",
+    "name": "Speak to Me",
+    "explicit": true,
+    "type": "track",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/track/574y1r7o2tRA009FW0LE7v"
+    },
+    "external_ids": {
+      "isrc": "GBN9Y1100076"
+    },
+    "preview_url": "https://p.scdn.co/mp3-preview/4ba756bc1ed5ed7b4c1e281acd30866fa492d0c7?cid=c03736df76424cde8deda585b4bfbad8",
+    "updated_at": null,
+    "track_number": 1,
+    "is_local": false,
+    "available_markets": [
+      "AE",
+      "AR",
+      "AU",
+      "BH",
+      "BO",
+      "BR",
+      "CA",
+      "CL",
+      "CO",
+      "CR",
+      "DO",
+      "EC",
+      "EG",
+      "GT",
+      "HK",
+      "HN",
+      "ID",
+      "IL",
+      "IN",
+      "JO",
+      "JP",
+      "KW",
+      "LB",
+      "MX",
+      "MY",
+      "NI",
+      "NZ",
+      "OM",
+      "PA",
+      "PE",
+      "PH",
+      "PS",
+      "PY",
+      "QA",
+      "SA",
+      "SG",
+      "SV",
+      "TH",
+      "TN",
+      "TW",
+      "US",
+      "UY",
+      "VN",
+      "ZA"
+    ],
+    "uri": "spotify:track:574y1r7o2tRA009FW0LE7v",
+    "bolha_id": 94,
+    "artists": [
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/0k17h0D3J5VfsdmQ1iZtE9"
+        },
+        "href": "https://api.spotify.com/v1/artists/0k17h0D3J5VfsdmQ1iZtE9",
+        "id": "0k17h0D3J5VfsdmQ1iZtE9",
+        "name": "Pink Floyd",
+        "type": "artist",
+        "uri": "spotify:artist:0k17h0D3J5VfsdmQ1iZtE9"
+      }
+    ],
+    "album": {
+      "album_type": "album",
+      "release_date": "1973-03-01",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/ab67616d0000b273f05e5ac32fdd79d100315a20",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://i.scdn.co/image/ab67616d00001e02f05e5ac32fdd79d100315a20",
+          "width": 300
+        },
+        {
+          "height": 64,
+          "url": "https://i.scdn.co/image/ab67616d00004851f05e5ac32fdd79d100315a20",
+          "width": 64
+        }
+      ],
+      "name": "The Dark Side of the Moon",
+      "release_date_precision": "day",
+      "type": "album",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/album/4LH4d3cOWNNsVw41Gqt2kv"
+      },
+      "id": "4LH4d3cOWNNsVw41Gqt2kv",
+      "available_markets": [
+        "AE",
+        "AR",
+        "AU",
+        "BH",
+        "BO",
+        "BR",
+        "CA",
+        "CL",
+        "CO",
+        "CR",
+        "DO",
+        "EC",
+        "EG",
+        "GT",
+        "HK",
+        "HN",
+        "ID",
+        "IL",
+        "IN",
+        "JO",
+        "JP",
+        "KW",
+        "LB",
+        "MX",
+        "MY",
+        "NI",
+        "NZ",
+        "OM",
+        "PA",
+        "PE",
+        "PH",
+        "PS",
+        "PY",
+        "QA",
+        "SA",
+        "SG",
+        "SV",
+        "TH",
+        "TN",
+        "TW",
+        "US",
+        "UY",
+        "VN",
+        "ZA"
+      ],
+      "uri": "spotify:album:4LH4d3cOWNNsVw41Gqt2kv",
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/0k17h0D3J5VfsdmQ1iZtE9"
+          },
+          "href": "https://api.spotify.com/v1/artists/0k17h0D3J5VfsdmQ1iZtE9",
+          "id": "0k17h0D3J5VfsdmQ1iZtE9",
+          "name": "Pink Floyd",
+          "type": "artist",
+          "uri": "spotify:artist:0k17h0D3J5VfsdmQ1iZtE9"
+        }
+      ],
+      "total_tracks": 10,
+      "href": "https://api.spotify.com/v1/albums/4LH4d3cOWNNsVw41Gqt2kv"
+    },
+    "spotify_track_id": "574y1r7o2tRA009FW0LE7v",
+    "created_by": null,
+    "href": "https://api.spotify.com/v1/tracks/574y1r7o2tRA009FW0LE7v",
+    "created_at": "2019-12-09T21:33:49Z",
+    "id": 1,
+    "baixavotos": 0,
+    "cimavotos": 0
+  },
+  {
+    "disc_number": 1,
+    "current_playing": 1,
+    "popularity": 62,
+    "deleted_at": null,
+    "duration_ms": 65314,
+    "name": "Speak to Me",
+    "explicit": true,
+    "type": "track",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/track/574y1r7o2tRA009FW0LE7v"
+    },
+    "external_ids": {
+      "isrc": "GBN9Y1100076"
+    },
+    "preview_url": "https://p.scdn.co/mp3-preview/4ba756bc1ed5ed7b4c1e281acd30866fa492d0c7?cid=c03736df76424cde8deda585b4bfbad8",
+    "updated_at": null,
+    "track_number": 1,
+    "is_local": false,
+    "id": 2,
+    "baixavotos": 0,
+    "available_markets": [
+      "AE",
+      "AR",
+      "AU",
+      "BH",
+      "BO",
+      "BR",
+      "CA",
+      "CL",
+      "CO",
+      "CR",
+      "DO",
+      "EC",
+      "EG",
+      "GT",
+      "HK",
+      "HN",
+      "ID",
+      "IL",
+      "IN",
+      "JO",
+      "JP",
+      "KW",
+      "LB",
+      "MX",
+      "MY",
+      "NI",
+      "NZ",
+      "OM",
+      "PA",
+      "PE",
+      "PH",
+      "PS",
+      "PY",
+      "QA",
+      "SA",
+      "SG",
+      "SV",
+      "TH",
+      "TN",
+      "TW",
+      "US",
+      "UY",
+      "VN",
+      "ZA"
+    ],
+    "uri": "spotify:track:574y1r7o2tRA009FW0LE7v",
+
+    "artists": [
+      {
+        "external_urls": {
+          "spotify": "https://open.spotify.com/artist/0k17h0D3J5VfsdmQ1iZtE9"
+        },
+        "href": "https://api.spotify.com/v1/artists/0k17h0D3J5VfsdmQ1iZtE9",
+        "id": "0k17h0D3J5VfsdmQ1iZtE9",
+        "name": "Pink Floyd",
+        "type": "artist",
+        "uri": "spotify:artist:0k17h0D3J5VfsdmQ1iZtE9"
+      }
+    ],
+    "album": {
+      "album_type": "album",
+      "release_date": "1973-03-01",
+      "images": [
+        {
+          "height": 640,
+          "url": "https://i.scdn.co/image/ab67616d0000b273f05e5ac32fdd79d100315a20",
+          "width": 640
+        },
+        {
+          "height": 300,
+          "url": "https://i.scdn.co/image/ab67616d00001e02f05e5ac32fdd79d100315a20",
+          "width": 300
+        },
+        {
+          "height": 64,
+          "url": "https://i.scdn.co/image/ab67616d00004851f05e5ac32fdd79d100315a20",
+          "width": 64
+        }
+      ],
+      "name": "The Dark Side of the Moon",
+      "release_date_precision": "day",
+      "type": "album",
+      "external_urls": {
+        "spotify": "https://open.spotify.com/album/4LH4d3cOWNNsVw41Gqt2kv"
+      },
+      "id": "4LH4d3cOWNNsVw41Gqt2kv",
+      "available_markets": [
+        "AE",
+        "AR",
+        "AU",
+        "BH",
+        "BO",
+        "BR",
+        "CA",
+        "CL",
+        "CO",
+        "CR",
+        "DO",
+        "EC",
+        "EG",
+        "GT",
+        "HK",
+        "HN",
+        "ID",
+        "IL",
+        "IN",
+        "JO",
+        "JP",
+        "KW",
+        "LB",
+        "MX",
+        "MY",
+        "NI",
+        "NZ",
+        "OM",
+        "PA",
+        "PE",
+        "PH",
+        "PS",
+        "PY",
+        "QA",
+        "SA",
+        "SG",
+        "SV",
+        "TH",
+        "TN",
+        "TW",
+        "US",
+        "UY",
+        "VN",
+        "ZA"
+      ],
+      "uri": "spotify:album:4LH4d3cOWNNsVw41Gqt2kv",
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/0k17h0D3J5VfsdmQ1iZtE9"
+          },
+          "href": "https://api.spotify.com/v1/artists/0k17h0D3J5VfsdmQ1iZtE9",
+          "id": "0k17h0D3J5VfsdmQ1iZtE9",
+          "name": "Pink Floyd",
+          "type": "artist",
+          "uri": "spotify:artist:0k17h0D3J5VfsdmQ1iZtE9"
+        }
+      ],
+      "total_tracks": 10,
+      "href": "https://api.spotify.com/v1/albums/4LH4d3cOWNNsVw41Gqt2kv"
+    },
+    "started_at": "2019-12-09T21:33:21Z",
+    "spotify_track_id": "574y1r7o2tRA009FW0LE7v",
+    "created_by": null,
+    "href": "https://api.spotify.com/v1/tracks/574y1r7o2tRA009FW0LE7v",
+    "created_at": "2019-12-09T21:33:49Z",
+    "bolha_id": 94,
+    "cimavotos": 0
+  }
+]

@@ -55,9 +55,8 @@ abstract class User implements Built<User, UserBuilder> {
 
   static User fromJson(String jsonString) {
     final parsed = jsonDecode(jsonString);
-    User localizacao =
-        standardSerializers.deserializeWith(User.serializer, parsed);
-    return localizacao;
+    User user = standardSerializers.deserializeWith(User.serializer, parsed);
+    return user;
   }
 
   String toJson() {

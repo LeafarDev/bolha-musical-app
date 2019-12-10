@@ -2,20 +2,25 @@ import 'package:bolha_musical/model/AuthState.dart';
 import 'package:bolha_musical/model/Bolha.dart';
 import 'package:bolha_musical/model/Localizacao.dart';
 import 'package:bolha_musical/model/Message.dart';
+import 'package:bolha_musical/model/SearchTrackResult.dart';
+import 'package:bolha_musical/model/Track.dart';
 
 import '../model/Me.dart';
 import '../model/Token.dart';
 
 class AppState {
-  AuthState authState = new AuthState();
-  Me me = new Me();
+  AuthState authState = AuthState();
+  Me me = Me();
   int currentBottomBarIndex = 0;
   Bolha bolhaAtual = null;
-  Token token = new Token();
+  Token token = Token();
   List<Bolha> bolhasDisponiveis = [];
-  Localizacao localizacaoAtual = new Localizacao((b) => b
+  Localizacao localizacaoAtual = Localizacao((b) => b
     ..latitude = 0.0
     ..longitude = 0.0);
+  SearchTrackResult lastSearchResult = SearchTrackResult();
+  bool searchingTrack = false;
+  List<Track> playlist = [];
   List<Message> messages = [
     Message.fromJson('''{"text":"Is really that time ?",
     "isLiked": true,
@@ -131,5 +136,8 @@ class AppState {
     currentBottomBarIndex = another.currentBottomBarIndex;
     bolhaAtual = another.bolhaAtual;
     localizacaoAtual = another.localizacaoAtual;
+    lastSearchResult = another.lastSearchResult;
+    searchingTrack = another.searchingTrack;
+    playlist = another.playlist;
   }
 }

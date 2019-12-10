@@ -103,15 +103,11 @@ class LocalizacaoBuilder implements Builder<Localizacao, LocalizacaoBuilder> {
   _$Localizacao _$v;
 
   double _latitude;
-
   double get latitude => _$this._latitude;
-
   set latitude(double latitude) => _$this._latitude = latitude;
 
   double _longitude;
-
   double get longitude => _$this._longitude;
-
   set longitude(double longitude) => _$this._longitude = longitude;
 
   LocalizacaoBuilder();
