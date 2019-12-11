@@ -95,7 +95,7 @@ class _MapaState extends State<Mapa> {
           body: Column(
             children: <Widget>[
               Container(
-                height: 610,
+                height: MediaQuery.of(context).size.height - 176,
                 child: FlutterMap(
                   options: MapOptions(
                     center: LatLng(51.5, -0.09),

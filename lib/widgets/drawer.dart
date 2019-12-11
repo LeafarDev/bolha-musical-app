@@ -42,7 +42,7 @@ class _HomeDrawerState extends State<HomeDrawer>
                       tag: "hero tag",
                       child: CircleAvatar(
                         backgroundImage: NetworkImage(state.me.images != null
-                            ? state.me.images[0].url
+                            ? state.me.images.length > 0 ? state.me.images[0].url : state.padraoPerfilFoto
                             : state.padraoPerfilFoto),
                       ),
                     ),

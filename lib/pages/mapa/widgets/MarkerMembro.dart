@@ -6,6 +6,12 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 
 Marker MarkerMembro(BolhaMembro membro) {
+  var image = store.state.padraoPerfilFoto;
+  if (membro.me.images != null) {
+    if (membro.me.images.length > 0) {
+      image = membro.me.images[0].url;
+    }
+  }
   return Marker(
     width: 34.0,
     height: 34.0,
@@ -20,8 +26,6 @@ Marker MarkerMembro(BolhaMembro membro) {
                 shape: BoxShape.circle,
                 image: DecorationImage(
                     fit: BoxFit.fill,
-                    image: NetworkImage(membro.me.images != null
-                        ? membro.me.images[0].url
-                        : store.state.padraoPerfilFoto))))),
+                    image: NetworkImage(image))))),
   );
 }
