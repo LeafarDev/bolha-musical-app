@@ -103,9 +103,9 @@ abstract class Track implements Built<Track, TrackBuilder> {
   @BuiltValueField(wireName: 'baixavotos')
   int get baixavotos;
 
-  String shortname() {
-    if (name != null && name.length > 20) {
-      return "${name.substring(0, 20)}...";
+  String shortname({textSize = 20}) {
+    if (name != null && name.length > textSize) {
+      return "${name.substring(0, textSize)}...";
     }
     return name;
   }

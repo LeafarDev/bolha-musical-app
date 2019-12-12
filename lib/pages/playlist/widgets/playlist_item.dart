@@ -31,6 +31,7 @@ class PlayListItem extends StatelessWidget {
         ),
         child: ListTile(
           onTap: () {},
+          selected: track.current_playing == 1,
           leading: CircleAvatar(
               backgroundImage: NetworkImage(track.album.images != null
                   ? track.album.images[0].url
@@ -54,8 +55,8 @@ class PlayListItem extends StatelessWidget {
             ));
           },
           child: Icon(
-            Icons.add,
-            color: Colors.black,
+            Icons.favorite,
+            color: Colors.grey,
           ),
           elevation: 0,
           shape: CircleBorder(),

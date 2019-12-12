@@ -46,6 +46,7 @@ class UsersSessaoUtils {
       store.dispatch(SetToken(new Token()));
       store.dispatch(SetAuthState(new AuthState()));
       prefs.remove('token');
+      prefs.remove('me');
       Navigator.popAndPushNamed(
           locator<NavigationService>()
               .navigatorKey
@@ -66,11 +67,20 @@ class UsersSessaoUtils {
   }
 
   static getMeFromTokenAndStore() async {
-    Me me = await UsersApi.getMe();
-    if (me != null) {
-      store.dispatch(SetME(me));
+    final prefs = await SharedPreferences.getInstance();
+    var mePrefs = prefs.getString('me') ?? null;
+    if (mePrefs == null) {
+      Me me = await UsersApi.getMe();
+      if (me != null) {
+        prefs.setString('me', me.toJson());
+        store.dispatch(SetME(me));
+      } else {
+        throw "Impossivel acionar me: getMeFromTokenAndStore";
+      }
     } else {
-      throw "Impossivel acionar me: getMeFromTokenAndStore";
+      Me me = Me.fromJson(mePrefs);
+      store.dispatch(SetME(me));
     }
+
   }
 }

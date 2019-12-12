@@ -11,6 +11,7 @@ import 'package:bolha_musical/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:flutter_widgets/flutter_widgets.dart';
 
 class Playlist extends StatefulWidget {
   @override
@@ -49,6 +50,15 @@ class PlaylistState extends State<Playlist> {
     _timer.cancel();
   }
 
+  _indexAtivo(lista) {
+    for (var i = 0; i < lista.length; i++) {
+      if (lista[i].current_playing == 1) {
+        return i;
+      }
+    }
+    return 0;
+  }
+
   @override
   Widget build(BuildContext context) {
     return new WillPopScope(
@@ -76,29 +86,37 @@ class PlaylistState extends State<Playlist> {
           body: StoreConnector<AppState, AppState>(
               converter: (store) => store.state,
               builder: (context, state) {
-                return SafeArea(
-                  child: AnimationLimiter(
-                    child: ListView.builder(
-                      padding: const EdgeInsets.all(8.0),
-                      itemCount: state.playlist.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return AnimationConfiguration.staggeredList(
-                          position: index,
-                          duration: const Duration(milliseconds: 375),
-                          child: SlideAnimation(
-                            verticalOffset: 44.0,
-                            child: FadeInAnimation(
-                              child: PlayListItem(
-                                  key: UniqueKey(),
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 70.0,
-                                  track: state.playlist[index]),
+                if (state.playlist.length > 0) {
+                  return SafeArea(
+                    child: AnimationLimiter(
+                      child: ScrollablePositionedList.builder(
+                        initialScrollIndex: state.playlist.length > 0
+                            ? _indexAtivo(state.playlist)
+                            : 0,
+                        padding: const EdgeInsets.all(8.0),
+                        itemCount: state.playlist.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return AnimationConfiguration.staggeredList(
+                            position: index,
+                            duration: const Duration(milliseconds: 375),
+                            child: SlideAnimation(
+                              verticalOffset: 44.0,
+                              child: FadeInAnimation(
+                                child: PlayListItem(
+                                    key: UniqueKey(),
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 70.0,
+                                    track: state.playlist[index]),
+                              ),
                             ),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                      ),
                     ),
-                  ),
+                  );
+                }
+                return Center(
+                  child: Text("Nada aqui ainda ;)"),
                 );
               }),
           bottomNavigationBar: BottomNavigationBar(
