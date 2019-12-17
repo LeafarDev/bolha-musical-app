@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'ApiDialogs.dart';
 class BolhaApi {
+
   static Future<Bolha> getBolhaAtual() async {
     final res = await http.get(
         "http://10.0.0.108:3001/api/v1/spotify/bolhas/atual",
@@ -69,8 +70,8 @@ class BolhaApi {
             body: data);
     var body = res.body;
     if (res.statusCode == 200) {
-      ApiDialogs.sucessoDialog("Agora você faz parte de uma nova bolha :D");
       Bolha bolha = Bolha.fromJson(res.body);
+      ApiDialogs.sucessoDialog("Agora você faz parte de uma nova bolha :D");
       store.dispatch(SetBolhaAtual(bolha));
       return bolha;
     } else {

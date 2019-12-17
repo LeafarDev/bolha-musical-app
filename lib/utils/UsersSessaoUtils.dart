@@ -21,6 +21,8 @@ class UsersSessaoUtils {
 
   static _setSessionToken(token) async {
     try {
+
+
       final prefs = await SharedPreferences.getInstance();
       store.dispatch(SetToken(token));
       var me = await UsersSessaoUtils.getMeFromTokenAndStore();
@@ -30,6 +32,13 @@ class UsersSessaoUtils {
       if (authstate != null) {
         store.dispatch(SetAuthState(authstate));
       }
+
+      var ping = await UsersApi.ping();
+
+      if (!ping) {
+        throw "Falha ao conversar com a api";
+      }
+
       Navigator.pushNamed(
           locator<NavigationService>()
               .navigatorKey
@@ -81,6 +90,5 @@ class UsersSessaoUtils {
       Me me = Me.fromJson(mePrefs);
       store.dispatch(SetME(me));
     }
-
   }
 }

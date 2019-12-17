@@ -34,11 +34,9 @@ class UsersApi {
     if (resMe.statusCode == 200) {
       Me me = Me.fromJson(resMe.body);
       print("sucesso me");
-      print(store.state.token.token);
       print(resMe.body);
       return me;
     } else {
-      print(resMe.body);
       return null;
     }
   }
@@ -53,6 +51,17 @@ class UsersApi {
             },
             body: localizacaoJson);
     if (res.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  static Future<bool> ping() async {
+    final resMe = await http.get(
+        "http://10.0.0.108:3001/api/v1/spotify/refresh/teste",
+        headers: {HttpHeaders.authorizationHeader: store.state.token.token});
+    if (resMe.statusCode == 200) {
       return true;
     } else {
       return false;

@@ -75,7 +75,9 @@ class _MapaState extends State<Mapa> {
         setState(() {
           TrackApi.playlist();
           _bolhaAtual = store.state.bolhaAtual;
-          BolhaApi.getBolhaAtual();
+          if (_bolhaAtual != null) {
+            BolhaApi.getBolhaAtual();
+          }
           if (locationMarker.length > 0) {
             if (store.state.localizacaoAtual.latitude !=
                 locationMarker[0].point.latitude &&
