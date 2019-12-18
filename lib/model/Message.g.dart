@@ -149,23 +149,33 @@ class MessageBuilder implements Builder<Message, MessageBuilder> {
   _$Message _$v;
 
   MeBuilder _sender;
+
   MeBuilder get sender => _$this._sender ??= new MeBuilder();
+
   set sender(MeBuilder sender) => _$this._sender = sender;
 
   String _time;
+
   String get time => _$this._time;
+
   set time(String time) => _$this._time = time;
 
   String _text;
+
   String get text => _$this._text;
+
   set text(String text) => _$this._text = text;
 
   bool _isLiked;
+
   bool get isLiked => _$this._isLiked;
+
   set isLiked(bool isLiked) => _$this._isLiked = isLiked;
 
   bool _unread;
+
   bool get unread => _$this._unread;
+
   set unread(bool unread) => _$this._unread = unread;
 
   MessageBuilder();

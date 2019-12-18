@@ -1,7 +1,6 @@
 import 'package:bolha_musical/api/TrackApi.dart';
 import 'package:bolha_musical/pages/playlist/widgets/playlist_search_item.dart';
 import 'package:bolha_musical/redux/app_state.dart';
-import 'package:bolha_musical/redux/store.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -16,6 +15,7 @@ class PlayListSearch extends StatefulWidget {
 
 class PlayListSearchState extends State<PlayListSearch> {
   TextEditingController _textFieldController = TextEditingController();
+
   @override
   initState() {
     super.initState();
@@ -60,7 +60,9 @@ class PlayListSearchState extends State<PlayListSearch> {
                           verticalOffset: 50.0,
                           child: FadeInAnimation(
                             child: PlayListSearchItem(
-                                width: 50, height: 80, track: state.lastSearchResult.tracks[index]),
+                                width: 50,
+                                height: 80,
+                                track: state.lastSearchResult.tracks[index]),
                           ),
                         ),
                       );

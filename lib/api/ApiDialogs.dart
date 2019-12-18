@@ -12,16 +12,16 @@ class ApiDialogs {
             .overlay
             .context,
         builder: (BuildContext context) => FancyDialog(
-          cancel: "Cancelar...",
-          gifPath: "./assets/gifs/vetorizado-cat-bolha.gif",
-          title: "Erro...",
-          descreption: message != null
-              ? message
-              : "Não consegui realizar esta operação...",
-          cancelFun: () {
-            print("cancelFun");
-          },
-        ));
+              cancel: "Cancelar...",
+              gifPath: "./assets/gifs/vetorizado-cat-bolha.gif",
+              title: "Erro...",
+              descreption: message != null
+                  ? message
+                  : "Não consegui realizar esta operação...",
+              cancelFun: () {
+                print("cancelFun");
+              },
+            ));
   }
 
   static sucessoDialog(message) {
@@ -32,15 +32,15 @@ class ApiDialogs {
             .overlay
             .context,
         builder: (BuildContext context) => FancyDialog(
-          cancel: "Cancelar...",
-          gifPath: "./assets/gifs/vetorizado-cat-bolha.gif",
-          title: "Feito!",
-          descreption: message != null
-              ? message
-              : "Não consegui realizar esta operação...",
-          cancelFun: () {
-            print("cancelFun");
-          },
-        ));
+              cancel: "Cancelar...",
+              gifPath: "./assets/gifs/vetorizado-cat-bolha.gif",
+              title: "Feito!",
+              descreption: message != null
+                  ? message
+                  : "Não consegui realizar esta operação...",
+              cancelFun: () {
+                print("cancelFun");
+              },
+            ));
   }
 }

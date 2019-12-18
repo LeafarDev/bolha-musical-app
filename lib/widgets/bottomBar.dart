@@ -46,25 +46,46 @@ List<BottomNavigationBarItem> bottomBarList() {
   ];
 }
 
+callRoute({route, replacement = true}) {
+  if (replacement == true) {
+    Navigator.pushReplacementNamed(
+        locator<NavigationService>().navigatorKey.currentState.overlay.context,
+        route);
+  } else {
+    print("u ugly");
+    Navigator.pushNamed(
+        locator<NavigationService>().navigatorKey.currentState.overlay.context,
+        route);
+  }
+}
+
 handleBottomTap(index) {
 //  context.dispose();
+
+  print("hey");
+  var replacement = true;
+
+  if (store.state.currentBottomBarIndex == index) {
+    return;
+  }
+  if (store.state.currentBottomBarIndex == 0 || index == 0) {
+    replacement = false;
+  }
+  print("beauty");
   store.dispatch(SetCurrentBottomBarIndex(index));
+  if ( index == 0) {
+    print("pooop");
+    Navigator.pop(locator<NavigationService>().navigatorKey.currentState.overlay.context);
+    return ;
+  }
   if (index == 0) {
-    Navigator.pushReplacementNamed(
-        locator<NavigationService>().navigatorKey.currentState.overlay.context,
-        '/mapa');
+    callRoute(route: '/mapa', replacement: replacement);
   } else if (index == 1) {
-    Navigator.pushReplacementNamed(
-        locator<NavigationService>().navigatorKey.currentState.overlay.context,
-        '/chat');
+    callRoute(route: '/chat', replacement: replacement);
   } else if (index == 2) {
-    Navigator.pushReplacementNamed(
-        locator<NavigationService>().navigatorKey.currentState.overlay.context,
-        '/bolhas');
+    callRoute(route: '/bolhas', replacement: replacement);
   } else if (index == 3) {
-    Navigator.pushReplacementNamed(
-        locator<NavigationService>().navigatorKey.currentState.overlay.context,
-        '/playlist');
+    callRoute(route: '/playlist', replacement: replacement);
   }
 }
 

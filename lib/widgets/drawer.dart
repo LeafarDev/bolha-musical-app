@@ -42,7 +42,9 @@ class _HomeDrawerState extends State<HomeDrawer>
                       tag: "hero tag",
                       child: CircleAvatar(
                         backgroundImage: NetworkImage(state.me.images != null
-                            ? state.me.images.length > 0 ? state.me.images[0].url : state.padraoPerfilFoto
+                            ? state.me.images.length > 0
+                                ? state.me.images[0].url
+                                : state.padraoPerfilFoto
                             : state.padraoPerfilFoto),
                       ),
                     ),
@@ -72,8 +74,14 @@ class _HomeDrawerState extends State<HomeDrawer>
                     Icon(
                       Icons.map,
                     ), onTap: () {
-                  store.dispatch(SetCurrentBottomBarIndex(0));
-                  Navigator.pushReplacementNamed(context, '/mapa');
+                  if (ModalRoute.of(context).settings.name != '/mapa' &&
+                      ModalRoute.of(context).settings.name != '/playlist' &&
+                      ModalRoute.of(context).settings.name != '/bolhas' &&
+                      ModalRoute.of(context).settings.name != '/chat' &&
+                      ModalRoute.of(context).settings.name != '/track-search') {
+                    store.dispatch(SetCurrentBottomBarIndex(0));
+                    Navigator.pushReplacementNamed(context, '/mapa');
+                  }
                 })
               ],
             ),

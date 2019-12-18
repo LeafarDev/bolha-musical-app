@@ -28,6 +28,8 @@ dependencies:
   user_location:
     git:
       url: https://github.com/LeafarDev/user_location_plugin
+      ref: master
+
   shared_preferences: ^0.5.4+6
   flutter_staggered_animations: ^0.1.2
   fancy_dialog: ^1.0.3

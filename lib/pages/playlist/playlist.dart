@@ -8,6 +8,7 @@ import 'package:bolha_musical/utils/NavigationService.dart';
 import 'package:bolha_musical/utils/SetupLocator.dart';
 import 'package:bolha_musical/widgets/bottomBar.dart';
 import 'package:bolha_musical/widgets/drawer.dart';
+import 'package:bolha_musical/widgets/player_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -83,42 +84,51 @@ class PlaylistState extends State<Playlist> {
                   },
                 ),
               ]),
-          body: StoreConnector<AppState, AppState>(
-              converter: (store) => store.state,
-              builder: (context, state) {
-                if (state.playlist.length > 0) {
-                  return SafeArea(
-                    child: AnimationLimiter(
-                      child: ScrollablePositionedList.builder(
-                        initialScrollIndex: state.playlist.length > 0
-                            ? _indexAtivo(state.playlist)
-                            : 0,
-                        padding: const EdgeInsets.all(8.0),
-                        itemCount: state.playlist.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return AnimationConfiguration.staggeredList(
-                            position: index,
-                            duration: const Duration(milliseconds: 375),
-                            child: SlideAnimation(
-                              verticalOffset: 44.0,
-                              child: FadeInAnimation(
-                                child: PlayListItem(
-                                    key: UniqueKey(),
-                                    width: MediaQuery.of(context).size.width,
-                                    height: 70.0,
-                                    track: state.playlist[index]),
-                              ),
+          body: Column(
+            children: <Widget>[
+              Container(
+                height: MediaQuery.of(context).size.height - 176,
+                child: StoreConnector<AppState, AppState>(
+                    converter: (store) => store.state,
+                    builder: (context, state) {
+                      if (state.playlist.length > 0) {
+                        return SafeArea(
+                          child: AnimationLimiter(
+                            child: ScrollablePositionedList.builder(
+                              initialScrollIndex: state.playlist.length > 0
+                                  ? _indexAtivo(state.playlist)
+                                  : 0,
+                              padding: const EdgeInsets.all(8.0),
+                              itemCount: state.playlist.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return AnimationConfiguration.staggeredList(
+                                  position: index,
+                                  duration: const Duration(milliseconds: 375),
+                                  child: SlideAnimation(
+                                    verticalOffset: 44.0,
+                                    child: FadeInAnimation(
+                                      child: PlayListItem(
+                                          key: UniqueKey(),
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          height: 70.0,
+                                          track: state.playlist[index]),
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
-                          );
-                        },
-                      ),
-                    ),
-                  );
-                }
-                return Center(
-                  child: Text("Nada aqui ainda ;)"),
-                );
-              }),
+                          ),
+                        );
+                      }
+                      return Center(
+                        child: Text("Nada aqui ainda ;)"),
+                      );
+                    }),
+              ),
+              PlayerBar()
+            ],
+          ),
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             backgroundColor: Color.fromRGBO(1, 41, 51, 1),

@@ -166,29 +166,41 @@ class ArtistBuilder implements Builder<Artist, ArtistBuilder> {
   _$Artist _$v;
 
   ExternalUrlsBuilder _externalUrls;
+
   ExternalUrlsBuilder get externalUrls =>
       _$this._externalUrls ??= new ExternalUrlsBuilder();
+
   set externalUrls(ExternalUrlsBuilder externalUrls) =>
       _$this._externalUrls = externalUrls;
 
   String _href;
+
   String get href => _$this._href;
+
   set href(String href) => _$this._href = href;
 
   String _id;
+
   String get id => _$this._id;
+
   set id(String id) => _$this._id = id;
 
   String _name;
+
   String get name => _$this._name;
+
   set name(String name) => _$this._name = name;
 
   String _type;
+
   String get type => _$this._type;
+
   set type(String type) => _$this._type = type;
 
   String _uri;
+
   String get uri => _$this._uri;
+
   set uri(String uri) => _$this._uri = uri;
 
   ArtistBuilder();

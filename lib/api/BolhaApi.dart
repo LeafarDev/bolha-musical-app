@@ -5,14 +5,11 @@ import 'package:bolha_musical/model/BackendMessage.dart';
 import 'package:bolha_musical/model/Bolha.dart';
 import 'package:bolha_musical/redux/actions.dart';
 import 'package:bolha_musical/redux/store.dart';
-import 'package:bolha_musical/utils/NavigationService.dart';
-import 'package:bolha_musical/utils/SetupLocator.dart';
-import 'package:fancy_dialog/fancy_dialog.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'ApiDialogs.dart';
-class BolhaApi {
 
+import 'ApiDialogs.dart';
+
+class BolhaApi {
   static Future<Bolha> getBolhaAtual() async {
     final res = await http.get(
         "http://10.0.0.108:3001/api/v1/spotify/bolhas/atual",

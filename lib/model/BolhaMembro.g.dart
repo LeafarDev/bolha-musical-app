@@ -260,47 +260,69 @@ class BolhaMembroBuilder implements Builder<BolhaMembro, BolhaMembroBuilder> {
   _$BolhaMembro _$v;
 
   int _id;
+
   int get id => _$this._id;
+
   set id(int id) => _$this._id = id;
 
   int _bolhaId;
+
   int get bolhaId => _$this._bolhaId;
+
   set bolhaId(int bolhaId) => _$this._bolhaId = bolhaId;
 
   int _userId;
+
   int get userId => _$this._userId;
+
   set userId(int userId) => _$this._userId = userId;
 
   String _checkin;
+
   String get checkin => _$this._checkin;
+
   set checkin(String checkin) => _$this._checkin = checkin;
 
   String _checkout;
+
   String get checkout => _$this._checkout;
+
   set checkout(String checkout) => _$this._checkout = checkout;
 
   String _createdBy;
+
   String get createdBy => _$this._createdBy;
+
   set createdBy(String createdBy) => _$this._createdBy = createdBy;
 
   String _createdAt;
+
   String get createdAt => _$this._createdAt;
+
   set createdAt(String createdAt) => _$this._createdAt = createdAt;
 
   String _updatedAt;
+
   String get updatedAt => _$this._updatedAt;
+
   set updatedAt(String updatedAt) => _$this._updatedAt = updatedAt;
 
   double _latitude;
+
   double get latitude => _$this._latitude;
+
   set latitude(double latitude) => _$this._latitude = latitude;
 
   double _longitude;
+
   double get longitude => _$this._longitude;
+
   set longitude(double longitude) => _$this._longitude = longitude;
 
   MeBuilder _me;
+
   MeBuilder get me => _$this._me ??= new MeBuilder();
+
   set me(MeBuilder me) => _$this._me = me;
 
   BolhaMembroBuilder();

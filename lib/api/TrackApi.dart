@@ -19,7 +19,6 @@ class TrackApi {
     store.dispatch(SetSearchingTrack(false));
     if (res.statusCode == 200) {
       SearchTrackResult result = SearchTrackResult.fromJson(res.body);
-      var raw = jsonDecode(res.body);
       store.dispatch(setLastSearchResult(SearchTrackResult.fromJson(res.body)));
       return result;
     } else {

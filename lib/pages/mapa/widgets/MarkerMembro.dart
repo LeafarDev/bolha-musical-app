@@ -25,7 +25,6 @@ Marker MarkerMembro(BolhaMembro membro) {
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
-                    fit: BoxFit.fill,
-                    image: NetworkImage(image))))),
+                    fit: BoxFit.fill, image: NetworkImage(image))))),
   );
 }

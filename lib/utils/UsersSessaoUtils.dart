@@ -21,8 +21,6 @@ class UsersSessaoUtils {
 
   static _setSessionToken(token) async {
     try {
-
-
       final prefs = await SharedPreferences.getInstance();
       store.dispatch(SetToken(token));
       var me = await UsersSessaoUtils.getMeFromTokenAndStore();

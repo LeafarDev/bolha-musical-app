@@ -6,6 +6,7 @@ import 'package:bolha_musical/redux/app_state.dart';
 import 'package:bolha_musical/redux/store.dart';
 import 'package:bolha_musical/widgets/bottomBar.dart';
 import 'package:bolha_musical/widgets/drawer.dart';
+import 'package:bolha_musical/widgets/player_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -74,12 +75,15 @@ class BolhasState extends State<Bolhas> {
       onWillPop: () async => false,
       child: Scaffold(
           drawer: HomeDrawer(),
-          floatingActionButton: UnicornDialer(
-              backgroundColor: Color.fromRGBO(255, 255, 255, 0.6),
-              parentButtonBackground: Colors.redAccent,
-              orientation: UnicornOrientation.VERTICAL,
-              parentButton: Icon(Icons.arrow_upward),
-              childButtons: childButtons),
+          floatingActionButton: Padding(
+            padding: EdgeInsets.only(bottom: 30),
+            child: UnicornDialer(
+                backgroundColor: Color.fromRGBO(255, 255, 255, 0.6),
+                parentButtonBackground: Colors.redAccent,
+                orientation: UnicornOrientation.VERTICAL,
+                parentButton: Icon(Icons.arrow_upward),
+                childButtons: childButtons),
+          ),
           appBar: AppBar(
               title: Text('Bolhas'),
               backgroundColor: Color.fromRGBO(1, 41, 51, 1),
@@ -97,34 +101,43 @@ class BolhasState extends State<Bolhas> {
               onRefresh: () {
                 return BolhaApi.getBolhasDisponiveis();
               },
-              child: StoreConnector<AppState, AppState>(
-                  converter: (store) => store.state,
-                  builder: (context, state) {
-                    return SafeArea(
-                      child: AnimationLimiter(
-                        child: ListView.builder(
-                          padding: const EdgeInsets.all(8.0),
-                          itemCount: state.bolhasDisponiveis.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return AnimationConfiguration.staggeredList(
-                              position: index,
-                              duration: const Duration(milliseconds: 375),
-                              child: SlideAnimation(
-                                verticalOffset: 44.0,
-                                child: FadeInAnimation(
-                                  child: BolhaItem(
-                                    width: MediaQuery.of(context).size.width,
-                                    height: 70.0,
-                                    bolha: state.bolhasDisponiveis[index],
-                                  ),
-                                ),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    height: MediaQuery.of(context).size.height - 176,
+                    child: StoreConnector<AppState, AppState>(
+                        converter: (store) => store.state,
+                        builder: (context, state) {
+                          return SafeArea(
+                            child: AnimationLimiter(
+                              child: ListView.builder(
+                                padding: const EdgeInsets.all(8.0),
+                                itemCount: state.bolhasDisponiveis.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return AnimationConfiguration.staggeredList(
+                                    position: index,
+                                    duration: const Duration(milliseconds: 375),
+                                    child: SlideAnimation(
+                                      verticalOffset: 44.0,
+                                      child: FadeInAnimation(
+                                        child: BolhaItem(
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          height: 70.0,
+                                          bolha: state.bolhasDisponiveis[index],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
                               ),
-                            );
-                          },
-                        ),
-                      ),
-                    );
-                  })),
+                            ),
+                          );
+                        }),
+                  ),
+                  PlayerBar()
+                ],
+              )),
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             backgroundColor: Color.fromRGBO(1, 41, 51, 1),
