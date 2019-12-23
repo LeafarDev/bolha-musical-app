@@ -47,7 +47,6 @@ class BolhaItem extends StatelessWidget {
         trailing: PopupMenuButton<int>(
           onSelected: (selectedDropDownItem) {
             if (selectedDropDownItem == 1) {
-              print("só entrar");
               showDialog(
                   context: context,
                   builder: (BuildContext context) => desejaEntrar(context));
@@ -93,10 +92,8 @@ class BolhaItem extends StatelessWidget {
       descreption: "Deseja realmente sair??",
       okFun: () async {
         BolhaApi.sairBolha();
-        print("okfun!");
       },
       cancelFun: () {
-        print("cancelFun");
       },
     );
   }
@@ -111,10 +108,8 @@ class BolhaItem extends StatelessWidget {
           "Ao entrar nessa bolha você sairá da bolha atual, caso esteja em uma.",
       okFun: () async {
         BolhaApi.entrarBolha(bolha.id);
-        print("okfun!");
       },
       cancelFun: () {
-        print("cancelFun");
       },
     );
   }

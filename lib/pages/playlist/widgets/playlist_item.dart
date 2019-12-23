@@ -15,12 +15,12 @@ class PlayListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: Color.fromRGBO(0, 0, 0, 0),
       child: Container(
         width: width,
         height: height,
-        margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+        margin: const EdgeInsets.symmetric(vertical: 1.0),
         decoration: BoxDecoration(
-          color: Colors.white,
           borderRadius: const BorderRadius.all(Radius.circular(4.0)),
           boxShadow: <BoxShadow>[
             BoxShadow(
@@ -34,11 +34,18 @@ class PlayListItem extends StatelessWidget {
           onTap: () {},
           selected: track.current_playing == 1,
           leading: CircleAvatar(
-              backgroundImage: CachedNetworkImageProvider(track.album.images != null
-                  ? track.album.images[0].url
-                  : store.state.padraoPerfilFoto)),
-          subtitle: Text(track.album.shortname()),
-          title: Text(track.shortname()),
+              backgroundImage: CachedNetworkImageProvider(
+                  track.album.images != null
+                      ? track.album.images[0].url
+                      : store.state.padraoPerfilFoto)),
+          subtitle: Text(
+            track.album.shortname(),
+            style: TextStyle(color: Colors.white),
+          ),
+          title: Text(
+            track.shortname(),
+            style: TextStyle(color: Colors.white),
+          ),
           trailing: iconButtonBuild(context),
         ),
       ),
@@ -62,7 +69,7 @@ class PlayListItem extends StatelessWidget {
           elevation: 0,
           shape: CircleBorder(),
           splashColor: Colors.grey,
-          fillColor: Colors.white,
+          fillColor: Color.fromRGBO(0, 0, 0, 0),
         ));
   }
 }

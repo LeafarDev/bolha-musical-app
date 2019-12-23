@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bolha_musical/api/TrackApi.dart';
 import 'package:bolha_musical/pages/playlist/widgets/playlist_search_item.dart';
 import 'package:bolha_musical/redux/app_state.dart';
@@ -15,6 +17,8 @@ class PlayListSearch extends StatefulWidget {
 
 class PlayListSearchState extends State<PlayListSearch> {
   TextEditingController _textFieldController = TextEditingController();
+  String _lastSearch = "";
+  FocusNode focusNode = FocusNode();
 
   @override
   initState() {
@@ -24,22 +28,20 @@ class PlayListSearchState extends State<PlayListSearch> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+
     return Scaffold(
+      backgroundColor: Color.fromRGBO(1, 41, 51, 0.9),
       resizeToAvoidBottomPadding: false,
-      appBar: AppBar(
-        title: Text('Buscar'),
-        backgroundColor: Color.fromRGBO(1, 41, 51, 1),
-      ),
-      body: Column(
-        children: <Widget>[inputSearch(), result()],
+      body: SafeArea(
+        child: Column(
+          children: <Widget>[inputSearch(), result()],
+        ),
       ),
     );
   }
 
   result() {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.79,
+    return Expanded(
       child: StoreConnector<AppState, AppState>(
           converter: (store) => store.state,
           builder: (context, state) {
@@ -78,13 +80,25 @@ class PlayListSearchState extends State<PlayListSearch> {
   inputSearch() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8.0),
-      height: MediaQuery.of(context).size.height * 0.10,
+      height: MediaQuery.of(context).size.height * 0.06,
       color: Colors.white,
       child: Row(
         children: <Widget>[
+          IconButton(
+            icon: Icon(Icons.arrow_back),
+            iconSize: 25.0,
+            color: Colors.black,
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
           Expanded(
             child: TextField(
               controller: _textFieldController,
+              focusNode: focusNode,
+              onChanged: (value) {
+                Timer.run(_doSearch());
+              },
               textCapitalization: TextCapitalization.sentences,
               decoration: InputDecoration.collapsed(
                 hintText: 'Darude - Sandstorm',
@@ -92,15 +106,27 @@ class PlayListSearchState extends State<PlayListSearch> {
             ),
           ),
           IconButton(
-            icon: Icon(Icons.search),
+            icon: Icon(Icons.close),
             iconSize: 25.0,
             color: Colors.black,
             onPressed: () {
-              TrackApi.search(_textFieldController.value.text);
+              //
+              _textFieldController.clear();
+              _doSearch();
             },
           ),
         ],
       ),
     );
+  }
+
+  _doSearch () async {
+    if (_lastSearch != _textFieldController.value.text) {
+      await TrackApi.search(_textFieldController.value.text);
+      setState(() {
+        _lastSearch = _textFieldController.value.text;
+      });
+      return true;
+    }
   }
 }

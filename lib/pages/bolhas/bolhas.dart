@@ -3,9 +3,6 @@ import 'dart:async';
 import 'package:bolha_musical/api/BolhaApi.dart';
 import 'package:bolha_musical/pages/bolhas/widgets/bolha_item.dart';
 import 'package:bolha_musical/redux/app_state.dart';
-import 'package:bolha_musical/redux/store.dart';
-import 'package:bolha_musical/widgets/bottomBar.dart';
-import 'package:bolha_musical/widgets/drawer.dart';
 import 'package:bolha_musical/widgets/player_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -74,7 +71,6 @@ class BolhasState extends State<Bolhas> {
     return new WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-          drawer: HomeDrawer(),
           floatingActionButton: Padding(
             padding: EdgeInsets.only(bottom: 30),
             child: UnicornDialer(
@@ -84,32 +80,19 @@ class BolhasState extends State<Bolhas> {
                 parentButton: Icon(Icons.arrow_upward),
                 childButtons: childButtons),
           ),
-          appBar: AppBar(
-              title: Text('Bolhas'),
-              backgroundColor: Color.fromRGBO(1, 41, 51, 1),
-              actions: <Widget>[
-                // action button
-                IconButton(
-                  icon: Icon(Icons.refresh),
-                  onPressed: () {
-                    BolhaApi.getBolhasDisponiveis();
-                  },
-                ),
-              ]),
           body: RefreshIndicator(
               key: _refreshIndicatorKey,
               onRefresh: () {
                 return BolhaApi.getBolhasDisponiveis();
               },
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    height: MediaQuery.of(context).size.height - 176,
-                    child: StoreConnector<AppState, AppState>(
-                        converter: (store) => store.state,
-                        builder: (context, state) {
-                          return SafeArea(
-                            child: AnimationLimiter(
+              child: SafeArea(
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      child: StoreConnector<AppState, AppState>(
+                          converter: (store) => store.state,
+                          builder: (context, state) {
+                            return AnimationLimiter(
                               child: ListView.builder(
                                 padding: const EdgeInsets.all(8.0),
                                 itemCount: state.bolhasDisponiveis.length,
@@ -122,7 +105,7 @@ class BolhasState extends State<Bolhas> {
                                       child: FadeInAnimation(
                                         child: BolhaItem(
                                           width:
-                                              MediaQuery.of(context).size.width,
+                                          MediaQuery.of(context).size.width,
                                           height: 70.0,
                                           bolha: state.bolhasDisponiveis[index],
                                         ),
@@ -131,22 +114,14 @@ class BolhasState extends State<Bolhas> {
                                   );
                                 },
                               ),
-                            ),
-                          );
-                        }),
-                  ),
-                  PlayerBar()
-                ],
+                            );
+                          }),
+                    ),
+                    PlayerBar()
+                  ],
+                ),
               )),
-          bottomNavigationBar: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: Color.fromRGBO(1, 41, 51, 1),
-            currentIndex: store.state.currentBottomBarIndex,
-            items: bottomBarList(),
-            onTap: (index) {
-              handleBottomTap(index);
-            },
-          )),
+          ),
     );
   }
 }

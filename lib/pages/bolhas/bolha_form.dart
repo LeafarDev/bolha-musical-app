@@ -25,7 +25,6 @@ class BolhasFormState extends State<BolhasForm> {
           children: <Widget>[
             TextField(
               onChanged: (text) {
-                print("First text field: $text");
               },
               controller: _textFieldController,
               decoration: InputDecoration(hintText: "Apelido"),

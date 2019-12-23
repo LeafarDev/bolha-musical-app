@@ -15,26 +15,40 @@ class _PlayerBarState extends State<PlayerBar> {
   Track _trackAtual = null;
   double _progressValue = 0.0;
   Timer _timer;
-
+  Timer _timerApi;
+  int conta = 0;
   @override
   initState() {
     super.initState();
+    _trackAtual = store.state.currentPlaying;
     _currentProgress();
-    _timer = Timer.periodic(Duration(seconds: 2), (_) {
     _timer = Timer.periodic(Duration(seconds: 1), (_) {
       _currentProgress();
     });
+    _timerApi = Timer.periodic(Duration(seconds: 10), (_) {
+      conta = conta + 1;
+      _callApi();
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _timer.cancel();
+    _timerApi.cancel();
+  }
+
+  _callApi() async {
+    await TrackApi.currentPlaying();
+    _trackAtual = store.state.currentPlaying;
   }
 
   _currentProgress() async {
-    await TrackApi.currentPlaying();
-    _trackAtual = store.state.currentPlaying;
     if (_trackAtual != null) {
       final started_at = DateTime.parse(_trackAtual.started_at);
       final durationMs = _trackAtual.durationMs;
       final agora = DateTime.now();
       final decorrido = agora.difference(started_at).inMilliseconds;
-          // print(_progressValue);
       _progressValue = decorrido / durationMs;
       return;
     }
@@ -44,7 +58,7 @@ class _PlayerBarState extends State<PlayerBar> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+
     return Container(
       color: Color.fromRGBO(1, 41, 51, 1),
       height: 39,

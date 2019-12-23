@@ -89,9 +89,7 @@ class ExternalIdsBuilder implements Builder<ExternalIds, ExternalIdsBuilder> {
   _$ExternalIds _$v;
 
   String _isrc;
-
   String get isrc => _$this._isrc;
-
   set isrc(String isrc) => _$this._isrc = isrc;
 
   ExternalIdsBuilder();

@@ -2,15 +2,12 @@ import 'dart:async';
 
 import 'package:bolha_musical/api/BolhaApi.dart';
 import 'package:bolha_musical/api/UsersApi.dart';
-import 'package:bolha_musical/model/AuthState.dart';
 import 'package:bolha_musical/model/Bolha.dart';
 import 'package:bolha_musical/model/Localizacao.dart';
 import 'package:bolha_musical/pages/mapa/widgets/CircleMarker.dart';
 import 'package:bolha_musical/pages/mapa/widgets/MarkerMembro.dart';
 import 'package:bolha_musical/redux/actions.dart';
 import 'package:bolha_musical/redux/store.dart';
-import 'package:bolha_musical/widgets/bottomBar.dart';
-import 'package:bolha_musical/widgets/drawer.dart';
 import 'package:bolha_musical/widgets/player_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -56,7 +53,6 @@ class _MapaState extends State<Mapa> {
     _timer = Timer.periodic(Duration(seconds: 15), (_) {
       setState(() {
         contador = contador + 1;
-        print("conta meu contador ${contador}");
         _bolhaAtual = store.state.bolhaAtual;
         if (_bolhaAtual != null) {
           BolhaApi.getBolhaAtual();
@@ -90,7 +86,6 @@ class _MapaState extends State<Mapa> {
             title: Text('Mapa'),
             backgroundColor: Color.fromRGBO(1, 41, 51, 1),
           ),
-          drawer: HomeDrawer(),
           body: Column(
             children: <Widget>[
               Container(
@@ -132,15 +127,6 @@ class _MapaState extends State<Mapa> {
               ),
               PlayerBar()
             ],
-          ),
-          bottomNavigationBar: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: Color.fromRGBO(1, 41, 51, 1),
-            currentIndex: 0,
-            items: bottomBarList(),
-            onTap: (index) {
-              handleBottomTap(index);
-            },
           ),
         ));
   }

@@ -3,16 +3,14 @@ import 'dart:async';
 import 'package:bolha_musical/api/TrackApi.dart';
 import 'package:bolha_musical/pages/playlist/widgets/playlist_item.dart';
 import 'package:bolha_musical/redux/app_state.dart';
-import 'package:bolha_musical/redux/store.dart';
 import 'package:bolha_musical/utils/NavigationService.dart';
 import 'package:bolha_musical/utils/SetupLocator.dart';
-import 'package:bolha_musical/widgets/bottomBar.dart';
-import 'package:bolha_musical/widgets/drawer.dart';
 import 'package:bolha_musical/widgets/player_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_widgets/flutter_widgets.dart';
+import 'package:unicorndial/unicorndial.dart';
 
 class Playlist extends StatefulWidget {
   @override
@@ -28,6 +26,7 @@ class PlaylistState extends State<Playlist> {
   int cont = 0;
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       new GlobalKey<RefreshIndicatorState>();
+  List _childButtons = List<UnicornButton>();
 
   @override
   State<StatefulWidget> createState() {
@@ -37,6 +36,27 @@ class PlaylistState extends State<Playlist> {
   @override
   initState() {
     super.initState();
+
+    setState(() {
+      _childButtons.add(UnicornButton(
+          hasLabel: true,
+          labelText: "Nova música_",
+          currentButton: FloatingActionButton(
+            heroTag: "train",
+            backgroundColor: Colors.redAccent,
+            mini: true,
+            child: Icon(Icons.add),
+            onPressed: () {
+              Navigator.pushNamed(
+                  locator<NavigationService>()
+                      .navigatorKey
+                      .currentState
+                      .overlay
+                      .context,
+                  '/track-search');
+            },
+          )));
+    });
     TrackApi.playlist();
     _timer = Timer.periodic(Duration(seconds: 15), (_) {
       setState(() {
@@ -48,7 +68,6 @@ class PlaylistState extends State<Playlist> {
 
   @override
   void dispose() {
-    
     super.dispose();
     _timer.cancel();
   }
@@ -67,67 +86,50 @@ class PlaylistState extends State<Playlist> {
     return new WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-          drawer: HomeDrawer(),
-          appBar: AppBar(
-              title: Text('Playlist'),
-              backgroundColor: Color.fromRGBO(1, 41, 51, 1),
-              actions: <Widget>[
-                // action button
-                IconButton(
-                  icon: Icon(Icons.search),
-                  onPressed: () {
-                    Navigator.pushNamed(
-                        locator<NavigationService>()
-                            .navigatorKey
-                            .currentState
-                            .overlay
-                            .context,
-                        '/track-search');
-                  },
-                ),
-              ]),
-          body: Column(
-            children: <Widget>[
-              Container(
-                height: MediaQuery.of(context).size.height - 176,
-                child: StoreConnector<AppState, AppState>(
-                    distinct: true,
-                    converter: (store) => store.state,
-                    builder: (context, state) {
-                      if (state.playlist.length > 0) {
-                        return AnimationLimiter(
-                          child: ScrollablePositionedList.builder(
-                            initialScrollIndex: state.playlist.length > 0
-                                ? _indexAtivo(state.playlist)
-                                : 0,
-                            padding: const EdgeInsets.all(8.0),
-                            itemCount: state.playlist.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return PlayListItem(
-                                  key: UniqueKey(),
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 70.0,
-                                  track: state.playlist[index]);
-                            },
-                          ),
-                        );
-                      }
-                      return Center(
-                        child: Text("Nada aqui ainda ;)"),
-                      );
-                    }),
-              ),
-              PlayerBar()
-            ],
+          floatingActionButton: Padding(
+            padding: EdgeInsets.only(bottom: 30),
+            child: UnicornDialer(
+                backgroundColor: Color.fromRGBO(255, 255, 255, 0.6),
+                parentButtonBackground: Colors.redAccent,
+                orientation: UnicornOrientation.VERTICAL,
+                parentButton: Icon(Icons.arrow_upward),
+                childButtons: _childButtons),
           ),
-          bottomNavigationBar: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: Color.fromRGBO(1, 41, 51, 1),
-            currentIndex: store.state.currentBottomBarIndex,
-            items: bottomBarList(),
-            onTap: (index) {
-              handleBottomTap(index);
-            },
+          backgroundColor: Color.fromRGBO(1, 41, 51, 0.9),
+          body: SafeArea(
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                  child: StoreConnector<AppState, AppState>(
+                      distinct: true,
+                      converter: (store) => store.state,
+                      builder: (context, state) {
+                        if (state.playlist.length > 0) {
+                          return AnimationLimiter(
+                            child: ScrollablePositionedList.builder(
+                              initialScrollIndex: state.playlist.length > 0
+                                  ? _indexAtivo(state.playlist)
+                                  : 0,
+                              padding: const EdgeInsets.all(8.0),
+                              itemCount: state.playlist.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return PlayListItem(
+                                    key: UniqueKey(),
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 70.0,
+                                    track: state.playlist[index]);
+                              },
+                            ),
+                          );
+                        }
+                        return Center(
+                          child: Text("Nada aqui ainda ;)"),
+                        );
+                      }),
+                ),
+                PlayerBar()
+              ],
+            ),
           )),
     );
   }

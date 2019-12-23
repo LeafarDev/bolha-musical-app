@@ -283,80 +283,56 @@ class AlbumBuilder implements Builder<Album, AlbumBuilder> {
   _$Album _$v;
 
   String _albumType;
-
   String get albumType => _$this._albumType;
-
   set albumType(String albumType) => _$this._albumType = albumType;
 
   String _releaseDate;
-
   String get releaseDate => _$this._releaseDate;
-
   set releaseDate(String releaseDate) => _$this._releaseDate = releaseDate;
 
   ListBuilder<SpotifyImage> _images;
-
   ListBuilder<SpotifyImage> get images =>
       _$this._images ??= new ListBuilder<SpotifyImage>();
-
   set images(ListBuilder<SpotifyImage> images) => _$this._images = images;
 
   String _name;
-
   String get name => _$this._name;
-
   set name(String name) => _$this._name = name;
 
   String _releaseDatePrecision;
-
   String get releaseDatePrecision => _$this._releaseDatePrecision;
-
   set releaseDatePrecision(String releaseDatePrecision) =>
       _$this._releaseDatePrecision = releaseDatePrecision;
 
   String _type;
-
   String get type => _$this._type;
-
   set type(String type) => _$this._type = type;
 
   ExternalUrlsBuilder _externalUrls;
-
   ExternalUrlsBuilder get externalUrls =>
       _$this._externalUrls ??= new ExternalUrlsBuilder();
-
   set externalUrls(ExternalUrlsBuilder externalUrls) =>
       _$this._externalUrls = externalUrls;
 
   String _id;
-
   String get id => _$this._id;
-
   set id(String id) => _$this._id = id;
 
   String _uri;
-
   String get uri => _$this._uri;
-
   set uri(String uri) => _$this._uri = uri;
 
   ListBuilder<Artist> _artists;
-
   ListBuilder<Artist> get artists =>
       _$this._artists ??= new ListBuilder<Artist>();
-
   set artists(ListBuilder<Artist> artists) => _$this._artists = artists;
 
   int _totalTracks;
-
   int get totalTracks => _$this._totalTracks;
-
   set totalTracks(int totalTracks) => _$this._totalTracks = totalTracks;
 
   String _href;
-
   String get href => _$this._href;
-
   set href(String href) => _$this._href = href;
 
   AlbumBuilder();

@@ -119,21 +119,15 @@ class SpotifyImageBuilder
   _$SpotifyImage _$v;
 
   int _height;
-
   int get height => _$this._height;
-
   set height(int height) => _$this._height = height;
 
   String _url;
-
   String get url => _$this._url;
-
   set url(String url) => _$this._url = url;
 
   int _width;
-
   int get width => _$this._width;
-
   set width(int width) => _$this._width = width;
 
   SpotifyImageBuilder();

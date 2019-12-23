@@ -43,7 +43,7 @@ class UsersSessaoUtils {
               .currentState
               .overlay
               .context,
-          '/mapa');
+          '/app');
     } catch (error) {
       // TODO AVISAR USUÁRIO QUE DEU ERRO
       final prefs = await SharedPreferences.getInstance();

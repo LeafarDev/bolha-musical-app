@@ -16,12 +16,12 @@ class PlayListSearchItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: Color.fromRGBO(0, 0, 0, 0),
       child: Container(
         width: width,
         height: height,
         margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
         decoration: BoxDecoration(
-          color: Colors.white,
           borderRadius: const BorderRadius.all(Radius.circular(4.0)),
           boxShadow: <BoxShadow>[
             BoxShadow(
@@ -34,11 +34,18 @@ class PlayListSearchItem extends StatelessWidget {
         child: ListTile(
           onTap: () {},
           leading: CircleAvatar(
-              backgroundImage: CachedNetworkImageProvider(track.album.images != null
-                  ? track.album.images[0].url
-                  : store.state.padraoPerfilFoto)),
-          subtitle: Text(track.album.shortname()),
-          title: Text(track.shortname()),
+              backgroundImage: CachedNetworkImageProvider(
+                  track.album.images != null
+                      ? track.album.images[0].url
+                      : store.state.padraoPerfilFoto)),
+          subtitle: Text(
+            track.album.shortname(),
+            style: TextStyle(color: Colors.white),
+          ),
+          title: Text(
+            track.shortname(),
+            style: TextStyle(color: Colors.white),
+          ),
           trailing: iconButtonBuild(context),
         ),
       ),
@@ -61,12 +68,12 @@ class PlayListSearchItem extends StatelessWidget {
           },
           child: Icon(
             Icons.add,
-            color: Colors.black,
+            color: Colors.grey,
           ),
           elevation: 0,
           shape: CircleBorder(),
           splashColor: Colors.grey,
-          fillColor: Colors.white,
+          fillColor: Color.fromRGBO(0, 0, 0, 0),
         ));
   }
 }

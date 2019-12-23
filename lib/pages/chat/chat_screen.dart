@@ -1,7 +1,6 @@
 import 'package:bolha_musical/model/Message.dart';
 import 'package:bolha_musical/redux/actions.dart';
 import 'package:bolha_musical/redux/store.dart';
-import 'package:bolha_musical/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -136,7 +135,6 @@ class _ChatScreenState extends State<ChatScreen> {
     return new WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
-          drawer: HomeDrawer(),
           backgroundColor: Theme.of(context).primaryColor,
           appBar: AppBar(
             title: Text(

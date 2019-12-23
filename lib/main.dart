@@ -1,3 +1,4 @@
+import 'package:bolha_musical/pages/app.dart';
 import 'package:bolha_musical/pages/bolhas/bolhas.dart';
 import 'package:bolha_musical/pages/chat/chat_screen.dart';
 import 'package:bolha_musical/pages/login.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => Login(),
+          '/app': (context) => App(),
           '/mapa': (context) => Mapa(),
           '/playlist': (context) => Playlist(),
           '/bolhas': (context) => Bolhas(),
