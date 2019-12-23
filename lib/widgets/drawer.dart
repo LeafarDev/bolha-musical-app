@@ -2,6 +2,7 @@ import 'package:bolha_musical/redux/actions.dart';
 import 'package:bolha_musical/redux/app_state.dart';
 import 'package:bolha_musical/redux/store.dart';
 import 'package:bolha_musical/utils/UsersSessaoUtils.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
@@ -41,7 +42,7 @@ class _HomeDrawerState extends State<HomeDrawer>
                       transitionOnUserGestures: true,
                       tag: "hero tag",
                       child: CircleAvatar(
-                        backgroundImage: NetworkImage(state.me.images != null
+                        backgroundImage: CachedNetworkImageProvider(state.me.images != null
                             ? state.me.images.length > 0
                                 ? state.me.images[0].url
                                 : state.padraoPerfilFoto

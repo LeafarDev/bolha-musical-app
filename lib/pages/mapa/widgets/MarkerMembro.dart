@@ -1,6 +1,7 @@
 import 'package:bolha_musical/model/BolhaMembro.dart';
 import 'package:bolha_musical/redux/store.dart';
 import 'package:bolha_musical/widgets/dialogPerfil.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
@@ -25,6 +26,6 @@ Marker MarkerMembro(BolhaMembro membro) {
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
-                    fit: BoxFit.fill, image: NetworkImage(image))))),
+                    fit: BoxFit.fill, image: CachedNetworkImageProvider(image))))),
   );
 }

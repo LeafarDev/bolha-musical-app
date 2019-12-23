@@ -96,7 +96,5 @@ flutter:
 
   assets:
     - assets/login/l03.jpg
-    - assets/gifs/error-500.gif
     - assets/gifs/vetorizado-cat-bolha.gif
-    - assets/login/04.jpg
     - assets/spotify-logo/Spotify_Icon_CMYK_White.png

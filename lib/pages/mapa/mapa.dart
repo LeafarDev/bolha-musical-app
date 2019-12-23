@@ -53,7 +53,7 @@ class _MapaState extends State<Mapa> {
     super.initState();
     _bolhaAtual = store.state.bolhaAtual;
     BolhaApi.getBolhaAtual();
-    _timer = Timer.periodic(Duration(seconds: 2), (_) {
+    _timer = Timer.periodic(Duration(seconds: 15), (_) {
       setState(() {
         contador = contador + 1;
         print("conta meu contador ${contador}");

@@ -21,25 +21,22 @@ class _PlayerBarState extends State<PlayerBar> {
     super.initState();
     _currentProgress();
     _timer = Timer.periodic(Duration(seconds: 2), (_) {
-      TrackApi.playlist();
+    _timer = Timer.periodic(Duration(seconds: 1), (_) {
       _currentProgress();
     });
   }
 
-  _currentProgress() {
-    if (store.state.playlist.length > 0) {
-      for (var i = 0; i < store.state.playlist.length; i++) {
-        if (store.state.playlist[i].current_playing == 1) {
-          final started_at = DateTime.parse(store.state.playlist[i].started_at);
-          final durationMs = store.state.playlist[i].durationMs;
-          final agora = DateTime.now();
-          final decorrido = agora.difference(started_at).inMilliseconds;
+  _currentProgress() async {
+    await TrackApi.currentPlaying();
+    _trackAtual = store.state.currentPlaying;
+    if (_trackAtual != null) {
+      final started_at = DateTime.parse(_trackAtual.started_at);
+      final durationMs = _trackAtual.durationMs;
+      final agora = DateTime.now();
+      final decorrido = agora.difference(started_at).inMilliseconds;
           // print(_progressValue);
-          _trackAtual = store.state.playlist[i];
-          _progressValue = decorrido / durationMs;
-          return;
-        }
-      }
+      _progressValue = decorrido / durationMs;
+      return;
     }
     _trackAtual = null;
     _progressValue = 0.0;

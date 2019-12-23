@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 void showCustomDialogWithImage(BuildContext context) {
@@ -27,7 +28,7 @@ void showCustomDialogWithImage(BuildContext context) {
                     shape: BoxShape.circle,
                     image: DecorationImage(
                         fit: BoxFit.fill,
-                        image: NetworkImage(
+                        image: CachedNetworkImageProvider(
                             "https://profile-images.scdn.co/images/userprofile/default/817641f61b9543e2a0faf1e43ab86b447bd86c1d")))),
           ),
           new Container(

@@ -40,5 +40,9 @@ AppState reducer(AppState prevState, dynamic action) {
   if (action is SetPlaylist) {
     newState.playlist = action.payload;
   }
+
+  if (action is SetCurrentPlaying) {
+    newState.currentPlaying = action.payload;
+  }
   return newState;
 }

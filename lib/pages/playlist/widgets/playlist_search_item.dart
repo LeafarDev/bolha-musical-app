@@ -1,6 +1,7 @@
 import 'package:bolha_musical/api/TrackApi.dart';
 import 'package:bolha_musical/model/Track.dart';
 import 'package:bolha_musical/redux/store.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -33,7 +34,7 @@ class PlayListSearchItem extends StatelessWidget {
         child: ListTile(
           onTap: () {},
           leading: CircleAvatar(
-              backgroundImage: NetworkImage(track.album.images != null
+              backgroundImage: CachedNetworkImageProvider(track.album.images != null
                   ? track.album.images[0].url
                   : store.state.padraoPerfilFoto)),
           subtitle: Text(track.album.shortname()),

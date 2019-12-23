@@ -21,6 +21,7 @@ class AppState {
   SearchTrackResult lastSearchResult = SearchTrackResult();
   bool searchingTrack = false;
   List<Track> playlist = [];
+  Track currentPlaying = null;
   List<Message> messages = [
     Message.fromJson('''{"text":"Is really that time ?",
     "isLiked": true,
@@ -139,5 +140,6 @@ class AppState {
     lastSearchResult = another.lastSearchResult;
     searchingTrack = another.searchingTrack;
     playlist = another.playlist;
+    currentPlaying = another.currentPlaying;
   }
 }

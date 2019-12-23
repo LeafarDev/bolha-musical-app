@@ -57,4 +57,18 @@ class TrackApi {
       return null;
     }
   }
+
+  static currentPlaying() async {
+    final res = await http
+        .get("http://10.0.0.108:3001/api/v1/spotify/bolhas/playlist/current-playing", headers: {
+      HttpHeaders.authorizationHeader: store.state.token.token,
+      HttpHeaders.contentTypeHeader: "application/json"
+    });
+    if (res.statusCode == 200) {
+      store.dispatch(SetCurrentPlaying(Track.fromJson(res.body)));
+      return true;
+    } else {
+      return null;
+    }
+  }
 }

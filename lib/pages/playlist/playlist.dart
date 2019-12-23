@@ -37,7 +37,8 @@ class PlaylistState extends State<Playlist> {
   @override
   initState() {
     super.initState();
-    _timer = Timer.periodic(Duration(seconds: 10), (_) {
+    TrackApi.playlist();
+    _timer = Timer.periodic(Duration(seconds: 15), (_) {
       setState(() {
         cont = cont + 1;
         TrackApi.playlist();
@@ -47,6 +48,7 @@ class PlaylistState extends State<Playlist> {
 
   @override
   void dispose() {
+    
     super.dispose();
     _timer.cancel();
   }
@@ -89,35 +91,24 @@ class PlaylistState extends State<Playlist> {
               Container(
                 height: MediaQuery.of(context).size.height - 176,
                 child: StoreConnector<AppState, AppState>(
+                    distinct: true,
                     converter: (store) => store.state,
                     builder: (context, state) {
                       if (state.playlist.length > 0) {
-                        return SafeArea(
-                          child: AnimationLimiter(
-                            child: ScrollablePositionedList.builder(
-                              initialScrollIndex: state.playlist.length > 0
-                                  ? _indexAtivo(state.playlist)
-                                  : 0,
-                              padding: const EdgeInsets.all(8.0),
-                              itemCount: state.playlist.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return AnimationConfiguration.staggeredList(
-                                  position: index,
-                                  duration: const Duration(milliseconds: 375),
-                                  child: SlideAnimation(
-                                    verticalOffset: 44.0,
-                                    child: FadeInAnimation(
-                                      child: PlayListItem(
-                                          key: UniqueKey(),
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          height: 70.0,
-                                          track: state.playlist[index]),
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
+                        return AnimationLimiter(
+                          child: ScrollablePositionedList.builder(
+                            initialScrollIndex: state.playlist.length > 0
+                                ? _indexAtivo(state.playlist)
+                                : 0,
+                            padding: const EdgeInsets.all(8.0),
+                            itemCount: state.playlist.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return PlayListItem(
+                                  key: UniqueKey(),
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 70.0,
+                                  track: state.playlist[index]);
+                            },
                           ),
                         );
                       }

@@ -72,3 +72,8 @@ class SetPlaylist {
 
   SetPlaylist(this.payload);
 }
+
+class SetCurrentPlaying {
+  final Track payload;
+  SetCurrentPlaying(this.payload);
+}
