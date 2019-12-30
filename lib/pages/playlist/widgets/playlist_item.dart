@@ -40,20 +40,27 @@ class PlayListItem extends StatelessWidget {
                       : store.state.padraoPerfilFoto)),
           subtitle: Text(
             track.album.shortname(),
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: _currentPlayingColor(track.current_playing)),
           ),
           title: Text(
             track.shortname(),
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: _currentPlayingColor(track.current_playing)),
           ),
-          trailing: iconButtonBuild(context),
+          trailing: _iconButtonBuild(context),
         ),
       ),
     );
   }
+  _currentPlayingColor (current_playing) {
+    if (current_playing == 1) {
+      return Colors.yellowAccent;
+    } else {
+      return Colors.white;
+    }
 
-  iconButtonBuild(context) {
-    // TODO: remover add button quando já estiver adicionado
+  }
+  _iconButtonBuild(context) {
+    // TODO: mudar icone de curtir, quando já curtido
     return Material(
         color: Colors.transparent,
         child: RawMaterialButton(

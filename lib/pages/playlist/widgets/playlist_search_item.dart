@@ -46,13 +46,13 @@ class PlayListSearchItem extends StatelessWidget {
             track.shortname(),
             style: TextStyle(color: Colors.white),
           ),
-          trailing: iconButtonBuild(context),
+          trailing: _iconButtonBuild(context),
         ),
       ),
     );
   }
 
-  iconButtonBuild(context) {
+  _iconButtonBuild(context) {
     // TODO: remover add button quando já estiver adicionado
     return Material(
         color: Colors.transparent,

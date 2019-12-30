@@ -34,7 +34,7 @@ class PlayListSearchState extends State<PlayListSearch> {
       resizeToAvoidBottomPadding: false,
       body: SafeArea(
         child: Column(
-          children: <Widget>[inputSearch(), result()],
+          children: <Widget>[_inputSearch(), result()],
         ),
       ),
     );
@@ -77,7 +77,7 @@ class PlayListSearchState extends State<PlayListSearch> {
     );
   }
 
-  inputSearch() {
+  _inputSearch() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8.0),
       height: MediaQuery.of(context).size.height * 0.06,

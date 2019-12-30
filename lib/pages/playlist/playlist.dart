@@ -24,8 +24,6 @@ class Playlist extends StatefulWidget {
 class PlaylistState extends State<Playlist> {
   Timer _timer;
   int cont = 0;
-  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
-      new GlobalKey<RefreshIndicatorState>();
   List _childButtons = List<UnicornButton>();
 
   @override
@@ -123,7 +121,10 @@ class PlaylistState extends State<Playlist> {
                           );
                         }
                         return Center(
-                          child: Text("Nada aqui ainda ;)"),
+                          child: Text(
+                            "Nada aqui ainda ;)",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         );
                       }),
                 ),

@@ -82,51 +82,49 @@ class _MapaState extends State<Mapa> {
     return new WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
-          appBar: AppBar(
-            title: Text('Mapa'),
-            backgroundColor: Color.fromRGBO(1, 41, 51, 1),
-          ),
-          body: Column(
-            children: <Widget>[
-              Container(
-                height: MediaQuery.of(context).size.height - 176,
-                child: FlutterMap(
-                  options: MapOptions(
-                    center: LatLng(51.5, -0.09),
-                    maxZoom: 16.0,
-                    minZoom: 8.0,
-                    zoom: 15.0,
-                    plugins: [
-                      // ADD THIS
-                      UserLocationPlugin(),
-                    ],
-                  ),
-                  layers: [
-                    TileLayerOptions(
-                        urlTemplate:
-                            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                        subdomains: ['a', 'b', 'c']),
-                    CircleLayerOptions(
-                        circles: [CircleMarkerMapa(_bolhaAtual)]),
-                    MarkerLayerOptions(
-                        markers: _bolhaAtual != null
-                            ? [
-                                ..._bolhaAtual.membros
-                                    .map((membro) => MarkerMembro(membro))
-                                    .toList(),
-                              ]
-                            : _locationMarker),
-                    UserLocationOptions(
-                      context: context,
-                      mapController: _mapController,
-                      markers: _locationMarker,
+          backgroundColor: Color.fromRGBO(1, 41, 51, 0.9),
+          body: SafeArea(
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                  child: FlutterMap(
+                    options: MapOptions(
+                      center: LatLng(51.5, -0.09),
+                      maxZoom: 16.0,
+                      minZoom: 8.0,
+                      zoom: 15.0,
+                      plugins: [
+                        // ADD THIS
+                        UserLocationPlugin(),
+                      ],
                     ),
-                  ],
-                  mapController: _mapController,
+                    layers: [
+                      TileLayerOptions(
+                          urlTemplate:
+                              'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                          subdomains: ['a', 'b', 'c']),
+                      CircleLayerOptions(
+                          circles: [CircleMarkerMapa(_bolhaAtual)]),
+                      MarkerLayerOptions(
+                          markers: _bolhaAtual != null
+                              ? [
+                                  ..._bolhaAtual.membros
+                                      .map((membro) => MarkerMembro(membro))
+                                      .toList(),
+                                ]
+                              : _locationMarker),
+                      UserLocationOptions(
+                        context: context,
+                        mapController: _mapController,
+                        markers: _locationMarker,
+                      ),
+                    ],
+                    mapController: _mapController,
+                  ),
                 ),
-              ),
-              PlayerBar()
-            ],
+                PlayerBar()
+              ],
+            ),
           ),
         ));
   }

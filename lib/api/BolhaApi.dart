@@ -87,6 +87,8 @@ class BolhaApi {
     var body = res.body;
     if (res.statusCode == 200) {
       ApiDialogs.sucessoDialog("Saiu com sucesso da bolha :)");
+      store.dispatch(SetBolhaAtual(null));
+      store.dispatch(SetPlaylist([]));
     } else {
       var backendMessage = BackendMessage.fromJson(body);
       ApiDialogs.errorDialog(backendMessage.message);

@@ -80,6 +80,7 @@ class BolhasState extends State<Bolhas> {
                 parentButton: Icon(Icons.arrow_upward),
                 childButtons: childButtons),
           ),
+        backgroundColor: Color.fromRGBO(1, 41, 51, 0.9),
           body: RefreshIndicator(
               key: _refreshIndicatorKey,
               onRefresh: () {

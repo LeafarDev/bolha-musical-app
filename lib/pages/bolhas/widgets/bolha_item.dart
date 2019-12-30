@@ -15,54 +15,58 @@ class BolhaItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: height,
-      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 4.0,
-            offset: const Offset(0.0, 4.0),
-          ),
-        ],
-      ),
-      child: ListTile(
-        onTap: () {
-          if (store.state.bolhaAtual.id != bolha.id) {
-            showDialog(
-                context: context,
-                builder: (BuildContext context) => desejaEntrar(context));
-          }
-        },
-        leading: Icon(
-          Icons.bubble_chart,
-          color: Colors.greenAccent,
+    return Material(
+      color: Color.fromRGBO(0, 0, 0, 0),
+      child: Container(
+        width: width,
+        height: height,
+        margin: const EdgeInsets.symmetric(vertical: 1.0),
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 4.0,
+              offset: const Offset(0.0, 4.0),
+            ),
+          ],
         ),
-        title: Text(bolha.apelido, style: Theme.of(context).textTheme.body1),
-        subtitle: Text("1/∞"),
-        trailing: PopupMenuButton<int>(
-          onSelected: (selectedDropDownItem) {
-            if (selectedDropDownItem == 1) {
+        child: ListTile(
+          onTap: () {
+            if (store.state.bolhaAtual.id != bolha.id) {
               showDialog(
                   context: context,
-                  builder: (BuildContext context) => desejaEntrar(context));
-            } else if (selectedDropDownItem == 2) {
-              showDialog(
-                  context: context,
-                  builder: (BuildContext context) => desejaSair(context));
+                  builder: (BuildContext context) => _desejaEntrar(context));
             }
           },
-          itemBuilder: (context) => popupList(bolha),
+          leading: Icon(
+            Icons.bubble_chart,
+            color: Colors.greenAccent,
+          ),
+          title: Text(bolha.apelido,
+            style: TextStyle(color: Colors.white),),
+          subtitle: Text("1/∞",
+            style: TextStyle(color: Colors.white),),
+          trailing: PopupMenuButton<int>(
+            onSelected: (selectedDropDownItem) {
+              if (selectedDropDownItem == 1) {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) => _desejaEntrar(context));
+              } else if (selectedDropDownItem == 2) {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) => _desejaSair(context));
+              }
+            },
+            itemBuilder: (context) => _popupList(bolha),
+          ),
         ),
       ),
     );
   }
 
-  popupList(bolha) {
+  _popupList(bolha) {
     var atual = store.state.bolhaAtual;
     List<PopupMenuEntry<int>> lista = [];
 
@@ -83,7 +87,7 @@ class BolhaItem extends StatelessWidget {
     return lista;
   }
 
-  desejaSair(BuildContext context) {
+  _desejaSair(BuildContext context) {
     return FancyDialog(
       ok: "Sim",
       cancel: "Cancelar...",
@@ -98,7 +102,7 @@ class BolhaItem extends StatelessWidget {
     );
   }
 
-  desejaEntrar(BuildContext context) {
+  _desejaEntrar(BuildContext context) {
     return FancyDialog(
       ok: "Entrar",
       cancel: "Cancelar...",

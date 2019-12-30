@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:bolha_musical/pages/eu/eu.dart';
 import 'package:bolha_musical/pages/mapa/mapa.dart';
 import 'package:bolha_musical/pages/playlist/playlist.dart';
 import 'package:flutter/cupertino.dart';
@@ -42,6 +43,7 @@ class _AppState extends State<App> {
       ChatScreen(),
       Bolhas(),
       Playlist(),
+      Eu()
     ];
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -107,6 +109,15 @@ class _AppState extends State<App> {
             Icons.playlist_play,
             color: _ItemBottomColor(3),
           )),
+      BottomNavigationBarItem(
+          title: Text(
+            "Eu",
+            style: TextStyle(color: _ItemBottomColor(4)),
+          ),
+          icon: Icon(
+            Icons.person_outline,
+            color: _ItemBottomColor(4),
+          ))
     ];
   }
 
