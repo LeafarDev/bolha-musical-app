@@ -8,6 +8,7 @@ import 'package:bolha_musical/model/Album.dart';
 import 'package:bolha_musical/model/Artist.dart';
 import 'package:bolha_musical/model/BackendMessage.dart';
 import 'package:bolha_musical/model/BolhaMembro.dart';
+import 'package:bolha_musical/model/Device.dart';
 import 'package:bolha_musical/model/ExplicitContent.dart';
 import 'package:bolha_musical/model/ExternalUrls.dart';
 import 'package:bolha_musical/model/Localizacao.dart';
@@ -61,6 +62,7 @@ part 'serializers.g.dart';
   Message,
   Track,
   Artist,
+  Device
 ])
 Serializers serializers = _$serializers;
 Serializers standardSerializers =

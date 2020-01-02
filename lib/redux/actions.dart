@@ -1,5 +1,6 @@
 import 'package:bolha_musical/model/AuthState.dart';
 import 'package:bolha_musical/model/Bolha.dart';
+import 'package:bolha_musical/model/Device.dart';
 import 'package:bolha_musical/model/Localizacao.dart';
 import 'package:bolha_musical/model/Me.dart';
 import 'package:bolha_musical/model/Message.dart';
@@ -75,5 +76,12 @@ class SetPlaylist {
 
 class SetCurrentPlaying {
   final Track payload;
+
   SetCurrentPlaying(this.payload);
+}
+
+class SetDevices {
+  final List<Device> payload;
+
+  SetDevices(this.payload);
 }

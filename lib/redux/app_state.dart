@@ -1,5 +1,6 @@
 import 'package:bolha_musical/model/AuthState.dart';
 import 'package:bolha_musical/model/Bolha.dart';
+import 'package:bolha_musical/model/Device.dart';
 import 'package:bolha_musical/model/Localizacao.dart';
 import 'package:bolha_musical/model/Message.dart';
 import 'package:bolha_musical/model/SearchTrackResult.dart';
@@ -21,6 +22,7 @@ class AppState {
   SearchTrackResult lastSearchResult = SearchTrackResult();
   bool searchingTrack = false;
   List<Track> playlist = [];
+  List<Device> devices = [];
   Track currentPlaying = null;
   List<Message> messages = [
     Message.fromJson('''{"text":"Is really that time ?",
@@ -141,5 +143,6 @@ class AppState {
     searchingTrack = another.searchingTrack;
     playlist = another.playlist;
     currentPlaying = another.currentPlaying;
+    devices = another.devices;
   }
 }
