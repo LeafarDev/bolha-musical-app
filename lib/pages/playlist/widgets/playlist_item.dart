@@ -15,7 +15,7 @@ class PlayListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Color.fromRGBO(0, 0, 0, 0),
+      color: Colors.transparent,
       child: Container(
         width: width,
         height: height,
@@ -76,7 +76,7 @@ class PlayListItem extends StatelessWidget {
           elevation: 0,
           shape: CircleBorder(),
           splashColor: Colors.grey,
-          fillColor: Color.fromRGBO(0, 0, 0, 0),
+          fillColor: Colors.transparent,
         ));
   }
 }

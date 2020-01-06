@@ -16,7 +16,7 @@ class BolhaItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Color.fromRGBO(0, 0, 0, 0),
+      color: Colors.transparent,
       child: Container(
         width: width,
         height: height,
