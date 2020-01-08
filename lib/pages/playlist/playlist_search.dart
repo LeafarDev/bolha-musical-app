@@ -18,7 +18,7 @@ class PlayListSearch extends StatefulWidget {
 class PlayListSearchState extends State<PlayListSearch> {
   TextEditingController _textFieldController = TextEditingController();
   String _lastSearch = "";
-  FocusNode focusNode = FocusNode();
+  FocusNode _focusNode = FocusNode();
 
   @override
   initState() {
@@ -28,7 +28,6 @@ class PlayListSearchState extends State<PlayListSearch> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: Color.fromRGBO(1, 41, 51, 0.9),
       resizeToAvoidBottomPadding: false,
@@ -95,7 +94,7 @@ class PlayListSearchState extends State<PlayListSearch> {
           Expanded(
             child: TextField(
               controller: _textFieldController,
-              focusNode: focusNode,
+              focusNode: _focusNode,
               onChanged: (value) {
                 Timer.run(_doSearch());
               },
@@ -120,7 +119,7 @@ class PlayListSearchState extends State<PlayListSearch> {
     );
   }
 
-  _doSearch () async {
+  _doSearch() async {
     if (_lastSearch != _textFieldController.value.text) {
       await TrackApi.search(_textFieldController.value.text);
       setState(() {

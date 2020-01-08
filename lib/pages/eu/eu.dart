@@ -1,8 +1,9 @@
 import 'package:bolha_musical/redux/app_state.dart';
+import 'package:bolha_musical/redux/store.dart';
 import 'package:bolha_musical/widgets/player_bar.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:unicorndial/unicorndial.dart';
 
 class Eu extends StatefulWidget {
   @override
@@ -16,7 +17,6 @@ class Eu extends StatefulWidget {
 class EuState extends State<Eu> {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       new GlobalKey<RefreshIndicatorState>();
-  List _childButtons = List<UnicornButton>();
 
   @override
   State<StatefulWidget> createState() {
@@ -38,30 +38,113 @@ class EuState extends State<Eu> {
     return new WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-          floatingActionButton: Padding(
-            padding: EdgeInsets.only(bottom: 30),
-            child: UnicornDialer(
-                backgroundColor: Color.fromRGBO(255, 255, 255, 0.6),
-                parentButtonBackground: Colors.redAccent,
-                orientation: UnicornOrientation.VERTICAL,
-                parentButton: Icon(Icons.arrow_upward),
-                childButtons: _childButtons),
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.transparent,
+            title: Center(
+              child: Text(
+                store.state.me.displayName != null
+                    ? store.state.me.displayName
+                    : "Carregando...",
+                style: TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            elevation: 0.0,
           ),
           backgroundColor: Color.fromRGBO(1, 41, 51, 0.9),
           body: SafeArea(
-            child: Column(
-              children: <Widget>[
-                Expanded(
-                  child: StoreConnector<AppState, AppState>(
-                      distinct: true,
-                      converter: (store) => store.state,
-                      builder: (context, state) {
-                        return Center(child: Text("Make me beautiful, ok?"));
-                      }),
-                ),
-                PlayerBar()
-              ],
-            ),
+            child: StoreConnector<AppState, AppState>(
+                distinct: true,
+                converter: (store) => store.state,
+                builder: (context, state) {
+                  return Column(
+                    children: <Widget>[
+                      Expanded(
+                        child: Column(
+                          children: <Widget>[
+                            Padding(
+                              padding: EdgeInsets.only(bottom: 30),
+                              child: CircleAvatar(
+                                backgroundImage: CachedNetworkImageProvider(
+                                  state.me.images != null
+                                      ? state.me.images[0].url
+                                      : state.padraoPerfilFoto,
+                                ),
+                                radius: 100,
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: RichText(
+                                    text: TextSpan(
+                                      style: TextStyle(color: Colors.white),
+                                      children: [
+                                        WidgetSpan(
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 2.0),
+                                            child: Icon(
+                                              Icons.people,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                        TextSpan(
+                                            text:
+                                                "${state.me.followers.total} Seguidores"),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                RichText(
+                                  text: TextSpan(
+                                    style: TextStyle(color: Colors.white),
+                                    children: [
+                                      WidgetSpan(
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 2.0),
+                                          child: Icon(
+                                            Icons.location_on,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      TextSpan(text: "${state.me.country}"),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      Material(
+                        color: Colors.pink,
+                        child: Center(
+                          child: FlatButton.icon(
+                              onPressed: null,
+                              icon: Icon(
+                                Icons.exit_to_app,
+                                color: Colors.white,
+                              ),
+                              label: Text(
+                                "Sair",
+                                style: TextStyle(color: Colors.white),
+                              )),
+                        ),
+                      ),
+                      PlayerBar()
+                    ],
+                  );
+                }),
           )),
     );
   }

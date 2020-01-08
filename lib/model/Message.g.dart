@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of message;
+part of root_dto;
 
 // **************************************************************************
 // BuiltValueGenerator
@@ -18,35 +18,41 @@ class _$MessageSerializer implements StructuredSerializer<Message> {
   Iterable<Object> serialize(Serializers serializers, Message object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[];
-    if (object.sender != null) {
+    if (object.id != null) {
       result
-        ..add('sender')
-        ..add(serializers.serialize(object.sender,
-            specifiedType: const FullType(Me)));
-    }
-    if (object.time != null) {
-      result
-        ..add('time')
-        ..add(serializers.serialize(object.time,
+        ..add('_id')
+        ..add(serializers.serialize(object.id,
             specifiedType: const FullType(String)));
     }
-    if (object.text != null) {
+    if (object.rid != null) {
       result
-        ..add('text')
-        ..add(serializers.serialize(object.text,
+        ..add('rid')
+        ..add(serializers.serialize(object.rid,
             specifiedType: const FullType(String)));
     }
-    if (object.isLiked != null) {
+    if (object.msg != null) {
       result
-        ..add('isLiked')
-        ..add(serializers.serialize(object.isLiked,
-            specifiedType: const FullType(bool)));
+        ..add('msg')
+        ..add(serializers.serialize(object.msg,
+            specifiedType: const FullType(String)));
     }
-    if (object.unread != null) {
+    if (object.ts != null) {
       result
-        ..add('unread')
-        ..add(serializers.serialize(object.unread,
-            specifiedType: const FullType(bool)));
+        ..add('ts')
+        ..add(serializers.serialize(object.ts,
+            specifiedType: const FullType(Ts)));
+    }
+    if (object.u != null) {
+      result
+        ..add('u')
+        ..add(
+            serializers.serialize(object.u, specifiedType: const FullType(U)));
+    }
+    if (object.updatedAt != null) {
+      result
+        ..add('_updatedAt')
+        ..add(serializers.serialize(object.updatedAt,
+            specifiedType: const FullType(UpdatedAt)));
     }
     return result;
   }
@@ -62,25 +68,29 @@ class _$MessageSerializer implements StructuredSerializer<Message> {
       iterator.moveNext();
       final dynamic value = iterator.current;
       switch (key) {
-        case 'sender':
-          result.sender.replace(serializers.deserialize(value,
-              specifiedType: const FullType(Me)) as Me);
-          break;
-        case 'time':
-          result.time = serializers.deserialize(value,
+        case '_id':
+          result.id = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
-        case 'text':
-          result.text = serializers.deserialize(value,
+        case 'rid':
+          result.rid = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
-        case 'isLiked':
-          result.isLiked = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+        case 'msg':
+          result.msg = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
           break;
-        case 'unread':
-          result.unread = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+        case 'ts':
+          result.ts.replace(serializers.deserialize(value,
+              specifiedType: const FullType(Ts)) as Ts);
+          break;
+        case 'u':
+          result.u.replace(serializers.deserialize(value,
+              specifiedType: const FullType(U)) as U);
+          break;
+        case '_updatedAt':
+          result.updatedAt.replace(serializers.deserialize(value,
+              specifiedType: const FullType(UpdatedAt)) as UpdatedAt);
           break;
       }
     }
@@ -91,20 +101,22 @@ class _$MessageSerializer implements StructuredSerializer<Message> {
 
 class _$Message extends Message {
   @override
-  final Me sender;
+  final String id;
   @override
-  final String time;
+  final String rid;
   @override
-  final String text;
+  final String msg;
   @override
-  final bool isLiked;
+  final Ts ts;
   @override
-  final bool unread;
+  final U u;
+  @override
+  final UpdatedAt updatedAt;
 
   factory _$Message([void Function(MessageBuilder) updates]) =>
       (new MessageBuilder()..update(updates)).build();
 
-  _$Message._({this.sender, this.time, this.text, this.isLiked, this.unread})
+  _$Message._({this.id, this.rid, this.msg, this.ts, this.u, this.updatedAt})
       : super._();
 
   @override
@@ -118,29 +130,33 @@ class _$Message extends Message {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is Message &&
-        sender == other.sender &&
-        time == other.time &&
-        text == other.text &&
-        isLiked == other.isLiked &&
-        unread == other.unread;
+        id == other.id &&
+        rid == other.rid &&
+        msg == other.msg &&
+        ts == other.ts &&
+        u == other.u &&
+        updatedAt == other.updatedAt;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc($jc(0, sender.hashCode), time.hashCode), text.hashCode),
-            isLiked.hashCode),
-        unread.hashCode));
+        $jc(
+            $jc($jc($jc($jc(0, id.hashCode), rid.hashCode), msg.hashCode),
+                ts.hashCode),
+            u.hashCode),
+        updatedAt.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('Message')
-          ..add('sender', sender)
-          ..add('time', time)
-          ..add('text', text)
-          ..add('isLiked', isLiked)
-          ..add('unread', unread))
+          ..add('id', id)
+          ..add('rid', rid)
+          ..add('msg', msg)
+          ..add('ts', ts)
+          ..add('u', u)
+          ..add('updatedAt', updatedAt))
         .toString();
   }
 }
@@ -148,35 +164,41 @@ class _$Message extends Message {
 class MessageBuilder implements Builder<Message, MessageBuilder> {
   _$Message _$v;
 
-  MeBuilder _sender;
-  MeBuilder get sender => _$this._sender ??= new MeBuilder();
-  set sender(MeBuilder sender) => _$this._sender = sender;
+  String _id;
+  String get id => _$this._id;
+  set id(String id) => _$this._id = id;
 
-  String _time;
-  String get time => _$this._time;
-  set time(String time) => _$this._time = time;
+  String _rid;
+  String get rid => _$this._rid;
+  set rid(String rid) => _$this._rid = rid;
 
-  String _text;
-  String get text => _$this._text;
-  set text(String text) => _$this._text = text;
+  String _msg;
+  String get msg => _$this._msg;
+  set msg(String msg) => _$this._msg = msg;
 
-  bool _isLiked;
-  bool get isLiked => _$this._isLiked;
-  set isLiked(bool isLiked) => _$this._isLiked = isLiked;
+  TsBuilder _ts;
+  TsBuilder get ts => _$this._ts ??= new TsBuilder();
+  set ts(TsBuilder ts) => _$this._ts = ts;
 
-  bool _unread;
-  bool get unread => _$this._unread;
-  set unread(bool unread) => _$this._unread = unread;
+  UBuilder _u;
+  UBuilder get u => _$this._u ??= new UBuilder();
+  set u(UBuilder u) => _$this._u = u;
+
+  UpdatedAtBuilder _updatedAt;
+  UpdatedAtBuilder get updatedAt =>
+      _$this._updatedAt ??= new UpdatedAtBuilder();
+  set updatedAt(UpdatedAtBuilder updatedAt) => _$this._updatedAt = updatedAt;
 
   MessageBuilder();
 
   MessageBuilder get _$this {
     if (_$v != null) {
-      _sender = _$v.sender?.toBuilder();
-      _time = _$v.time;
-      _text = _$v.text;
-      _isLiked = _$v.isLiked;
-      _unread = _$v.unread;
+      _id = _$v.id;
+      _rid = _$v.rid;
+      _msg = _$v.msg;
+      _ts = _$v.ts?.toBuilder();
+      _u = _$v.u?.toBuilder();
+      _updatedAt = _$v.updatedAt?.toBuilder();
       _$v = null;
     }
     return this;
@@ -201,16 +223,21 @@ class MessageBuilder implements Builder<Message, MessageBuilder> {
     try {
       _$result = _$v ??
           new _$Message._(
-              sender: _sender?.build(),
-              time: time,
-              text: text,
-              isLiked: isLiked,
-              unread: unread);
+              id: id,
+              rid: rid,
+              msg: msg,
+              ts: _ts?.build(),
+              u: _u?.build(),
+              updatedAt: _updatedAt?.build());
     } catch (_) {
       String _$failedField;
       try {
-        _$failedField = 'sender';
-        _sender?.build();
+        _$failedField = 'ts';
+        _ts?.build();
+        _$failedField = 'u';
+        _u?.build();
+        _$failedField = 'updatedAt';
+        _updatedAt?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'Message', _$failedField, e.toString());

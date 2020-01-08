@@ -13,9 +13,13 @@ import 'package:bolha_musical/model/ExplicitContent.dart';
 import 'package:bolha_musical/model/ExternalUrls.dart';
 import 'package:bolha_musical/model/Localizacao.dart';
 import 'package:bolha_musical/model/Message.dart';
+import 'package:bolha_musical/model/RocketChatResultResponse.dart';
 import 'package:bolha_musical/model/SearchTrackResult.dart';
 import 'package:bolha_musical/model/SpotifyImage.dart';
 import 'package:bolha_musical/model/Track.dart';
+import 'package:bolha_musical/model/Ts.dart';
+import 'package:bolha_musical/model/U.dart';
+import 'package:bolha_musical/model/UpdatedAt.dart';
 import 'package:bolha_musical/redux/app_state.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
@@ -26,6 +30,8 @@ import 'Bolha.dart';
 import 'ExternalIds.dart';
 import 'Followers.dart';
 import 'Me.dart';
+import 'RocketChatResponse.dart';
+import 'RocketChatResultResponse.dart';
 import 'Token.dart';
 import 'User.dart';
 
@@ -62,7 +68,12 @@ part 'serializers.g.dart';
   Message,
   Track,
   Artist,
-  Device
+  Device,
+  RocketChatResponse,
+  RocketChatResultResponse,
+  Ts,
+  U,
+  UpdatedAt
 ])
 Serializers serializers = _$serializers;
 Serializers standardSerializers =

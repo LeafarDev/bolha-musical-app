@@ -18,7 +18,6 @@ class _PlayerBarState extends State<PlayerBar> {
   double _progressValue = 0.0;
   Timer _timer;
   Timer _timerApi;
-  int conta = 0;
   IconData iconeDispositivoAtual;
 
   @override
@@ -43,7 +42,6 @@ class _PlayerBarState extends State<PlayerBar> {
       _currentProgress();
     });
     _timerApi = Timer.periodic(Duration(seconds: 10), (_) {
-      conta = conta + 1;
       _callApi();
     });
   }

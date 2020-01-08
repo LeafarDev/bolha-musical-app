@@ -25,7 +25,6 @@ class _LoginState extends State<Login> {
   StreamSubscription _onDestroy;
   StreamSubscription<String> _onUrlChanged;
   StreamSubscription<WebViewStateChanged> _onStateChanged;
-  Future<AuthState> authState;
 
   @override
   void dispose() {
@@ -72,7 +71,6 @@ class _LoginState extends State<Login> {
                     width: 300,
                     child: FlatButton(
                       onPressed: () async {
-                        var result = await _geAuthState();
                         String url =
                             "https://accounts.spotify.com/authorize?client_id=c03736df76424cde8deda585b4bfbad8&response_type=code&redirect_uri=http://10.0.0.108:3001/api/v1/spotify/login/callback&scope=user-read-private playlist-read-private user-top-read user-follow-modify user-library-modify user-modify-playback-state user-read-playback-state user-read-currently-playing app-remote-control user-follow-read user-read-recently-played streaming user-library-read user-read-email&state=${state.authState.id}";
                         if (state.authState.id != null) {
@@ -115,7 +113,6 @@ class _LoginState extends State<Login> {
 
   void _geAuthState() async {
     if (store.state.authState.id == null) {
-      print("get state");
       AuthState authstate = await UsersApi.getAuthState();
       if (authstate != null) {
         store.dispatch(SetAuthState(authstate));

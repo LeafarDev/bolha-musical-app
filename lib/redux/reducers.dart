@@ -44,8 +44,13 @@ AppState reducer(AppState prevState, dynamic action) {
   if (action is SetCurrentPlaying) {
     newState.currentPlaying = action.payload;
   }
+
   if (action is SetDevices) {
     newState.devices = action.payload;
+  }
+
+  if (action is SetMessages) {
+    newState.messages = action.payload;
   }
   return newState;
 }

@@ -21,10 +21,15 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(Localizacao.serializer)
       ..add(Me.serializer)
       ..add(Message.serializer)
+      ..add(RocketChatResponse.serializer)
+      ..add(RocketChatResultResponse.serializer)
       ..add(SearchTrackResult.serializer)
       ..add(SpotifyImage.serializer)
       ..add(Token.serializer)
       ..add(Track.serializer)
+      ..add(Ts.serializer)
+      ..add(U.serializer)
+      ..add(UpdatedAt.serializer)
       ..add(User.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(Artist)]),
@@ -32,6 +37,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(BolhaMembro)]),
           () => new ListBuilder<BolhaMembro>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(Message)]),
+          () => new ListBuilder<Message>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(SpotifyImage)]),
           () => new ListBuilder<SpotifyImage>())

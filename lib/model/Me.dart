@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:bolha_musical/model/SpotifyImage.dart';
 import 'package:bolha_musical/model/serializers.dart';
+import 'package:bolha_musical/redux/store.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -22,6 +23,10 @@ abstract class Me implements Built<Me, MeBuilder> {
   @nullable
   @BuiltValueField(wireName: 'email')
   String get email;
+
+  @nullable
+  @BuiltValueField(wireName: 'rocket_chat_auth_token')
+  String get rocket_chat_auth_token;
 
   @nullable
   @BuiltValueField(wireName: 'type')
@@ -69,6 +74,14 @@ abstract class Me implements Built<Me, MeBuilder> {
 
   String r() {
     return " ";
+  }
+
+  getImage() {
+    if (images != null) {
+      return images[0].url;
+    } else {
+      return store.state.padraoPerfilFoto;
+    }
   }
 
   static Me fromJson(String jsonString) {

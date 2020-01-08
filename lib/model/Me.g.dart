@@ -24,6 +24,12 @@ class _$MeSerializer implements StructuredSerializer<Me> {
         ..add(serializers.serialize(object.email,
             specifiedType: const FullType(String)));
     }
+    if (object.rocket_chat_auth_token != null) {
+      result
+        ..add('rocket_chat_auth_token')
+        ..add(serializers.serialize(object.rocket_chat_auth_token,
+            specifiedType: const FullType(String)));
+    }
     if (object.type != null) {
       result
         ..add('type')
@@ -109,6 +115,10 @@ class _$MeSerializer implements StructuredSerializer<Me> {
           result.email = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'rocket_chat_auth_token':
+          result.rocket_chat_auth_token = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
         case 'type':
           result.type = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
@@ -167,6 +177,8 @@ class _$Me extends Me {
   @override
   final String email;
   @override
+  final String rocket_chat_auth_token;
+  @override
   final String type;
   @override
   final ExternalUrls externalUrls;
@@ -194,6 +206,7 @@ class _$Me extends Me {
 
   _$Me._(
       {this.email,
+      this.rocket_chat_auth_token,
       this.type,
       this.externalUrls,
       this.images,
@@ -219,6 +232,7 @@ class _$Me extends Me {
     if (identical(other, this)) return true;
     return other is Me &&
         email == other.email &&
+        rocket_chat_auth_token == other.rocket_chat_auth_token &&
         type == other.type &&
         externalUrls == other.externalUrls &&
         images == other.images &&
@@ -244,7 +258,11 @@ class _$Me extends Me {
                                 $jc(
                                     $jc(
                                         $jc(
-                                            $jc($jc(0, email.hashCode),
+                                            $jc(
+                                                $jc(
+                                                    $jc(0, email.hashCode),
+                                                    rocket_chat_auth_token
+                                                        .hashCode),
                                                 type.hashCode),
                                             externalUrls.hashCode),
                                         images.hashCode),
@@ -262,6 +280,7 @@ class _$Me extends Me {
   String toString() {
     return (newBuiltValueToStringHelper('Me')
           ..add('email', email)
+          ..add('rocket_chat_auth_token', rocket_chat_auth_token)
           ..add('type', type)
           ..add('externalUrls', externalUrls)
           ..add('images', images)
@@ -283,6 +302,11 @@ class MeBuilder implements Builder<Me, MeBuilder> {
   String _email;
   String get email => _$this._email;
   set email(String email) => _$this._email = email;
+
+  String _rocket_chat_auth_token;
+  String get rocket_chat_auth_token => _$this._rocket_chat_auth_token;
+  set rocket_chat_auth_token(String rocket_chat_auth_token) =>
+      _$this._rocket_chat_auth_token = rocket_chat_auth_token;
 
   String _type;
   String get type => _$this._type;
@@ -339,6 +363,7 @@ class MeBuilder implements Builder<Me, MeBuilder> {
   MeBuilder get _$this {
     if (_$v != null) {
       _email = _$v.email;
+      _rocket_chat_auth_token = _$v.rocket_chat_auth_token;
       _type = _$v.type;
       _externalUrls = _$v.externalUrls?.toBuilder();
       _images = _$v.images?.toBuilder();
@@ -375,6 +400,7 @@ class MeBuilder implements Builder<Me, MeBuilder> {
       _$result = _$v ??
           new _$Me._(
               email: email,
+              rocket_chat_auth_token: rocket_chat_auth_token,
               type: type,
               externalUrls: _externalUrls?.build(),
               images: _images?.build(),

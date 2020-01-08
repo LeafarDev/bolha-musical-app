@@ -1,10 +1,18 @@
 import 'dart:async';
+
+import 'package:bolha_musical/api/BolhaApi.dart';
+import 'package:bolha_musical/api/UsersApi.dart';
+import 'package:bolha_musical/model/Localizacao.dart';
 import 'package:bolha_musical/pages/eu/eu.dart';
 import 'package:bolha_musical/pages/mapa/mapa.dart';
 import 'package:bolha_musical/pages/playlist/playlist.dart';
+import 'package:bolha_musical/redux/actions.dart';
+import 'package:bolha_musical/redux/store.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
+
 import 'bolhas/bolhas.dart';
 import 'chat/chat_screen.dart';
 
@@ -15,7 +23,6 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   Timer _timer;
-  int contador = 0;
   int _currentIndex = 3;
 
   @override
@@ -31,20 +38,30 @@ class _AppState extends State<App> {
     _timer.cancel();
   }
 
+  _location() async {
+    Position position = await Geolocator().getLastKnownPosition(desiredAccuracy: LocationAccuracy.high);
+    Localizacao _localizacao = new Localizacao((b) => b
+      ..latitude = position.latitude
+      ..longitude = position.longitude);
+    store.dispatch(SetLocalizacaoAtual(_localizacao));
+    UsersApi.enviarLocalizacaoAtual();
+  }
+
   @override
   initState() {
     super.initState();
+    _location();
+    _timer = Timer.periodic(Duration(seconds: 10), (_) {
+      setState(() {
+        _location();
+        BolhaApi.getBolhaAtual();
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    var paginas = [
-      Mapa(),
-      ChatScreen(),
-      Bolhas(),
-      Playlist(),
-      Eu()
-    ];
+    var paginas = [Mapa(), ChatScreen(), Bolhas(), Playlist(), Eu()];
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
@@ -120,7 +137,6 @@ class _AppState extends State<App> {
           ))
     ];
   }
-
 
   _ItemBottomColor(index) {
     return _currentIndex == index ? Colors.yellowAccent : Colors.white;

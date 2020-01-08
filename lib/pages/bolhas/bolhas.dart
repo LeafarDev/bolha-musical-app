@@ -22,7 +22,6 @@ class Bolhas extends StatefulWidget {
 // This class holds data related to the form.
 class BolhasState extends State<Bolhas> {
   Timer _timer;
-  int cont = 0;
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       new GlobalKey<RefreshIndicatorState>();
 
@@ -37,8 +36,6 @@ class BolhasState extends State<Bolhas> {
     BolhaApi.getBolhasDisponiveis();
     _timer = Timer.periodic(Duration(seconds: 5), (_) {
       setState(() {
-        cont = cont + 1;
-        print(cont);
         BolhaApi.getBolhasDisponiveis();
       });
     });

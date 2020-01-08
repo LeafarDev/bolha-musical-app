@@ -23,7 +23,6 @@ class Playlist extends StatefulWidget {
 // This class holds data related to the form.
 class PlaylistState extends State<Playlist> {
   Timer _timer;
-  int cont = 0;
   List _childButtons = List<UnicornButton>();
 
   @override
@@ -58,7 +57,6 @@ class PlaylistState extends State<Playlist> {
     TrackApi.playlist();
     _timer = Timer.periodic(Duration(seconds: 15), (_) {
       setState(() {
-        cont = cont + 1;
         TrackApi.playlist();
       });
     });

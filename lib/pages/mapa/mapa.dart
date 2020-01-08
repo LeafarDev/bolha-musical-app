@@ -1,12 +1,9 @@
 import 'dart:async';
 
 import 'package:bolha_musical/api/BolhaApi.dart';
-import 'package:bolha_musical/api/UsersApi.dart';
 import 'package:bolha_musical/model/Bolha.dart';
-import 'package:bolha_musical/model/Localizacao.dart';
 import 'package:bolha_musical/pages/mapa/widgets/CircleMarker.dart';
 import 'package:bolha_musical/pages/mapa/widgets/MarkerMembro.dart';
-import 'package:bolha_musical/redux/actions.dart';
 import 'package:bolha_musical/redux/store.dart';
 import 'package:bolha_musical/widgets/player_bar.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +20,6 @@ class Mapa extends StatefulWidget {
 class _MapaState extends State<Mapa> {
   Bolha _bolhaAtual = null;
   Timer _timer;
-  int contador = 0;
   MapController _mapController = MapController();
   List<Marker> _locationMarker = [];
 
@@ -50,25 +46,9 @@ class _MapaState extends State<Mapa> {
     super.initState();
     _bolhaAtual = store.state.bolhaAtual;
     BolhaApi.getBolhaAtual();
-    _timer = Timer.periodic(Duration(seconds: 15), (_) {
+    _timer = Timer.periodic(Duration(seconds: 5), (_) {
       setState(() {
-        contador = contador + 1;
         _bolhaAtual = store.state.bolhaAtual;
-        if (_bolhaAtual != null) {
-          BolhaApi.getBolhaAtual();
-        }
-        if (_locationMarker.length > 0) {
-          if (store.state.localizacaoAtual.latitude !=
-                  _locationMarker[0].point.latitude &&
-              store.state.localizacaoAtual.longitude !=
-                  _locationMarker[0].point.longitude) {
-            Localizacao _localizacao = new Localizacao((b) => b
-              ..latitude = _locationMarker[0].point.latitude
-              ..longitude = _locationMarker[0].point.longitude);
-            store.dispatch(SetLocalizacaoAtual(_localizacao));
-            UsersApi.enviarLocalizacaoAtual();
-          }
-        }
       });
     });
   }

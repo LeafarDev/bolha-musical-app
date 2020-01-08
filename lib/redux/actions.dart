@@ -85,3 +85,9 @@ class SetDevices {
 
   SetDevices(this.payload);
 }
+
+class SetMessages {
+  final List<Message> payload;
+
+  SetMessages(this.payload);
+}
