@@ -56,9 +56,7 @@ class PlaylistState extends State<Playlist> {
     });
     TrackApi.playlist();
     _timer = Timer.periodic(Duration(seconds: 15), (_) {
-      setState(() {
-        TrackApi.playlist();
-      });
+      TrackApi.playlist();
     });
   }
 

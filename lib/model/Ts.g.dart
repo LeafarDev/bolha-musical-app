@@ -18,10 +18,10 @@ class _$TsSerializer implements StructuredSerializer<Ts> {
   Iterable<Object> serialize(Serializers serializers, Ts object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[];
-    if (object.$date != null) {
+    if (object.date != null) {
       result
         ..add('\$date')
-        ..add(serializers.serialize(object.$date,
+        ..add(serializers.serialize(object.date,
             specifiedType: const FullType(int)));
     }
     return result;
@@ -39,7 +39,7 @@ class _$TsSerializer implements StructuredSerializer<Ts> {
       final dynamic value = iterator.current;
       switch (key) {
         case '\$date':
-          result.$date = serializers.deserialize(value,
+          result.date = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
           break;
       }
@@ -51,12 +51,12 @@ class _$TsSerializer implements StructuredSerializer<Ts> {
 
 class _$Ts extends Ts {
   @override
-  final int $date;
+  final int date;
 
   factory _$Ts([void Function(TsBuilder) updates]) =>
       (new TsBuilder()..update(updates)).build();
 
-  _$Ts._({this.$date}) : super._();
+  _$Ts._({this.date}) : super._();
 
   @override
   Ts rebuild(void Function(TsBuilder) updates) =>
@@ -68,27 +68,27 @@ class _$Ts extends Ts {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is Ts && $date == other.$date;
+    return other is Ts && date == other.date;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, $date.hashCode));
+    return $jf($jc(0, date.hashCode));
   }
 }
 
 class TsBuilder implements Builder<Ts, TsBuilder> {
   _$Ts _$v;
 
-  int _$date;
-  int get $date => _$this._$date;
-  set $date(int $date) => _$this._$date = $date;
+  int _date;
+  int get date => _$this._date;
+  set date(int date) => _$this._date = date;
 
   TsBuilder();
 
   TsBuilder get _$this {
     if (_$v != null) {
-      _$date = _$v.$date;
+      _date = _$v.date;
       _$v = null;
     }
     return this;
@@ -109,7 +109,7 @@ class TsBuilder implements Builder<Ts, TsBuilder> {
 
   @override
   _$Ts build() {
-    final _$result = _$v ?? new _$Ts._($date: $date);
+    final _$result = _$v ?? new _$Ts._(date: date);
     replace(_$result);
     return _$result;
   }

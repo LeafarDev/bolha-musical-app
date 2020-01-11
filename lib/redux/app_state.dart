@@ -5,6 +5,7 @@ import 'package:bolha_musical/model/Localizacao.dart';
 import 'package:bolha_musical/model/Message.dart';
 import 'package:bolha_musical/model/SearchTrackResult.dart';
 import 'package:bolha_musical/model/Track.dart';
+import 'package:dash_chat/dash_chat.dart';
 
 import '../model/Me.dart';
 import '../model/Token.dart';
@@ -16,7 +17,8 @@ class AppState {
   Bolha bolhaAtual = null;
   Token token = Token();
   List<Bolha> bolhasDisponiveis = [];
-  Localizacao localizacaoAtual = Localizacao((b) => b
+  Localizacao localizacaoAtual = Localizacao((b) =>
+  b
     ..latitude = 0.0
     ..longitude = 0.0);
   SearchTrackResult lastSearchResult = SearchTrackResult();
@@ -25,7 +27,7 @@ class AppState {
   List<Device> devices = [];
   Track currentPlaying = null;
   List<Message> messages = [];
-
+  List<ChatMessage> chatMessages = [];
   String padraoPerfilFoto =
       "https://scontent-gru1-1.xx.fbcdn.net/v/t31.0-1/c47.0.160.160a/p160x160/10506738_10150004552801856_220367501106153455_o.jpg?_nc_cat=1&_nc_ohc=IPx3jo13vcMAQkPVjXxdnCBWbyWPNrV9Ja1GpNbHMk_tDGVrjWwdKmXuQ&_nc_ht=scontent-gru1-1.xx&oh=c6a0c59f4aad554cc29fa09ec49220a5&oe=5E75F250";
 
@@ -44,6 +46,10 @@ class AppState {
     playlist = another.playlist;
     currentPlaying = another.currentPlaying;
     devices = another.devices;
+    if (messages.length != another.messages.length) {
+      chatMessages = List<ChatMessage>.from(
+          another.messages.map((i) => i.toDashMessage()));
+    }
     messages = another.messages;
   }
 }

@@ -17,7 +17,7 @@ abstract class UpdatedAt implements Built<UpdatedAt, UpdatedAtBuilder> {
 
   @nullable
   @BuiltValueField(wireName: "\$date")
-  int get $date;
+  int get date;
 
   static UpdatedAt fromJson(String jsonString) {
     final parsed = jsonDecode(jsonString);
@@ -32,7 +32,7 @@ abstract class UpdatedAt implements Built<UpdatedAt, UpdatedAtBuilder> {
   }
 
   String toString() {
-    return (newBuiltValueToStringHelper('UpdatedAt')..add('\$date', $date))
+    return (newBuiltValueToStringHelper('UpdatedAt')..add('\$date', date))
         .toString();
   }
 

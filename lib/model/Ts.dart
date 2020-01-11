@@ -16,7 +16,7 @@ abstract class Ts implements Built<Ts, TsBuilder> {
 
   @nullable
   @BuiltValueField(wireName: "\$date")
-  int get $date;
+  int get date;
 
   static Ts fromJson(String jsonString) {
     final parsed = jsonDecode(jsonString);
@@ -32,7 +32,7 @@ abstract class Ts implements Built<Ts, TsBuilder> {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('Ts')..add('\$date', $date)).toString();
+    return (newBuiltValueToStringHelper('Ts')..add('\$date', date)).toString();
   }
 
   static Serializer<Ts> get serializer => _$tsSerializer;

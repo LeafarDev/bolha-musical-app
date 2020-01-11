@@ -18,10 +18,10 @@ class _$UpdatedAtSerializer implements StructuredSerializer<UpdatedAt> {
   Iterable<Object> serialize(Serializers serializers, UpdatedAt object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[];
-    if (object.$date != null) {
+    if (object.date != null) {
       result
         ..add('\$date')
-        ..add(serializers.serialize(object.$date,
+        ..add(serializers.serialize(object.date,
             specifiedType: const FullType(int)));
     }
     return result;
@@ -39,7 +39,7 @@ class _$UpdatedAtSerializer implements StructuredSerializer<UpdatedAt> {
       final dynamic value = iterator.current;
       switch (key) {
         case '\$date':
-          result.$date = serializers.deserialize(value,
+          result.date = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
           break;
       }
@@ -51,12 +51,12 @@ class _$UpdatedAtSerializer implements StructuredSerializer<UpdatedAt> {
 
 class _$UpdatedAt extends UpdatedAt {
   @override
-  final int $date;
+  final int date;
 
   factory _$UpdatedAt([void Function(UpdatedAtBuilder) updates]) =>
       (new UpdatedAtBuilder()..update(updates)).build();
 
-  _$UpdatedAt._({this.$date}) : super._();
+  _$UpdatedAt._({this.date}) : super._();
 
   @override
   UpdatedAt rebuild(void Function(UpdatedAtBuilder) updates) =>
@@ -68,27 +68,27 @@ class _$UpdatedAt extends UpdatedAt {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is UpdatedAt && $date == other.$date;
+    return other is UpdatedAt && date == other.date;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, $date.hashCode));
+    return $jf($jc(0, date.hashCode));
   }
 }
 
 class UpdatedAtBuilder implements Builder<UpdatedAt, UpdatedAtBuilder> {
   _$UpdatedAt _$v;
 
-  int _$date;
-  int get $date => _$this._$date;
-  set $date(int $date) => _$this._$date = $date;
+  int _date;
+  int get date => _$this._date;
+  set date(int date) => _$this._date = date;
 
   UpdatedAtBuilder();
 
   UpdatedAtBuilder get _$this {
     if (_$v != null) {
-      _$date = _$v.$date;
+      _date = _$v.date;
       _$v = null;
     }
     return this;
@@ -109,7 +109,7 @@ class UpdatedAtBuilder implements Builder<UpdatedAt, UpdatedAtBuilder> {
 
   @override
   _$UpdatedAt build() {
-    final _$result = _$v ?? new _$UpdatedAt._($date: $date);
+    final _$result = _$v ?? new _$UpdatedAt._(date: date);
     replace(_$result);
     return _$result;
   }

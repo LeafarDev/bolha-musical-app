@@ -4,8 +4,11 @@ import 'dart:convert';
 
 import 'package:bolha_musical/model/RocketChatResultResponse.dart';
 import 'package:bolha_musical/model/serializers.dart';
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+
+import 'Message.dart';
 
 part 'RocketChatResponse.g.dart';
 
@@ -23,6 +26,7 @@ abstract class RocketChatResponse
   @nullable
   @BuiltValueField(wireName: 'result')
   RocketChatResultResponse get result;
+
 
   static RocketChatResponse fromJson(String jsonString) {
     final parsed = jsonDecode(jsonString);

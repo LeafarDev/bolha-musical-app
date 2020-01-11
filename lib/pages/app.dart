@@ -51,11 +51,10 @@ class _AppState extends State<App> {
   initState() {
     super.initState();
     _location();
+    BolhaApi.getBolhaAtual();
     _timer = Timer.periodic(Duration(seconds: 10), (_) {
-      setState(() {
-        _location();
-        BolhaApi.getBolhaAtual();
-      });
+      // _location();
+      BolhaApi.getBolhaAtual();
     });
   }
 

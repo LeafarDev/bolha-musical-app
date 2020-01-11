@@ -56,6 +56,14 @@ abstract class Bolha implements Built<Bolha, BolhaBuilder> {
   int get userLiderId;
 
   @nullable
+  @BuiltValueField(wireName: 'referencia')
+  String get referencia;
+
+  @nullable
+  @BuiltValueField(wireName: 'rocket_chat_canal_id')
+  String get rocket_chat_canal_id;
+
+  @nullable
   @BuiltValueField(wireName: 'created_by')
   String get createdBy;
 

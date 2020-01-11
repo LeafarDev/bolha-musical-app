@@ -97,7 +97,7 @@ class _PlayerBarState extends State<PlayerBar> {
                           builder: (BuildContext context) => DeviceForm());
                     },
                     child: Padding(
-                      padding: EdgeInsets.only(left: 30, right: 100),
+                      padding: EdgeInsets.only(left: 30, right: 50),
                       child: Icon(
                         iconeDispositivoAtual,
                         color: Colors.green,

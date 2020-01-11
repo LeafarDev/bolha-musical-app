@@ -8,6 +8,8 @@ import 'package:bolha_musical/model/serializers.dart';
 import 'package:bolha_musical/redux/store.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:dash_chat/dash_chat.dart';
+import 'package:flutter/material.dart' as prefix0;
 
 import 'Ts.dart';
 import 'U.dart';
@@ -41,21 +43,31 @@ abstract class Message implements Built<Message, MessageBuilder> {
   U get u;
 
   @nullable
+  @BuiltValueField(wireName: 'groupable')
+  bool get groupable;
+
+  @nullable
   @BuiltValueField(wireName: '_updatedAt')
   UpdatedAt get updatedAt;
 
-  getImage() {
+  getUser() {
     Bolha bolhaAtual = store.state.bolhaAtual;
     if (bolhaAtual != null) {
-      List<BolhaMembro> result = bolhaAtual.membros
-          .where((i) => i.me.id == u.username)
-          .toList();
+      List<BolhaMembro> result =
+          bolhaAtual.membros.where((i) => i.me.id == u.username).toList();
       if (result.isNotEmpty) {
-        return result[0].me.getImage();
-      } else {
-        return store.state.padraoPerfilFoto;
+        return result[0].me;
       }
     }
+    return null;
+  }
+
+  getImage() {
+    var user = getUser();
+    if (getUser() != null) {
+      return user.getImage();
+    }
+    return store.state.padraoPerfilFoto;
   }
 
   static Message fromJson(String jsonString) {
@@ -63,6 +75,30 @@ abstract class Message implements Built<Message, MessageBuilder> {
     Message message =
         standardSerializers.deserializeWith(Message.serializer, parsed);
     return message;
+  }
+
+  dashUserGuest() {
+    return ChatUser(
+        name: "Visitante",
+        avatar: getImage(),
+        containerColor: prefix0.Colors.pink,
+        color: prefix0.Colors.white);
+  }
+
+  toDashMessage() {
+    var user = getUser();
+    ChatUser dashUser = null;
+    if (user != null) {
+      dashUser = user.toDashUSer();
+    } else {
+      dashUser = dashUserGuest();
+    }
+
+    return ChatMessage(
+        id: id,
+        text: msg,
+        createdAt: DateTime.fromMillisecondsSinceEpoch(ts.date),
+        user: dashUser);
   }
 
   String toJson() {

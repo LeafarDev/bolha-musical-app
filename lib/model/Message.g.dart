@@ -48,6 +48,12 @@ class _$MessageSerializer implements StructuredSerializer<Message> {
         ..add(
             serializers.serialize(object.u, specifiedType: const FullType(U)));
     }
+    if (object.groupable != null) {
+      result
+        ..add('groupable')
+        ..add(serializers.serialize(object.groupable,
+            specifiedType: const FullType(bool)));
+    }
     if (object.updatedAt != null) {
       result
         ..add('_updatedAt')
@@ -88,6 +94,10 @@ class _$MessageSerializer implements StructuredSerializer<Message> {
           result.u.replace(serializers.deserialize(value,
               specifiedType: const FullType(U)) as U);
           break;
+        case 'groupable':
+          result.groupable = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
         case '_updatedAt':
           result.updatedAt.replace(serializers.deserialize(value,
               specifiedType: const FullType(UpdatedAt)) as UpdatedAt);
@@ -111,12 +121,21 @@ class _$Message extends Message {
   @override
   final U u;
   @override
+  final bool groupable;
+  @override
   final UpdatedAt updatedAt;
 
   factory _$Message([void Function(MessageBuilder) updates]) =>
       (new MessageBuilder()..update(updates)).build();
 
-  _$Message._({this.id, this.rid, this.msg, this.ts, this.u, this.updatedAt})
+  _$Message._(
+      {this.id,
+      this.rid,
+      this.msg,
+      this.ts,
+      this.u,
+      this.groupable,
+      this.updatedAt})
       : super._();
 
   @override
@@ -135,6 +154,7 @@ class _$Message extends Message {
         msg == other.msg &&
         ts == other.ts &&
         u == other.u &&
+        groupable == other.groupable &&
         updatedAt == other.updatedAt;
   }
 
@@ -142,9 +162,11 @@ class _$Message extends Message {
   int get hashCode {
     return $jf($jc(
         $jc(
-            $jc($jc($jc($jc(0, id.hashCode), rid.hashCode), msg.hashCode),
-                ts.hashCode),
-            u.hashCode),
+            $jc(
+                $jc($jc($jc($jc(0, id.hashCode), rid.hashCode), msg.hashCode),
+                    ts.hashCode),
+                u.hashCode),
+            groupable.hashCode),
         updatedAt.hashCode));
   }
 
@@ -156,6 +178,7 @@ class _$Message extends Message {
           ..add('msg', msg)
           ..add('ts', ts)
           ..add('u', u)
+          ..add('groupable', groupable)
           ..add('updatedAt', updatedAt))
         .toString();
   }
@@ -184,6 +207,10 @@ class MessageBuilder implements Builder<Message, MessageBuilder> {
   UBuilder get u => _$this._u ??= new UBuilder();
   set u(UBuilder u) => _$this._u = u;
 
+  bool _groupable;
+  bool get groupable => _$this._groupable;
+  set groupable(bool groupable) => _$this._groupable = groupable;
+
   UpdatedAtBuilder _updatedAt;
   UpdatedAtBuilder get updatedAt =>
       _$this._updatedAt ??= new UpdatedAtBuilder();
@@ -198,6 +225,7 @@ class MessageBuilder implements Builder<Message, MessageBuilder> {
       _msg = _$v.msg;
       _ts = _$v.ts?.toBuilder();
       _u = _$v.u?.toBuilder();
+      _groupable = _$v.groupable;
       _updatedAt = _$v.updatedAt?.toBuilder();
       _$v = null;
     }
@@ -228,6 +256,7 @@ class MessageBuilder implements Builder<Message, MessageBuilder> {
               msg: msg,
               ts: _ts?.build(),
               u: _u?.build(),
+              groupable: groupable,
               updatedAt: _updatedAt?.build());
     } catch (_) {
       String _$failedField;
@@ -236,6 +265,7 @@ class MessageBuilder implements Builder<Message, MessageBuilder> {
         _ts?.build();
         _$failedField = 'u';
         _u?.build();
+
         _$failedField = 'updatedAt';
         _updatedAt?.build();
       } catch (e) {

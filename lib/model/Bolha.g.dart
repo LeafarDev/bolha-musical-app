@@ -72,6 +72,18 @@ class _$BolhaSerializer implements StructuredSerializer<Bolha> {
         ..add(serializers.serialize(object.userLiderId,
             specifiedType: const FullType(int)));
     }
+    if (object.referencia != null) {
+      result
+        ..add('referencia')
+        ..add(serializers.serialize(object.referencia,
+            specifiedType: const FullType(String)));
+    }
+    if (object.rocket_chat_canal_id != null) {
+      result
+        ..add('rocket_chat_canal_id')
+        ..add(serializers.serialize(object.rocket_chat_canal_id,
+            specifiedType: const FullType(String)));
+    }
     if (object.createdBy != null) {
       result
         ..add('created_by')
@@ -163,6 +175,14 @@ class _$BolhaSerializer implements StructuredSerializer<Bolha> {
           result.userLiderId = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
           break;
+        case 'referencia':
+          result.referencia = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'rocket_chat_canal_id':
+          result.rocket_chat_canal_id = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
         case 'created_by':
           result.createdBy = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
@@ -218,6 +238,10 @@ class _$Bolha extends Bolha {
   @override
   final int userLiderId;
   @override
+  final String referencia;
+  @override
+  final String rocket_chat_canal_id;
+  @override
   final String createdBy;
   @override
   final String createdAt;
@@ -244,6 +268,8 @@ class _$Bolha extends Bolha {
       this.longitude,
       this.distancia_metros,
       this.userLiderId,
+      this.referencia,
+      this.rocket_chat_canal_id,
       this.createdBy,
       this.createdAt,
       this.updatedAt,
@@ -280,6 +306,8 @@ class _$Bolha extends Bolha {
         longitude == other.longitude &&
         distancia_metros == other.distancia_metros &&
         userLiderId == other.userLiderId &&
+        referencia == other.referencia &&
+        rocket_chat_canal_id == other.rocket_chat_canal_id &&
         createdBy == other.createdBy &&
         createdAt == other.createdAt &&
         updatedAt == other.updatedAt &&
@@ -306,20 +334,26 @@ class _$Bolha extends Bolha {
                                                         $jc(
                                                             $jc(
                                                                 $jc(
-                                                                    0,
-                                                                    id
+                                                                    $jc(
+                                                                        $jc(
+                                                                            0,
+                                                                            id
+                                                                                .hashCode),
+                                                                        apelido
+                                                                            .hashCode),
+                                                                    cor
                                                                         .hashCode),
-                                                                apelido
+                                                                ehFixa
                                                                     .hashCode),
-                                                            cor.hashCode),
-                                                        ehFixa.hashCode),
-                                                    userIdReferenciaRaio
-                                                        .hashCode),
-                                                latitude.hashCode),
-                                            raio.hashCode),
-                                        longitude.hashCode),
-                                    distancia_metros.hashCode),
-                                userLiderId.hashCode),
+                                                            userIdReferenciaRaio
+                                                                .hashCode),
+                                                        latitude.hashCode),
+                                                    raio.hashCode),
+                                                longitude.hashCode),
+                                            distancia_metros.hashCode),
+                                        userLiderId.hashCode),
+                                    referencia.hashCode),
+                                rocket_chat_canal_id.hashCode),
                             createdBy.hashCode),
                         createdAt.hashCode),
                     updatedAt.hashCode),
@@ -341,6 +375,8 @@ class _$Bolha extends Bolha {
           ..add('longitude', longitude)
           ..add('distancia_metros', distancia_metros)
           ..add('userLiderId', userLiderId)
+          ..add('referencia', referencia)
+          ..add('rocket_chat_canal_id', rocket_chat_canal_id)
           ..add('createdBy', createdBy)
           ..add('createdAt', createdAt)
           ..add('updatedAt', updatedAt)
@@ -396,6 +432,15 @@ class BolhaBuilder implements Builder<Bolha, BolhaBuilder> {
   int get userLiderId => _$this._userLiderId;
   set userLiderId(int userLiderId) => _$this._userLiderId = userLiderId;
 
+  String _referencia;
+  String get referencia => _$this._referencia;
+  set referencia(String referencia) => _$this._referencia = referencia;
+
+  String _rocket_chat_canal_id;
+  String get rocket_chat_canal_id => _$this._rocket_chat_canal_id;
+  set rocket_chat_canal_id(String rocket_chat_canal_id) =>
+      _$this._rocket_chat_canal_id = rocket_chat_canal_id;
+
   String _createdBy;
   String get createdBy => _$this._createdBy;
   set createdBy(String createdBy) => _$this._createdBy = createdBy;
@@ -435,6 +480,8 @@ class BolhaBuilder implements Builder<Bolha, BolhaBuilder> {
       _longitude = _$v.longitude;
       _distancia_metros = _$v.distancia_metros;
       _userLiderId = _$v.userLiderId;
+      _referencia = _$v.referencia;
+      _rocket_chat_canal_id = _$v.rocket_chat_canal_id;
       _createdBy = _$v.createdBy;
       _createdAt = _$v.createdAt;
       _updatedAt = _$v.updatedAt;
@@ -475,6 +522,8 @@ class BolhaBuilder implements Builder<Bolha, BolhaBuilder> {
               longitude: longitude,
               distancia_metros: distancia_metros,
               userLiderId: userLiderId,
+              referencia: referencia,
+              rocket_chat_canal_id: rocket_chat_canal_id,
               createdBy: createdBy,
               createdAt: createdAt,
               updatedAt: updatedAt,

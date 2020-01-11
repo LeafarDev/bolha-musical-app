@@ -8,6 +8,8 @@ import 'package:bolha_musical/redux/store.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
+import 'package:dash_chat/dash_chat.dart';
+import 'package:flutter/material.dart' as prefix0;
 
 import 'ExplicitContent.dart';
 import 'ExternalUrls.dart';
@@ -72,16 +74,21 @@ abstract class Me implements Built<Me, MeBuilder> {
   @BuiltValueField(wireName: 'href')
   String get href;
 
-  String r() {
-    return " ";
-  }
-
   getImage() {
     if (images != null) {
-      return images[0].url;
-    } else {
-      return store.state.padraoPerfilFoto;
-    }
+      if (images.length > 0) {
+        return images[0].url;
+      }
+    } return store.state.padraoPerfilFoto;
+  }
+
+  toDashUSer() {
+    return ChatUser(
+        uid: id,
+        name: displayName,
+        avatar: getImage(),
+        containerColor: prefix0.Colors.grey,
+        color: prefix0.Colors.white);
   }
 
   static Me fromJson(String jsonString) {

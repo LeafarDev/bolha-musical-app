@@ -15,9 +15,6 @@ class Eu extends StatefulWidget {
 // Define a corresponding State class.
 // This class holds data related to the form.
 class EuState extends State<Eu> {
-  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
-      new GlobalKey<RefreshIndicatorState>();
-
   @override
   State<StatefulWidget> createState() {
     return null;
@@ -69,9 +66,7 @@ class EuState extends State<Eu> {
                               padding: EdgeInsets.only(bottom: 30),
                               child: CircleAvatar(
                                 backgroundImage: CachedNetworkImageProvider(
-                                  state.me.images != null
-                                      ? state.me.images[0].url
-                                      : state.padraoPerfilFoto,
+                                  state.me.getImage()
                                 ),
                                 radius: 100,
                               ),
