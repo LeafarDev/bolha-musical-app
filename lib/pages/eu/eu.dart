@@ -15,10 +15,6 @@ class Eu extends StatefulWidget {
 // Define a corresponding State class.
 // This class holds data related to the form.
 class EuState extends State<Eu> {
-  @override
-  State<StatefulWidget> createState() {
-    return null;
-  }
 
   @override
   initState() {

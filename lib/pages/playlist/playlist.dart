@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bolha_musical/api/TrackApi.dart';
 import 'package:bolha_musical/pages/playlist/widgets/playlist_item.dart';
 import 'package:bolha_musical/redux/app_state.dart';
+import 'package:bolha_musical/redux/store.dart';
 import 'package:bolha_musical/utils/NavigationService.dart';
 import 'package:bolha_musical/utils/SetupLocator.dart';
 import 'package:bolha_musical/widgets/player_bar.dart';
@@ -10,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_widgets/flutter_widgets.dart';
+import 'package:highlighter_coachmark/highlighter_coachmark.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:unicorndial/unicorndial.dart';
 
 class Playlist extends StatefulWidget {
@@ -24,16 +27,11 @@ class Playlist extends StatefulWidget {
 class PlaylistState extends State<Playlist> {
   Timer _timer;
   List _childButtons = List<UnicornButton>();
-
-  @override
-  State<StatefulWidget> createState() {
-    return null;
-  }
+  GlobalKey _fabKey = GlobalObjectKey("fab");
 
   @override
   initState() {
     super.initState();
-
     setState(() {
       _childButtons.add(UnicornButton(
           hasLabel: true,
@@ -58,6 +56,43 @@ class PlaylistState extends State<Playlist> {
     _timer = Timer.periodic(Duration(seconds: 15), (_) {
       TrackApi.playlist();
     });
+    _handleShowFab();
+  }
+
+  _handleShowFab() async {
+    final prefs = await SharedPreferences.getInstance();
+    var jaViu = prefs.getString('ja-viu-tutorial-add-playlist') ?? null;
+    if (jaViu == null && store.state.bolhaAtual != null) {
+      prefs.setString('ja-viu-tutorial-add-playlist', "1");
+      Timer(Duration(seconds: 1), () => showCoachMarkFAB());
+    }
+  }
+
+  void showCoachMarkFAB() {
+    CoachMark coachMarkFAB = CoachMark();
+    RenderBox target = _fabKey.currentContext.findRenderObject();
+
+    Rect markRect = target.localToGlobal(Offset.zero) & target.size;
+    markRect = Rect.fromCircle(
+        center: Offset(markRect.left + 30.0, markRect.bottom - 55.0),
+        radius: markRect.longestSide * 0.05);
+
+    coachMarkFAB.show(
+      targetContext: _fabKey.currentContext,
+      markRect: markRect,
+      children: [
+        Positioned(
+            top: markRect.top - 55.0,
+            right: 10.0,
+            child: Text("Aperte para adicionar uma música",
+                style: const TextStyle(
+                  fontSize: 24.0,
+                  fontStyle: FontStyle.italic,
+                  color: Colors.white,
+                )))
+      ],
+      duration: null,
+    );
   }
 
   @override
@@ -81,6 +116,7 @@ class PlaylistState extends State<Playlist> {
       onWillPop: () async => false,
       child: Scaffold(
           floatingActionButton: Padding(
+            key: _fabKey,
             padding: EdgeInsets.only(bottom: 30),
             child: UnicornDialer(
                 backgroundColor: Color.fromRGBO(255, 255, 255, 0.6),
@@ -107,18 +143,20 @@ class PlaylistState extends State<Playlist> {
                               padding: const EdgeInsets.all(8.0),
                               itemCount: state.playlist.length,
                               itemBuilder: (BuildContext context, int index) {
-                                return PlayListItem(
-                                    key: UniqueKey(),
-                                    width: MediaQuery.of(context).size.width,
-                                    height: 70.0,
-                                    track: state.playlist[index]);
+                                return PlaylistItem(state.playlist[index]);
                               },
                             ),
                           );
                         }
+                        var msg =
+                            "Nada aqui ainda, tente adicionar uma nova música na bolha ;)";
+                        if (state.bolhaAtual == null) {
+                          msg =
+                              "Nada aqui ainda, entre em uma bolha para adicionar músicas";
+                        }
                         return Center(
                           child: Text(
-                            "Nada aqui ainda ;)",
+                            msg,
                             style: TextStyle(color: Colors.white),
                           ),
                         );

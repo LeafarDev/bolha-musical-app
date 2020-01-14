@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:bolha_musical/model/BackendMessage.dart';
 import 'package:bolha_musical/model/Bolha.dart';
+import 'package:bolha_musical/pages/app.dart';
+import 'package:bolha_musical/pages/chat/ChatSocket.dart';
 import 'package:bolha_musical/redux/actions.dart';
 import 'package:bolha_musical/redux/store.dart';
 import 'package:http/http.dart' as http;
@@ -24,7 +26,7 @@ class BolhaApi {
         return null;
       }
     } catch (error) {
-      return null;
+      print(error);
     }
   }
 
@@ -59,9 +61,16 @@ class BolhaApi {
               body: data);
       if (res.statusCode == 200) {
         Bolha bolha = Bolha.fromJson(res.body);
+        store.dispatch(SetBolhaAtual(null));
+        store.dispatch(SetPlaylist([]));
+        store.dispatch(SetMessages([]));
         store.dispatch(SetBolhaAtual(bolha));
+        App.chatSocket.startSocketChannel();
+        ApiDialogs.sucessoDialog("Bolha criada com sucesso, tente adicionar umas músicas o/");
         return bolha;
       } else {
+        var backendMessage = BackendMessage.fromJson(res.body);
+        ApiDialogs.errorDialog(backendMessage.message);
         return null;
       }
     } catch (error) {
@@ -82,11 +91,12 @@ class BolhaApi {
       var body = res.body;
       if (res.statusCode == 200) {
         Bolha bolha = Bolha.fromJson(res.body);
-        ApiDialogs.sucessoDialog("Agora você faz parte de uma nova bolha :D");
+        ApiDialogs.sucessoDialog("Agora você faz parte de uma nova bolha, tente adicionar umas músicas :D");
         store.dispatch(SetBolhaAtual(null));
         store.dispatch(SetPlaylist([]));
         store.dispatch(SetMessages([]));
         store.dispatch(SetBolhaAtual(bolha));
+        App.chatSocket.startSocketChannel();
         return bolha;
       } else {
         var backendMessage = BackendMessage.fromJson(body);

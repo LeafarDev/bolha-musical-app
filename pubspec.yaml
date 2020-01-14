@@ -49,6 +49,9 @@ dependencies:
   flutter_emoji: ">= 2.0.0"
   dash_chat: ^1.0.10
   image_picker: 0.6.1
+  connectivity_widget: ^0.1.2
+  flushbar: ^1.9.1
+  highlighter_coachmark: ^0.0.3
 
 dev_dependencies:
   flutter_test:

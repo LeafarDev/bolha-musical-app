@@ -43,11 +43,19 @@ class BolhaItem extends StatelessWidget {
             Icons.bubble_chart,
             color: Colors.greenAccent,
           ),
-          title: Text(bolha.apelido,
-            style: TextStyle(color: Colors.white),),
-          subtitle: Text("1/∞",
-            style: TextStyle(color: Colors.white),),
+          title: Text(
+            bolha.apelido,
+            style: TextStyle(color: _bolhaAtualColor(bolha)),
+          ),
+          subtitle: Text(
+            "1/∞",
+            style: TextStyle(color: _bolhaAtualColor(bolha)),
+          ),
           trailing: PopupMenuButton<int>(
+            icon: Icon(
+              Icons.more_vert,
+              color: Colors.white,
+            ),
             onSelected: (selectedDropDownItem) {
               if (selectedDropDownItem == 1) {
                 showDialog(
@@ -87,6 +95,15 @@ class BolhaItem extends StatelessWidget {
     return lista;
   }
 
+  _bolhaAtualColor(bolha) {
+    var atual = store.state.bolhaAtual;
+    if (bolha.id == atual.id) {
+      return Colors.yellowAccent;
+    } else {
+      return Colors.white;
+    }
+  }
+
   _desejaSair(BuildContext context) {
     return FancyDialog(
       ok: "Sim",
@@ -97,8 +114,7 @@ class BolhaItem extends StatelessWidget {
       okFun: () async {
         BolhaApi.sairBolha();
       },
-      cancelFun: () {
-      },
+      cancelFun: () {},
     );
   }
 
@@ -113,8 +129,7 @@ class BolhaItem extends StatelessWidget {
       okFun: () async {
         BolhaApi.entrarBolha(bolha.id);
       },
-      cancelFun: () {
-      },
+      cancelFun: () {},
     );
   }
 }

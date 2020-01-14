@@ -1,82 +1,96 @@
 import 'package:bolha_musical/model/Track.dart';
 import 'package:bolha_musical/redux/store.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class PlayListItem extends StatelessWidget {
-  final double width;
-  final double height;
-  final Track track;
+class PlaylistItem extends StatelessWidget {
+  final Track _track;
+  final VoidCallback onTap;
 
-  const PlayListItem({Key key, this.width, this.height, this.track})
-      : super(key: key);
+  PlaylistItem(this._track, {this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: Container(
-        width: width,
-        height: height,
-        margin: const EdgeInsets.symmetric(vertical: 1.0),
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: Colors.black12,
-              blurRadius: 4.0,
-              offset: const Offset(0.0, 4.0),
-            ),
-          ],
-        ),
-        child: ListTile(
-          onTap: () {},
-          selected: track.current_playing == 1,
-          leading: CircleAvatar(
-              backgroundImage: CachedNetworkImageProvider(
-                  track.album.images != null
-                      ? track.album.images[0].url
-                      : store.state.padraoPerfilFoto)),
-          subtitle: Text(
-            track.album.shortname(),
-            style: TextStyle(color: _currentPlayingColor(track.current_playing)),
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: onTap,
+      child: Material(
+        color: Colors.transparent,
+        child: Container(
+          margin: const EdgeInsets.symmetric(vertical: 1.0),
+          width: MediaQuery.of(context).size.width,
+          height: 70.0,
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 4.0,
+                offset: const Offset(0.0, 4.0),
+              ),
+            ],
           ),
-          title: Text(
-            track.shortname(),
-            style: TextStyle(color: _currentPlayingColor(track.current_playing)),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              CircleAvatar(
+                  backgroundImage: CachedNetworkImageProvider(
+                      _track.album.images != null
+                          ? _track.album.images[0].url
+                          : store.state.padraoPerfilFoto)),
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.only(left: 30),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        _track.name,
+                        style: TextStyle(color: _currentPlayingColor(_track)),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      Text(
+                        _track.artists[0].name,
+                        style: TextStyle(color: _currentPlayingColor(_track)),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "12:12",
+                    style: TextStyle(color: _currentPlayingColor(_track)),
+                  )),
+              Padding(
+                padding: const EdgeInsets.only(right: 10, left: 10),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Icon(Icons.thumb_up, color: Colors.white30,),
+                    Icon(Icons.thumb_down, color: Colors.white30,),
+                  ],
+                ),
+              ),
+            ],
           ),
-          trailing: _iconButtonBuild(context),
         ),
       ),
     );
   }
-  _currentPlayingColor (current_playing) {
+
+  _currentPlayingColor(current_playing) {
     if (current_playing == 1) {
       return Colors.yellowAccent;
     } else {
       return Colors.white;
     }
-
-  }
-  _iconButtonBuild(context) {
-    // TODO: mudar icone de curtir, quando já curtido
-    return Material(
-        color: Colors.transparent,
-        child: RawMaterialButton(
-          onPressed: () {
-            Scaffold.of(context).showSnackBar(SnackBar(
-              content: Text('Adicionado'),
-            ));
-          },
-          child: Icon(
-            Icons.favorite,
-            color: Colors.grey,
-          ),
-          elevation: 0,
-          shape: CircleBorder(),
-          splashColor: Colors.grey,
-          fillColor: Colors.transparent,
-        ));
   }
 }

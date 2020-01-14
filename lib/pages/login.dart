@@ -16,11 +16,6 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  @override
-  State<StatefulWidget> createState() {
-    return null;
-  }
-
   final flutterWebviewPlugin = new FlutterWebviewPlugin();
   StreamSubscription _onDestroy;
   StreamSubscription<String> _onUrlChanged;
@@ -47,8 +42,6 @@ class _LoginState extends State<Login> {
         flutterWebviewPlugin.close();
         UsersSessaoUtils.inicializarSessaoComState();
       }
-      if (url.startsWith(
-          "http://10.0.0.108:3001/api/v1/spotify/login/callback?code")) {}
     });
   }
 
@@ -58,7 +51,7 @@ class _LoginState extends State<Login> {
       body: StoreConnector<AppState, AppState>(
         converter: (store) => store.state,
         builder: (context, state) {
-          if (state.authState.id != null) {
+          if (state.authState.id != null && state.token.token == null) {
             return Container(
               decoration: BoxDecoration(
                 image: DecorationImage(

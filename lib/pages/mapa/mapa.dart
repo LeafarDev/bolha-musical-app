@@ -24,11 +24,6 @@ class _MapaState extends State<Mapa> {
   List<Marker> _locationMarker = [];
 
   @override
-  State<StatefulWidget> createState() {
-    return null;
-  }
-
-  @override
   void setState(fn) {
     if (mounted) {
       super.setState(fn);
