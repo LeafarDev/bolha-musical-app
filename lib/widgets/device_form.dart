@@ -47,8 +47,8 @@ class DeviceFormState extends State<DeviceForm> {
               ),
             ),
             actions: <Widget>[
-              new FlatButton(
-                child: new Text('Fechar'),
+              FlatButton(
+                child: Text('Fechar'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

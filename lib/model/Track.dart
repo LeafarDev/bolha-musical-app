@@ -2,7 +2,9 @@ library track;
 
 import 'dart:convert';
 
+import 'package:bolha_musical/model/Voto.dart';
 import 'package:bolha_musical/model/serializers.dart';
+import 'package:bolha_musical/redux/store.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -24,6 +26,10 @@ abstract class Track implements Built<Track, TrackBuilder> {
   int get discNumber;
 
   @nullable
+  @BuiltValueField(wireName: 'id_interno')
+  int get id_interno;
+
+  @nullable
   @BuiltValueField(wireName: 'popularity')
   int get popularity;
 
@@ -38,6 +44,10 @@ abstract class Track implements Built<Track, TrackBuilder> {
   @nullable
   @BuiltValueField(wireName: 'explicit')
   bool get explicit;
+
+  @nullable
+  @BuiltValueField(wireName: 'saved')
+  bool get saved;
 
   @nullable
   @BuiltValueField(wireName: 'type')
@@ -80,6 +90,10 @@ abstract class Track implements Built<Track, TrackBuilder> {
   BuiltList<Artist> get artists;
 
   @nullable
+  @BuiltValueField(wireName: 'votos')
+  BuiltList<Voto> get votos;
+
+  @nullable
   @BuiltValueField(wireName: 'album')
   Album get album;
 
@@ -95,13 +109,6 @@ abstract class Track implements Built<Track, TrackBuilder> {
   @BuiltValueField(wireName: 'current_playing')
   int get current_playing;
 
-  @nullable
-  @BuiltValueField(wireName: 'cimavotos')
-  int get cimavotos;
-
-  @nullable
-  @BuiltValueField(wireName: 'baixavotos')
-  int get baixavotos;
 
   String shortname({textSize = 20}) {
     if (name != null && name.length > textSize) {
@@ -109,7 +116,23 @@ abstract class Track implements Built<Track, TrackBuilder> {
     }
     return name;
   }
+  bool usuarioAtualCimaVotou () {
+    List<Voto> result =
+    votos.where((i) => i.user_id == store.state.me.user_id && i.cimavoto).toList();
+    if (result.isNotEmpty) {
+      return true;
+    }
+    return false;
+  }
 
+  bool usuarioAtualBaixaVotou () {
+    List<Voto> result =
+    votos.where((i) => i.user_id == store.state.me.user_id && !i.cimavoto).toList();
+    if (result.isNotEmpty) {
+      return true;
+    }
+    return false;
+  }
   static Track fromJson(String jsonString) {
     final parsed = jsonDecode(jsonString);
     Track track = standardSerializers.deserializeWith(Track.serializer, parsed);

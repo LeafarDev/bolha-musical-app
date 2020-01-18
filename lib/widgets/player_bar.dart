@@ -28,14 +28,11 @@ class _PlayerBarState extends State<PlayerBar> {
     _callApi();
     _timer = Timer.periodic(Duration(seconds: 1), (_) {
       setState(() {
-        if (store.state.devices.isEmpty) {
-          iconeDispositivoAtual = Icons.device_unknown;
-        } else {
-          for (var i = 0; i < store.state.devices.length; i++) {
-            if (store.state.devices[i].isActive) {
-              iconeDispositivoAtual = store.state.devices[i].getIcon();
-              break;
-            }
+        iconeDispositivoAtual = Icons.device_unknown;
+        for (var i = 0; i < store.state.devices.length; i++) {
+          if (store.state.devices[i].isActive) {
+            iconeDispositivoAtual = store.state.devices[i].getIcon();
+            break;
           }
         }
       });

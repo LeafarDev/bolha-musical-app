@@ -1,4 +1,5 @@
 import 'package:bolha_musical/model/Track.dart';
+import 'package:bolha_musical/pages/playlist/widgets/voto_dialog.dart';
 import 'package:bolha_musical/redux/store.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -74,8 +75,30 @@ class PlaylistItem extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Icon(Icons.thumb_up, color: Colors.white30,),
-                    Icon(Icons.thumb_down, color: Colors.white30,),
+                    GestureDetector(
+                      behavior: HitTestBehavior.translucent,
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) => VotoDialog(true, _track.id_interno));
+                      },
+                      child: Icon(
+                        Icons.thumb_up,
+                        color: _track.usuarioAtualCimaVotou() ? Colors.green : Colors.white30,
+                      ),
+                    ),
+                    GestureDetector(
+                      behavior: HitTestBehavior.translucent,
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) => VotoDialog(false, _track.id_interno));
+                      },
+                      child: Icon(
+                        Icons.thumb_down,
+                        color: _track.usuarioAtualBaixaVotou() ? Colors.red : Colors.white30,
+                      ),
+                    )
                   ],
                 ),
               ),

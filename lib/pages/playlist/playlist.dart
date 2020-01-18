@@ -112,7 +112,7 @@ class PlaylistState extends State<Playlist> {
 
   @override
   Widget build(BuildContext context) {
-    return new WillPopScope(
+    return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
           floatingActionButton: Padding(

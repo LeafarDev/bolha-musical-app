@@ -55,6 +55,10 @@ abstract class Me implements Built<Me, MeBuilder> {
   String get id;
 
   @nullable
+  @BuiltValueField(wireName: 'user_id')
+  int get user_id;
+
+  @nullable
   @BuiltValueField(wireName: 'uri')
   String get uri;
 

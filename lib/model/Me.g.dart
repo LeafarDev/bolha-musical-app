@@ -67,6 +67,12 @@ class _$MeSerializer implements StructuredSerializer<Me> {
         ..add(serializers.serialize(object.id,
             specifiedType: const FullType(String)));
     }
+    if (object.user_id != null) {
+      result
+        ..add('user_id')
+        ..add(serializers.serialize(object.user_id,
+            specifiedType: const FullType(int)));
+    }
     if (object.uri != null) {
       result
         ..add('uri')
@@ -146,6 +152,10 @@ class _$MeSerializer implements StructuredSerializer<Me> {
           result.id = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'user_id':
+          result.user_id = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
         case 'uri':
           result.uri = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
@@ -191,6 +201,8 @@ class _$Me extends Me {
   @override
   final String id;
   @override
+  final int user_id;
+  @override
   final String uri;
   @override
   final String displayName;
@@ -213,6 +225,7 @@ class _$Me extends Me {
       this.explicitContent,
       this.product,
       this.id,
+      this.user_id,
       this.uri,
       this.displayName,
       this.followers,
@@ -239,6 +252,7 @@ class _$Me extends Me {
         explicitContent == other.explicitContent &&
         product == other.product &&
         id == other.id &&
+        user_id == other.user_id &&
         uri == other.uri &&
         displayName == other.displayName &&
         followers == other.followers &&
@@ -260,15 +274,17 @@ class _$Me extends Me {
                                         $jc(
                                             $jc(
                                                 $jc(
-                                                    $jc(0, email.hashCode),
-                                                    rocket_chat_auth_token
-                                                        .hashCode),
-                                                type.hashCode),
-                                            externalUrls.hashCode),
-                                        images.hashCode),
-                                    explicitContent.hashCode),
-                                product.hashCode),
-                            id.hashCode),
+                                                    $jc(
+                                                        $jc(0, email.hashCode),
+                                                        rocket_chat_auth_token
+                                                            .hashCode),
+                                                    type.hashCode),
+                                                externalUrls.hashCode),
+                                            images.hashCode),
+                                        explicitContent.hashCode),
+                                    product.hashCode),
+                                id.hashCode),
+                            user_id.hashCode),
                         uri.hashCode),
                     displayName.hashCode),
                 followers.hashCode),
@@ -287,6 +303,7 @@ class _$Me extends Me {
           ..add('explicitContent', explicitContent)
           ..add('product', product)
           ..add('id', id)
+          ..add('user_id', user_id)
           ..add('uri', uri)
           ..add('displayName', displayName)
           ..add('followers', followers)
@@ -337,6 +354,10 @@ class MeBuilder implements Builder<Me, MeBuilder> {
   String get id => _$this._id;
   set id(String id) => _$this._id = id;
 
+  int _user_id;
+  int get user_id => _$this._user_id;
+  set user_id(int user_id) => _$this._user_id = user_id;
+
   String _uri;
   String get uri => _$this._uri;
   set uri(String uri) => _$this._uri = uri;
@@ -370,6 +391,7 @@ class MeBuilder implements Builder<Me, MeBuilder> {
       _explicitContent = _$v.explicitContent?.toBuilder();
       _product = _$v.product;
       _id = _$v.id;
+      _user_id = _$v.user_id;
       _uri = _$v.uri;
       _displayName = _$v.displayName;
       _followers = _$v.followers?.toBuilder();
@@ -407,6 +429,7 @@ class MeBuilder implements Builder<Me, MeBuilder> {
               explicitContent: _explicitContent?.build(),
               product: product,
               id: id,
+              user_id: user_id,
               uri: uri,
               displayName: displayName,
               followers: _followers?.build(),

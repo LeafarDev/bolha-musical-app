@@ -31,9 +31,13 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(U.serializer)
       ..add(UpdatedAt.serializer)
       ..add(User.serializer)
+      ..add(Voto.serializer)
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(Artist)]),
           () => new ListBuilder<Artist>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(Voto)]),
+          () => new ListBuilder<Voto>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(BolhaMembro)]),
           () => new ListBuilder<BolhaMembro>())

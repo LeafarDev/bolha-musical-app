@@ -33,14 +33,14 @@ class BolhasFormState extends State<BolhasForm> {
         ),
       ),
       actions: <Widget>[
-        new FlatButton(
-          child: new Text('Cancelar'),
+        FlatButton(
+          child: Text('Cancelar'),
           onPressed: () {
             Navigator.of(context).pop();
           },
         ),
-        new FlatButton(
-          child: new Text('Criar'),
+        FlatButton(
+          child: Text('Criar'),
           onPressed: () {
             BolhaApi.criarBolha(_textFieldController.value.text);
             Navigator.of(context).pop();

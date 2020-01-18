@@ -34,6 +34,7 @@ import 'RocketChatResponse.dart';
 import 'RocketChatResultResponse.dart';
 import 'Token.dart';
 import 'User.dart';
+import 'Voto.dart';
 
 part 'serializers.g.dart';
 
@@ -73,6 +74,7 @@ part 'serializers.g.dart';
   RocketChatResultResponse,
   Ts,
   U,
+  Voto,
   UpdatedAt
 ])
 Serializers serializers = _$serializers;
