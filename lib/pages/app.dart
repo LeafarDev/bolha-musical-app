@@ -82,6 +82,8 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
+    _chatSocket.setContext(context);
+    _chatSocket.setCurrentIndex(_currentIndex);
     var paginas = [Mapa(), ChatScreen(), Bolhas(), Playlist(), Eu()];
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,

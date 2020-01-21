@@ -8,12 +8,16 @@ import 'package:bolha_musical/redux/store.dart';
 import 'package:bolha_musical/utils/ramdom.dart';
 import 'package:connectivity_widget/connectivity_widget.dart';
 import 'package:dash_chat/dash_chat.dart';
+import 'package:flushbar/flushbar.dart';
+import 'package:flutter/material.dart';
 import 'package:web_socket_channel/io.dart';
 
 class ChatSocket {
   Timer _timer;
   Timer _timerAllMessages;
   IOWebSocketChannel _channel;
+  BuildContext _context;
+  int _currentIndex = 3;
 
   ChatSocket() {
     _timerAllMessages = Timer.periodic(Duration(seconds: 30), (_) {
@@ -33,6 +37,13 @@ class ChatSocket {
     });
   }
 
+  void setContext(context) {
+    _context = context;
+  }
+
+  void setCurrentIndex (currentIndex) {
+    _currentIndex = currentIndex;
+  }
   void startSocketChannel() {
     try {
       _channel =
@@ -63,6 +74,20 @@ class ChatSocket {
             Message newMsg =
                 Message.fromJson(jsonEncode(response["fields"]["args"][0]));
             store.dispatch(SetMessage(newMsg));
+            if (_context != null && _currentIndex != 1) {
+              Flushbar(
+                icon: Icon(
+                  Icons.message,
+                  color: Colors.white,
+                ),
+                backgroundColor: Color.fromRGBO(1, 41, 51, 0.9),
+                flushbarPosition: FlushbarPosition.TOP,
+                title:  newMsg.toDashMessage().user.name,
+                message:  newMsg.msg,
+                duration:  Duration(seconds: 3),
+              )..show(_context);
+            }
+
           }
 
           if (messageObj.msg == "result") {
