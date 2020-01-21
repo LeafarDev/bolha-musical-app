@@ -78,30 +78,40 @@ class BolhaItem extends StatelessWidget {
     var atual = store.state.bolhaAtual;
     List<PopupMenuEntry<int>> lista = [];
 
-    if (atual == null || (atual != null ? atual.id != bolha.id : false)) {
-      lista.add(
-        PopupMenuItem(
-          value: 1,
-          child: Text("Entrar"),
-        ),
-      );
+    if (atual != null ) {
+      if (atual.id == bolha.id) {
+        lista.add(PopupMenuItem(
+          value: 2,
+          child: Text("Sair"),
+        ));
+      } else {
+        lista.add(
+          PopupMenuItem(
+            value: 1,
+            child: Text("Entrar"),
+          ),
+        );
+      }
+      return lista;
     }
-    if (atual != null ? atual.id == bolha.id : false) {
-      lista.add(PopupMenuItem(
-        value: 2,
-        child: Text("Sair"),
-      ));
-    }
+
+    lista.add(
+      PopupMenuItem(
+        value: 1,
+        child: Text("Entrar"),
+      ),
+    );
     return lista;
   }
 
   _bolhaAtualColor(bolha) {
     var atual = store.state.bolhaAtual;
-    if (bolha.id == atual.id) {
-      return Colors.yellowAccent;
-    } else {
-      return Colors.white;
+    if (atual != null) {
+      if (bolha.id == atual.id) {
+        return Colors.yellowAccent;
+      }
     }
+    return Colors.white;
   }
 
   _desejaSair(BuildContext context) {

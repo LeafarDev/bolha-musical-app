@@ -24,7 +24,9 @@ class _LoginState extends State<Login> {
   @override
   void dispose() {
     // Every listener should be canceled, the same should be done with this stream.
-    _onDestroy.cancel();
+    if (_onDestroy != null) {
+      _onDestroy.cancel();
+    }
     _onUrlChanged.cancel();
     _onStateChanged.cancel();
     flutterWebviewPlugin.dispose();

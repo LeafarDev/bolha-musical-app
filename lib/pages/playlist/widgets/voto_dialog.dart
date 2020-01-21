@@ -57,18 +57,19 @@ class VotoDialogState extends State<VotoDialog> {
             ),
             actions: <Widget>[
               FlatButton(
-                child: Text('Fechar'),
+                child: Text('Cancelar'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
               FlatButton(
-                child: Text('Criar'),
+                child: Text(_cimavoto ? 'Cimavotar' : 'Baixavotar'),
                 onPressed: () {
                   TrackApi.votar(Voto((b) => b
                     ..refletirSpotify = _refletir_spotify
                     ..cimavoto = _cimavoto
                     ..trackInternoId = _track_id_interno));
+                  Navigator.of(context).pop();
                 },
               )
             ],

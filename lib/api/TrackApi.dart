@@ -46,6 +46,7 @@ class TrackApi {
           },
           body: data);
       if (res.statusCode == 200) {
+        playlist();
         return true;
       } else {
         var backendMessage = BackendMessage.fromJson(res.body);
@@ -107,8 +108,12 @@ class TrackApi {
           },
           body: voto.toJson());
       if (res.statusCode == 200) {
+        var backendMessage = BackendMessage.fromJson(res.body);
+        ApiDialogs.sucessoDialog(backendMessage.message);
+        playlist();
         return true;
       } else {
+        ApiDialogs.sucessoDialog("Não consegui realizar esta ação :/");
         print(res.body);
       }
     } catch (error) {

@@ -49,7 +49,7 @@ class _AppState extends State<App> {
   _location() async {
     Position position = await Geolocator()
         .getLastKnownPosition(desiredAccuracy: LocationAccuracy.high);
-    _apiInicial();
+
     if (position != null) {
       Localizacao _localizacao = new Localizacao((b) =>
       b
@@ -65,12 +65,13 @@ class _AppState extends State<App> {
   initState() {
     super.initState();
     _location();
-
+    _apiInicial();
     _timer = Timer.periodic(Duration(seconds: 10), (_) {
-      // _location();
+      _location();
       BolhaApi.getBolhaAtual();
     });
   }
+
   _apiInicial () async {
     await BolhaApi.getBolhaAtual();
     if (store.state.bolhaAtual != null) {
@@ -78,6 +79,7 @@ class _AppState extends State<App> {
     }
 
   }
+
   @override
   Widget build(BuildContext context) {
     var paginas = [Mapa(), ChatScreen(), Bolhas(), Playlist(), Eu()];

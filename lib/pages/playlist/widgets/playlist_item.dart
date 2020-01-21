@@ -49,13 +49,13 @@ class PlaylistItem extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         _track.name,
-                        style: TextStyle(color: _currentPlayingColor(_track)),
+                        style: TextStyle(color: _currentPlayingColor(_track.current_playing)),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
                         _track.artists[0].name,
-                        style: TextStyle(color: _currentPlayingColor(_track)),
+                        style: TextStyle(color: _currentPlayingColor(_track.current_playing)),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -67,7 +67,7 @@ class PlaylistItem extends StatelessWidget {
                   alignment: Alignment.center,
                   child: Text(
                     "12:12",
-                    style: TextStyle(color: _currentPlayingColor(_track)),
+                    style: TextStyle(color: _currentPlayingColor(_track.current_playing)),
                   )),
               Padding(
                 padding: const EdgeInsets.only(right: 10, left: 10),
