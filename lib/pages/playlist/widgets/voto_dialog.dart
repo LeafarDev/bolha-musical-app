@@ -47,7 +47,10 @@ class VotoDialogState extends State<VotoDialog> {
                   SwitchListTile(
                     value: _refletir_spotify,
                     onChanged: (a) {},
-                    title: Text('Salvar Música na Minha Biblioteca',
+                    title: Text(
+                        _cimavoto
+                            ? 'Salvar Música na Minha Biblioteca'
+                            : 'Remover da biblioteca?',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: _cimavoto ? Colors.green : Colors.red)),

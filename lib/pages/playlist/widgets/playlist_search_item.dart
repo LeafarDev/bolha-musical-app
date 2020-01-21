@@ -39,7 +39,7 @@ class PlayListSearchItem extends StatelessWidget {
                       ? track.album.images[0].url
                       : store.state.padraoPerfilFoto)),
           subtitle: Text(
-            track.album.shortname(),
+            track.artists[0].name,
             style: TextStyle(color: Colors.white),
           ),
           title: Text(

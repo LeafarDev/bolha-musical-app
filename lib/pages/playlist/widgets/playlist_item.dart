@@ -2,6 +2,7 @@ import 'package:bolha_musical/model/Track.dart';
 import 'package:bolha_musical/pages/playlist/widgets/voto_dialog.dart';
 import 'package:bolha_musical/redux/store.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dash_chat/dash_chat.dart';
 import 'package:flutter/material.dart';
 
 class PlaylistItem extends StatelessWidget {
@@ -66,7 +67,7 @@ class PlaylistItem extends StatelessWidget {
               Align(
                   alignment: Alignment.center,
                   child: Text(
-                    "12:12",
+                    _durationMinutes(_track.durationMs),
                     style: TextStyle(color: _currentPlayingColor(_track.current_playing)),
                   )),
               Padding(
@@ -109,6 +110,10 @@ class PlaylistItem extends StatelessWidget {
     );
   }
 
+  String _durationMinutes (durationMs) {
+    var duration = DateTime.fromMillisecondsSinceEpoch(durationMs);
+    return DateFormat('mm:ss').format(duration);
+  }
   _currentPlayingColor(current_playing) {
     if (current_playing == 1) {
       return Colors.yellowAccent;
