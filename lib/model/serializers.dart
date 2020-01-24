@@ -13,6 +13,7 @@ import 'package:bolha_musical/model/ExplicitContent.dart';
 import 'package:bolha_musical/model/ExternalUrls.dart';
 import 'package:bolha_musical/model/Localizacao.dart';
 import 'package:bolha_musical/model/Message.dart';
+import 'package:bolha_musical/model/ReferenciaTamanhoBolha.dart';
 import 'package:bolha_musical/model/RocketChatResultResponse.dart';
 import 'package:bolha_musical/model/SearchTrackResult.dart';
 import 'package:bolha_musical/model/SpotifyImage.dart';
@@ -74,6 +75,7 @@ part 'serializers.g.dart';
   RocketChatResultResponse,
   Ts,
   U,
+  ReferenciaTamanhoBolha,
   Voto,
   UpdatedAt
 ])

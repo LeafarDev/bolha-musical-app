@@ -52,6 +52,7 @@ dependencies:
   connectivity_widget: ^0.1.2
   flushbar: ^1.9.1
   highlighter_coachmark: ^0.0.3
+  flutter_material_color_picker: ^1.0.5
 
 dev_dependencies:
   flutter_test:

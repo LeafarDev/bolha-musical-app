@@ -135,11 +135,10 @@ class PlaylistState extends State<Playlist> {
                       converter: (store) => store.state,
                       builder: (context, state) {
                         if (state.playlist.length > 0) {
+                          var indexAtivo = _indexAtivo(state.playlist);
                           return AnimationLimiter(
                             child: ScrollablePositionedList.builder(
-                              initialScrollIndex: state.playlist.length > 0
-                                  ? _indexAtivo(state.playlist)
-                                  : 0,
+                              initialScrollIndex: indexAtivo,
                               padding: const EdgeInsets.all(8.0),
                               itemCount: state.playlist.length,
                               itemBuilder: (BuildContext context, int index) {
