@@ -3,8 +3,8 @@ import 'dart:io';
 
 import 'package:bolha_musical/model/BackendMessage.dart';
 import 'package:bolha_musical/model/Bolha.dart';
+import 'package:bolha_musical/model/ReferenciaTamanhoBolha.dart';
 import 'package:bolha_musical/pages/app.dart';
-import 'package:bolha_musical/pages/chat/ChatSocket.dart';
 import 'package:bolha_musical/redux/actions.dart';
 import 'package:bolha_musical/redux/store.dart';
 import 'package:http/http.dart' as http;
@@ -30,6 +30,26 @@ class BolhaApi {
     }
   }
 
+  static Future<bool> getReferenciaTamanhoBolha() async {
+    try {
+      final res = await http.get(
+          "http://10.0.0.108:3001/api/v1/spotify/bolhas/referencias",
+          headers: {HttpHeaders.authorizationHeader: store.state.token.token});
+      if (res.statusCode == 200) {
+        var referenciasRaw = jsonDecode(res.body);
+        store.dispatch(SetReferenciasTamanhoBolha(List<ReferenciaTamanhoBolha>.from(referenciasRaw.map(
+                (model) => ReferenciaTamanhoBolha.fromJson(jsonEncode(model))))));
+
+        return true;
+      } else {
+        store.dispatch(SetReferenciasTamanhoBolha([]));
+      }
+      return false;
+    } catch (error) {
+      return null;
+    }
+  }
+
   static Future<bool> getBolhasDisponiveis() async {
     try {
       final res = await http.get(
@@ -49,8 +69,7 @@ class BolhaApi {
     }
   }
 
-  static Future<Bolha> criarBolha(apelido) async {
-    String data = jsonEncode({'apelido': apelido});
+  static criarBolha(Bolha bolha) async {
     try {
       final res =
           await http.post("http://10.0.0.108:3001/api/v1/spotify/bolhas",
@@ -58,7 +77,7 @@ class BolhaApi {
                 HttpHeaders.authorizationHeader: store.state.token.token,
                 HttpHeaders.contentTypeHeader: "application/json"
               },
-              body: data);
+              body: bolha.toJson());
       if (res.statusCode == 200) {
         Bolha bolha = Bolha.fromJson(res.body);
         store.dispatch(SetBolhaAtual(null));
@@ -66,12 +85,15 @@ class BolhaApi {
         store.dispatch(SetMessages([]));
         store.dispatch(SetBolhaAtual(bolha));
         App.chatSocket.startSocketChannel();
-        ApiDialogs.sucessoDialog("Bolha criada com sucesso, tente adicionar umas músicas o/");
+        ApiDialogs.sucessoDialog(
+            "Bolha criada com sucesso, tente adicionar umas músicas o/");
         return bolha;
-      } else {
+      } else if(res.statusCode != 422){
         var backendMessage = BackendMessage.fromJson(res.body);
         ApiDialogs.errorDialog(backendMessage.message);
         return null;
+      } else {
+        return jsonDecode(res.body);
       }
     } catch (error) {
       return null;
@@ -91,7 +113,8 @@ class BolhaApi {
       var body = res.body;
       if (res.statusCode == 200) {
         Bolha bolha = Bolha.fromJson(res.body);
-        ApiDialogs.sucessoDialog("Agora você faz parte de uma nova bolha, tente adicionar umas músicas :D");
+        ApiDialogs.sucessoDialog(
+            "Agora você faz parte de uma nova bolha, tente adicionar umas músicas :D");
         store.dispatch(SetBolhaAtual(null));
         store.dispatch(SetPlaylist([]));
         store.dispatch(SetMessages([]));

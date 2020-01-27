@@ -18,30 +18,25 @@ abstract class ReferenciaTamanhoBolha
   @BuiltValueField(wireName: 'id')
   int get id;
 
+  @nullable
   @BuiltValueField(wireName: 'raio_metros')
-  int get raioMetros;
+  double get raioMetros;
 
+  @nullable
   @BuiltValueField(wireName: 'min')
   int get min;
 
+  @nullable
   @BuiltValueField(wireName: 'max')
   int get max;
 
-  @BuiltValueField(wireName: 'deleted_at')
-  String get deletedAt;
-
-  @BuiltValueField(wireName: 'created_at')
-  String get createdAt;
-
-  @BuiltValueField(wireName: 'updated_at')
-  String get updatedAt;
-
   static ReferenciaTamanhoBolha fromJson(String jsonString) {
     final parsed = jsonDecode(jsonString);
-    ReferenciaTamanhoBolha referenciaTamanhoBolha = standardSerializers
-        .deserializeWith(ReferenciaTamanhoBolha.serializer, parsed);
-    return referenciaTamanhoBolha;
+    ReferenciaTamanhoBolha message =
+    standardSerializers.deserializeWith(ReferenciaTamanhoBolha.serializer, parsed);
+    return message;
   }
+
 
   String toJson() {
     return json.encode(standardSerializers.serializeWith(

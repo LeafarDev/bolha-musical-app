@@ -26,24 +26,25 @@ class _$ReferenciaTamanhoBolhaSerializer
     final result = <Object>[
       'id',
       serializers.serialize(object.id, specifiedType: const FullType(int)),
-      'raio_metros',
-      serializers.serialize(object.raioMetros,
-          specifiedType: const FullType(int)),
-      'min',
-      serializers.serialize(object.min, specifiedType: const FullType(int)),
-      'max',
-      serializers.serialize(object.max, specifiedType: const FullType(int)),
-      'deleted_at',
-      serializers.serialize(object.deletedAt,
-          specifiedType: const FullType(String)),
-      'created_at',
-      serializers.serialize(object.createdAt,
-          specifiedType: const FullType(String)),
-      'updated_at',
-      serializers.serialize(object.updatedAt,
-          specifiedType: const FullType(String)),
     ];
-
+    if (object.raioMetros != null) {
+      result
+        ..add('raio_metros')
+        ..add(serializers.serialize(object.raioMetros,
+            specifiedType: const FullType(double)));
+    }
+    if (object.min != null) {
+      result
+        ..add('min')
+        ..add(serializers.serialize(object.min,
+            specifiedType: const FullType(int)));
+    }
+    if (object.max != null) {
+      result
+        ..add('max')
+        ..add(serializers.serialize(object.max,
+            specifiedType: const FullType(int)));
+    }
     return result;
   }
 
@@ -65,7 +66,7 @@ class _$ReferenciaTamanhoBolhaSerializer
           break;
         case 'raio_metros':
           result.raioMetros = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(double)) as double;
           break;
         case 'min':
           result.min = serializers.deserialize(value,
@@ -74,18 +75,6 @@ class _$ReferenciaTamanhoBolhaSerializer
         case 'max':
           result.max = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
-          break;
-        case 'deleted_at':
-          result.deletedAt = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
-          break;
-        case 'created_at':
-          result.createdAt = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
-          break;
-        case 'updated_at':
-          result.updatedAt = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
           break;
       }
     }
@@ -98,52 +87,20 @@ class _$ReferenciaTamanhoBolha extends ReferenciaTamanhoBolha {
   @override
   final int id;
   @override
-  final int raioMetros;
+  final double raioMetros;
   @override
   final int min;
   @override
   final int max;
-  @override
-  final String deletedAt;
-  @override
-  final String createdAt;
-  @override
-  final String updatedAt;
 
   factory _$ReferenciaTamanhoBolha(
           [void Function(ReferenciaTamanhoBolhaBuilder) updates]) =>
       (new ReferenciaTamanhoBolhaBuilder()..update(updates)).build();
 
-  _$ReferenciaTamanhoBolha._(
-      {this.id,
-      this.raioMetros,
-      this.min,
-      this.max,
-      this.deletedAt,
-      this.createdAt,
-      this.updatedAt})
+  _$ReferenciaTamanhoBolha._({this.id, this.raioMetros, this.min, this.max})
       : super._() {
     if (id == null) {
       throw new BuiltValueNullFieldError('ReferenciaTamanhoBolha', 'id');
-    }
-    if (raioMetros == null) {
-      throw new BuiltValueNullFieldError(
-          'ReferenciaTamanhoBolha', 'raioMetros');
-    }
-    if (min == null) {
-      throw new BuiltValueNullFieldError('ReferenciaTamanhoBolha', 'min');
-    }
-    if (max == null) {
-      throw new BuiltValueNullFieldError('ReferenciaTamanhoBolha', 'max');
-    }
-    if (deletedAt == null) {
-      throw new BuiltValueNullFieldError('ReferenciaTamanhoBolha', 'deletedAt');
-    }
-    if (createdAt == null) {
-      throw new BuiltValueNullFieldError('ReferenciaTamanhoBolha', 'createdAt');
-    }
-    if (updatedAt == null) {
-      throw new BuiltValueNullFieldError('ReferenciaTamanhoBolha', 'updatedAt');
     }
   }
 
@@ -163,24 +120,14 @@ class _$ReferenciaTamanhoBolha extends ReferenciaTamanhoBolha {
         id == other.id &&
         raioMetros == other.raioMetros &&
         min == other.min &&
-        max == other.max &&
-        deletedAt == other.deletedAt &&
-        createdAt == other.createdAt &&
-        updatedAt == other.updatedAt;
+        max == other.max;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc(
-            $jc(
-                $jc(
-                    $jc($jc($jc(0, id.hashCode), raioMetros.hashCode),
-                        min.hashCode),
-                    max.hashCode),
-                deletedAt.hashCode),
-            createdAt.hashCode),
-        updatedAt.hashCode));
+        $jc($jc($jc(0, id.hashCode), raioMetros.hashCode), min.hashCode),
+        max.hashCode));
   }
 
   @override
@@ -189,10 +136,7 @@ class _$ReferenciaTamanhoBolha extends ReferenciaTamanhoBolha {
           ..add('id', id)
           ..add('raioMetros', raioMetros)
           ..add('min', min)
-          ..add('max', max)
-          ..add('deletedAt', deletedAt)
-          ..add('createdAt', createdAt)
-          ..add('updatedAt', updatedAt))
+          ..add('max', max))
         .toString();
   }
 }
@@ -205,9 +149,9 @@ class ReferenciaTamanhoBolhaBuilder
   int get id => _$this._id;
   set id(int id) => _$this._id = id;
 
-  int _raioMetros;
-  int get raioMetros => _$this._raioMetros;
-  set raioMetros(int raioMetros) => _$this._raioMetros = raioMetros;
+  double _raioMetros;
+  double get raioMetros => _$this._raioMetros;
+  set raioMetros(double raioMetros) => _$this._raioMetros = raioMetros;
 
   int _min;
   int get min => _$this._min;
@@ -217,18 +161,6 @@ class ReferenciaTamanhoBolhaBuilder
   int get max => _$this._max;
   set max(int max) => _$this._max = max;
 
-  String _deletedAt;
-  String get deletedAt => _$this._deletedAt;
-  set deletedAt(String deletedAt) => _$this._deletedAt = deletedAt;
-
-  String _createdAt;
-  String get createdAt => _$this._createdAt;
-  set createdAt(String createdAt) => _$this._createdAt = createdAt;
-
-  String _updatedAt;
-  String get updatedAt => _$this._updatedAt;
-  set updatedAt(String updatedAt) => _$this._updatedAt = updatedAt;
-
   ReferenciaTamanhoBolhaBuilder();
 
   ReferenciaTamanhoBolhaBuilder get _$this {
@@ -237,9 +169,6 @@ class ReferenciaTamanhoBolhaBuilder
       _raioMetros = _$v.raioMetros;
       _min = _$v.min;
       _max = _$v.max;
-      _deletedAt = _$v.deletedAt;
-      _createdAt = _$v.createdAt;
-      _updatedAt = _$v.updatedAt;
       _$v = null;
     }
     return this;
@@ -262,13 +191,7 @@ class ReferenciaTamanhoBolhaBuilder
   _$ReferenciaTamanhoBolha build() {
     final _$result = _$v ??
         new _$ReferenciaTamanhoBolha._(
-            id: id,
-            raioMetros: raioMetros,
-            min: min,
-            max: max,
-            deletedAt: deletedAt,
-            createdAt: createdAt,
-            updatedAt: updatedAt);
+            id: id, raioMetros: raioMetros, min: min, max: max);
     replace(_$result);
     return _$result;
   }

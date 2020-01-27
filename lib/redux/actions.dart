@@ -4,6 +4,7 @@ import 'package:bolha_musical/model/Device.dart';
 import 'package:bolha_musical/model/Localizacao.dart';
 import 'package:bolha_musical/model/Me.dart';
 import 'package:bolha_musical/model/Message.dart';
+import 'package:bolha_musical/model/ReferenciaTamanhoBolha.dart';
 import 'package:bolha_musical/model/SearchTrackResult.dart';
 import 'package:bolha_musical/model/Token.dart';
 import 'package:bolha_musical/model/Track.dart';
@@ -54,6 +55,12 @@ class SetBolhasDisponiveis {
   final List<Bolha> payload;
 
   SetBolhasDisponiveis(this.payload);
+}
+
+class SetReferenciasTamanhoBolha {
+  final List<ReferenciaTamanhoBolha> payload;
+
+  SetReferenciasTamanhoBolha(this.payload);
 }
 
 class setLastSearchResult {

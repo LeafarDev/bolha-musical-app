@@ -3,6 +3,7 @@ import 'package:bolha_musical/model/Bolha.dart';
 import 'package:bolha_musical/model/Device.dart';
 import 'package:bolha_musical/model/Localizacao.dart';
 import 'package:bolha_musical/model/Message.dart';
+import 'package:bolha_musical/model/ReferenciaTamanhoBolha.dart';
 import 'package:bolha_musical/model/SearchTrackResult.dart';
 import 'package:bolha_musical/model/Track.dart';
 import 'package:dash_chat/dash_chat.dart';
@@ -11,6 +12,7 @@ import '../model/Me.dart';
 import '../model/Token.dart';
 
 class AppState {
+  List<ReferenciaTamanhoBolha> referenciasTamanhoBolha = [];
   AuthState authState = AuthState();
   Me me = Me();
   int currentBottomBarIndex = 0;
@@ -45,6 +47,7 @@ class AppState {
     searchingTrack = another.searchingTrack;
     playlist = another.playlist;
     currentPlaying = another.currentPlaying;
+    referenciasTamanhoBolha = another.referenciasTamanhoBolha;
     devices = another.devices;
     if (messages.length != another.messages.length) {
       chatMessages = List<ChatMessage>.from(

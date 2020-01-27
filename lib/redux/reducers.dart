@@ -52,5 +52,10 @@ AppState reducer(AppState prevState, dynamic action) {
   if (action is SetMessages) {
     newState.messages = action.payload;
   }
+
+  if (action is SetReferenciasTamanhoBolha) {
+    newState.referenciasTamanhoBolha = action.payload;
+  }
+
   return newState;
 }

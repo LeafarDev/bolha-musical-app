@@ -18,12 +18,22 @@ class _$BolhaSerializer implements StructuredSerializer<Bolha> {
   Iterable<Object> serialize(Serializers serializers, Bolha object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
-      'id',
-      serializers.serialize(object.id, specifiedType: const FullType(int)),
       'apelido',
       serializers.serialize(object.apelido,
           specifiedType: const FullType(String)),
     ];
+    if (object.id != null) {
+      result
+        ..add('id')
+        ..add(serializers.serialize(object.id,
+            specifiedType: const FullType(int)));
+    }
+    if (object.tamanho_bolha_referencia_id != null) {
+      result
+        ..add('tamanho_bolha_referencia_id')
+        ..add(serializers.serialize(object.tamanho_bolha_referencia_id,
+            specifiedType: const FullType(int)));
+    }
     if (object.cor != null) {
       result
         ..add('cor')
@@ -139,6 +149,10 @@ class _$BolhaSerializer implements StructuredSerializer<Bolha> {
           result.id = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
           break;
+        case 'tamanho_bolha_referencia_id':
+          result.tamanho_bolha_referencia_id = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
         case 'apelido':
           result.apelido = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
@@ -220,6 +234,8 @@ class _$Bolha extends Bolha {
   @override
   final int id;
   @override
+  final int tamanho_bolha_referencia_id;
+  @override
   final String apelido;
   @override
   final String cor;
@@ -259,6 +275,7 @@ class _$Bolha extends Bolha {
 
   _$Bolha._(
       {this.id,
+      this.tamanho_bolha_referencia_id,
       this.apelido,
       this.cor,
       this.ehFixa,
@@ -277,9 +294,6 @@ class _$Bolha extends Bolha {
       this.membros,
       this.lider})
       : super._() {
-    if (id == null) {
-      throw new BuiltValueNullFieldError('Bolha', 'id');
-    }
     if (apelido == null) {
       throw new BuiltValueNullFieldError('Bolha', 'apelido');
     }
@@ -297,6 +311,7 @@ class _$Bolha extends Bolha {
     if (identical(other, this)) return true;
     return other is Bolha &&
         id == other.id &&
+        tamanho_bolha_referencia_id == other.tamanho_bolha_referencia_id &&
         apelido == other.apelido &&
         cor == other.cor &&
         ehFixa == other.ehFixa &&
@@ -336,8 +351,11 @@ class _$Bolha extends Bolha {
                                                                 $jc(
                                                                     $jc(
                                                                         $jc(
-                                                                            0,
-                                                                            id
+                                                                            $jc(
+                                                                                0,
+                                                                                id
+                                                                                    .hashCode),
+                                                                            tamanho_bolha_referencia_id
                                                                                 .hashCode),
                                                                         apelido
                                                                             .hashCode),
@@ -366,6 +384,7 @@ class _$Bolha extends Bolha {
   String toString() {
     return (newBuiltValueToStringHelper('Bolha')
           ..add('id', id)
+          ..add('tamanho_bolha_referencia_id', tamanho_bolha_referencia_id)
           ..add('apelido', apelido)
           ..add('cor', cor)
           ..add('ehFixa', ehFixa)
@@ -393,6 +412,11 @@ class BolhaBuilder implements Builder<Bolha, BolhaBuilder> {
   int _id;
   int get id => _$this._id;
   set id(int id) => _$this._id = id;
+
+  int _tamanho_bolha_referencia_id;
+  int get tamanho_bolha_referencia_id => _$this._tamanho_bolha_referencia_id;
+  set tamanho_bolha_referencia_id(int tamanho_bolha_referencia_id) =>
+      _$this._tamanho_bolha_referencia_id = tamanho_bolha_referencia_id;
 
   String _apelido;
   String get apelido => _$this._apelido;
@@ -471,6 +495,7 @@ class BolhaBuilder implements Builder<Bolha, BolhaBuilder> {
   BolhaBuilder get _$this {
     if (_$v != null) {
       _id = _$v.id;
+      _tamanho_bolha_referencia_id = _$v.tamanho_bolha_referencia_id;
       _apelido = _$v.apelido;
       _cor = _$v.cor;
       _ehFixa = _$v.ehFixa;
@@ -513,6 +538,7 @@ class BolhaBuilder implements Builder<Bolha, BolhaBuilder> {
       _$result = _$v ??
           new _$Bolha._(
               id: id,
+              tamanho_bolha_referencia_id: tamanho_bolha_referencia_id,
               apelido: apelido,
               cor: cor,
               ehFixa: ehFixa,

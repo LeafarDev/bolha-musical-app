@@ -27,7 +27,7 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   Timer _timer;
-  int _currentIndex = 3;
+  int _currentIndex = 2;
   ChatSocket _chatSocket;
 
   _AppState(this._chatSocket);
@@ -74,6 +74,7 @@ class _AppState extends State<App> {
 
   _apiInicial () async {
     await BolhaApi.getBolhaAtual();
+    BolhaApi.getReferenciaTamanhoBolha();
     if (store.state.bolhaAtual != null) {
       _chatSocket.startSocketChannel();
     }
