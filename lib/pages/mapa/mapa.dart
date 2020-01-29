@@ -84,6 +84,9 @@ class _MapaState extends State<Mapa> {
                           markers: _bolhaAtual != null
                               ? [
                                   ..._bolhaAtual.membros
+                                      .where((m) =>
+                                          m.mostrar_localizacao_mapa != false)
+                                      .toList()
                                       .map((membro) => MarkerMembro(membro))
                                       .toList(),
                                 ]

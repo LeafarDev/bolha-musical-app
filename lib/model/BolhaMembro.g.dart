@@ -42,6 +42,12 @@ class _$BolhaMembroSerializer implements StructuredSerializer<BolhaMembro> {
         ..add(serializers.serialize(object.checkin,
             specifiedType: const FullType(String)));
     }
+    if (object.mostrar_localizacao_mapa != null) {
+      result
+        ..add('mostrar_localizacao_mapa')
+        ..add(serializers.serialize(object.mostrar_localizacao_mapa,
+            specifiedType: const FullType(bool)));
+    }
     if (object.checkout != null) {
       result
         ..add('checkout')
@@ -114,6 +120,10 @@ class _$BolhaMembroSerializer implements StructuredSerializer<BolhaMembro> {
           result.checkin = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'mostrar_localizacao_mapa':
+          result.mostrar_localizacao_mapa = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
         case 'checkout':
           result.checkout = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
@@ -159,6 +169,8 @@ class _$BolhaMembro extends BolhaMembro {
   @override
   final String checkin;
   @override
+  final bool mostrar_localizacao_mapa;
+  @override
   final String checkout;
   @override
   final String createdBy;
@@ -181,6 +193,7 @@ class _$BolhaMembro extends BolhaMembro {
       this.bolhaId,
       this.userId,
       this.checkin,
+      this.mostrar_localizacao_mapa,
       this.checkout,
       this.createdBy,
       this.createdAt,
@@ -205,6 +218,7 @@ class _$BolhaMembro extends BolhaMembro {
         bolhaId == other.bolhaId &&
         userId == other.userId &&
         checkin == other.checkin &&
+        mostrar_localizacao_mapa == other.mostrar_localizacao_mapa &&
         checkout == other.checkout &&
         createdBy == other.createdBy &&
         createdAt == other.createdAt &&
@@ -225,10 +239,12 @@ class _$BolhaMembro extends BolhaMembro {
                             $jc(
                                 $jc(
                                     $jc(
-                                        $jc($jc(0, id.hashCode),
-                                            bolhaId.hashCode),
-                                        userId.hashCode),
-                                    checkin.hashCode),
+                                        $jc(
+                                            $jc($jc(0, id.hashCode),
+                                                bolhaId.hashCode),
+                                            userId.hashCode),
+                                        checkin.hashCode),
+                                    mostrar_localizacao_mapa.hashCode),
                                 checkout.hashCode),
                             createdBy.hashCode),
                         createdAt.hashCode),
@@ -245,6 +261,7 @@ class _$BolhaMembro extends BolhaMembro {
           ..add('bolhaId', bolhaId)
           ..add('userId', userId)
           ..add('checkin', checkin)
+          ..add('mostrar_localizacao_mapa', mostrar_localizacao_mapa)
           ..add('checkout', checkout)
           ..add('createdBy', createdBy)
           ..add('createdAt', createdAt)
@@ -274,6 +291,11 @@ class BolhaMembroBuilder implements Builder<BolhaMembro, BolhaMembroBuilder> {
   String _checkin;
   String get checkin => _$this._checkin;
   set checkin(String checkin) => _$this._checkin = checkin;
+
+  bool _mostrar_localizacao_mapa;
+  bool get mostrar_localizacao_mapa => _$this._mostrar_localizacao_mapa;
+  set mostrar_localizacao_mapa(bool mostrar_localizacao_mapa) =>
+      _$this._mostrar_localizacao_mapa = mostrar_localizacao_mapa;
 
   String _checkout;
   String get checkout => _$this._checkout;
@@ -311,6 +333,7 @@ class BolhaMembroBuilder implements Builder<BolhaMembro, BolhaMembroBuilder> {
       _bolhaId = _$v.bolhaId;
       _userId = _$v.userId;
       _checkin = _$v.checkin;
+      _mostrar_localizacao_mapa = _$v.mostrar_localizacao_mapa;
       _checkout = _$v.checkout;
       _createdBy = _$v.createdBy;
       _createdAt = _$v.createdAt;
@@ -346,6 +369,7 @@ class BolhaMembroBuilder implements Builder<BolhaMembro, BolhaMembroBuilder> {
               bolhaId: bolhaId,
               userId: userId,
               checkin: checkin,
+              mostrar_localizacao_mapa: mostrar_localizacao_mapa,
               checkout: checkout,
               createdBy: createdBy,
               createdAt: createdAt,

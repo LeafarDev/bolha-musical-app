@@ -31,6 +31,10 @@ abstract class BolhaMembro implements Built<BolhaMembro, BolhaMembroBuilder> {
   String get checkin;
 
   @nullable
+  @BuiltValueField(wireName: 'mostrar_localizacao_mapa')
+  bool get mostrar_localizacao_mapa;
+
+  @nullable
   @BuiltValueField(wireName: 'checkout')
   String get checkout;
 
