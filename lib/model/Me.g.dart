@@ -36,6 +36,12 @@ class _$MeSerializer implements StructuredSerializer<Me> {
         ..add(serializers.serialize(object.type,
             specifiedType: const FullType(String)));
     }
+    if (object.language_code != null) {
+      result
+        ..add('language_code')
+        ..add(serializers.serialize(object.language_code,
+            specifiedType: const FullType(String)));
+    }
     if (object.externalUrls != null) {
       result
         ..add('external_urls')
@@ -54,6 +60,12 @@ class _$MeSerializer implements StructuredSerializer<Me> {
         ..add('explicit_content')
         ..add(serializers.serialize(object.explicitContent,
             specifiedType: const FullType(ExplicitContent)));
+    }
+    if (object.mostrar_localizacao_mapa != null) {
+      result
+        ..add('mostrar_localizacao_mapa')
+        ..add(serializers.serialize(object.mostrar_localizacao_mapa,
+            specifiedType: const FullType(bool)));
     }
     if (object.product != null) {
       result
@@ -129,6 +141,10 @@ class _$MeSerializer implements StructuredSerializer<Me> {
           result.type = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'language_code':
+          result.language_code = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
         case 'external_urls':
           result.externalUrls.replace(serializers.deserialize(value,
               specifiedType: const FullType(ExternalUrls)) as ExternalUrls);
@@ -143,6 +159,10 @@ class _$MeSerializer implements StructuredSerializer<Me> {
           result.explicitContent.replace(serializers.deserialize(value,
                   specifiedType: const FullType(ExplicitContent))
               as ExplicitContent);
+          break;
+        case 'mostrar_localizacao_mapa':
+          result.mostrar_localizacao_mapa = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
           break;
         case 'product':
           result.product = serializers.deserialize(value,
@@ -191,11 +211,15 @@ class _$Me extends Me {
   @override
   final String type;
   @override
+  final String language_code;
+  @override
   final ExternalUrls externalUrls;
   @override
   final BuiltList<SpotifyImage> images;
   @override
   final ExplicitContent explicitContent;
+  @override
+  final bool mostrar_localizacao_mapa;
   @override
   final String product;
   @override
@@ -220,9 +244,11 @@ class _$Me extends Me {
       {this.email,
       this.rocket_chat_auth_token,
       this.type,
+      this.language_code,
       this.externalUrls,
       this.images,
       this.explicitContent,
+      this.mostrar_localizacao_mapa,
       this.product,
       this.id,
       this.user_id,
@@ -247,9 +273,11 @@ class _$Me extends Me {
         email == other.email &&
         rocket_chat_auth_token == other.rocket_chat_auth_token &&
         type == other.type &&
+        language_code == other.language_code &&
         externalUrls == other.externalUrls &&
         images == other.images &&
         explicitContent == other.explicitContent &&
+        mostrar_localizacao_mapa == other.mostrar_localizacao_mapa &&
         product == other.product &&
         id == other.id &&
         user_id == other.user_id &&
@@ -275,13 +303,20 @@ class _$Me extends Me {
                                             $jc(
                                                 $jc(
                                                     $jc(
-                                                        $jc(0, email.hashCode),
-                                                        rocket_chat_auth_token
-                                                            .hashCode),
-                                                    type.hashCode),
-                                                externalUrls.hashCode),
-                                            images.hashCode),
-                                        explicitContent.hashCode),
+                                                        $jc(
+                                                            $jc(
+                                                                $jc(
+                                                                    0,
+                                                                    email
+                                                                        .hashCode),
+                                                                rocket_chat_auth_token
+                                                                    .hashCode),
+                                                            type.hashCode),
+                                                        language_code.hashCode),
+                                                    externalUrls.hashCode),
+                                                images.hashCode),
+                                            explicitContent.hashCode),
+                                        mostrar_localizacao_mapa.hashCode),
                                     product.hashCode),
                                 id.hashCode),
                             user_id.hashCode),
@@ -298,9 +333,11 @@ class _$Me extends Me {
           ..add('email', email)
           ..add('rocket_chat_auth_token', rocket_chat_auth_token)
           ..add('type', type)
+          ..add('language_code', language_code)
           ..add('externalUrls', externalUrls)
           ..add('images', images)
           ..add('explicitContent', explicitContent)
+          ..add('mostrar_localizacao_mapa', mostrar_localizacao_mapa)
           ..add('product', product)
           ..add('id', id)
           ..add('user_id', user_id)
@@ -329,6 +366,11 @@ class MeBuilder implements Builder<Me, MeBuilder> {
   String get type => _$this._type;
   set type(String type) => _$this._type = type;
 
+  String _language_code;
+  String get language_code => _$this._language_code;
+  set language_code(String language_code) =>
+      _$this._language_code = language_code;
+
   ExternalUrlsBuilder _externalUrls;
   ExternalUrlsBuilder get externalUrls =>
       _$this._externalUrls ??= new ExternalUrlsBuilder();
@@ -345,6 +387,11 @@ class MeBuilder implements Builder<Me, MeBuilder> {
       _$this._explicitContent ??= new ExplicitContentBuilder();
   set explicitContent(ExplicitContentBuilder explicitContent) =>
       _$this._explicitContent = explicitContent;
+
+  bool _mostrar_localizacao_mapa;
+  bool get mostrar_localizacao_mapa => _$this._mostrar_localizacao_mapa;
+  set mostrar_localizacao_mapa(bool mostrar_localizacao_mapa) =>
+      _$this._mostrar_localizacao_mapa = mostrar_localizacao_mapa;
 
   String _product;
   String get product => _$this._product;
@@ -386,9 +433,11 @@ class MeBuilder implements Builder<Me, MeBuilder> {
       _email = _$v.email;
       _rocket_chat_auth_token = _$v.rocket_chat_auth_token;
       _type = _$v.type;
+      _language_code = _$v.language_code;
       _externalUrls = _$v.externalUrls?.toBuilder();
       _images = _$v.images?.toBuilder();
       _explicitContent = _$v.explicitContent?.toBuilder();
+      _mostrar_localizacao_mapa = _$v.mostrar_localizacao_mapa;
       _product = _$v.product;
       _id = _$v.id;
       _user_id = _$v.user_id;
@@ -424,9 +473,11 @@ class MeBuilder implements Builder<Me, MeBuilder> {
               email: email,
               rocket_chat_auth_token: rocket_chat_auth_token,
               type: type,
+              language_code: language_code,
               externalUrls: _externalUrls?.build(),
               images: _images?.build(),
               explicitContent: _explicitContent?.build(),
+              mostrar_localizacao_mapa: mostrar_localizacao_mapa,
               product: product,
               id: id,
               user_id: user_id,

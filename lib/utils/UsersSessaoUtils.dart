@@ -73,6 +73,7 @@ class UsersSessaoUtils {
     }
   }
 
+
   static getMeFromTokenAndStore() async {
     final prefs = await SharedPreferences.getInstance();
     var mePrefs = prefs.getString('me') ?? null;

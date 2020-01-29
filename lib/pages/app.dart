@@ -16,7 +16,7 @@ import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 
 import 'bolhas/bolhas.dart';
-import 'chat/ChatSocket.dart';
+import '../api/ChatSocket.dart';
 import 'chat/chat_screen.dart';
 
 class App extends StatefulWidget {

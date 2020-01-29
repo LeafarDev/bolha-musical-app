@@ -35,6 +35,10 @@ abstract class Me implements Built<Me, MeBuilder> {
   String get type;
 
   @nullable
+  @BuiltValueField(wireName: 'language_code')
+  String get language_code;
+
+  @nullable
   @BuiltValueField(wireName: 'external_urls')
   ExternalUrls get externalUrls;
 
@@ -45,6 +49,10 @@ abstract class Me implements Built<Me, MeBuilder> {
   @nullable
   @BuiltValueField(wireName: 'explicit_content')
   ExplicitContent get explicitContent;
+
+  @nullable
+  @BuiltValueField(wireName: 'mostrar_localizacao_mapa')
+  bool get mostrar_localizacao_mapa;
 
   @nullable
   @BuiltValueField(wireName: 'product')
@@ -83,7 +91,8 @@ abstract class Me implements Built<Me, MeBuilder> {
       if (images.length > 0) {
         return images[0].url;
       }
-    } return store.state.padraoPerfilFoto;
+    }
+    return store.state.padraoPerfilFoto;
   }
 
   toDashUSer() {

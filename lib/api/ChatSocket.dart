@@ -29,7 +29,7 @@ class ChatSocket {
       if (_channel != null) {
         if (_channel.closeCode != 1000 && _channel.closeCode != null) {
           if (await ConnectivityUtils.instance.isPhoneConnected() == true) {
-            print("here we go again");
+            // print("here we go again");
             startSocketChannel();
           }
         }
@@ -54,23 +54,23 @@ class ChatSocket {
         if (message != false) {
           var messageObj = RocketChatResponse.fromJson(message);
           // handling of the incoming messages
-          print("incoming!!!>>");
-          print(message);
+          // print("incoming!!!>>");
+          // print(message);
           if (messageObj.msg == "ping") {
-            print("pong");
-            print(_pongString());
+            // print("pong");
+            // print(_pongString());
             _channel.sink.add(_pongString());
           }
 
           if (messageObj.msg == "connected") {
-            print("connected::");
+            // print("connected::");
             _channel.sink.add(_storyMessagesString());
             _channel.sink.add(_subsScriptionMessageString());
           }
 
           if (messageObj.msg == "changed") {
             var response = json.decode(message);
-            print("remove constrainsts with strenght");
+            // print("remove constrainsts with strenght");
             Message newMsg =
                 Message.fromJson(jsonEncode(response["fields"]["args"][0]));
             store.dispatch(SetMessage(newMsg));
@@ -108,19 +108,19 @@ class ChatSocket {
       }, onError: (error, StackTrace stackTrace) {
         // error handling
         // enquanto sem internet, ficar aguardando voltar pra rechamar conexão
-        print(error);
+        // print(error);
       }, onDone: () {
         // communication has been closed
-        print("i'm done");
+        // print("i'm done");
       });
-      print("closed reason ${_channel.closeReason}");
+      // print("closed reason ${_channel.closeReason}");
     } catch (e) {
-      print("# closed reason ${_channel.closeReason}");
+      // print("# closed reason ${_channel.closeReason}");
 
       ///
       /// An error occurred
       ///
-      print(e);
+      // print(e);
     }
   }
 

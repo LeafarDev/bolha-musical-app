@@ -93,7 +93,7 @@ class BolhasState extends State<Bolhas> {
           mini: true,
           child: Icon(Icons.add),
           onPressed: () {
-            showDialog(
+            return showDialog(
                 context: context,
                 builder: (BuildContext context) => BolhasForm());
           },

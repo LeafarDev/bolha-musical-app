@@ -6,6 +6,7 @@ import 'package:bolha_musical/model/BackendMessage.dart';
 import 'package:bolha_musical/model/Device.dart';
 import 'package:bolha_musical/model/Me.dart';
 import 'package:bolha_musical/model/Token.dart';
+import 'package:bolha_musical/model/ValidationError.dart';
 import 'package:bolha_musical/redux/actions.dart';
 import 'package:bolha_musical/redux/store.dart';
 import 'package:http/http.dart' as http;
@@ -127,6 +128,32 @@ class UsersApi {
       return true;
     } else {
       var backendMessage = BackendMessage.fromJson(body);
+      ApiDialogs.errorDialog(backendMessage.message);
+      return null;
+    }
+  }
+
+  static updatePreferences(language_code, mostrar_localizacao_mapa) async {
+    String data = jsonEncode(
+      {
+        'language_code': language_code,
+        'mostrar_localizacao_mapa': mostrar_localizacao_mapa
+      },
+    );
+    final res = await http.put("http://10.0.0.108:3001/api/v1/users/preferences",
+        headers: {
+          HttpHeaders.authorizationHeader: store.state.token.token,
+          HttpHeaders.contentTypeHeader: "application/json"
+        },
+        body: data);
+    if (res.statusCode == 200) {
+      return true;
+    } else if(res.statusCode == 422){
+      var  validationError = new ValidationError();
+      validationError.record(jsonDecode(res.body));
+      return validationError;
+    } else {
+      var backendMessage = BackendMessage.fromJson(res.body);
       ApiDialogs.errorDialog(backendMessage.message);
       return null;
     }

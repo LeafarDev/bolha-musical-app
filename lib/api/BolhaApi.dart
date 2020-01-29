@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:bolha_musical/model/BackendMessage.dart';
 import 'package:bolha_musical/model/Bolha.dart';
 import 'package:bolha_musical/model/ReferenciaTamanhoBolha.dart';
+import 'package:bolha_musical/model/ValidationError.dart';
 import 'package:bolha_musical/pages/app.dart';
 import 'package:bolha_musical/redux/actions.dart';
 import 'package:bolha_musical/redux/store.dart';
@@ -80,20 +81,15 @@ class BolhaApi {
               body: bolha.toJson());
       if (res.statusCode == 200) {
         Bolha bolha = Bolha.fromJson(res.body);
-        store.dispatch(SetBolhaAtual(null));
-        store.dispatch(SetPlaylist([]));
-        store.dispatch(SetMessages([]));
-        store.dispatch(SetBolhaAtual(bolha));
-        App.chatSocket.startSocketChannel();
-        ApiDialogs.sucessoDialog(
-            "Bolha criada com sucesso, tente adicionar umas músicas o/");
         return bolha;
-      } else if(res.statusCode != 422){
+      } else if(res.statusCode == 422){
+        var  validationError = new ValidationError();
+        validationError.record(jsonDecode(res.body));
+        return validationError;
+      } else {
         var backendMessage = BackendMessage.fromJson(res.body);
         ApiDialogs.errorDialog(backendMessage.message);
         return null;
-      } else {
-        return jsonDecode(res.body);
       }
     } catch (error) {
       return null;
