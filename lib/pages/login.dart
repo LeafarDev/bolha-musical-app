@@ -36,7 +36,6 @@ class _LoginState extends State<Login> {
   @override
   void initState() {
     UsersSessaoUtils.inicializarSessaoComToken();
-    _geAuthState();
     // Add a listener to on url changed
     _onUrlChanged = flutterWebviewPlugin.onUrlChanged.listen((String url) {
       if (url.startsWith(
@@ -99,6 +98,7 @@ class _LoginState extends State<Login> {
               ) /* add child content here */,
             );
           } else {
+            _geAuthState();
             return Center(child: CircularProgressIndicator());
           }
         },

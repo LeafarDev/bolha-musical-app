@@ -62,40 +62,43 @@ class ChatScreenState extends State<ChatScreen> {
                       }
                       return DashChat(
                         key: _chatViewKey,
+                        shouldShowLoadEarlier: true,
                         height: MediaQuery.of(context).size.height - 118,
                         messages: state,
                         user: store.state.me.toDashUSer(),
-                        scrollToBottom: false,
+                        scrollToBottom: true,
                         onSend: (m) => App.chatSocket.sendMessage(m),
                         sendButtonBuilder: (Function onSend) {
                           return ConnectivityWidget(
-                            showOfflineBanner: false,
-
-                            builder: (context, isOnline) {
-                              if (isOnline) {
-                                return IconButton(
-                                    icon: Icon(
-                                      Icons.send,
-                                    ),
-                                    onPressed: onSend);
-                              } else {
-                                return IconButton(
-                                    icon: Icon(Icons.warning, color: Colors.orange),
-                                    onPressed: () {
-                                      Flushbar(
-                                        icon: Icon(
-                                          Icons.signal_cellular_connected_no_internet_4_bar,
-                                          color: Colors.white,
-                                        ),
-                                        flushbarPosition: FlushbarPosition.BOTTOM,
-                                        backgroundColor: Colors.orange,
-                                        message: "Impossível enviar mensagem, aguardando conexão",
-                                        duration: Duration(seconds: 3),
-                                      )..show(context);
-                                    });
-                              }
-                            }
-                          );
+                              showOfflineBanner: false,
+                              builder: (context, isOnline) {
+                                if (isOnline) {
+                                  return IconButton(
+                                      icon: Icon(
+                                        Icons.send,
+                                      ),
+                                      onPressed: onSend);
+                                } else {
+                                  return IconButton(
+                                      icon: Icon(Icons.warning,
+                                          color: Colors.orange),
+                                      onPressed: () {
+                                        Flushbar(
+                                          icon: Icon(
+                                            Icons
+                                                .signal_cellular_connected_no_internet_4_bar,
+                                            color: Colors.white,
+                                          ),
+                                          flushbarPosition:
+                                              FlushbarPosition.BOTTOM,
+                                          backgroundColor: Colors.orange,
+                                          message:
+                                              "Impossível enviar mensagem, aguardando conexão",
+                                          duration: Duration(seconds: 3),
+                                        )..show(context);
+                                      });
+                                }
+                              });
                         },
                         showUserAvatar: true,
                         inverted: false,

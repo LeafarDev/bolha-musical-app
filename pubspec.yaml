@@ -47,7 +47,7 @@ dependencies:
   flutter_webview_plugin: ^0.3.9+1
   geolocator: ^5.1.5
   flutter_emoji: ">= 2.0.0"
-  dash_chat: ^1.0.10
+  dash_chat: ^1.0.14
   image_picker: 0.6.1
   connectivity_widget: ^0.1.2
   flushbar: ^1.9.1

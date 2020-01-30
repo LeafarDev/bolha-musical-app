@@ -4,6 +4,7 @@ import 'package:bolha_musical/model/ValidationError.dart';
 import 'package:bolha_musical/redux/actions.dart';
 import 'package:bolha_musical/redux/app_state.dart';
 import 'package:bolha_musical/redux/store.dart';
+import 'package:bolha_musical/utils/UsersSessaoUtils.dart';
 import 'package:bolha_musical/widgets/player_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flushbar/flushbar.dart';
@@ -64,26 +65,48 @@ class EuState extends State<Eu> {
                 distinct: true,
                 converter: (store) => store.state,
                 builder: (context, state) {
-                  return Column(
-                    children: <Widget>[
-                      Expanded(
-                        child: Column(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.only(bottom: 30),
-                              child: CircleAvatar(
-                                backgroundImage: CachedNetworkImageProvider(
-                                    state.me.getImage()),
-                                radius: 100,
+                  if (state.me.id != null) {
+                    return Column(
+                      children: <Widget>[
+                        Expanded(
+                          child: Column(
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 30),
+                                child: CircleAvatar(
+                                  backgroundImage: CachedNetworkImageProvider(
+                                      state.me.getImage()),
+                                  radius: 100,
+                                ),
                               ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: RichText(
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: RichText(
+                                      text: TextSpan(
+                                        style: TextStyle(color: Colors.white),
+                                        children: [
+                                          WidgetSpan(
+                                            child: Padding(
+                                              padding: const EdgeInsets.symmetric(
+                                                  horizontal: 2.0),
+                                              child: Icon(
+                                                Icons.people,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                          TextSpan(
+                                              text:
+                                              "${state.me.followers.total} Seguidores"),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  RichText(
                                     text: TextSpan(
                                       style: TextStyle(color: Colors.white),
                                       children: [
@@ -92,91 +115,76 @@ class EuState extends State<Eu> {
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 2.0),
                                             child: Icon(
-                                              Icons.people,
+                                              Icons.location_on,
                                               color: Colors.white,
                                             ),
                                           ),
                                         ),
-                                        TextSpan(
-                                            text:
-                                                "${state.me.followers.total} Seguidores"),
+                                        TextSpan(text: "${state.me.country}"),
                                       ],
                                     ),
                                   ),
+                                ],
+                              ),
+                              Container(
+                                height: MediaQuery.of(context).size.height * 0.08,
+                                child: SwitchListTile(
+                                  value: _mostrar_localizacao_mapa,
+                                  onChanged: (value) {
+                                    if (value != _mostrar_localizacao_mapa) {
+                                      setState(() {
+                                        _mostrar_localizacao_mapa = value;
+                                        _updaTeUserConfigs(context);
+                                      });
+                                    }
+                                  },
+                                  title: Text('Mostrar minha foto na bolha',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white)),
                                 ),
-                                RichText(
-                                  text: TextSpan(
-                                    style: TextStyle(color: Colors.white),
-                                    children: [
-                                      WidgetSpan(
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 2.0),
-                                          child: Icon(
-                                            Icons.location_on,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ),
-                                      TextSpan(text: "${state.me.country}"),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Container(
-                              height: MediaQuery.of(context).size.height * 0.08,
-                              child: SwitchListTile(
-                                value: _mostrar_localizacao_mapa,
-                                onChanged: (value) {
-                                  if (value != _mostrar_localizacao_mapa) {
-                                    setState(() {
-                                      _mostrar_localizacao_mapa = value;
-                                      _updaTeUserConfigs(context);
-                                    });
-                                  }
+                              ),
+                              errorText('mostrar_localizacao_mapa'),
+                              DropdownButton<String>(
+                                isExpanded: true,
+                                items:
+                                _gerarItemDropdownLanguage([":pt-br", ":en"]),
+                                onChanged: (String value) async {
+                                  setState(() {
+                                    _language_code = value;
+                                  });
+                                  _updaTeUserConfigs(context);
                                 },
-                                title: Text('Mostrar minha foto na bolha',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white)),
+                                value: _language_code,
                               ),
-                            ),
-                            errorText('mostrar_localizacao_mapa'),
-                            DropdownButton<String>(
-                              isExpanded: true,
-                              items:
-                                  _gerarItemDropdownLanguage([":pt-br", ":en"]),
-                              onChanged: (String value) async {
-                                setState(() {
-                                  _language_code = value;
-                                });
-                                _updaTeUserConfigs(context);
-                              },
-                              value: _language_code,
-                            ),
-                            errorText('language'),
-                          ],
+                              errorText('language'),
+                            ],
+                          ),
                         ),
-                      ),
-                      Material(
-                        color: Colors.pink,
-                        child: Center(
-                          child: FlatButton.icon(
-                              onPressed: null,
-                              icon: Icon(
-                                Icons.exit_to_app,
-                                color: Colors.white,
-                              ),
-                              label: Text(
-                                "Sair",
-                                style: TextStyle(color: Colors.white),
-                              )),
+                        Material(
+                          color: Colors.pink,
+                          child: Center(
+                            child: FlatButton.icon(
+                                onPressed: () {
+                                  UsersSessaoUtils.logout();
+                                },
+                                icon: Icon(
+                                  Icons.exit_to_app,
+                                  color: Colors.white,
+                                ),
+                                label: Text(
+                                  "Sair",
+                                  style: TextStyle(color: Colors.white),
+                                )),
+                          ),
                         ),
-                      ),
-                      PlayerBar()
-                    ],
-                  );
+                        PlayerBar()
+                      ],
+                    );
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
+
                 }),
           )),
     );

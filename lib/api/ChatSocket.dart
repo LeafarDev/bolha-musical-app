@@ -21,14 +21,14 @@ class ChatSocket {
 
   ChatSocket() {
     _timerAllMessages = Timer.periodic(Duration(seconds: 30), (_) {
-      if (_channel != null) {
+      if (_channel != null  &&  store.state.bolhaAtual != null) {
         _channel.sink.add(_storyMessagesString());
       }
     });
     ConnectivityUtils.instance.isPhoneConnectedStream.listen((onData) async {
       if (_channel != null) {
         if (_channel.closeCode != 1000 && _channel.closeCode != null) {
-          if (await ConnectivityUtils.instance.isPhoneConnected() == true) {
+          if (await ConnectivityUtils.instance.isPhoneConnected() == true &&  store.state.bolhaAtual != null) {
             // print("here we go again");
             startSocketChannel();
           }
@@ -189,8 +189,13 @@ class ChatSocket {
   }
 
   void dispose() {
-    _timer.cancel();
-    _timerAllMessages.cancel();
+    if (_timer != null) {
+      _timer.cancel();
+    }
+
+    if (_timerAllMessages != null) {
+      _timerAllMessages.cancel();
+    }
     _channel.sink.close();
   }
 }
