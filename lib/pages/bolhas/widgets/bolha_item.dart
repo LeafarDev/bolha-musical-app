@@ -41,7 +41,7 @@ class BolhaItem extends StatelessWidget {
           },
           leading: Icon(
             Icons.bubble_chart,
-            color: Colors.greenAccent,
+            color: Color(int.parse(bolha.cor)),
           ),
           title: Text(
             bolha.apelido,

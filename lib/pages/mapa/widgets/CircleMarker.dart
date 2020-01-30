@@ -8,7 +8,7 @@ CircleMarker CircleMarkerMapa(Bolha bolha) {
       //radius marker
       point: LatLng(bolha != null ? bolha.latitude : 0,
           bolha != null ? bolha.longitude : 0),
-      color: Colors.redAccent.withOpacity(0.1),
+      color: Color(int.parse(bolha.cor)).withOpacity(0.2),
       borderStrokeWidth: 3.0,
       borderColor: Colors.green,
       useRadiusInMeter: true,
