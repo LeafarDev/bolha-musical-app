@@ -78,8 +78,9 @@ class _MapaState extends State<Mapa> {
                           urlTemplate:
                               'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                           subdomains: ['a', 'b', 'c']),
-                      CircleLayerOptions(
-                          circles: [CircleMarkerMapa(_bolhaAtual)]),
+                      if (_bolhaAtual != null)
+                        CircleLayerOptions(
+                            circles: [CircleMarkerMapa(_bolhaAtual)]),
                       MarkerLayerOptions(
                           markers: _bolhaAtual != null
                               ? [

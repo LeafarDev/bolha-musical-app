@@ -32,6 +32,7 @@ class PlaylistState extends State<Playlist> {
   @override
   initState() {
     super.initState();
+
     setState(() {
       _childButtons.add(UnicornButton(
           hasLabel: true,
@@ -110,6 +111,18 @@ class PlaylistState extends State<Playlist> {
     return 0;
   }
 
+  _unicornDialer() {
+    if (store.state.bolhaAtual != null) {
+      return UnicornDialer(
+          backgroundColor: Color.fromRGBO(255, 255, 255, 0.6),
+          parentButtonBackground: Colors.redAccent,
+          orientation: UnicornOrientation.VERTICAL,
+          parentButton: Icon(Icons.arrow_upward),
+          childButtons: _childButtons);
+    }
+    return Container(height: 0, width: 0,);
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -118,12 +131,7 @@ class PlaylistState extends State<Playlist> {
           floatingActionButton: Padding(
             key: _fabKey,
             padding: EdgeInsets.only(bottom: 30),
-            child: UnicornDialer(
-                backgroundColor: Color.fromRGBO(255, 255, 255, 0.6),
-                parentButtonBackground: Colors.redAccent,
-                orientation: UnicornOrientation.VERTICAL,
-                parentButton: Icon(Icons.arrow_upward),
-                childButtons: _childButtons),
+            child: _unicornDialer(),
           ),
           backgroundColor: Color.fromRGBO(1, 41, 51, 0.9),
           body: SafeArea(
@@ -151,7 +159,7 @@ class PlaylistState extends State<Playlist> {
                             "Nada aqui ainda, tente adicionar uma nova música na bolha ;)";
                         if (state.bolhaAtual == null) {
                           msg =
-                              "Nada aqui ainda, entre em uma bolha para adicionar músicas";
+                          "Nada aqui ainda, entre em uma bolha para adicionar músicas";
                         }
                         return Center(
                           child: Text(

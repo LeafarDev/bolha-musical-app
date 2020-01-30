@@ -13,16 +13,35 @@ import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:geolocator/geolocator.dart';
 
-import 'bolhas/bolhas.dart';
 import '../api/ChatSocket.dart';
+import 'bolhas/bolhas.dart';
 import 'chat/chat_screen.dart';
 
 class App extends StatefulWidget {
   static ChatSocket chatSocket = ChatSocket();
+
   @override
   _AppState createState() => new _AppState(chatSocket);
+}
+
+class LifecycleEventHandler extends WidgetsBindingObserver {
+  @override
+  Future<Null> didChangeAppLifecycleState(AppLifecycleState state) async {
+    switch (state) {
+      case AppLifecycleState.inactive:
+        await BolhaApi.sairBolha();
+        break;
+      case AppLifecycleState.paused:
+        break;
+      case AppLifecycleState.resumed:
+        break;
+      case AppLifecycleState.suspending:
+        break;
+    }
+  }
 }
 
 class _AppState extends State<App> {
@@ -51,8 +70,7 @@ class _AppState extends State<App> {
         .getLastKnownPosition(desiredAccuracy: LocationAccuracy.high);
 
     if (position != null) {
-      Localizacao _localizacao = new Localizacao((b) =>
-      b
+      Localizacao _localizacao = new Localizacao((b) => b
         ..latitude = position.latitude
         ..longitude = position.longitude);
       store.dispatch(SetLocalizacaoAtual(_localizacao));
@@ -64,6 +82,7 @@ class _AppState extends State<App> {
   @override
   initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(new LifecycleEventHandler());
     _location();
     _apiInicial();
     _timer = Timer.periodic(Duration(seconds: 10), (_) {
@@ -72,13 +91,12 @@ class _AppState extends State<App> {
     });
   }
 
-  _apiInicial () async {
+  _apiInicial() async {
     await BolhaApi.getBolhaAtual();
     BolhaApi.getReferenciaTamanhoBolha();
     if (store.state.bolhaAtual != null) {
       _chatSocket.startSocketChannel();
     }
-
   }
 
   @override
@@ -96,38 +114,50 @@ class _AppState extends State<App> {
           offlineBanner: Container(
             alignment: Alignment.topLeft,
             child: Flushbar(
-              icon: Icon(Icons.signal_cellular_connected_no_internet_4_bar,
-                color: Colors.white,),
+              icon: Icon(
+                Icons.signal_cellular_connected_no_internet_4_bar,
+                color: Colors.white,
+              ),
               flushbarPosition: FlushbarPosition.TOP,
               title: "Sem conexão",
               backgroundColor: Colors.red,
               message:
-              "Sua conexão está indisponivel, Verifique sua conexão de dados ou wifi",
+                  "Sua conexão está indisponivel, Verifique sua conexão de dados ou wifi",
               duration: Duration(seconds: 3),
             ),
           ),
-          builder: (context, isOnline) =>
-              Scaffold(
-                body: paginas[_currentIndex],
-                bottomNavigationBar: BottomNavigationBar(
-                  type: BottomNavigationBarType.fixed,
-                  backgroundColor: Color.fromRGBO(1, 41, 51, 1),
-                  currentIndex: _currentIndex,
-                  items: _bottomBarList(),
-                  onTap: (index) {
-                    if (_currentIndex == index) {
-                      return;
-                    }
+          builder: (context, isOnline) => Scaffold(
+            body: paginas[_currentIndex],
+            bottomNavigationBar: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              backgroundColor: Color.fromRGBO(1, 41, 51, 1),
+              currentIndex: _currentIndex,
+              items: _bottomBarList(),
+              onTap: (index) {
+                if (_currentIndex == index) {
 
-                    setState(() {
-                      _currentIndex = index;
-                    });
-                  },
-                ),
-              ),
+                  return;
+                }
+
+                setState(() {
+                  _currentIndex = index;
+                });
+              },
+            ),
+          ),
         ));
   }
-
+doThar () async {
+  var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      'your channel id', 'your channel name', 'your channel description',
+      importance: Importance.Max, priority: Priority.High, ticker: 'ticker');
+  var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+  var platformChannelSpecifics = NotificationDetails(
+      androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+  await flutterLocalNotificationsPlugin.show(
+      0, 'plain title', 'plain body', platformChannelSpecifics,
+      payload: 'item x');
+}
   List<BottomNavigationBarItem> _bottomBarList() {
     return [
       BottomNavigationBarItem(
