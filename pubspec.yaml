@@ -23,18 +23,14 @@ dependencies:
   redux_thunk: ^0.2.1
   path_provider: ^1.4.4
   built_collection: "4.2.2"
-  flutter_map: ^0.7.3
+  flutter_map: ^0.8.2
   built_value: "6.8.2"
-  user_location:
-    git:
-      url: https://github.com/LeafarDev/user_location_plugin
-      ref: master
-
+  user_location: ^0.1.1
   shared_preferences: ^0.5.4+6
   flutter_staggered_animations: ^0.1.2
   fancy_dialog: ^1.0.3
   flutter_speed_dial: ^1.2.4
-  cached_network_image: ^1.1.3
+  cached_network_image: ^2.0.0
   unicorndial: ^1.1.5
   get_it: ^3.0.3
   redux: ^3.0.0
@@ -54,6 +50,7 @@ dependencies:
   highlighter_coachmark: ^0.0.3
   flutter_material_color_picker: ^1.0.5
   grouped_buttons: ^1.0.4
+  flutter_local_notifications: ^1.1.3
 
 dev_dependencies:
   flutter_test:

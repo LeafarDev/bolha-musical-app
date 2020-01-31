@@ -1,3 +1,4 @@
+import 'package:bolha_musical/api/BolhaApi.dart';
 import 'package:bolha_musical/api/UsersApi.dart';
 import 'package:bolha_musical/model/Me.dart';
 import 'package:bolha_musical/model/ValidationError.dart';
@@ -91,8 +92,9 @@ class EuState extends State<Eu> {
                                         children: [
                                           WidgetSpan(
                                             child: Padding(
-                                              padding: const EdgeInsets.symmetric(
-                                                  horizontal: 2.0),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 2.0),
                                               child: Icon(
                                                 Icons.people,
                                                 color: Colors.white,
@@ -101,7 +103,7 @@ class EuState extends State<Eu> {
                                           ),
                                           TextSpan(
                                               text:
-                                              "${state.me.followers.total} Seguidores"),
+                                                  "${state.me.followers.total} Seguidores"),
                                         ],
                                       ),
                                     ),
@@ -127,7 +129,8 @@ class EuState extends State<Eu> {
                                 ],
                               ),
                               Container(
-                                height: MediaQuery.of(context).size.height * 0.08,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.08,
                                 child: SwitchListTile(
                                   value: _mostrar_localizacao_mapa,
                                   onChanged: (value) {
@@ -147,8 +150,8 @@ class EuState extends State<Eu> {
                               errorText('mostrar_localizacao_mapa'),
                               DropdownButton<String>(
                                 isExpanded: true,
-                                items:
-                                _gerarItemDropdownLanguage([":pt-br", ":en"]),
+                                items: _gerarItemDropdownLanguage(
+                                    [":pt-br", ":en"]),
                                 onChanged: (String value) async {
                                   setState(() {
                                     _language_code = value;
@@ -166,6 +169,9 @@ class EuState extends State<Eu> {
                           child: Center(
                             child: FlatButton.icon(
                                 onPressed: () {
+                                  if (store.state.bolhaAtual != null) {
+                                    BolhaApi.sairBolha();
+                                  }
                                   UsersSessaoUtils.logout();
                                 },
                                 icon: Icon(
@@ -184,7 +190,6 @@ class EuState extends State<Eu> {
                   } else {
                     return Center(child: CircularProgressIndicator());
                   }
-
                 }),
           )),
     );

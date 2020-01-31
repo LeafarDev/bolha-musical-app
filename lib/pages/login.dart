@@ -35,6 +35,7 @@ class _LoginState extends State<Login> {
 
   @override
   void initState() {
+    super.initState();
     UsersSessaoUtils.inicializarSessaoComToken();
     // Add a listener to on url changed
     _onUrlChanged = flutterWebviewPlugin.onUrlChanged.listen((String url) {

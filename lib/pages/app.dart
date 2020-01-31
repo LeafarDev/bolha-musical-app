@@ -38,7 +38,8 @@ class LifecycleEventHandler extends WidgetsBindingObserver {
         break;
       case AppLifecycleState.resumed:
         break;
-      case AppLifecycleState.suspending:
+      case AppLifecycleState.detached:
+        await BolhaApi.sairBolha();
         break;
     }
   }
@@ -147,17 +148,6 @@ class _AppState extends State<App> {
           ),
         ));
   }
-doThar () async {
-  var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-      'your channel id', 'your channel name', 'your channel description',
-      importance: Importance.Max, priority: Priority.High, ticker: 'ticker');
-  var iOSPlatformChannelSpecifics = IOSNotificationDetails();
-  var platformChannelSpecifics = NotificationDetails(
-      androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-  await flutterLocalNotificationsPlugin.show(
-      0, 'plain title', 'plain body', platformChannelSpecifics,
-      payload: 'item x');
-}
   List<BottomNavigationBarItem> _bottomBarList() {
     return [
       BottomNavigationBarItem(
