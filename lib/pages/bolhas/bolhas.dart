@@ -45,7 +45,7 @@ class BolhasState extends State<Bolhas> {
     _timer.cancel();
   }
 
-  _handleShowFab () async {
+  _handleShowFab() async {
     final prefs = await SharedPreferences.getInstance();
     // prefs.remove('ja-viu-tutorial-add-bolha');
     var jaViu = prefs.getString('ja-viu-tutorial-add-bolha') ?? null;
@@ -65,20 +65,21 @@ class BolhasState extends State<Bolhas> {
         radius: markRect.longestSide * 0.05);
 
     coachMarkFAB.show(
-        targetContext: _fabKey.currentContext,
-        markRect: markRect,
-        children: [
-          Positioned(
-              top: markRect.top - 55.0,
-              right: 10.0,
-              child: Text("Aperte para criar uma bolha",
-                  style: const TextStyle(
-                    fontSize: 24.0,
-                    fontStyle: FontStyle.italic,
-                    color: Colors.white,
-                  )))
-        ],
-        duration: null,);
+      targetContext: _fabKey.currentContext,
+      markRect: markRect,
+      children: [
+        Positioned(
+            top: markRect.top - 55.0,
+            right: 10.0,
+            child: Text("Aperte para criar uma bolha",
+                style: const TextStyle(
+                  fontSize: 24.0,
+                  fontStyle: FontStyle.italic,
+                  color: Colors.white,
+                )))
+      ],
+      duration: null,
+    );
   }
 
   @override

@@ -3,7 +3,7 @@ import 'package:bolha_musical/model/Bolha.dart';
 import 'package:bolha_musical/model/Device.dart';
 import 'package:bolha_musical/model/Localizacao.dart';
 import 'package:bolha_musical/model/Me.dart';
-import 'package:bolha_musical/model/Message.dart';
+import 'package:bolha_musical/model/MessageObj.dart';
 import 'package:bolha_musical/model/ReferenciaTamanhoBolha.dart';
 import 'package:bolha_musical/model/SearchTrackResult.dart';
 import 'package:bolha_musical/model/Token.dart';
@@ -28,7 +28,7 @@ class SetME {
 }
 
 class SetMessage {
-  final Message payload;
+  final MessageObj payload;
 
   SetMessage(this.payload);
 }
@@ -94,7 +94,7 @@ class SetDevices {
 }
 
 class SetMessages {
-  final List<Message> payload;
+  final List<MessageObj> payload;
 
   SetMessages(this.payload);
 }

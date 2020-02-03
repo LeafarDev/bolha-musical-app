@@ -12,7 +12,7 @@ import 'package:bolha_musical/model/Device.dart';
 import 'package:bolha_musical/model/ExplicitContent.dart';
 import 'package:bolha_musical/model/ExternalUrls.dart';
 import 'package:bolha_musical/model/Localizacao.dart';
-import 'package:bolha_musical/model/Message.dart';
+import 'package:bolha_musical/model/MessageObj.dart';
 import 'package:bolha_musical/model/ReferenciaTamanhoBolha.dart';
 import 'package:bolha_musical/model/RocketChatResultResponse.dart';
 import 'package:bolha_musical/model/SearchTrackResult.dart';
@@ -67,7 +67,7 @@ part 'serializers.g.dart';
   SearchTrackResult,
   ExternalIds,
   Album,
-  Message,
+  MessageObj,
   Track,
   Artist,
   Device,

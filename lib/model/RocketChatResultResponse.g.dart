@@ -29,7 +29,7 @@ class _$RocketChatResultResponseSerializer
         ..add('messages')
         ..add(serializers.serialize(object.messages,
             specifiedType:
-                const FullType(BuiltList, const [const FullType(Message)])));
+                const FullType(BuiltList, const [const FullType(MessageObj)])));
     }
     return result;
   }
@@ -49,7 +49,7 @@ class _$RocketChatResultResponseSerializer
         case 'messages':
           result.messages.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
-                      BuiltList, const [const FullType(Message)]))
+                      BuiltList, const [const FullType(MessageObj)]))
               as BuiltList<dynamic>);
           break;
       }
@@ -61,7 +61,7 @@ class _$RocketChatResultResponseSerializer
 
 class _$RocketChatResultResponse extends RocketChatResultResponse {
   @override
-  final BuiltList<Message> messages;
+  final BuiltList<MessageObj> messages;
 
   factory _$RocketChatResultResponse(
           [void Function(RocketChatResultResponseBuilder) updates]) =>
@@ -102,10 +102,10 @@ class RocketChatResultResponseBuilder
         Builder<RocketChatResultResponse, RocketChatResultResponseBuilder> {
   _$RocketChatResultResponse _$v;
 
-  ListBuilder<Message> _messages;
-  ListBuilder<Message> get messages =>
-      _$this._messages ??= new ListBuilder<Message>();
-  set messages(ListBuilder<Message> messages) => _$this._messages = messages;
+  ListBuilder<MessageObj> _messages;
+  ListBuilder<MessageObj> get messages =>
+      _$this._messages ??= new ListBuilder<MessageObj>();
+  set messages(ListBuilder<MessageObj> messages) => _$this._messages = messages;
 
   RocketChatResultResponseBuilder();
 

@@ -20,7 +20,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(Followers.serializer)
       ..add(Localizacao.serializer)
       ..add(Me.serializer)
-      ..add(Message.serializer)
+      ..add(MessageObj.serializer)
       ..add(ReferenciaTamanhoBolha.serializer)
       ..add(RocketChatResponse.serializer)
       ..add(RocketChatResultResponse.serializer)
@@ -43,8 +43,8 @@ Serializers _$serializers = (new Serializers().toBuilder()
           const FullType(BuiltList, const [const FullType(BolhaMembro)]),
           () => new ListBuilder<BolhaMembro>())
       ..addBuilderFactory(
-          const FullType(BuiltList, const [const FullType(Message)]),
-          () => new ListBuilder<Message>())
+          const FullType(BuiltList, const [const FullType(MessageObj)]),
+          () => new ListBuilder<MessageObj>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(SpotifyImage)]),
           () => new ListBuilder<SpotifyImage>())

@@ -15,12 +15,12 @@ import 'Ts.dart';
 import 'U.dart';
 import 'UpdatedAt.dart';
 
-part 'Message.g.dart';
+part 'MessageObj.g.dart';
 
-abstract class Message implements Built<Message, MessageBuilder> {
-  Message._();
+abstract class MessageObj implements Built<MessageObj, MessageObjBuilder> {
+  MessageObj._();
 
-  factory Message([updates(MessageBuilder b)]) = _$Message;
+  factory MessageObj([updates(MessageObjBuilder b)]) = _$MessageObj;
 
   @nullable
   @BuiltValueField(wireName: '_id')
@@ -70,10 +70,10 @@ abstract class Message implements Built<Message, MessageBuilder> {
     return store.state.padraoPerfilFoto;
   }
 
-  static Message fromJson(String jsonString) {
+  static MessageObj fromJson(String jsonString) {
     final parsed = jsonDecode(jsonString);
-    Message message =
-        standardSerializers.deserializeWith(Message.serializer, parsed);
+    MessageObj message =
+        standardSerializers.deserializeWith(MessageObj.serializer, parsed);
     return message;
   }
 
@@ -103,8 +103,8 @@ abstract class Message implements Built<Message, MessageBuilder> {
 
   String toJson() {
     return json
-        .encode(standardSerializers.serializeWith(Message.serializer, this));
+        .encode(standardSerializers.serializeWith(MessageObj.serializer, this));
   }
 
-  static Serializer<Message> get serializer => _$messageSerializer;
+  static Serializer<MessageObj> get serializer => _$messageObjSerializer;
 }

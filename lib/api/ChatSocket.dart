@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:bolha_musical/model/Message.dart';
+import 'package:bolha_musical/model/MessageObj.dart';
 import 'package:bolha_musical/model/RocketChatResponse.dart';
 import 'package:bolha_musical/redux/actions.dart';
 import 'package:bolha_musical/redux/store.dart';
@@ -10,7 +10,10 @@ import 'package:connectivity_widget/connectivity_widget.dart';
 import 'package:dash_chat/dash_chat.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:web_socket_channel/io.dart';
+
+import '../main.dart';
 
 class ChatSocket {
   Timer _timer;
@@ -71,9 +74,10 @@ class ChatSocket {
           if (messageObj.msg == "changed") {
             var response = json.decode(message);
             // print("remove constrainsts with strenght");
-            Message newMsg =
-                Message.fromJson(jsonEncode(response["fields"]["args"][0]));
+            MessageObj newMsg =
+            MessageObj.fromJson(jsonEncode(response["fields"]["args"][0]));
             store.dispatch(SetMessage(newMsg));
+            _notificationMessage(newMsg.msg);
             if (_context != null && _currentIndex != 1) {
               Flushbar(
                 icon: Icon(
@@ -93,7 +97,7 @@ class ChatSocket {
           if (messageObj.msg == "result") {
             if (messageObj.result != null) {
               if (messageObj.result.messages != null) {
-                List<Message> messages = messageObj.result.messages.toList();
+                List<MessageObj> messages = messageObj.result.messages.toList();
                 messages.sort((a, b) {
                   return DateTime.fromMicrosecondsSinceEpoch(a.ts.date)
                       .compareTo(
@@ -123,6 +127,46 @@ class ChatSocket {
       // print(e);
     }
   }
+
+  _notificationMessage(message) async {
+    var messages = List<Message>();
+    // First two person objects will use icons that part of the Android app's drawable resources
+    var me = Person(
+        name: 'Me',
+        key: '1',
+        uri: 'tel:1234567890',
+        icon: 'me');
+    var coworker = Person(
+        name: 'Coworker',
+        key: '2',
+        uri: 'tel:9876543210',
+        icon: 'coworker');
+
+    // download the icon that would be use for the lunc
+    messages.add(Message('Hi', DateTime.now(), null));
+
+    messages.add(Message(
+        'What\'s up?', DateTime.now().add(Duration(minutes: 5)), coworker));
+    var messagingStyle = MessagingStyleInformation(me,
+        groupConversation: true,
+        conversationTitle: 'Team lunch',
+        htmlFormatContent: true,
+        htmlFormatTitle: true,
+        messages: messages);
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+        'message channel id',
+        'message channel name',
+        'message channel description',
+        category: 'msg',
+        style: AndroidNotificationStyle.Messaging,
+        styleInformation: messagingStyle);
+    var platformChannelSpecifics =
+    NotificationDetails(androidPlatformChannelSpecifics, null);
+    await flutterLocalNotificationsPlugin.show(
+        42, 'message title', 'message body', platformChannelSpecifics);
+
+  }
+
 
   sendMessage(ChatMessage message) {
     _channel.sink.add(jsonEncode({

@@ -88,6 +88,7 @@ class PlayListSearchState extends State<PlayListSearch> {
             iconSize: 25.0,
             color: Colors.black,
             onPressed: () {
+              TrackApi.playlist();
               Navigator.pop(context);
             },
           ),

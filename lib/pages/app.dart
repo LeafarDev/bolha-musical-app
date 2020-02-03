@@ -17,6 +17,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:geolocator/geolocator.dart';
 
 import '../api/ChatSocket.dart';
+import '../main.dart';
 import 'bolhas/bolhas.dart';
 import 'chat/chat_screen.dart';
 
@@ -32,13 +33,13 @@ class LifecycleEventHandler extends WidgetsBindingObserver {
   Future<Null> didChangeAppLifecycleState(AppLifecycleState state) async {
     switch (state) {
       case AppLifecycleState.inactive:
-        await BolhaApi.sairBolha();
         break;
       case AppLifecycleState.paused:
         break;
       case AppLifecycleState.resumed:
         break;
       case AppLifecycleState.detached:
+        print("detached");
         await BolhaApi.sairBolha();
         break;
     }
@@ -90,6 +91,21 @@ class _AppState extends State<App> {
       _location();
       BolhaApi.getBolhaAtual();
     });
+    _showOngoingNotification();
+  }
+
+  Future<void> _showOngoingNotification() async {
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+        '0', 'permanente', 'enquanto aberto',
+        importance: Importance.Max,
+        priority: Priority.High,
+        ongoing: true,
+        autoCancel: false);
+    var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+    var platformChannelSpecifics = NotificationDetails(
+        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.show(0, 'Bolha musical executando',
+        'Equanto aberto vamos reproduzir as músicas normalmente', platformChannelSpecifics);
   }
 
   _apiInicial() async {
@@ -136,7 +152,6 @@ class _AppState extends State<App> {
               items: _bottomBarList(),
               onTap: (index) {
                 if (_currentIndex == index) {
-
                   return;
                 }
 
@@ -148,6 +163,7 @@ class _AppState extends State<App> {
           ),
         ));
   }
+
   List<BottomNavigationBarItem> _bottomBarList() {
     return [
       BottomNavigationBarItem(

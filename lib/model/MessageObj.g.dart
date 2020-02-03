@@ -6,16 +6,16 @@ part of root_dto;
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<Message> _$messageSerializer = new _$MessageSerializer();
+Serializer<MessageObj> _$messageObjSerializer = new _$MessageObjSerializer();
 
-class _$MessageSerializer implements StructuredSerializer<Message> {
+class _$MessageObjSerializer implements StructuredSerializer<MessageObj> {
   @override
-  final Iterable<Type> types = const [Message, _$Message];
+  final Iterable<Type> types = const [MessageObj, _$MessageObj];
   @override
-  final String wireName = 'Message';
+  final String wireName = 'MessageObj';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, Message object,
+  Iterable<Object> serialize(Serializers serializers, MessageObj object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[];
     if (object.id != null) {
@@ -64,9 +64,9 @@ class _$MessageSerializer implements StructuredSerializer<Message> {
   }
 
   @override
-  Message deserialize(Serializers serializers, Iterable<Object> serialized,
+  MessageObj deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new MessageBuilder();
+    final result = new MessageObjBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -109,7 +109,7 @@ class _$MessageSerializer implements StructuredSerializer<Message> {
   }
 }
 
-class _$Message extends Message {
+class _$MessageObj extends MessageObj {
   @override
   final String id;
   @override
@@ -125,10 +125,10 @@ class _$Message extends Message {
   @override
   final UpdatedAt updatedAt;
 
-  factory _$Message([void Function(MessageBuilder) updates]) =>
-      (new MessageBuilder()..update(updates)).build();
+  factory _$MessageObj([void Function(MessageObjBuilder) updates]) =>
+      (new MessageObjBuilder()..update(updates)).build();
 
-  _$Message._(
+  _$MessageObj._(
       {this.id,
       this.rid,
       this.msg,
@@ -139,16 +139,16 @@ class _$Message extends Message {
       : super._();
 
   @override
-  Message rebuild(void Function(MessageBuilder) updates) =>
+  MessageObj rebuild(void Function(MessageObjBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  MessageBuilder toBuilder() => new MessageBuilder()..replace(this);
+  MessageObjBuilder toBuilder() => new MessageObjBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is Message &&
+    return other is MessageObj &&
         id == other.id &&
         rid == other.rid &&
         msg == other.msg &&
@@ -172,7 +172,7 @@ class _$Message extends Message {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('Message')
+    return (newBuiltValueToStringHelper('MessageObj')
           ..add('id', id)
           ..add('rid', rid)
           ..add('msg', msg)
@@ -184,8 +184,8 @@ class _$Message extends Message {
   }
 }
 
-class MessageBuilder implements Builder<Message, MessageBuilder> {
-  _$Message _$v;
+class MessageObjBuilder implements Builder<MessageObj, MessageObjBuilder> {
+  _$MessageObj _$v;
 
   String _id;
   String get id => _$this._id;
@@ -216,9 +216,9 @@ class MessageBuilder implements Builder<Message, MessageBuilder> {
       _$this._updatedAt ??= new UpdatedAtBuilder();
   set updatedAt(UpdatedAtBuilder updatedAt) => _$this._updatedAt = updatedAt;
 
-  MessageBuilder();
+  MessageObjBuilder();
 
-  MessageBuilder get _$this {
+  MessageObjBuilder get _$this {
     if (_$v != null) {
       _id = _$v.id;
       _rid = _$v.rid;
@@ -233,24 +233,24 @@ class MessageBuilder implements Builder<Message, MessageBuilder> {
   }
 
   @override
-  void replace(Message other) {
+  void replace(MessageObj other) {
     if (other == null) {
       throw new ArgumentError.notNull('other');
     }
-    _$v = other as _$Message;
+    _$v = other as _$MessageObj;
   }
 
   @override
-  void update(void Function(MessageBuilder) updates) {
+  void update(void Function(MessageObjBuilder) updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$Message build() {
-    _$Message _$result;
+  _$MessageObj build() {
+    _$MessageObj _$result;
     try {
       _$result = _$v ??
-          new _$Message._(
+          new _$MessageObj._(
               id: id,
               rid: rid,
               msg: msg,
@@ -270,7 +270,7 @@ class MessageBuilder implements Builder<Message, MessageBuilder> {
         _updatedAt?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'Message', _$failedField, e.toString());
+            'MessageObj', _$failedField, e.toString());
       }
       rethrow;
     }
