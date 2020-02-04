@@ -33,13 +33,13 @@ class PlayListSearchState extends State<PlayListSearch> {
       resizeToAvoidBottomPadding: false,
       body: SafeArea(
         child: Column(
-          children: <Widget>[_inputSearch(), result()],
+          children: <Widget>[_inputSearch(), _result()],
         ),
       ),
     );
   }
 
-  result() {
+  _result() {
     return Expanded(
       child: StoreConnector<AppState, AppState>(
           converter: (store) => store.state,

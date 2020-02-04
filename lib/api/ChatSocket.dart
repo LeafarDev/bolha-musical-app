@@ -163,7 +163,7 @@ class ChatSocket {
     var platformChannelSpecifics =
     NotificationDetails(androidPlatformChannelSpecifics, null);
     await flutterLocalNotificationsPlugin.show(
-        42, 'message title', 'message body', platformChannelSpecifics);
+        42, 'message title', 'message body', platformChannelSpecifics, payload: "chat-notification");
 
   }
 

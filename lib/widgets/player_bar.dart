@@ -18,7 +18,7 @@ class _PlayerBarState extends State<PlayerBar> {
   double _progressValue = 0.0;
   Timer _timer;
   Timer _timerApi;
-  IconData iconeDispositivoAtual;
+  IconData _iconeDispositivoAtual;
 
   @override
   initState() {
@@ -28,10 +28,10 @@ class _PlayerBarState extends State<PlayerBar> {
     _callApi();
     _timer = Timer.periodic(Duration(seconds: 1), (_) {
       setState(() {
-        iconeDispositivoAtual = Icons.device_unknown;
+        _iconeDispositivoAtual = Icons.device_unknown;
         for (var i = 0; i < store.state.devices.length; i++) {
           if (store.state.devices[i].isActive) {
-            iconeDispositivoAtual = store.state.devices[i].getIcon();
+            _iconeDispositivoAtual = store.state.devices[i].getIcon();
             break;
           }
         }
@@ -96,7 +96,7 @@ class _PlayerBarState extends State<PlayerBar> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 30, right: 50),
                       child: Icon(
-                        iconeDispositivoAtual,
+                        _iconeDispositivoAtual,
                         color: Colors.green,
                       ),
                     ),

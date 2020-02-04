@@ -1,4 +1,5 @@
 import 'package:bolha_musical/pages/app.dart';
+import 'package:bolha_musical/pages/chat/widgets/message_container_custom.dart';
 import 'package:bolha_musical/redux/app_state.dart';
 import 'package:bolha_musical/redux/store.dart';
 import 'package:bolha_musical/widgets/player_bar.dart';
@@ -68,6 +69,12 @@ class ChatScreenState extends State<ChatScreen> {
                         user: store.state.me.toDashUSer(),
                         scrollToBottom: true,
                         onSend: (m) => App.chatSocket.sendMessage(m),
+                        messageBuilder: (ChatMessage message) {
+                          return MessageContainerCustom(
+                              message: message,
+                              isUser: message.user.name ==
+                                  store.state.me.displayName);
+                        },
                         sendButtonBuilder: (Function onSend) {
                           return ConnectivityWidget(
                               showOfflineBanner: false,
