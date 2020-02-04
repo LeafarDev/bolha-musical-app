@@ -98,22 +98,28 @@ class TrackApi {
     }
   }
 
-  static votar(Voto voto) async {
+  static votar(voto) async {
     try {
+      var data;
+      if (voto is Voto) {
+        data = voto.toJson();
+      } else {
+        data = jsonEncode(voto);
+      }
       final res = await http.post(
           "http://10.0.0.108:3001/api/v1/spotify/bolhas/playlist/track/votar",
           headers: {
             HttpHeaders.authorizationHeader: store.state.token.token,
             HttpHeaders.contentTypeHeader: "application/json"
           },
-          body: voto.toJson());
+          body: data);
       if (res.statusCode == 200) {
         var backendMessage = BackendMessage.fromJson(res.body);
         ApiDialogs.sucessoDialog(backendMessage.message);
         playlist();
         return true;
       } else {
-        ApiDialogs.sucessoDialog("Não consegui realizar esta ação :/");
+        ApiDialogs.errorDialog("Não consegui realizar esta ação :/");
         print(res.body);
       }
     } catch (error) {

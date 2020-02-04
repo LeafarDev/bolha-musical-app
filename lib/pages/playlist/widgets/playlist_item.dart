@@ -1,3 +1,4 @@
+import 'package:bolha_musical/api/TrackApi.dart';
 import 'package:bolha_musical/model/Track.dart';
 import 'package:bolha_musical/pages/playlist/widgets/voto_dialog.dart';
 import 'package:bolha_musical/redux/store.dart';
@@ -50,13 +51,17 @@ class PlaylistItem extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         _track.name,
-                        style: TextStyle(color: _currentPlayingColor(_track.current_playing)),
+                        style: TextStyle(
+                            color:
+                                _currentPlayingColor(_track.current_playing)),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
                         _track.artists[0].name,
-                        style: TextStyle(color: _currentPlayingColor(_track.current_playing)),
+                        style: TextStyle(
+                            color:
+                                _currentPlayingColor(_track.current_playing)),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -68,7 +73,8 @@ class PlaylistItem extends StatelessWidget {
                   alignment: Alignment.center,
                   child: Text(
                     _durationMinutes(_track.durationMs),
-                    style: TextStyle(color: _currentPlayingColor(_track.current_playing)),
+                    style: TextStyle(
+                        color: _currentPlayingColor(_track.current_playing)),
                   )),
               Padding(
                 padding: const EdgeInsets.only(right: 10, left: 10),
@@ -79,25 +85,47 @@ class PlaylistItem extends StatelessWidget {
                     GestureDetector(
                       behavior: HitTestBehavior.translucent,
                       onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) => VotoDialog(true, _track.id_interno));
+                        if (_track.usuarioAtualCimaVotou()) {
+                          TrackApi.votar({
+                            "refletir_spotify": false,
+                            "cimavoto": -1,
+                            "track_interno_id": _track.id_interno
+                          });
+                        } else {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) =>
+                                  VotoDialog(true, _track.id_interno));
+                        }
                       },
                       child: Icon(
                         Icons.thumb_up,
-                        color: _track.usuarioAtualCimaVotou() ? Colors.green : Colors.white30,
+                        color: _track.usuarioAtualCimaVotou()
+                            ? Colors.green
+                            : Colors.white30,
                       ),
                     ),
                     GestureDetector(
                       behavior: HitTestBehavior.translucent,
                       onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) => VotoDialog(false, _track.id_interno));
+                        if (_track.usuarioAtualBaixaVotou()) {
+                          TrackApi.votar({
+                            "refletir_spotify": false,
+                            "cimavoto": -1,
+                            "track_interno_id": _track.id_interno
+                          });
+                        } else {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) =>
+                                  VotoDialog(false, _track.id_interno));
+                        }
                       },
                       child: Icon(
                         Icons.thumb_down,
-                        color: _track.usuarioAtualBaixaVotou() ? Colors.red : Colors.white30,
+                        color: _track.usuarioAtualBaixaVotou()
+                            ? Colors.red
+                            : Colors.white30,
                       ),
                     )
                   ],
@@ -110,10 +138,11 @@ class PlaylistItem extends StatelessWidget {
     );
   }
 
-  String _durationMinutes (durationMs) {
+  String _durationMinutes(durationMs) {
     var duration = DateTime.fromMillisecondsSinceEpoch(durationMs);
     return DateFormat('mm:ss').format(duration);
   }
+
   _currentPlayingColor(current_playing) {
     if (current_playing == 1) {
       return Colors.yellowAccent;
