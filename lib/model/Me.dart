@@ -10,6 +10,7 @@ import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dash_chat/dash_chat.dart';
 import 'package:flutter/material.dart' as prefix0;
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'ExplicitContent.dart';
 import 'ExternalUrls.dart';
@@ -102,6 +103,14 @@ abstract class Me implements Built<Me, MeBuilder> {
         avatar: getImage(),
         containerColor: prefix0.Colors.grey,
         color: prefix0.Colors.white);
+  }
+
+  toNotificationMessagePerson () {
+    return Person(
+        name: displayName,
+        key: id,
+        uri: '',
+        icon: displayName);
   }
 
   static Me fromJson(String jsonString) {

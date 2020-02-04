@@ -7,11 +7,13 @@ import 'package:bolha_musical/model/ReferenciaTamanhoBolha.dart';
 import 'package:bolha_musical/model/SearchTrackResult.dart';
 import 'package:bolha_musical/model/Track.dart';
 import 'package:dash_chat/dash_chat.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import '../model/Me.dart';
 import '../model/Token.dart';
 
 class AppState {
+  String currentAppState = 'resumed';
   List<ReferenciaTamanhoBolha> referenciasTamanhoBolha = [];
   AuthState authState = AuthState();
   Me me = Me();
@@ -53,6 +55,7 @@ class AppState {
       chatMessages = List<ChatMessage>.from(
           another.messages.map((i) => i.toDashMessage()));
     }
+    currentAppState = another.currentAppState;
     messages = another.messages;
   }
 }

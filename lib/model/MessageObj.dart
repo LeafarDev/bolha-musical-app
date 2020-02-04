@@ -4,12 +4,14 @@ import 'dart:convert';
 
 import 'package:bolha_musical/model/Bolha.dart';
 import 'package:bolha_musical/model/BolhaMembro.dart';
+import 'package:bolha_musical/model/Me.dart';
 import 'package:bolha_musical/model/serializers.dart';
 import 'package:bolha_musical/redux/store.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dash_chat/dash_chat.dart';
 import 'package:flutter/material.dart' as prefix0;
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'Ts.dart';
 import 'U.dart';
@@ -50,7 +52,7 @@ abstract class MessageObj implements Built<MessageObj, MessageObjBuilder> {
   @BuiltValueField(wireName: '_updatedAt')
   UpdatedAt get updatedAt;
 
-  getUser() {
+  Me getUser() {
     Bolha bolhaAtual = store.state.bolhaAtual;
     if (bolhaAtual != null) {
       List<BolhaMembro> result =
@@ -83,6 +85,19 @@ abstract class MessageObj implements Built<MessageObj, MessageObjBuilder> {
         avatar: getImage(),
         containerColor: prefix0.Colors.pink,
         color: prefix0.Colors.white);
+  }
+
+  toNotificationMessagePerson () {
+    if (getUser() == null) {
+      return Person(
+          name: "Visitante",
+          key: "xx1112zz111zzabv",
+          uri: '',
+          icon: "Visitante");
+    } else {
+      getUser().toNotificationMessagePerson();
+    }
+
   }
 
   toDashMessage() {

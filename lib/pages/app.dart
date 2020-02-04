@@ -33,12 +33,16 @@ class LifecycleEventHandler extends WidgetsBindingObserver {
   Future<Null> didChangeAppLifecycleState(AppLifecycleState state) async {
     switch (state) {
       case AppLifecycleState.inactive:
+        store.dispatch(SetCurrentAppState('inactive'));
         break;
       case AppLifecycleState.paused:
+        store.dispatch(SetCurrentAppState('paused'));
         break;
       case AppLifecycleState.resumed:
+        store.dispatch(SetCurrentAppState('resumed'));
         break;
       case AppLifecycleState.detached:
+        store.dispatch(SetCurrentAppState('detached'));
         print("detached");
         await BolhaApi.sairBolha();
         break;

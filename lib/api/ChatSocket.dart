@@ -77,7 +77,9 @@ class ChatSocket {
             MessageObj newMsg =
             MessageObj.fromJson(jsonEncode(response["fields"]["args"][0]));
             store.dispatch(SetMessage(newMsg));
-            _notificationMessage(newMsg.msg);
+            if(store.state.currentAppState == 'paused' || store.state.currentAppState == 'inactive') {
+              _notificationMessage(newMsg);
+            }
             if (_context != null && _currentIndex != 1) {
               Flushbar(
                 icon: Icon(
@@ -128,35 +130,26 @@ class ChatSocket {
     }
   }
 
-  _notificationMessage(message) async {
+  _notificationMessage(MessageObj message) async {
     var messages = List<Message>();
     // First two person objects will use icons that part of the Android app's drawable resources
-    var me = Person(
-        name: 'Me',
-        key: '1',
-        uri: 'tel:1234567890',
-        icon: 'me');
-    var coworker = Person(
-        name: 'Coworker',
-        key: '2',
-        uri: 'tel:9876543210',
-        icon: 'coworker');
+    var me = store.state.me.toNotificationMessagePerson();
 
-    // download the icon that would be use for the lunc
-    messages.add(Message('Hi', DateTime.now(), null));
+    var person = message.toNotificationMessagePerson();
 
     messages.add(Message(
-        'What\'s up?', DateTime.now().add(Duration(minutes: 5)), coworker));
+        message.msg, DateTime.now().add(Duration(minutes: 5)), person));
+
     var messagingStyle = MessagingStyleInformation(me,
         groupConversation: true,
-        conversationTitle: 'Team lunch',
+        conversationTitle: store.state.bolhaAtual.apelido,
         htmlFormatContent: true,
         htmlFormatTitle: true,
         messages: messages);
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-        'message channel id',
-        'message channel name',
-        'message channel description',
+        'chat-notification-42',
+        'chat-notification-420n',
+        'chat-notification-42d',
         category: 'msg',
         style: AndroidNotificationStyle.Messaging,
         styleInformation: messagingStyle);
