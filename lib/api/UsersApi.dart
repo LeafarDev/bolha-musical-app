@@ -133,11 +133,12 @@ class UsersApi {
     }
   }
 
-  static updatePreferences(language_code, mostrar_localizacao_mapa) async {
+  static updatePreferences(language_code, mostrar_localizacao_mapa, tocar_track_automaticamente) async {
     String data = jsonEncode(
       {
         'language_code': language_code,
-        'mostrar_localizacao_mapa': mostrar_localizacao_mapa
+        'mostrar_localizacao_mapa': mostrar_localizacao_mapa,
+        'tocar_track_automaticamente': tocar_track_automaticamente
       },
     );
     final res = await http.put("http://10.0.0.108:3001/api/v1/users/preferences",

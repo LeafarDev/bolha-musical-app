@@ -222,8 +222,8 @@ class EuState extends State<Eu> {
   }
 
   _updaTeUserConfigs(_context) async {
-    var result = await UsersApi.updatePreferences(
-        _language_code, _mostrar_localizacao_mapa);
+    var result = await UsersApi.updatePreferences(_language_code,
+        _mostrar_localizacao_mapa, store.state.me.tocar_track_automaticamente);
     if (result == true) {
       final prefs = await SharedPreferences.getInstance();
       Me me = await UsersApi.getMe();
