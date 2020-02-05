@@ -56,6 +56,10 @@ abstract class Me implements Built<Me, MeBuilder> {
   bool get mostrar_localizacao_mapa;
 
   @nullable
+  @BuiltValueField(wireName: 'tocar_track_automaticamente')
+  bool get tocar_track_automaticamente;
+
+  @nullable
   @BuiltValueField(wireName: 'product')
   String get product;
 

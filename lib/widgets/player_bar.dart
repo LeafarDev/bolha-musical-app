@@ -113,7 +113,7 @@ class _PlayerBarState extends State<PlayerBar> {
                   Padding(
                     padding: EdgeInsets.only(right: 36),
                     child: Icon(
-                      Icons.pause_circle_filled,
+                      Icons.volume_up,
                       color: Colors.white,
                     ),
                   )

@@ -12,6 +12,7 @@ import 'package:http/http.dart' as http;
 import 'ApiDialogs.dart';
 
 class TrackApi {
+
   static search(search) async {
     try {
       store.dispatch(SetSearchingTrack(true));

@@ -32,7 +32,12 @@ class PlayListSearchItem extends StatelessWidget {
           ],
         ),
         child: ListTile(
-          onTap: () {},
+          onTap: () {
+            FocusScopeNode currentFocus = FocusScope.of(context);
+            if (!currentFocus.hasPrimaryFocus) {
+              currentFocus.unfocus();
+            }
+          },
           leading: CircleAvatar(
               backgroundImage: CachedNetworkImageProvider(
                   track.album.images != null
@@ -64,6 +69,10 @@ class PlayListSearchItem extends StatelessWidget {
                 content:
                     Text("`${track.shortname()}` foi adicionado com sucesso"),
               ));
+              FocusScopeNode currentFocus = FocusScope.of(context);
+              if (!currentFocus.hasPrimaryFocus) {
+                currentFocus.unfocus();
+              }
             }
           },
           child: Icon(

@@ -67,6 +67,12 @@ class _$MeSerializer implements StructuredSerializer<Me> {
         ..add(serializers.serialize(object.mostrar_localizacao_mapa,
             specifiedType: const FullType(bool)));
     }
+    if (object.tocar_track_automaticamente != null) {
+      result
+        ..add('tocar_track_automaticamente')
+        ..add(serializers.serialize(object.tocar_track_automaticamente,
+            specifiedType: const FullType(bool)));
+    }
     if (object.product != null) {
       result
         ..add('product')
@@ -164,6 +170,10 @@ class _$MeSerializer implements StructuredSerializer<Me> {
           result.mostrar_localizacao_mapa = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool;
           break;
+        case 'tocar_track_automaticamente':
+          result.tocar_track_automaticamente = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
         case 'product':
           result.product = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
@@ -221,6 +231,8 @@ class _$Me extends Me {
   @override
   final bool mostrar_localizacao_mapa;
   @override
+  final bool tocar_track_automaticamente;
+  @override
   final String product;
   @override
   final String id;
@@ -249,6 +261,7 @@ class _$Me extends Me {
       this.images,
       this.explicitContent,
       this.mostrar_localizacao_mapa,
+      this.tocar_track_automaticamente,
       this.product,
       this.id,
       this.user_id,
@@ -278,6 +291,7 @@ class _$Me extends Me {
         images == other.images &&
         explicitContent == other.explicitContent &&
         mostrar_localizacao_mapa == other.mostrar_localizacao_mapa &&
+        tocar_track_automaticamente == other.tocar_track_automaticamente &&
         product == other.product &&
         id == other.id &&
         user_id == other.user_id &&
@@ -306,17 +320,20 @@ class _$Me extends Me {
                                                         $jc(
                                                             $jc(
                                                                 $jc(
-                                                                    0,
-                                                                    email
+                                                                    $jc(
+                                                                        0,
+                                                                        email
+                                                                            .hashCode),
+                                                                    rocket_chat_auth_token
                                                                         .hashCode),
-                                                                rocket_chat_auth_token
-                                                                    .hashCode),
-                                                            type.hashCode),
-                                                        language_code.hashCode),
-                                                    externalUrls.hashCode),
-                                                images.hashCode),
-                                            explicitContent.hashCode),
-                                        mostrar_localizacao_mapa.hashCode),
+                                                                type.hashCode),
+                                                            language_code
+                                                                .hashCode),
+                                                        externalUrls.hashCode),
+                                                    images.hashCode),
+                                                explicitContent.hashCode),
+                                            mostrar_localizacao_mapa.hashCode),
+                                        tocar_track_automaticamente.hashCode),
                                     product.hashCode),
                                 id.hashCode),
                             user_id.hashCode),
@@ -338,6 +355,7 @@ class _$Me extends Me {
           ..add('images', images)
           ..add('explicitContent', explicitContent)
           ..add('mostrar_localizacao_mapa', mostrar_localizacao_mapa)
+          ..add('tocar_track_automaticamente', tocar_track_automaticamente)
           ..add('product', product)
           ..add('id', id)
           ..add('user_id', user_id)
@@ -393,6 +411,11 @@ class MeBuilder implements Builder<Me, MeBuilder> {
   set mostrar_localizacao_mapa(bool mostrar_localizacao_mapa) =>
       _$this._mostrar_localizacao_mapa = mostrar_localizacao_mapa;
 
+  bool _tocar_track_automaticamente;
+  bool get tocar_track_automaticamente => _$this._tocar_track_automaticamente;
+  set tocar_track_automaticamente(bool tocar_track_automaticamente) =>
+      _$this._tocar_track_automaticamente = tocar_track_automaticamente;
+
   String _product;
   String get product => _$this._product;
   set product(String product) => _$this._product = product;
@@ -438,6 +461,7 @@ class MeBuilder implements Builder<Me, MeBuilder> {
       _images = _$v.images?.toBuilder();
       _explicitContent = _$v.explicitContent?.toBuilder();
       _mostrar_localizacao_mapa = _$v.mostrar_localizacao_mapa;
+      _tocar_track_automaticamente = _$v.tocar_track_automaticamente;
       _product = _$v.product;
       _id = _$v.id;
       _user_id = _$v.user_id;
@@ -478,6 +502,7 @@ class MeBuilder implements Builder<Me, MeBuilder> {
               images: _images?.build(),
               explicitContent: _explicitContent?.build(),
               mostrar_localizacao_mapa: mostrar_localizacao_mapa,
+              tocar_track_automaticamente: tocar_track_automaticamente,
               product: product,
               id: id,
               user_id: user_id,

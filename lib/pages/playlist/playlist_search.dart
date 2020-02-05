@@ -48,27 +48,31 @@ class PlayListSearchState extends State<PlayListSearch> {
             if (state.searchingTrack) {
               return Center(child: CircularProgressIndicator());
             } else {
-              return SafeArea(
-                child: AnimationLimiter(
-                  child: ListView.builder(
-                    padding: const EdgeInsets.all(8.0),
-                    itemCount: state.lastSearchResult.tracks.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return AnimationConfiguration.staggeredList(
-                        position: index,
-                        duration: const Duration(milliseconds: 375),
-                        child: SlideAnimation(
-                          verticalOffset: 50.0,
-                          child: FadeInAnimation(
-                            child: PlayListSearchItem(
-                                width: 50,
-                                height: 80,
-                                track: state.lastSearchResult.tracks[index]),
-                          ),
+              return GestureDetector(
+                onTap: () {
+                  FocusScopeNode currentFocus = FocusScope.of(context);
+                  if (!currentFocus.hasPrimaryFocus) {
+                    currentFocus.unfocus();
+                  }
+                },
+                child: ListView.builder(
+                  padding: const EdgeInsets.all(8.0),
+                  itemCount: state.lastSearchResult.tracks.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return AnimationConfiguration.staggeredList(
+                      position: index,
+                      duration: const Duration(milliseconds: 375),
+                      child: SlideAnimation(
+                        verticalOffset: 50.0,
+                        child: FadeInAnimation(
+                          child: PlayListSearchItem(
+                              width: 50,
+                              height: 80,
+                              track: state.lastSearchResult.tracks[index]),
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  },
                 ),
               );
             }
