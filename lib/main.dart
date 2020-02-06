@@ -1,6 +1,7 @@
 import 'package:bolha_musical/pages/app.dart';
 import 'package:bolha_musical/pages/bolhas/bolhas.dart';
 import 'package:bolha_musical/pages/chat/chat_screen.dart';
+import 'package:bolha_musical/pages/chat/pessoas.dart';
 import 'package:bolha_musical/pages/login.dart';
 import 'package:bolha_musical/pages/mapa/mapa.dart';
 import 'package:bolha_musical/pages/playlist/playlist.dart';
@@ -54,6 +55,7 @@ class MyApp extends StatelessWidget {
           '/bolhas': (context) => Bolhas(),
           '/chat': (context) => ChatScreen(),
           '/track-search': (context) => PlayListSearch(),
+          '/pessoas': (context) => Pessoas(),
         },
       ),
     );

@@ -20,7 +20,7 @@ Marker MarkerMembro(BolhaMembro membro) {
     builder: (ctx) => GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () {
-          showCustomDialogWithImage(ctx);
+          showCustomDialogWithImage(ctx, membro);
         },
         child: Container(
             decoration: BoxDecoration(

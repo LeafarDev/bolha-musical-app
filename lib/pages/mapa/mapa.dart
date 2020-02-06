@@ -34,6 +34,7 @@ class _MapaState extends State<Mapa> {
   void dispose() {
     super.dispose();
     _timer.cancel();
+    _locationMarker.clear();
   }
 
   @override
