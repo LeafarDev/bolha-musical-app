@@ -48,22 +48,40 @@ class PessoasItem extends StatelessWidget {
             pessoa.me.displayName,
             style: TextStyle(color: Colors.white),
           ),
-          trailing: _iconButtonBuild(context),
+          trailing: _iconButtonBuild(context, pessoa),
         ),
       ),
     );
   }
 
-  _iconButtonBuild(context) {
-    // TODO: remover add button quando já estiver adicionado
-    return Material(
-        color: Colors.transparent,
-        child: RawMaterialButton(
-          onPressed: () async {},
-          elevation: 0,
-          shape: CircleBorder(),
-          splashColor: Colors.grey,
-          fillColor: Colors.transparent,
-        ));
+  _iconButtonBuild(context, BolhaMembro pessoa) {
+    // TODO: remover add button uando já estiver adicionado
+    if (store.state.me.id != pessoa.me.id) {
+      return PopupMenuButton<int>(
+        icon: Icon(
+          Icons.more_vert,
+          color: Colors.white,
+        ),
+        onSelected: (selectedDropDownItem) {
+          if (selectedDropDownItem == 1) {
+            
+          }
+        },
+        itemBuilder: (context) => _popupList(pessoa),
+      );
+    }
+  }
+
+  _popupList(BolhaMembro pessoa) {
+    List<PopupMenuEntry<int>> lista = [];
+    if (store.state.me == store.state.bolhaAtual.userLiderId && store.state.me.id != pessoa.me.id) {
+      lista.add(
+        PopupMenuItem(
+          value: 1,
+          child: Text("Expulsar da bolha"),
+        ),
+      );
+    }
+    return lista;
   }
 }
