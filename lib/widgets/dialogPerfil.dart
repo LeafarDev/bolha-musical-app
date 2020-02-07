@@ -1,8 +1,12 @@
+import 'package:bolha_musical/api/UsersApi.dart';
 import 'package:bolha_musical/model/BolhaMembro.dart';
+import 'package:bolha_musical/redux/store.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 
 void showCustomDialogWithImage(BuildContext context, BolhaMembro membro) {
+  var seguindo = UsersApi.following(membro.me.id);
   Dialog dialogWithImage = Dialog(
     child: Container(
       color: Color.fromRGBO(1, 41, 51, 1),
@@ -47,19 +51,50 @@ void showCustomDialogWithImage(BuildContext context, BolhaMembro membro) {
                 ),
                 color: Colors.redAccent,
                 onPressed: () {
-                  //Code to execute when Floating Action Button is clicked
-                  //...
+                  Navigator.of(context).pop();
                 },
               ),
               SizedBox(
                 width: 20,
               ),
-              FlatButton(
-                color: Color.fromRGBO(30, 215, 96, 1),
-                child: Text('Seguir'), //`Text` to display
-                onPressed: () {
-                },
-              ),
+              if (membro.me.id != store.state.me.id)
+                FlatButton(
+                  color: Color.fromRGBO(30, 215, 96, 1),
+                  child: seguindo == true
+                      ? Text('Deixar de Seguir')
+                      : Text('Seguir'), //`Text` to display
+                  onPressed: () async {
+                    if(seguindo == true) {
+                      var result = await UsersApi.unfollow(membro.me.id);
+                      if (result) {
+                        Flushbar(
+                          icon: Icon(
+                            Icons.check_box_outline_blank,
+                            color: Colors.white
+                          ),
+                          backgroundColor: Color.fromRGBO(1, 41, 51, 0.9),
+                          flushbarPosition: FlushbarPosition.TOP,
+                          message: "Deixou de seguir ${membro.me.displayName}",
+                          duration: Duration(seconds: 3),
+                        )..show(context);
+                      }
+                    } else {
+                      var result = await UsersApi.follow(membro.me.id);
+                      if (result) {
+                        Flushbar(
+                          icon: Icon(
+                            Icons.check_box,
+                            color: Colors.white
+                          ),
+                          backgroundColor: Color.fromRGBO(1, 41, 51, 0.9),
+                          flushbarPosition: FlushbarPosition.TOP,
+                          message: "Seguindo ${membro.me.displayName}",
+                          duration: Duration(seconds: 3),
+                        )..show(context);
+                      }
+                    }
+                  },
+                ),
             ],
           ),
         ],
