@@ -1,3 +1,4 @@
+import 'package:bolha_musical/api/BolhaApi.dart';
 import 'package:bolha_musical/model/BolhaMembro.dart';
 import 'package:bolha_musical/redux/store.dart';
 import 'package:bolha_musical/widgets/dialogPerfil.dart';
@@ -55,7 +56,6 @@ class PessoasItem extends StatelessWidget {
   }
 
   _iconButtonBuild(context, BolhaMembro pessoa) {
-    // TODO: remover add button uando já estiver adicionado
     if (store.state.me.id != pessoa.me.id) {
       return PopupMenuButton<int>(
         icon: Icon(
@@ -64,7 +64,7 @@ class PessoasItem extends StatelessWidget {
         ),
         onSelected: (selectedDropDownItem) {
           if (selectedDropDownItem == 1) {
-            
+            BolhaApi.expulsarBolha(pessoa.userId);
           }
         },
         itemBuilder: (context) => _popupList(pessoa),
@@ -74,7 +74,8 @@ class PessoasItem extends StatelessWidget {
 
   _popupList(BolhaMembro pessoa) {
     List<PopupMenuEntry<int>> lista = [];
-    if (store.state.me == store.state.bolhaAtual.userLiderId && store.state.me.id != pessoa.me.id) {
+    if (store.state.me.user_id == store.state.bolhaAtual.userLiderId &&
+        store.state.me.id != pessoa.me.id) {
       lista.add(
         PopupMenuItem(
           value: 1,

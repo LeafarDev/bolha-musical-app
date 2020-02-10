@@ -64,6 +64,7 @@ class _MapaState extends State<Mapa> {
               children: <Widget>[
                 Expanded(
                   child: FlutterMap(
+                    key: UniqueKey(),
                     options: MapOptions(
                       center: LatLng(51.5, -0.09),
                       maxZoom: 16.0,

@@ -38,8 +38,9 @@ class BolhaApi {
           headers: {HttpHeaders.authorizationHeader: store.state.token.token});
       if (res.statusCode == 200) {
         var referenciasRaw = jsonDecode(res.body);
-        store.dispatch(SetReferenciasTamanhoBolha(List<ReferenciaTamanhoBolha>.from(referenciasRaw.map(
-                (model) => ReferenciaTamanhoBolha.fromJson(jsonEncode(model))))));
+        store.dispatch(SetReferenciasTamanhoBolha(
+            List<ReferenciaTamanhoBolha>.from(referenciasRaw.map((model) =>
+                ReferenciaTamanhoBolha.fromJson(jsonEncode(model))))));
 
         return true;
       } else {
@@ -82,8 +83,8 @@ class BolhaApi {
       if (res.statusCode == 200) {
         Bolha bolha = Bolha.fromJson(res.body);
         return bolha;
-      } else if(res.statusCode == 422){
-        var  validationError = new ValidationError();
+      } else if (res.statusCode == 422) {
+        var validationError = new ValidationError();
         validationError.record(jsonDecode(res.body));
         return validationError;
       } else {
@@ -144,6 +145,30 @@ class BolhaApi {
         var backendMessage = BackendMessage.fromJson(body);
         ApiDialogs.errorDialog(backendMessage.message);
         return backendMessage;
+      }
+    } catch (error) {
+      return null;
+    }
+  }
+
+  static expulsarBolha(id) async {
+    String data = jsonEncode({'id': id});
+    try {
+      final res = await http.post(
+          "http://10.0.0.108:3001/api/v1/spotify/bolhas/membro/expulsar",
+          headers: {
+            HttpHeaders.authorizationHeader: store.state.token.token,
+            HttpHeaders.contentTypeHeader: "application/json"
+          },
+          body: data);
+      if (res.statusCode == 200) {
+        getBolhaAtual();
+        return true;
+      } else {
+        var body = res.body;
+        var backendMessage = BackendMessage.fromJson(body);
+        ApiDialogs.errorDialog(backendMessage.message);
+        return false;
       }
     } catch (error) {
       return null;

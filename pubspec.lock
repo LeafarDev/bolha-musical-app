@@ -829,10 +829,12 @@ packages:
   user_location:
     dependency: "direct main"
     description:
-      name: user_location
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.1"
+      path: "."
+      ref: HEAD
+      resolved-ref: "75ba9472a7b773c070bea1ad6f78cec503ad215f"
+      url: "git://github.com/LeafarDev/user_location_plugin.git"
+    source: git
+    version: "0.1.2"
   uuid:
     dependency: transitive
     description:
