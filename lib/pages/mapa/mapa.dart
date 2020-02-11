@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bolha_musical/api/BolhaApi.dart';
 import 'package:bolha_musical/model/Bolha.dart';
+import 'package:bolha_musical/model/Localizacao.dart';
 import 'package:bolha_musical/pages/mapa/widgets/CircleMarker.dart';
 import 'package:bolha_musical/pages/mapa/widgets/MarkerMembro.dart';
 import 'package:bolha_musical/redux/store.dart';
@@ -10,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
-import 'package:user_location/user_location.dart';
 
 class Mapa extends StatefulWidget {
   @override
@@ -20,8 +20,11 @@ class Mapa extends StatefulWidget {
 class _MapaState extends State<Mapa> {
   Bolha _bolhaAtual = null;
   Timer _timer;
-  MapController _mapController = MapController();
-  List<Marker> _locationMarker = [];
+  double _zoom = 15;
+  MapController _mapController = new MapController();
+  Localizacao _local = Localizacao((b) => b
+    ..latitude = 0.0
+    ..longitude = 0.0);
 
   @override
   void setState(fn) {
@@ -34,16 +37,19 @@ class _MapaState extends State<Mapa> {
   void dispose() {
     super.dispose();
     _timer.cancel();
-    _locationMarker.clear();
   }
 
   @override
   initState() {
     super.initState();
-    _bolhaAtual = store.state.bolhaAtual;
+    setState(() {
+      _local = store.state.localizacaoAtual;
+      _bolhaAtual = store.state.bolhaAtual;
+    });
     BolhaApi.getBolhaAtual();
     _timer = Timer.periodic(Duration(seconds: 5), (_) {
       setState(() {
+        _local = store.state.localizacaoAtual;
         _bolhaAtual = store.state.bolhaAtual;
       });
     });
@@ -66,13 +72,16 @@ class _MapaState extends State<Mapa> {
                   child: FlutterMap(
                     key: UniqueKey(),
                     options: MapOptions(
-                      center: LatLng(51.5, -0.09),
+                      onPositionChanged: (MapPosition position, cond) {
+                        _zoom = position.zoom;
+                      },
+                      center: LatLng(_local.latitude, _local.longitude),
                       maxZoom: 16.0,
                       minZoom: 8.0,
-                      zoom: 15.0,
+                      zoom: _zoom,
                       plugins: [
                         // ADD THIS
-                        UserLocationPlugin(),
+                        // UserLocationPlugin(),
                       ],
                     ),
                     layers: [
@@ -92,13 +101,7 @@ class _MapaState extends State<Mapa> {
                                       .toList()
                                       .map((membro) => MarkerMembro(membro))
                                       .toList(),
-                                ]
-                              : _locationMarker),
-                      UserLocationOptions(
-                        context: context,
-                        mapController: _mapController,
-                        markers: _locationMarker,
-                      ),
+                                ]: []),
                     ],
                     mapController: _mapController,
                   ),
