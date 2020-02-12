@@ -69,7 +69,10 @@ class _LoginState extends State<Login> {
                         String url =
                             "https://accounts.spotify.com/authorize?client_id=c03736df76424cde8deda585b4bfbad8&response_type=code&redirect_uri=http://10.0.0.108:3001/api/v1/spotify/login/callback&scope=user-read-private playlist-read-private user-top-read user-follow-modify user-library-modify user-modify-playback-state user-read-playback-state user-read-currently-playing app-remote-control user-follow-read user-read-recently-played streaming user-library-read user-read-email&state=${state.authState.id}";
                         if (state.authState.id != null) {
-                          flutterWebviewPlugin.launch(url,  clearCookies: true,);
+                          flutterWebviewPlugin.launch(
+                            url,
+                            clearCookies: true,
+                          );
                         }
                       },
                       color: Color.fromRGBO(30, 215, 96, 1),

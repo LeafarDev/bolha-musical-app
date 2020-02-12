@@ -32,11 +32,10 @@ abstract class ReferenciaTamanhoBolha
 
   static ReferenciaTamanhoBolha fromJson(String jsonString) {
     final parsed = jsonDecode(jsonString);
-    ReferenciaTamanhoBolha message =
-    standardSerializers.deserializeWith(ReferenciaTamanhoBolha.serializer, parsed);
+    ReferenciaTamanhoBolha message = standardSerializers.deserializeWith(
+        ReferenciaTamanhoBolha.serializer, parsed);
     return message;
   }
-
 
   String toJson() {
     return json.encode(standardSerializers.serializeWith(

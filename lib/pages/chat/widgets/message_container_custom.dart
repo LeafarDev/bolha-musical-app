@@ -88,7 +88,7 @@ class MessageContainerCustom extends StatelessWidget {
               text: "${message.user.name}:",
               style: TextStyle(
                 fontSize: 16,
-                color:  Colors.greenAccent,
+                color: Colors.greenAccent,
               ),
             ),
             if (messageTextBuilder != null)

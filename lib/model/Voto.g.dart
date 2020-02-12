@@ -136,20 +136,28 @@ class VotoBuilder implements Builder<Voto, VotoBuilder> {
   _$Voto _$v;
 
   int _user_id;
+
   int get user_id => _$this._user_id;
+
   set user_id(int user_id) => _$this._user_id = user_id;
 
   int _trackInternoId;
+
   int get trackInternoId => _$this._trackInternoId;
+
   set trackInternoId(int trackInternoId) =>
       _$this._trackInternoId = trackInternoId;
 
   bool _cimavoto;
+
   bool get cimavoto => _$this._cimavoto;
+
   set cimavoto(bool cimavoto) => _$this._cimavoto = cimavoto;
 
   bool _refletirSpotify;
+
   bool get refletirSpotify => _$this._refletirSpotify;
+
   set refletirSpotify(bool refletirSpotify) =>
       _$this._refletirSpotify = refletirSpotify;
 

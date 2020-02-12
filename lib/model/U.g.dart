@@ -117,15 +117,21 @@ class UBuilder implements Builder<U, UBuilder> {
   _$U _$v;
 
   String _id;
+
   String get id => _$this._id;
+
   set id(String id) => _$this._id = id;
 
   String _username;
+
   String get username => _$this._username;
+
   set username(String username) => _$this._username = username;
 
   String _name;
+
   String get name => _$this._name;
+
   set name(String name) => _$this._name = name;
 
   UBuilder();

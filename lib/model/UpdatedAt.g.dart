@@ -81,7 +81,9 @@ class UpdatedAtBuilder implements Builder<UpdatedAt, UpdatedAtBuilder> {
   _$UpdatedAt _$v;
 
   int _date;
+
   int get date => _$this._date;
+
   set date(int date) => _$this._date = date;
 
   UpdatedAtBuilder();

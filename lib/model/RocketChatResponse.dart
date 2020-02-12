@@ -27,7 +27,6 @@ abstract class RocketChatResponse
   @BuiltValueField(wireName: 'result')
   RocketChatResultResponse get result;
 
-
   static RocketChatResponse fromJson(String jsonString) {
     final parsed = jsonDecode(jsonString);
     RocketChatResponse result = standardSerializers.deserializeWith(

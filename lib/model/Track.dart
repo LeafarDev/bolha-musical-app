@@ -109,30 +109,33 @@ abstract class Track implements Built<Track, TrackBuilder> {
   @BuiltValueField(wireName: 'current_playing')
   int get current_playing;
 
-
   String shortname({textSize = 20}) {
     if (name != null && name.length > textSize) {
       return "${name.substring(0, textSize)}...";
     }
     return name;
   }
-  bool usuarioAtualCimaVotou () {
-    List<Voto> result =
-    votos.where((i) => i.user_id == store.state.me.user_id && i.cimavoto).toList();
+
+  bool usuarioAtualCimaVotou() {
+    List<Voto> result = votos
+        .where((i) => i.user_id == store.state.me.user_id && i.cimavoto)
+        .toList();
     if (result.isNotEmpty) {
       return true;
     }
     return false;
   }
 
-  bool usuarioAtualBaixaVotou () {
-    List<Voto> result =
-    votos.where((i) => i.user_id == store.state.me.user_id && !i.cimavoto).toList();
+  bool usuarioAtualBaixaVotou() {
+    List<Voto> result = votos
+        .where((i) => i.user_id == store.state.me.user_id && !i.cimavoto)
+        .toList();
     if (result.isNotEmpty) {
       return true;
     }
     return false;
   }
+
   static Track fromJson(String jsonString) {
     final parsed = jsonDecode(jsonString);
     Track track = standardSerializers.deserializeWith(Track.serializer, parsed);

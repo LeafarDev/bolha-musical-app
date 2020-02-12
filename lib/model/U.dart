@@ -1,4 +1,3 @@
-
 library u;
 
 import 'dart:convert';
@@ -29,14 +28,12 @@ abstract class U implements Built<U, UBuilder> {
 
   static U fromJson(String jsonString) {
     final parsed = jsonDecode(jsonString);
-    U result = standardSerializers.deserializeWith(
-        U.serializer, parsed);
+    U result = standardSerializers.deserializeWith(U.serializer, parsed);
     return result;
   }
 
   String toJson() {
-    return json.encode(
-        standardSerializers.serializeWith(U.serializer, this));
+    return json.encode(standardSerializers.serializeWith(U.serializer, this));
   }
 
   static Serializer<U> get serializer => _$uSerializer;

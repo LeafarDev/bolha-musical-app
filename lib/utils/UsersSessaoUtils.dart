@@ -6,10 +6,8 @@ import 'package:bolha_musical/redux/actions.dart';
 import 'package:bolha_musical/redux/store.dart';
 import 'package:bolha_musical/utils/SetupLocator.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/cupertino.dart' as prefix0;
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../main.dart';
 import 'NavigationService.dart';
 import 'getLocalToken.dart';
 
@@ -25,7 +23,7 @@ class UsersSessaoUtils {
     try {
       final prefs = await SharedPreferences.getInstance();
       store.dispatch(SetToken(token));
-      var me = await UsersSessaoUtils.getMeFromTokenAndStore();
+      await UsersSessaoUtils.getMeFromTokenAndStore();
       prefs.setString('token', token.toJson());
       // state só pode ser utilizado uma vez
       AuthState authstate = await UsersApi.getAuthState();
@@ -54,7 +52,7 @@ class UsersSessaoUtils {
     }
   }
 
-  static logout () async {
+  static logout() async {
     final prefs = await SharedPreferences.getInstance();
     store.dispatch(SetBolhaAtual(null));
     store.dispatch(SetMessages([]));
@@ -67,11 +65,9 @@ class UsersSessaoUtils {
     prefs.remove('ja-viu-tutorial-add-playlist');
     prefs.remove('ja-viu-tutorial-add-bolha');
     print("remove");
-    Navigator.popUntil(locator<NavigationService>()
-        .navigatorKey
-        .currentState
-        .overlay
-        .context, ModalRoute.withName('/'));
+    Navigator.popUntil(
+        locator<NavigationService>().navigatorKey.currentState.overlay.context,
+        ModalRoute.withName('/'));
   }
 
   static inicializarSessaoComState() async {
@@ -82,7 +78,6 @@ class UsersSessaoUtils {
       }
     }
   }
-
 
   static getMeFromTokenAndStore() async {
     final prefs = await SharedPreferences.getInstance();

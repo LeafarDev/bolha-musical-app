@@ -372,81 +372,115 @@ class MeBuilder implements Builder<Me, MeBuilder> {
   _$Me _$v;
 
   String _email;
+
   String get email => _$this._email;
+
   set email(String email) => _$this._email = email;
 
   String _rocket_chat_auth_token;
+
   String get rocket_chat_auth_token => _$this._rocket_chat_auth_token;
+
   set rocket_chat_auth_token(String rocket_chat_auth_token) =>
       _$this._rocket_chat_auth_token = rocket_chat_auth_token;
 
   String _type;
+
   String get type => _$this._type;
+
   set type(String type) => _$this._type = type;
 
   String _language_code;
+
   String get language_code => _$this._language_code;
+
   set language_code(String language_code) =>
       _$this._language_code = language_code;
 
   ExternalUrlsBuilder _externalUrls;
+
   ExternalUrlsBuilder get externalUrls =>
       _$this._externalUrls ??= new ExternalUrlsBuilder();
+
   set externalUrls(ExternalUrlsBuilder externalUrls) =>
       _$this._externalUrls = externalUrls;
 
   ListBuilder<SpotifyImage> _images;
+
   ListBuilder<SpotifyImage> get images =>
       _$this._images ??= new ListBuilder<SpotifyImage>();
+
   set images(ListBuilder<SpotifyImage> images) => _$this._images = images;
 
   ExplicitContentBuilder _explicitContent;
+
   ExplicitContentBuilder get explicitContent =>
       _$this._explicitContent ??= new ExplicitContentBuilder();
+
   set explicitContent(ExplicitContentBuilder explicitContent) =>
       _$this._explicitContent = explicitContent;
 
   bool _mostrar_localizacao_mapa;
+
   bool get mostrar_localizacao_mapa => _$this._mostrar_localizacao_mapa;
+
   set mostrar_localizacao_mapa(bool mostrar_localizacao_mapa) =>
       _$this._mostrar_localizacao_mapa = mostrar_localizacao_mapa;
 
   bool _tocar_track_automaticamente;
+
   bool get tocar_track_automaticamente => _$this._tocar_track_automaticamente;
+
   set tocar_track_automaticamente(bool tocar_track_automaticamente) =>
       _$this._tocar_track_automaticamente = tocar_track_automaticamente;
 
   String _product;
+
   String get product => _$this._product;
+
   set product(String product) => _$this._product = product;
 
   String _id;
+
   String get id => _$this._id;
+
   set id(String id) => _$this._id = id;
 
   int _user_id;
+
   int get user_id => _$this._user_id;
+
   set user_id(int user_id) => _$this._user_id = user_id;
 
   String _uri;
+
   String get uri => _$this._uri;
+
   set uri(String uri) => _$this._uri = uri;
 
   String _displayName;
+
   String get displayName => _$this._displayName;
+
   set displayName(String displayName) => _$this._displayName = displayName;
 
   FollowersBuilder _followers;
+
   FollowersBuilder get followers =>
       _$this._followers ??= new FollowersBuilder();
+
   set followers(FollowersBuilder followers) => _$this._followers = followers;
 
   String _country;
+
   String get country => _$this._country;
+
   set country(String country) => _$this._country = country;
 
   String _href;
+
   String get href => _$this._href;
+
   set href(String href) => _$this._href = href;
 
   MeBuilder();

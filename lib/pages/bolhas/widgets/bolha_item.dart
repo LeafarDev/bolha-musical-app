@@ -78,7 +78,7 @@ class BolhaItem extends StatelessWidget {
     var atual = store.state.bolhaAtual;
     List<PopupMenuEntry<int>> lista = [];
 
-    if (atual != null ) {
+    if (atual != null) {
       if (atual.id == bolha.id) {
         lista.add(PopupMenuItem(
           value: 2,

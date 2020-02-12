@@ -190,32 +190,46 @@ class DeviceBuilder implements Builder<Device, DeviceBuilder> {
   _$Device _$v;
 
   String _id;
+
   String get id => _$this._id;
+
   set id(String id) => _$this._id = id;
 
   bool _isActive;
+
   bool get isActive => _$this._isActive;
+
   set isActive(bool isActive) => _$this._isActive = isActive;
 
   bool _isPrivateSession;
+
   bool get isPrivateSession => _$this._isPrivateSession;
+
   set isPrivateSession(bool isPrivateSession) =>
       _$this._isPrivateSession = isPrivateSession;
 
   bool _isRestricted;
+
   bool get isRestricted => _$this._isRestricted;
+
   set isRestricted(bool isRestricted) => _$this._isRestricted = isRestricted;
 
   String _name;
+
   String get name => _$this._name;
+
   set name(String name) => _$this._name = name;
 
   String _type;
+
   String get type => _$this._type;
+
   set type(String type) => _$this._type = type;
 
   int _volumePercent;
+
   int get volumePercent => _$this._volumePercent;
+
   set volumePercent(int volumePercent) => _$this._volumePercent = volumePercent;
 
   DeviceBuilder();

@@ -24,14 +24,15 @@ class ChatSocket {
 
   ChatSocket() {
     _timerAllMessages = Timer.periodic(Duration(seconds: 30), (_) {
-      if (_channel != null  &&  store.state.bolhaAtual != null) {
+      if (_channel != null && store.state.bolhaAtual != null) {
         _channel.sink.add(_storyMessagesString());
       }
     });
     ConnectivityUtils.instance.isPhoneConnectedStream.listen((onData) async {
       if (_channel != null) {
         if (_channel.closeCode != 1000 && _channel.closeCode != null) {
-          if (await ConnectivityUtils.instance.isPhoneConnected() == true &&  store.state.bolhaAtual != null) {
+          if (await ConnectivityUtils.instance.isPhoneConnected() == true &&
+              store.state.bolhaAtual != null) {
             // print("here we go again");
             startSocketChannel();
           }
@@ -44,9 +45,10 @@ class ChatSocket {
     _context = context;
   }
 
-  void setCurrentIndex (currentIndex) {
+  void setCurrentIndex(currentIndex) {
     _currentIndex = currentIndex;
   }
+
   void startSocketChannel() {
     try {
       _channel =
@@ -75,9 +77,10 @@ class ChatSocket {
             var response = json.decode(message);
             // print("remove constrainsts with strenght");
             MessageObj newMsg =
-            MessageObj.fromJson(jsonEncode(response["fields"]["args"][0]));
+                MessageObj.fromJson(jsonEncode(response["fields"]["args"][0]));
             store.dispatch(SetMessage(newMsg));
-            if(store.state.currentAppState == 'paused' || store.state.currentAppState == 'inactive') {
+            if (store.state.currentAppState == 'paused' ||
+                store.state.currentAppState == 'inactive') {
               _notificationMessage(newMsg);
             }
             if (_context != null && _currentIndex != 1) {
@@ -88,12 +91,11 @@ class ChatSocket {
                 ),
                 backgroundColor: Color.fromRGBO(1, 41, 51, 0.9),
                 flushbarPosition: FlushbarPosition.TOP,
-                title:  newMsg.toDashMessage().user.name,
-                message:  newMsg.msg,
-                duration:  Duration(seconds: 3),
+                title: newMsg.toDashMessage().user.name,
+                message: newMsg.msg,
+                duration: Duration(seconds: 3),
               )..show(_context);
             }
-
           }
 
           if (messageObj.msg == "result") {
@@ -137,8 +139,8 @@ class ChatSocket {
 
     var person = message.toNotificationMessagePerson();
 
-    messages.add(Message(
-        message.msg, DateTime.now().add(Duration(minutes: 5)), person));
+    messages.add(
+        Message(message.msg, DateTime.now().add(Duration(minutes: 5)), person));
 
     var messagingStyle = MessagingStyleInformation(me,
         groupConversation: true,
@@ -154,12 +156,11 @@ class ChatSocket {
         style: AndroidNotificationStyle.Messaging,
         styleInformation: messagingStyle);
     var platformChannelSpecifics =
-    NotificationDetails(androidPlatformChannelSpecifics, null);
+        NotificationDetails(androidPlatformChannelSpecifics, null);
     await flutterLocalNotificationsPlugin.show(
-        42, 'message title', 'message body', platformChannelSpecifics, payload: "chat-notification");
-
+        42, 'message title', 'message body', platformChannelSpecifics,
+        payload: "chat-notification");
   }
-
 
   sendMessage(ChatMessage message) {
     _channel.sink.add(jsonEncode({

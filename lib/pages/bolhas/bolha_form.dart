@@ -135,7 +135,6 @@ class BolhasFormState extends State<BolhasForm> {
                         onBack: () => print("Back button pressed"),
                       ),
                     ),
-
                   ],
                 ),
               ),
@@ -155,7 +154,7 @@ class BolhasFormState extends State<BolhasForm> {
                     ..ehFixa = _eh_fixa
                     ..apelido = _textFieldController.value.text
                     ..tamanho_bolha_referencia_id =
-                    _idReferencia != null ? int.parse(_idReferencia) : null
+                        _idReferencia != null ? int.parse(_idReferencia) : null
                     ..cor = _color.value.toString());
                   _errors.clearAll();
                   var result = await BolhaApi.criarBolha(bolha);
@@ -177,7 +176,8 @@ class BolhasFormState extends State<BolhasForm> {
           );
         });
   }
-  errorText (field) {
+
+  errorText(field) {
     if (_errors.has(field)) {
       print("has");
       return Text(

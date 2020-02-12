@@ -16,6 +16,7 @@ abstract class Bolha implements Built<Bolha, BolhaBuilder> {
   Bolha._();
 
   factory Bolha([updates(BolhaBuilder b)]) = _$Bolha;
+
   @nullable
   @BuiltValueField(wireName: 'id')
   int get id;

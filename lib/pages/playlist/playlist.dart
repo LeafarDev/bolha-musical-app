@@ -120,7 +120,10 @@ class PlaylistState extends State<Playlist> {
           parentButton: Icon(Icons.arrow_upward),
           childButtons: _childButtons);
     }
-    return Container(height: 0, width: 0,);
+    return Container(
+      height: 0,
+      width: 0,
+    );
   }
 
   @override
@@ -159,7 +162,7 @@ class PlaylistState extends State<Playlist> {
                             "Nada aqui ainda, tente adicionar uma nova música na bolha ;)";
                         if (state.bolhaAtual == null) {
                           msg =
-                          "Nada aqui ainda, entre em uma bolha para adicionar músicas";
+                              "Nada aqui ainda, entre em uma bolha para adicionar músicas";
                         }
                         return Center(
                           child: Text(

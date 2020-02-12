@@ -46,7 +46,7 @@ class PessoasItem extends StatelessWidget {
             style: TextStyle(color: Colors.white),
           ),
           title: Text(
-            pessoa.me.displayName,
+            "what the ?",
             style: TextStyle(color: Colors.white),
           ),
           trailing: _iconButtonBuild(context, pessoa),

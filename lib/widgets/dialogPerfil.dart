@@ -64,14 +64,12 @@ void showCustomDialogWithImage(BuildContext context, BolhaMembro membro) {
                       ? Text('Deixar de Seguir')
                       : Text('Seguir'), //`Text` to display
                   onPressed: () async {
-                    if(seguindo == true) {
+                    if (seguindo == true) {
                       var result = await UsersApi.unfollow(membro.me.id);
                       if (result) {
                         Flushbar(
-                          icon: Icon(
-                            Icons.check_box_outline_blank,
-                            color: Colors.white
-                          ),
+                          icon: Icon(Icons.check_box_outline_blank,
+                              color: Colors.white),
                           backgroundColor: Color.fromRGBO(1, 41, 51, 0.9),
                           flushbarPosition: FlushbarPosition.TOP,
                           message: "Deixou de seguir ${membro.me.displayName}",
@@ -82,10 +80,7 @@ void showCustomDialogWithImage(BuildContext context, BolhaMembro membro) {
                       var result = await UsersApi.follow(membro.me.id);
                       if (result) {
                         Flushbar(
-                          icon: Icon(
-                            Icons.check_box,
-                            color: Colors.white
-                          ),
+                          icon: Icon(Icons.check_box, color: Colors.white),
                           backgroundColor: Color.fromRGBO(1, 41, 51, 0.9),
                           flushbarPosition: FlushbarPosition.TOP,
                           message: "Seguindo ${membro.me.displayName}",

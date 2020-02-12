@@ -188,32 +188,46 @@ class MessageObjBuilder implements Builder<MessageObj, MessageObjBuilder> {
   _$MessageObj _$v;
 
   String _id;
+
   String get id => _$this._id;
+
   set id(String id) => _$this._id = id;
 
   String _rid;
+
   String get rid => _$this._rid;
+
   set rid(String rid) => _$this._rid = rid;
 
   String _msg;
+
   String get msg => _$this._msg;
+
   set msg(String msg) => _$this._msg = msg;
 
   TsBuilder _ts;
+
   TsBuilder get ts => _$this._ts ??= new TsBuilder();
+
   set ts(TsBuilder ts) => _$this._ts = ts;
 
   UBuilder _u;
+
   UBuilder get u => _$this._u ??= new UBuilder();
+
   set u(UBuilder u) => _$this._u = u;
 
   bool _groupable;
+
   bool get groupable => _$this._groupable;
+
   set groupable(bool groupable) => _$this._groupable = groupable;
 
   UpdatedAtBuilder _updatedAt;
+
   UpdatedAtBuilder get updatedAt =>
       _$this._updatedAt ??= new UpdatedAtBuilder();
+
   set updatedAt(UpdatedAtBuilder updatedAt) => _$this._updatedAt = updatedAt;
 
   MessageObjBuilder();

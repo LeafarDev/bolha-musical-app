@@ -101,11 +101,15 @@ class FollowersBuilder implements Builder<Followers, FollowersBuilder> {
   _$Followers _$v;
 
   String _href;
+
   String get href => _$this._href;
+
   set href(String href) => _$this._href = href;
 
   int _total;
+
   int get total => _$this._total;
+
   set total(int total) => _$this._total = total;
 
   FollowersBuilder();

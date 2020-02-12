@@ -87,7 +87,7 @@ abstract class MessageObj implements Built<MessageObj, MessageObjBuilder> {
         color: prefix0.Colors.white);
   }
 
-  toNotificationMessagePerson () {
+  toNotificationMessagePerson() {
     if (getUser() == null) {
       return Person(
           name: "Visitante",
@@ -97,7 +97,6 @@ abstract class MessageObj implements Built<MessageObj, MessageObjBuilder> {
     } else {
       getUser().toNotificationMessagePerson();
     }
-
   }
 
   toDashMessage() {

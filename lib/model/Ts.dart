@@ -3,7 +3,6 @@ library ts;
 import 'dart:convert';
 
 import 'package:bolha_musical/model/serializers.dart';
-import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -20,14 +19,12 @@ abstract class Ts implements Built<Ts, TsBuilder> {
 
   static Ts fromJson(String jsonString) {
     final parsed = jsonDecode(jsonString);
-    Ts result = standardSerializers.deserializeWith(
-        Ts.serializer, parsed);
+    Ts result = standardSerializers.deserializeWith(Ts.serializer, parsed);
     return result;
   }
 
   String toJson() {
-    return json.encode(
-        standardSerializers.serializeWith(Ts.serializer, this));
+    return json.encode(standardSerializers.serializeWith(Ts.serializer, this));
   }
 
   @override

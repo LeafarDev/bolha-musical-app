@@ -108,8 +108,11 @@ class _AppState extends State<App> {
     var iOSPlatformChannelSpecifics = IOSNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(
         androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-    await flutterLocalNotificationsPlugin.show(0, 'Bolha musical executando',
-        'Equanto aberto vamos reproduzir as músicas normalmente', platformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.show(
+        0,
+        'Bolha musical executando',
+        'Equanto aberto vamos reproduzir as músicas normalmente',
+        platformChannelSpecifics);
   }
 
   _apiInicial() async {

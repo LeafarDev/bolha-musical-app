@@ -87,7 +87,9 @@ class TokenBuilder implements Builder<Token, TokenBuilder> {
   _$Token _$v;
 
   String _token;
+
   String get token => _$this._token;
+
   set token(String token) => _$this._token = token;
 
   TokenBuilder();

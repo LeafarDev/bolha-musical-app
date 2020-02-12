@@ -109,12 +109,8 @@ abstract class Me implements Built<Me, MeBuilder> {
         color: prefix0.Colors.white);
   }
 
-  toNotificationMessagePerson () {
-    return Person(
-        name: displayName,
-        key: id,
-        uri: '',
-        icon: displayName);
+  toNotificationMessagePerson() {
+    return Person(name: displayName, key: id, uri: '', icon: displayName);
   }
 
   static Me fromJson(String jsonString) {

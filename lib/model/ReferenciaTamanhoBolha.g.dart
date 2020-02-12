@@ -146,19 +146,27 @@ class ReferenciaTamanhoBolhaBuilder
   _$ReferenciaTamanhoBolha _$v;
 
   int _id;
+
   int get id => _$this._id;
+
   set id(int id) => _$this._id = id;
 
   double _raioMetros;
+
   double get raioMetros => _$this._raioMetros;
+
   set raioMetros(double raioMetros) => _$this._raioMetros = raioMetros;
 
   int _min;
+
   int get min => _$this._min;
+
   set min(int min) => _$this._min = min;
 
   int _max;
+
   int get max => _$this._max;
+
   set max(int max) => _$this._max = max;
 
   ReferenciaTamanhoBolhaBuilder();

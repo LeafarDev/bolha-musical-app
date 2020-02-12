@@ -7,7 +7,6 @@ import 'package:bolha_musical/model/ReferenciaTamanhoBolha.dart';
 import 'package:bolha_musical/model/SearchTrackResult.dart';
 import 'package:bolha_musical/model/Track.dart';
 import 'package:dash_chat/dash_chat.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import '../model/Me.dart';
 import '../model/Token.dart';
@@ -21,8 +20,7 @@ class AppState {
   Bolha bolhaAtual = null;
   Token token = Token();
   List<Bolha> bolhasDisponiveis = [];
-  Localizacao localizacaoAtual = Localizacao((b) =>
-  b
+  Localizacao localizacaoAtual = Localizacao((b) => b
     ..latitude = 0.0
     ..longitude = 0.0);
   SearchTrackResult lastSearchResult = SearchTrackResult();

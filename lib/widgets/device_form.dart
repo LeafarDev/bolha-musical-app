@@ -39,7 +39,6 @@ class DeviceFormState extends State<DeviceForm> {
                       Navigator.of(context).pop();
                       await UsersApi.updateDevice(value);
                       await UsersApi.devices();
-
                     },
                     value: _value,
                   ),

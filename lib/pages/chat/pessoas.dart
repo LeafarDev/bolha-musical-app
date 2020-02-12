@@ -1,7 +1,5 @@
-import 'package:bolha_musical/api/TrackApi.dart';
 import 'package:bolha_musical/pages/chat/widgets/pessoas_item.dart';
 import 'package:bolha_musical/redux/app_state.dart';
-import 'package:bolha_musical/redux/store.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -24,16 +22,16 @@ class PessoasState extends State<Pessoas> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.black12,
-          elevation: 0.0,
-          leading:IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(Icons.arrow_back,
-                color: Colors.white),
-          ),),
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.black12,
+        elevation: 0.0,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+        ),
+      ),
       backgroundColor: Color.fromRGBO(1, 41, 51, 0.9),
       resizeToAvoidBottomPadding: false,
       body: SafeArea(
@@ -62,6 +60,7 @@ class PessoasState extends State<Pessoas> {
                             verticalOffset: 50.0,
                             child: FadeInAnimation(
                               child: PessoasItem(
+                                  key: UniqueKey(),
                                   width: 50,
                                   height: 80,
                                   pessoa: state.bolhaAtual.membros[index]),

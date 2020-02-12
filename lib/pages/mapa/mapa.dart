@@ -101,7 +101,8 @@ class _MapaState extends State<Mapa> {
                                       .toList()
                                       .map((membro) => MarkerMembro(membro))
                                       .toList(),
-                                ]: []),
+                                ]
+                              : []),
                     ],
                     mapController: _mapController,
                   ),
