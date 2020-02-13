@@ -6,7 +6,6 @@ import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 
 showCustomDialogWithImage(BuildContext context, BolhaMembro membro, seguindo) {
-  print("iniciar seugindooo ${seguindo}");
   Dialog dialogWithImage = Dialog(
     child: Container(
       color: Color.fromRGBO(1, 41, 51, 1),
@@ -64,7 +63,6 @@ showCustomDialogWithImage(BuildContext context, BolhaMembro membro, seguindo) {
                       ? Text('Deixar de Seguir')
                       : Text('Seguir'), //`Text` to display
                   onPressed: () async {
-                    print("seguindo ${seguindo}");
                     Navigator.of(context).pop();
                     if (seguindo == true) {
                       var result = await UsersApi.unfollow(membro.me.id);
@@ -79,7 +77,6 @@ showCustomDialogWithImage(BuildContext context, BolhaMembro membro, seguindo) {
                         )..show(context);
                       }
                     } else {
-                      print("Seguir ${membro.me.id}");
                       var result = await UsersApi.follow(membro.me.id);
                       if (result) {
                         Flushbar(

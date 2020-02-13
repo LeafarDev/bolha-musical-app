@@ -49,8 +49,6 @@ class UsersApi {
           headers: {HttpHeaders.authorizationHeader: store.state.token.token});
       if (resMe.statusCode == 200) {
         Me me = Me.fromJson(resMe.body);
-        print("sucesso me");
-        print(resMe.body);
         return me;
       } else {
         return null;
@@ -165,27 +163,24 @@ class UsersApi {
   static following(id) async {
     try {
       final res = await http.get(
-          "http://10.0.0.108:3001/api/v1/spotify/search?id=${id}",
+          "http://10.0.0.108:3001/api/v1/users/following/contains?id=${id}",
           headers: {
             HttpHeaders.authorizationHeader: store.state.token.token,
             HttpHeaders.contentTypeHeader: "application/json"
           });
       if (res.statusCode == 200) {
         var resultado = jsonDecode(res.body);
-        print("following----> ${res.body}");
-        return resultado.seguindo;
+        print("seguindo ${resultado}");
+        return resultado["seguindo"];
       } else {
-        print(res.body);
         return null;
       }
     } catch (error) {
-      print(error);
       return null;
     }
   }
 
   static follow(id) async {
-    print("vai neguin");
     try {
       final res = await http
           .put("http://10.0.0.108:3001/api/v1/users/follow", headers: {
@@ -194,17 +189,12 @@ class UsersApi {
       }, body: jsonEncode({
         "id": id
       }));
-      print("vai neguin2 ${res.body}");
       if (res.statusCode == 200) {
-        print("200");
         return true;
       } else {
-        print("wut");
-        print(res.body);
         return false;
       }
     } catch (error) {
-      print(error);
       return false;
     }
   }
@@ -219,11 +209,8 @@ class UsersApi {
         "id": id
       }));
       if (res.statusCode == 200) {
-        print("2001");
         return true;
       } else {
-        print("wut1");
-        print(res.body);
         return false;
       }
     } catch (error) {
