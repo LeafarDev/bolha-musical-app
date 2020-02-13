@@ -1,3 +1,4 @@
+import 'package:bolha_musical/api/UsersApi.dart';
 import 'package:bolha_musical/model/BolhaMembro.dart';
 import 'package:bolha_musical/redux/store.dart';
 import 'package:bolha_musical/widgets/dialogPerfil.dart';
@@ -19,8 +20,10 @@ Marker MarkerMembro(BolhaMembro membro) {
     point: LatLng(membro.latitude, membro.longitude),
     builder: (ctx) => GestureDetector(
         behavior: HitTestBehavior.translucent,
-        onTap: () {
-          showCustomDialogWithImage(ctx, membro);
+        onTap: () async {
+          var seguindo = await UsersApi.following(membro.me.id);
+          print("<<<<<seguindo");
+          showCustomDialogWithImage(ctx, membro, seguindo);
         },
         child: Container(
             decoration: BoxDecoration(

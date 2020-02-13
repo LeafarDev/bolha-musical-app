@@ -5,8 +5,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 
-void showCustomDialogWithImage(BuildContext context, BolhaMembro membro) {
-  var seguindo = UsersApi.following(membro.me.id);
+showCustomDialogWithImage(BuildContext context, BolhaMembro membro, seguindo) {
+  print("iniciar seugindooo ${seguindo}");
   Dialog dialogWithImage = Dialog(
     child: Container(
       color: Color.fromRGBO(1, 41, 51, 1),
@@ -64,6 +64,8 @@ void showCustomDialogWithImage(BuildContext context, BolhaMembro membro) {
                       ? Text('Deixar de Seguir')
                       : Text('Seguir'), //`Text` to display
                   onPressed: () async {
+                    print("seguindo ${seguindo}");
+                    Navigator.of(context).pop();
                     if (seguindo == true) {
                       var result = await UsersApi.unfollow(membro.me.id);
                       if (result) {
@@ -77,6 +79,7 @@ void showCustomDialogWithImage(BuildContext context, BolhaMembro membro) {
                         )..show(context);
                       }
                     } else {
+                      print("Seguir ${membro.me.id}");
                       var result = await UsersApi.follow(membro.me.id);
                       if (result) {
                         Flushbar(
@@ -88,6 +91,7 @@ void showCustomDialogWithImage(BuildContext context, BolhaMembro membro) {
                         )..show(context);
                       }
                     }
+
                   },
                 ),
             ],

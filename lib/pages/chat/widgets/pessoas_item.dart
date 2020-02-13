@@ -1,6 +1,9 @@
 import 'package:bolha_musical/api/BolhaApi.dart';
+import 'package:bolha_musical/api/UsersApi.dart';
 import 'package:bolha_musical/model/BolhaMembro.dart';
 import 'package:bolha_musical/redux/store.dart';
+import 'package:bolha_musical/utils/NavigationService.dart';
+import 'package:bolha_musical/utils/SetupLocator.dart';
 import 'package:bolha_musical/widgets/dialogPerfil.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
@@ -33,8 +36,14 @@ class PessoasItem extends StatelessWidget {
           ],
         ),
         child: ListTile(
-          onTap: () {
-            showCustomDialogWithImage(context, pessoa);
+          onTap: () async {
+            var seguindo = await UsersApi.following(pessoa.me.id);
+            print("gambe ${seguindo}");
+            showCustomDialogWithImage(locator<NavigationService>()
+                .navigatorKey
+                .currentState
+                .overlay
+                .context, pessoa, seguindo);
           },
           leading: CircleAvatar(
               backgroundImage:

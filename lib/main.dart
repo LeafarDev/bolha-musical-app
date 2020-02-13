@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
           '/playlist': (context) => Playlist(),
           '/bolhas': (context) => Bolhas(),
           '/chat': (context) => ChatScreen(),
-          '/track-search': (context) => PlayListSearch(),
+          '/track-search': (conAtext) => PlayListSearch(),
           '/pessoas': (context) => Pessoas(),
         },
       ),
