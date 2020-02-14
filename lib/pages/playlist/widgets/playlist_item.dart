@@ -76,6 +76,10 @@ class PlaylistItem extends StatelessWidget {
                     style: TextStyle(
                         color: _currentPlayingColor(_track.current_playing)),
                   )),
+              Icon(
+                Icons.favorite,
+                color: _track.saved ? Colors.red : Colors.grey,
+              ),
               Padding(
                 padding: const EdgeInsets.only(right: 10, left: 10),
                 child: Column(

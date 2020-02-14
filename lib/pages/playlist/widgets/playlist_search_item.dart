@@ -2,6 +2,7 @@ import 'package:bolha_musical/api/TrackApi.dart';
 import 'package:bolha_musical/model/Track.dart';
 import 'package:bolha_musical/redux/store.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -65,10 +66,16 @@ class PlayListSearchItem extends StatelessWidget {
           onPressed: () async {
             var result = await TrackApi.addTrack(track.id);
             if (result != null) {
-              Scaffold.of(context).showSnackBar(SnackBar(
-                content:
-                    Text("`${track.shortname()}` foi adicionado com sucesso"),
-              ));
+              Flushbar(
+                icon: Icon(
+                  Icons.queue_music,
+                  color: Colors.white,
+                ),
+                backgroundColor: Color.fromRGBO(1, 41, 51, 0.9),
+                flushbarPosition: FlushbarPosition.TOP,
+                message: "❝${track.shortname()}❞ foi adicionado com sucesso",
+                duration: Duration(seconds: 3),
+              )..show(context);
               FocusScopeNode currentFocus = FocusScope.of(context);
               if (!currentFocus.hasPrimaryFocus) {
                 currentFocus.unfocus();

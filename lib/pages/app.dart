@@ -206,7 +206,7 @@ class _AppState extends State<App> {
             style: TextStyle(color: _itemBottomColor(3)),
           ),
           icon: Icon(
-            Icons.playlist_play,
+            Icons.queue_music,
             color: _itemBottomColor(3),
           )),
       BottomNavigationBarItem(

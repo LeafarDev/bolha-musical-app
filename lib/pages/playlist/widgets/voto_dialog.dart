@@ -46,7 +46,13 @@ class VotoDialogState extends State<VotoDialog> {
                 children: <Widget>[
                   SwitchListTile(
                     value: _refletir_spotify,
-                    onChanged: (a) {},
+                    onChanged: (value) {
+                      if (value != _refletir_spotify) {
+                        setState(() {
+                          _refletir_spotify = value;
+                        });
+                      }
+                    },
                     title: Text(
                         _cimavoto
                             ? 'Salvar Música na Minha Biblioteca'

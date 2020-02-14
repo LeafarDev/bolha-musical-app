@@ -60,6 +60,10 @@ class _PlayerBarState extends State<PlayerBar> {
     await TrackApi.currentPlaying();
     UsersApi.devices();
     _trackAtual = store.state.currentPlaying;
+    if (store.state.me.product != 'premium' && store.state.me.tocar_track_automaticamente) {
+      UsersApi.updatePreferences(store.state.me.language_code,
+          store.state.me.mostrar_localizacao_mapa, false);
+    }
   }
 
   _currentProgress() async {
