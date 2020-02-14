@@ -114,7 +114,7 @@ class _PlayerBarState extends State<PlayerBar> {
                         padding: EdgeInsets.only(right: 30),
                         child: Text(
                             _trackAtual != null
-                                ? _trackAtual.shortname(textSize: 25)
+                                ? _trackAtual.shortname(textSize: 20)
                                 : "...".padRight(34, " "),
                             style: TextStyle(color: Colors.white)),
                       ),
@@ -124,6 +124,20 @@ class _PlayerBarState extends State<PlayerBar> {
                         child: GestureDetector(
                           behavior: HitTestBehavior.translucent,
                           onTap: () async {
+                            if (state.me.product != 'premium') {
+                              Flushbar(
+                                icon: Icon(
+                                  Icons.warning,
+                                  color: Colors.white,
+                                ),
+                                backgroundColor: Color.fromRGBO(1, 41, 51, 0.9),
+                                flushbarPosition: FlushbarPosition.TOP,
+                                message:
+                                    "O Spotify só permite reproduzir em contas premium :/",
+                                duration: Duration(seconds: 3),
+                              )..show(context);
+                              return;
+                            }
                             var result = await UsersApi.updatePreferences(
                                 state.me.language_code,
                                 state.me.mostrar_localizacao_mapa,
@@ -157,7 +171,8 @@ class _PlayerBarState extends State<PlayerBar> {
                             }
                           },
                           child: Icon(
-                            state.me.tocar_track_automaticamente == true
+                            state.me.tocar_track_automaticamente == true &&
+                                    state.me.product == 'premium'
                                 ? Icons.volume_up
                                 : Icons.volume_off,
                             color: Colors.white,

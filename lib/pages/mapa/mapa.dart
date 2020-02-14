@@ -20,7 +20,7 @@ class Mapa extends StatefulWidget {
 class _MapaState extends State<Mapa> {
   Bolha _bolhaAtual = null;
   Timer _timer;
-  double _zoom = 15;
+  double _zoom = 13;
   MapController _mapController = new MapController();
   Localizacao _local = Localizacao((b) => b
     ..latitude = 0.0

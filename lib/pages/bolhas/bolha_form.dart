@@ -179,7 +179,6 @@ class BolhasFormState extends State<BolhasForm> {
 
   errorText(field) {
     if (_errors.has(field)) {
-      print("has");
       return Text(
         _errors.get(field),
         style: TextStyle(color: Colors.red),

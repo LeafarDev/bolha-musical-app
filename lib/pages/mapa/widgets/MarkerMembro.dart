@@ -1,6 +1,8 @@
 import 'package:bolha_musical/api/UsersApi.dart';
 import 'package:bolha_musical/model/BolhaMembro.dart';
 import 'package:bolha_musical/redux/store.dart';
+import 'package:bolha_musical/utils/NavigationService.dart';
+import 'package:bolha_musical/utils/SetupLocator.dart';
 import 'package:bolha_musical/widgets/dialogPerfil.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,8 +24,11 @@ Marker MarkerMembro(BolhaMembro membro) {
         behavior: HitTestBehavior.translucent,
         onTap: () async {
           var seguindo = await UsersApi.following(membro.me.id);
-          print("<<<<<seguindo");
-          showCustomDialogWithImage(ctx, membro, seguindo);
+          showCustomDialogWithImage(locator<NavigationService>()
+              .navigatorKey
+              .currentState
+              .overlay
+              .context, membro, seguindo);
         },
         child: Container(
             decoration: BoxDecoration(

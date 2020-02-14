@@ -38,7 +38,6 @@ class PessoasItem extends StatelessWidget {
         child: ListTile(
           onTap: () async {
             var seguindo = await UsersApi.following(pessoa.me.id);
-            print("gambe ${seguindo}");
             showCustomDialogWithImage(locator<NavigationService>()
                 .navigatorKey
                 .currentState
@@ -55,7 +54,7 @@ class PessoasItem extends StatelessWidget {
             style: TextStyle(color: Colors.white),
           ),
           title: Text(
-            "what the ?",
+            "??????????????",
             style: TextStyle(color: Colors.white),
           ),
           trailing: _iconButtonBuild(context, pessoa),
