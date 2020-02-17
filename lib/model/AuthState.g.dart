@@ -118,21 +118,15 @@ class AuthStateBuilder implements Builder<AuthState, AuthStateBuilder> {
   _$AuthState _$v;
 
   String _id;
-
   String get id => _$this._id;
-
   set id(String id) => _$this._id = id;
 
   String _expiresAt;
-
   String get expiresAt => _$this._expiresAt;
-
   set expiresAt(String expiresAt) => _$this._expiresAt = expiresAt;
 
   String _createdAt;
-
   String get createdAt => _$this._createdAt;
-
   set createdAt(String createdAt) => _$this._createdAt = createdAt;
 
   AuthStateBuilder();

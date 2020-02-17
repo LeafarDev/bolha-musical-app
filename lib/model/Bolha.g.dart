@@ -52,6 +52,12 @@ class _$BolhaSerializer implements StructuredSerializer<Bolha> {
         ..add(serializers.serialize(object.userIdReferenciaRaio,
             specifiedType: const FullType(int)));
     }
+    if (object.apenasLiderAdicionaTrack != null) {
+      result
+        ..add('apenas_lider_adiciona_track')
+        ..add(serializers.serialize(object.apenasLiderAdicionaTrack,
+            specifiedType: const FullType(bool)));
+    }
     if (object.latitude != null) {
       result
         ..add('latitude')
@@ -169,6 +175,10 @@ class _$BolhaSerializer implements StructuredSerializer<Bolha> {
           result.userIdReferenciaRaio = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
           break;
+        case 'apenas_lider_adiciona_track':
+          result.apenasLiderAdicionaTrack = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
         case 'latitude':
           result.latitude = serializers.deserialize(value,
               specifiedType: const FullType(double)) as double;
@@ -244,6 +254,8 @@ class _$Bolha extends Bolha {
   @override
   final int userIdReferenciaRaio;
   @override
+  final bool apenasLiderAdicionaTrack;
+  @override
   final double latitude;
   @override
   final double raio;
@@ -280,6 +292,7 @@ class _$Bolha extends Bolha {
       this.cor,
       this.ehFixa,
       this.userIdReferenciaRaio,
+      this.apenasLiderAdicionaTrack,
       this.latitude,
       this.raio,
       this.longitude,
@@ -316,6 +329,7 @@ class _$Bolha extends Bolha {
         cor == other.cor &&
         ehFixa == other.ehFixa &&
         userIdReferenciaRaio == other.userIdReferenciaRaio &&
+        apenasLiderAdicionaTrack == other.apenasLiderAdicionaTrack &&
         latitude == other.latitude &&
         raio == other.raio &&
         longitude == other.longitude &&
@@ -352,18 +366,21 @@ class _$Bolha extends Bolha {
                                                                     $jc(
                                                                         $jc(
                                                                             $jc(
-                                                                                0,
-                                                                                id
+                                                                                $jc(
+                                                                                    0,
+                                                                                    id
+                                                                                        .hashCode),
+                                                                                tamanho_bolha_referencia_id
                                                                                     .hashCode),
-                                                                            tamanho_bolha_referencia_id
+                                                                            apelido
                                                                                 .hashCode),
-                                                                        apelido
+                                                                        cor
                                                                             .hashCode),
-                                                                    cor
+                                                                    ehFixa
                                                                         .hashCode),
-                                                                ehFixa
+                                                                userIdReferenciaRaio
                                                                     .hashCode),
-                                                            userIdReferenciaRaio
+                                                            apenasLiderAdicionaTrack
                                                                 .hashCode),
                                                         latitude.hashCode),
                                                     raio.hashCode),
@@ -389,6 +406,7 @@ class _$Bolha extends Bolha {
           ..add('cor', cor)
           ..add('ehFixa', ehFixa)
           ..add('userIdReferenciaRaio', userIdReferenciaRaio)
+          ..add('apenasLiderAdicionaTrack', apenasLiderAdicionaTrack)
           ..add('latitude', latitude)
           ..add('raio', raio)
           ..add('longitude', longitude)
@@ -410,122 +428,89 @@ class BolhaBuilder implements Builder<Bolha, BolhaBuilder> {
   _$Bolha _$v;
 
   int _id;
-
   int get id => _$this._id;
-
   set id(int id) => _$this._id = id;
 
   int _tamanho_bolha_referencia_id;
-
   int get tamanho_bolha_referencia_id => _$this._tamanho_bolha_referencia_id;
-
   set tamanho_bolha_referencia_id(int tamanho_bolha_referencia_id) =>
       _$this._tamanho_bolha_referencia_id = tamanho_bolha_referencia_id;
 
   String _apelido;
-
   String get apelido => _$this._apelido;
-
   set apelido(String apelido) => _$this._apelido = apelido;
 
   String _cor;
-
   String get cor => _$this._cor;
-
   set cor(String cor) => _$this._cor = cor;
 
   bool _ehFixa;
-
   bool get ehFixa => _$this._ehFixa;
-
   set ehFixa(bool ehFixa) => _$this._ehFixa = ehFixa;
 
   int _userIdReferenciaRaio;
-
   int get userIdReferenciaRaio => _$this._userIdReferenciaRaio;
-
   set userIdReferenciaRaio(int userIdReferenciaRaio) =>
       _$this._userIdReferenciaRaio = userIdReferenciaRaio;
 
+  bool _apenasLiderAdicionaTrack;
+  bool get apenasLiderAdicionaTrack => _$this._apenasLiderAdicionaTrack;
+  set apenasLiderAdicionaTrack(bool apenasLiderAdicionaTrack) =>
+      _$this._apenasLiderAdicionaTrack = apenasLiderAdicionaTrack;
+
   double _latitude;
-
   double get latitude => _$this._latitude;
-
   set latitude(double latitude) => _$this._latitude = latitude;
 
   double _raio;
-
   double get raio => _$this._raio;
-
   set raio(double raio) => _$this._raio = raio;
 
   double _longitude;
-
   double get longitude => _$this._longitude;
-
   set longitude(double longitude) => _$this._longitude = longitude;
 
   double _distancia_metros;
-
   double get distancia_metros => _$this._distancia_metros;
-
   set distancia_metros(double distancia_metros) =>
       _$this._distancia_metros = distancia_metros;
 
   int _userLiderId;
-
   int get userLiderId => _$this._userLiderId;
-
   set userLiderId(int userLiderId) => _$this._userLiderId = userLiderId;
 
   String _referencia;
-
   String get referencia => _$this._referencia;
-
   set referencia(String referencia) => _$this._referencia = referencia;
 
   String _rocket_chat_canal_id;
-
   String get rocket_chat_canal_id => _$this._rocket_chat_canal_id;
-
   set rocket_chat_canal_id(String rocket_chat_canal_id) =>
       _$this._rocket_chat_canal_id = rocket_chat_canal_id;
 
   String _createdBy;
-
   String get createdBy => _$this._createdBy;
-
   set createdBy(String createdBy) => _$this._createdBy = createdBy;
 
   String _createdAt;
-
   String get createdAt => _$this._createdAt;
-
   set createdAt(String createdAt) => _$this._createdAt = createdAt;
 
   String _updatedAt;
-
   String get updatedAt => _$this._updatedAt;
-
   set updatedAt(String updatedAt) => _$this._updatedAt = updatedAt;
 
   int _bolhaId;
-
   int get bolhaId => _$this._bolhaId;
-
   set bolhaId(int bolhaId) => _$this._bolhaId = bolhaId;
 
   ListBuilder<BolhaMembro> _membros;
-
   ListBuilder<BolhaMembro> get membros =>
       _$this._membros ??= new ListBuilder<BolhaMembro>();
-
   set membros(ListBuilder<BolhaMembro> membros) => _$this._membros = membros;
 
   UserBuilder _lider;
-
   UserBuilder get lider => _$this._lider ??= new UserBuilder();
-
   set lider(UserBuilder lider) => _$this._lider = lider;
 
   BolhaBuilder();
@@ -538,6 +523,7 @@ class BolhaBuilder implements Builder<Bolha, BolhaBuilder> {
       _cor = _$v.cor;
       _ehFixa = _$v.ehFixa;
       _userIdReferenciaRaio = _$v.userIdReferenciaRaio;
+      _apenasLiderAdicionaTrack = _$v.apenasLiderAdicionaTrack;
       _latitude = _$v.latitude;
       _raio = _$v.raio;
       _longitude = _$v.longitude;
@@ -581,6 +567,7 @@ class BolhaBuilder implements Builder<Bolha, BolhaBuilder> {
               cor: cor,
               ehFixa: ehFixa,
               userIdReferenciaRaio: userIdReferenciaRaio,
+              apenasLiderAdicionaTrack: apenasLiderAdicionaTrack,
               latitude: latitude,
               raio: raio,
               longitude: longitude,

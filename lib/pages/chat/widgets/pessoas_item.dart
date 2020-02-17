@@ -54,7 +54,7 @@ class PessoasItem extends StatelessWidget {
             style: TextStyle(color: Colors.white),
           ),
           title: Text(
-            "??????????????",
+            pessoa != null ? pessoa.me.displayName : "??????????????",
             style: TextStyle(color: Colors.white),
           ),
           trailing: _iconButtonBuild(context, pessoa),

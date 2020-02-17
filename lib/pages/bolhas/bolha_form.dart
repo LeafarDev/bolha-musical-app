@@ -28,8 +28,10 @@ class BolhasFormState extends State<BolhasForm> {
   TextEditingController _textFieldController = TextEditingController();
   Color _color = Colors.blue[800];
   String _idReferencia;
+  bool _apenasLiderAdicionaTrack = false;
   bool _eh_fixa = false;
   Map<String, Object> _opcoesLocalizacao = new HashMap();
+  Map<String, Object> _opcoesLiderTrack = new HashMap();
   ValidationError _errors = ValidationError();
 
   @override
@@ -37,6 +39,8 @@ class BolhasFormState extends State<BolhasForm> {
     super.initState();
     _opcoesLocalizacao["Parada"] = true;
     _opcoesLocalizacao["Se moverá comigo"] = false;
+    _opcoesLiderTrack["Somente eu"] = true;
+    _opcoesLiderTrack["Todos os membros"] = false;
   }
 
   @override
@@ -81,6 +85,24 @@ class BolhasFormState extends State<BolhasForm> {
                           ),
                         )),
                     errorText('apelido'),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "Quem pode adicionar música?",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    RadioButtonGroup(
+                      labels: _opcoesLiderTrack.entries
+                          .map((item) => item.key)
+                          .toList(),
+                      activeColor: Colors.yellowAccent,
+                      labelStyle: TextStyle(color: Color(0xFFBDBDBD)),
+                      onSelected: (String selected) {
+                        _apenasLiderAdicionaTrack = _opcoesLiderTrack[selected];
+                      },
+                    ),
+                    errorText('apenas_lider_adiciona_track'),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
@@ -155,7 +177,8 @@ class BolhasFormState extends State<BolhasForm> {
                     ..apelido = _textFieldController.value.text
                     ..tamanho_bolha_referencia_id =
                         _idReferencia != null ? int.parse(_idReferencia) : null
-                    ..cor = _color.value.toString());
+                    ..cor = _color.value.toString()
+                    ..apenasLiderAdicionaTrack = _apenasLiderAdicionaTrack);
                   _errors.clearAll();
                   var result = await BolhaApi.criarBolha(bolha);
                   if (result is ValidationError) {

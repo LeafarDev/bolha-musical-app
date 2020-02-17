@@ -41,6 +41,10 @@ abstract class Bolha implements Built<Bolha, BolhaBuilder> {
   int get userIdReferenciaRaio;
 
   @nullable
+  @BuiltValueField(wireName: 'apenas_lider_adiciona_track')
+  bool get apenasLiderAdicionaTrack;
+
+  @nullable
   @BuiltValueField(wireName: 'latitude')
   double get latitude;
 

@@ -449,140 +449,96 @@ class TrackBuilder implements Builder<Track, TrackBuilder> {
   _$Track _$v;
 
   int _discNumber;
-
   int get discNumber => _$this._discNumber;
-
   set discNumber(int discNumber) => _$this._discNumber = discNumber;
 
   int _id_interno;
-
   int get id_interno => _$this._id_interno;
-
   set id_interno(int id_interno) => _$this._id_interno = id_interno;
 
   int _popularity;
-
   int get popularity => _$this._popularity;
-
   set popularity(int popularity) => _$this._popularity = popularity;
 
   int _durationMs;
-
   int get durationMs => _$this._durationMs;
-
   set durationMs(int durationMs) => _$this._durationMs = durationMs;
 
   String _name;
-
   String get name => _$this._name;
-
   set name(String name) => _$this._name = name;
 
   bool _explicit;
-
   bool get explicit => _$this._explicit;
-
   set explicit(bool explicit) => _$this._explicit = explicit;
 
   bool _saved;
-
   bool get saved => _$this._saved;
-
   set saved(bool saved) => _$this._saved = saved;
 
   String _type;
-
   String get type => _$this._type;
-
   set type(String type) => _$this._type = type;
 
   ExternalUrlsBuilder _externalUrls;
-
   ExternalUrlsBuilder get externalUrls =>
       _$this._externalUrls ??= new ExternalUrlsBuilder();
-
   set externalUrls(ExternalUrlsBuilder externalUrls) =>
       _$this._externalUrls = externalUrls;
 
   ExternalIdsBuilder _externalIds;
-
   ExternalIdsBuilder get externalIds =>
       _$this._externalIds ??= new ExternalIdsBuilder();
-
   set externalIds(ExternalIdsBuilder externalIds) =>
       _$this._externalIds = externalIds;
 
   bool _isPlayable;
-
   bool get isPlayable => _$this._isPlayable;
-
   set isPlayable(bool isPlayable) => _$this._isPlayable = isPlayable;
 
   String _previewUrl;
-
   String get previewUrl => _$this._previewUrl;
-
   set previewUrl(String previewUrl) => _$this._previewUrl = previewUrl;
 
   int _trackNumber;
-
   int get trackNumber => _$this._trackNumber;
-
   set trackNumber(int trackNumber) => _$this._trackNumber = trackNumber;
 
   bool _isLocal;
-
   bool get isLocal => _$this._isLocal;
-
   set isLocal(bool isLocal) => _$this._isLocal = isLocal;
 
   String _id;
-
   String get id => _$this._id;
-
   set id(String id) => _$this._id = id;
 
   String _uri;
-
   String get uri => _$this._uri;
-
   set uri(String uri) => _$this._uri = uri;
 
   ListBuilder<Artist> _artists;
-
   ListBuilder<Artist> get artists =>
       _$this._artists ??= new ListBuilder<Artist>();
-
   set artists(ListBuilder<Artist> artists) => _$this._artists = artists;
 
   ListBuilder<Voto> _votos;
-
   ListBuilder<Voto> get votos => _$this._votos ??= new ListBuilder<Voto>();
-
   set votos(ListBuilder<Voto> votos) => _$this._votos = votos;
 
   AlbumBuilder _album;
-
   AlbumBuilder get album => _$this._album ??= new AlbumBuilder();
-
   set album(AlbumBuilder album) => _$this._album = album;
 
   String _href;
-
   String get href => _$this._href;
-
   set href(String href) => _$this._href = href;
 
   String _started_at;
-
   String get started_at => _$this._started_at;
-
   set started_at(String started_at) => _$this._started_at = started_at;
 
   int _current_playing;
-
   int get current_playing => _$this._current_playing;
-
   set current_playing(int current_playing) =>
       _$this._current_playing = current_playing;
 

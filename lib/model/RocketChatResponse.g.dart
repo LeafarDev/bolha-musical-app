@@ -111,16 +111,12 @@ class RocketChatResponseBuilder
   _$RocketChatResponse _$v;
 
   String _msg;
-
   String get msg => _$this._msg;
-
   set msg(String msg) => _$this._msg = msg;
 
   RocketChatResultResponseBuilder _result;
-
   RocketChatResultResponseBuilder get result =>
       _$this._result ??= new RocketChatResultResponseBuilder();
-
   set result(RocketChatResultResponseBuilder result) => _$this._result = result;
 
   RocketChatResponseBuilder();

@@ -199,45 +199,31 @@ class SearchTrackResultBuilder
   _$SearchTrackResult _$v;
 
   String _href;
-
   String get href => _$this._href;
-
   set href(String href) => _$this._href = href;
 
   int _limit;
-
   int get limit => _$this._limit;
-
   set limit(int limit) => _$this._limit = limit;
 
   String _next;
-
   String get next => _$this._next;
-
   set next(String next) => _$this._next = next;
 
   int _offset;
-
   int get offset => _$this._offset;
-
   set offset(int offset) => _$this._offset = offset;
 
   ListBuilder<Track> _tracks;
-
   ListBuilder<Track> get tracks => _$this._tracks ??= new ListBuilder<Track>();
-
   set tracks(ListBuilder<Track> tracks) => _$this._tracks = tracks;
 
   String _previous;
-
   String get previous => _$this._previous;
-
   set previous(String previous) => _$this._previous = previous;
 
   int _total;
-
   int get total => _$this._total;
-
   set total(int total) => _$this._total = total;
 
   SearchTrackResultBuilder();

@@ -103,10 +103,8 @@ class RocketChatResultResponseBuilder
   _$RocketChatResultResponse _$v;
 
   ListBuilder<MessageObj> _messages;
-
   ListBuilder<MessageObj> get messages =>
       _$this._messages ??= new ListBuilder<MessageObj>();
-
   set messages(ListBuilder<MessageObj> messages) => _$this._messages = messages;
 
   RocketChatResultResponseBuilder();

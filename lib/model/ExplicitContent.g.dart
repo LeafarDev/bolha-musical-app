@@ -111,16 +111,12 @@ class ExplicitContentBuilder
   _$ExplicitContent _$v;
 
   bool _filterEnabled;
-
   bool get filterEnabled => _$this._filterEnabled;
-
   set filterEnabled(bool filterEnabled) =>
       _$this._filterEnabled = filterEnabled;
 
   bool _filterLocked;
-
   bool get filterLocked => _$this._filterLocked;
-
   set filterLocked(bool filterLocked) => _$this._filterLocked = filterLocked;
 
   ExplicitContentBuilder();

@@ -81,9 +81,7 @@ class TsBuilder implements Builder<Ts, TsBuilder> {
   _$Ts _$v;
 
   int _date;
-
   int get date => _$this._date;
-
   set date(int date) => _$this._date = date;
 
   TsBuilder();

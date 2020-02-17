@@ -241,64 +241,44 @@ class UserBuilder implements Builder<User, UserBuilder> {
   _$User _$v;
 
   int _id;
-
   int get id => _$this._id;
-
   set id(int id) => _$this._id = id;
 
   String _email;
-
   String get email => _$this._email;
-
   set email(String email) => _$this._email = email;
 
   int _isActive;
-
   int get isActive => _$this._isActive;
-
   set isActive(int isActive) => _$this._isActive = isActive;
 
   String _spotifyClientId;
-
   String get spotifyClientId => _$this._spotifyClientId;
-
   set spotifyClientId(String spotifyClientId) =>
       _$this._spotifyClientId = spotifyClientId;
 
   String _createdBy;
-
   String get createdBy => _$this._createdBy;
-
   set createdBy(String createdBy) => _$this._createdBy = createdBy;
 
   String _createdAt;
-
   String get createdAt => _$this._createdAt;
-
   set createdAt(String createdAt) => _$this._createdAt = createdAt;
 
   String _updatedAt;
-
   String get updatedAt => _$this._updatedAt;
-
   set updatedAt(String updatedAt) => _$this._updatedAt = updatedAt;
 
   double _latitude;
-
   double get latitude => _$this._latitude;
-
   set latitude(double latitude) => _$this._latitude = latitude;
 
   double _longitude;
-
   double get longitude => _$this._longitude;
-
   set longitude(double longitude) => _$this._longitude = longitude;
 
   String _dataUltimaLocalizacao;
-
   String get dataUltimaLocalizacao => _$this._dataUltimaLocalizacao;
-
   set dataUltimaLocalizacao(String dataUltimaLocalizacao) =>
       _$this._dataUltimaLocalizacao = dataUltimaLocalizacao;
 
