@@ -32,7 +32,6 @@ class PlaylistState extends State<Playlist> {
   @override
   initState() {
     super.initState();
-
     setState(() {
       _childButtons.add(UnicornButton(
           hasLabel: true,
@@ -64,8 +63,12 @@ class PlaylistState extends State<Playlist> {
     final prefs = await SharedPreferences.getInstance();
     var jaViu = prefs.getString('ja-viu-tutorial-add-playlist') ?? null;
     if (jaViu == null && store.state.bolhaAtual != null) {
-      prefs.setString('ja-viu-tutorial-add-playlist', "1");
-      Timer(Duration(seconds: 1), () => showCoachMarkFAB());
+      if (store.state.bolhaAtual.apenasLiderAdicionaTrack == false ||
+          (store.state.bolhaAtual.apenasLiderAdicionaTrack &&
+              store.state.me.user_id == store.state.bolhaAtual.userLiderId)) {
+        prefs.setString('ja-viu-tutorial-add-playlist', "1");
+        Timer(Duration(seconds: 1), () => showCoachMarkFAB());
+      }
     }
   }
 
@@ -113,12 +116,16 @@ class PlaylistState extends State<Playlist> {
 
   _unicornDialer() {
     if (store.state.bolhaAtual != null) {
-      return UnicornDialer(
-          backgroundColor: Color.fromRGBO(255, 255, 255, 0.6),
-          parentButtonBackground: Colors.redAccent,
-          orientation: UnicornOrientation.VERTICAL,
-          parentButton: Icon(Icons.arrow_upward),
-          childButtons: _childButtons);
+      if (store.state.bolhaAtual.apenasLiderAdicionaTrack == false ||
+          (store.state.bolhaAtual.apenasLiderAdicionaTrack &&
+              store.state.me.user_id == store.state.bolhaAtual.userLiderId)) {
+        return UnicornDialer(
+            backgroundColor: Color.fromRGBO(255, 255, 255, 0.6),
+            parentButtonBackground: Colors.redAccent,
+            orientation: UnicornOrientation.VERTICAL,
+            parentButton: Icon(Icons.arrow_upward),
+            childButtons: _childButtons);
+      }
     }
     return Container(
       height: 0,
