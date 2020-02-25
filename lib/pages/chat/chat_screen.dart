@@ -81,7 +81,7 @@ class ChatScreenState extends State<ChatScreen> {
                       if (store.state.bolhaAtual == null) {
                         return Center(
                           child: Text(
-                            "Nenhum mensagem. Entre em uma bolha para adicionar músicas",
+                            "Nenhuma mensagem. Entre em uma bolha primeiro o/",
                             style: TextStyle(color: Colors.white),
                           ),
                         );

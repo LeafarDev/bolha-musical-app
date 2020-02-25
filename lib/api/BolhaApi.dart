@@ -24,6 +24,8 @@ class BolhaApi {
         return bolha;
       } else {
         store.dispatch(SetBolhaAtual(null));
+        store.dispatch(SetPlaylist([]));
+        store.dispatch(SetMessages([]));
         return null;
       }
     } catch (error) {
@@ -141,6 +143,7 @@ class BolhaApi {
         store.dispatch(SetBolhaAtual(null));
         store.dispatch(SetPlaylist([]));
         store.dispatch(SetMessages([]));
+        store.dispatch(SetCurrentPlaying(null));
       } else {
         var backendMessage = BackendMessage.fromJson(body);
         ApiDialogs.errorDialog(backendMessage.message);

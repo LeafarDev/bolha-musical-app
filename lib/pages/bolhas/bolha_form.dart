@@ -39,8 +39,8 @@ class BolhasFormState extends State<BolhasForm> {
     super.initState();
     _opcoesLocalizacao["Parada"] = true;
     _opcoesLocalizacao["Se moverá comigo"] = false;
-    _opcoesLiderTrack["Somente eu"] = true;
     _opcoesLiderTrack["Todos os membros"] = false;
+    _opcoesLiderTrack["Somente eu"] = true;
   }
 
   @override
