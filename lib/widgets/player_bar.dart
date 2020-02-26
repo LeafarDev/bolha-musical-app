@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bolha_musical/api/TrackApi.dart';
 import 'package:bolha_musical/api/UsersApi.dart';
 import 'package:bolha_musical/model/Me.dart';
@@ -82,12 +83,17 @@ class _PlayerBarState extends State<PlayerBar> {
 
   @override
   Widget build(BuildContext context) {
-    double rightPaddingMuteIcon = 36.0;
+    int textSize = 20;
+    if (MediaQuery.of(context).size.width >= 360) {
+      textSize = 28;
+    }
+    double rightPaddingMuteIcon =
+        MediaQuery.of(context).size.width * 0.05; // 36.0
     bool mostrarSkipButton = false;
     if (store.state.bolhaAtual != null) {
       if (store.state.me.user_id == store.state.bolhaAtual.userLiderId) {
         mostrarSkipButton = true;
-        rightPaddingMuteIcon = 8.0;
+        rightPaddingMuteIcon = MediaQuery.of(context).size.width * 0.02;
       }
     }
     return Container(
@@ -116,7 +122,9 @@ class _PlayerBarState extends State<PlayerBar> {
                               builder: (BuildContext context) => DeviceForm());
                         },
                         child: Padding(
-                          padding: EdgeInsets.only(left: 30, right: 50),
+                          padding: EdgeInsets.only(
+                              left: MediaQuery.of(context).size.width * 0.07,
+                              right: MediaQuery.of(context).size.width * 0.10),
                           child: Icon(
                             _iconeDispositivoAtual,
                             color: Colors.green,
@@ -124,16 +132,17 @@ class _PlayerBarState extends State<PlayerBar> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(right: 30),
-                        child: Text(
+                        padding: EdgeInsets.only(right: 0),
+                        child: AutoSizeText(
                             _trackAtual != null
-                                ? _trackAtual.shortname(textSize: 20)
+                                ? _trackAtual.shortname(textSize: textSize)
                                 : "...".padRight(34, " "),
+                            overflow: TextOverflow.ellipsis,
                             style: TextStyle(color: Colors.white)),
                       ),
                       Spacer(),
                       Padding(
-                        padding: EdgeInsets.only(right: 8),
+                        padding: EdgeInsets.only(right: rightPaddingMuteIcon),
                         child: GestureDetector(
                           behavior: HitTestBehavior.translucent,
                           onTap: () async {
@@ -194,10 +203,11 @@ class _PlayerBarState extends State<PlayerBar> {
                       ),
                       if (mostrarSkipButton)
                         Padding(
-                          padding: EdgeInsets.only(right: 36),
+                          padding: EdgeInsets.only(
+                              right: MediaQuery.of(context).size.width * 0.05),
                           child: GestureDetector(
                             behavior: HitTestBehavior.translucent,
-                            onTap: ()  async {
+                            onTap: () async {
                               print("skip");
                               await TrackApi.skip();
                             },

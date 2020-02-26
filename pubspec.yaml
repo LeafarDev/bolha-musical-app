@@ -28,6 +28,7 @@ dependencies:
   shared_preferences: ^0.5.4+6
   flutter_staggered_animations: ^0.1.2
   fancy_dialog: ^1.0.3
+  auto_size_text: 2.1.0
   flutter_speed_dial: ^1.2.5
   cached_network_image: ^2.0.0
   unicorndial: ^1.1.5

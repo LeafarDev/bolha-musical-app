@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bolha_musical/api/TrackApi.dart';
 import 'package:bolha_musical/model/Track.dart';
 import 'package:bolha_musical/redux/store.dart';
@@ -48,8 +49,8 @@ class PlayListSearchItem extends StatelessWidget {
             track.artists[0].name,
             style: TextStyle(color: Colors.white),
           ),
-          title: Text(
-            track.shortname(),
+          title: AutoSizeText(
+            track.shortname(textSize: 40),
             style: TextStyle(color: Colors.white),
           ),
           trailing: _iconButtonBuild(context),
