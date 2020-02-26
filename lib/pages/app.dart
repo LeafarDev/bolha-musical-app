@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../api/ChatSocket.dart';
 import '../main.dart';
@@ -99,13 +100,20 @@ class _AppState extends State<App> {
   }
 
   Future<void> _showOngoingNotification() async {
+    final prefs = await SharedPreferences.getInstance();
+    bool som = true;
+    var prefAtivarSom = prefs.getString('_ativarSomNotificacao') ?? null;
+    if (prefAtivarSom != null) {
+      som = prefAtivarSom == "1";
+    }
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
         '0', 'permanente', 'enquanto aberto',
         importance: Importance.Max,
         priority: Priority.High,
         ongoing: true,
-        autoCancel: false);
-    var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+        autoCancel: false,
+        playSound: som);
+    var iOSPlatformChannelSpecifics = IOSNotificationDetails(presentSound: som);
     var platformChannelSpecifics = NotificationDetails(
         androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
     await flutterLocalNotificationsPlugin.show(

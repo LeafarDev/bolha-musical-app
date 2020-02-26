@@ -8,6 +8,7 @@ import 'package:bolha_musical/model/ReferenciaTamanhoBolha.dart';
 import 'package:bolha_musical/model/SearchTrackResult.dart';
 import 'package:bolha_musical/model/Token.dart';
 import 'package:bolha_musical/model/Track.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class SetAuthState {
   final AuthState payload;
@@ -99,8 +100,15 @@ class SetMessages {
   SetMessages(this.payload);
 }
 
+class SetNotificacaoMessages{
+  final List<Message> payload;
+
+  SetNotificacaoMessages(this.payload);
+}
+
 class SetCurrentAppState {
   final String payload;
 
   SetCurrentAppState(this.payload);
 }
+

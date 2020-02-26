@@ -170,7 +170,6 @@ class UsersApi {
           });
       if (res.statusCode == 200) {
         var resultado = jsonDecode(res.body);
-        print("seguindo ${resultado}");
         return resultado["seguindo"];
       } else {
         return null;

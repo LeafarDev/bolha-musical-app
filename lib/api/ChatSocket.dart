@@ -11,6 +11,7 @@ import 'package:dash_chat/dash_chat.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:web_socket_channel/io.dart';
 
 import '../main.dart';
@@ -133,28 +134,36 @@ class ChatSocket {
   }
 
   _notificationMessage(MessageObj message) async {
-    var messages = List<Message>();
     // First two person objects will use icons that part of the Android app's drawable resources
+    final prefs = await SharedPreferences.getInstance();
+    bool som = true;
+    var prefAtivarSom = prefs.getString('_ativarSomNotificacao') ?? null;
+    if (prefAtivarSom != null) {
+      som = prefAtivarSom == "1";
+    }
     var me = store.state.me.toNotificationMessagePerson();
-
     var person = message.toNotificationMessagePerson();
-
-    messages.add(
+    List<Message> notifymessages = List<Message>();
+    notifymessages.addAll(store.state.notificacaoMessages);
+    store.dispatch(SetNotificacaoMessages(notifymessages));
+    notifymessages.add(
         Message(message.msg, DateTime.now().add(Duration(minutes: 5)), person));
 
+    print(message.toNotificationMessagePerson());
     var messagingStyle = MessagingStyleInformation(me,
         groupConversation: true,
         conversationTitle: store.state.bolhaAtual.apelido,
         htmlFormatContent: true,
         htmlFormatTitle: true,
-        messages: messages);
+        messages: notifymessages);
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
         'chat-notification-42',
         'chat-notification-420n',
         'chat-notification-42d',
         category: 'msg',
         style: AndroidNotificationStyle.Messaging,
-        styleInformation: messagingStyle);
+        styleInformation: messagingStyle,
+        playSound: som);
     var platformChannelSpecifics =
         NotificationDetails(androidPlatformChannelSpecifics, null);
     await flutterLocalNotificationsPlugin.show(

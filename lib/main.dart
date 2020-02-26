@@ -6,6 +6,7 @@ import 'package:bolha_musical/pages/login.dart';
 import 'package:bolha_musical/pages/mapa/mapa.dart';
 import 'package:bolha_musical/pages/playlist/playlist.dart';
 import 'package:bolha_musical/pages/playlist/playlist_search.dart';
+import 'package:bolha_musical/redux/actions.dart';
 import 'package:bolha_musical/redux/store.dart';
 import 'package:bolha_musical/utils/NavigationService.dart';
 import 'package:bolha_musical/utils/SetupLocator.dart';
@@ -36,6 +37,9 @@ _notification() {
 Future onSelectNotification(String payload) async {
   if (payload != null) {
     debugPrint('notification payload: ' + payload);
+    if (payload == "chat-notification") {
+      store.dispatch(SetNotificacaoMessages([]));
+    }
   }
   print("onSelectNotification::payload");
 }

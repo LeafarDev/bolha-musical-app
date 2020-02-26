@@ -59,5 +59,10 @@ AppState reducer(AppState prevState, dynamic action) {
   if (action is SetCurrentAppState) {
     newState.currentAppState = action.payload;
   }
+
+  if (action is SetNotificacaoMessages) {
+    newState.notificacaoMessages = action.payload;
+  }
+
   return newState;
 }

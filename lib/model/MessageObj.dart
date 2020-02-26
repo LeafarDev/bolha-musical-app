@@ -95,7 +95,7 @@ abstract class MessageObj implements Built<MessageObj, MessageObjBuilder> {
           uri: '',
           icon: "Visitante");
     } else {
-      getUser().toNotificationMessagePerson();
+      return getUser().toNotificationMessagePerson();
     }
   }
 

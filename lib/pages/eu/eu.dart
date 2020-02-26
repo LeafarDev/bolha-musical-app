@@ -24,6 +24,7 @@ class Eu extends StatefulWidget {
 // This class holds data related to the form.
 class EuState extends State<Eu> {
   bool _mostrar_localizacao_mapa = true;
+  bool _ativarSomNotificacao = true;
   String _language_code;
   ValidationError _errors = ValidationError();
 
@@ -32,6 +33,18 @@ class EuState extends State<Eu> {
     super.initState();
     _mostrar_localizacao_mapa = store.state.me.mostrar_localizacao_mapa;
     _language_code = store.state.me.language_code;
+    _initSomNotificacao();
+  }
+
+  _initSomNotificacao () async {
+    final prefs = await SharedPreferences.getInstance();
+    var prefAtivarSom = prefs.getString('_ativarSomNotificacao') ?? null;
+    if (prefAtivarSom != null) {
+      _ativarSomNotificacao = prefAtivarSom == "1";
+    } else {
+      prefs.setString('_ativarSomNotificacao', "1");
+      _ativarSomNotificacao = true;
+    }
   }
 
   @override
@@ -129,6 +142,27 @@ class EuState extends State<Eu> {
                                     ),
                                   ),
                                 ],
+                              ),
+                              Container(
+                                height:
+                                MediaQuery.of(context).size.height * 0.08,
+                                child: SwitchListTile(
+                                  value: _ativarSomNotificacao,
+                                  onChanged: (value) async {
+                                    if (value != _ativarSomNotificacao) {
+                                      final prefs = await SharedPreferences.getInstance();
+                                      setState(() {
+                                        _ativarSomNotificacao = value;
+                                        prefs.setString('_ativarSomNotificacao', value ? "1" : "0");
+                                        _updaTeUserConfigs(context);
+                                      });
+                                    }
+                                  },
+                                  title: Text('Ativar som da notificação',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white)),
+                                ),
                               ),
                               Container(
                                 height:
