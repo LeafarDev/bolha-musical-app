@@ -60,7 +60,8 @@ class _PlayerBarState extends State<PlayerBar> {
     await TrackApi.currentPlaying();
     UsersApi.devices();
     _trackAtual = store.state.currentPlaying;
-    if (store.state.me.product != 'premium' && store.state.me.tocar_track_automaticamente) {
+    if (store.state.me.product != 'premium' &&
+        store.state.me.tocar_track_automaticamente) {
       UsersApi.updatePreferences(store.state.me.language_code,
           store.state.me.mostrar_localizacao_mapa, false);
     }
@@ -81,6 +82,14 @@ class _PlayerBarState extends State<PlayerBar> {
 
   @override
   Widget build(BuildContext context) {
+    double rightPaddingMuteIcon = 36.0;
+    bool mostrarSkipButton = false;
+    if (store.state.bolhaAtual != null) {
+      if (store.state.me.user_id == store.state.bolhaAtual.userLiderId) {
+        mostrarSkipButton = true;
+        rightPaddingMuteIcon = 8.0;
+      }
+    }
     return Container(
       color: Color.fromRGBO(1, 41, 51, 1),
       height: 39,
@@ -124,7 +133,7 @@ class _PlayerBarState extends State<PlayerBar> {
                       ),
                       Spacer(),
                       Padding(
-                        padding: EdgeInsets.only(right: 36),
+                        padding: EdgeInsets.only(right: 8),
                         child: GestureDetector(
                           behavior: HitTestBehavior.translucent,
                           onTap: () async {
@@ -182,7 +191,22 @@ class _PlayerBarState extends State<PlayerBar> {
                             color: Colors.white,
                           ),
                         ),
-                      )
+                      ),
+                      if (mostrarSkipButton)
+                        Padding(
+                          padding: EdgeInsets.only(right: 36),
+                          child: GestureDetector(
+                            behavior: HitTestBehavior.translucent,
+                            onTap: ()  async {
+                              print("skip");
+                              await TrackApi.skip();
+                            },
+                            child: Icon(
+                              Icons.skip_next,
+                              color: Colors.white,
+                            ),
+                          ),
+                        )
                     ],
                   )),
             ],
