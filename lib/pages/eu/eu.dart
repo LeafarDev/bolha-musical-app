@@ -41,6 +41,7 @@ class EuState extends State<Eu> {
 
   @override
   Widget build(BuildContext context) {
+    print(MediaQuery.of(context).size.height);
     return new WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
@@ -72,14 +73,15 @@ class EuState extends State<Eu> {
                         Expanded(
                           child: Column(
                             children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.only(bottom: 30),
-                                child: CircleAvatar(
-                                  backgroundImage: CachedNetworkImageProvider(
-                                      state.me.getImage()),
-                                  radius: 100,
+                              if (MediaQuery.of(context).size.height > 600)
+                                Padding(
+                                  padding: EdgeInsets.only(bottom: 30),
+                                  child: CircleAvatar(
+                                    backgroundImage: CachedNetworkImageProvider(
+                                        state.me.getImage()),
+                                    radius: 100,
+                                  ),
                                 ),
-                              ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
