@@ -38,6 +38,7 @@ class En {
 	String get muted => "Muted";
 	String get non_muted => "Now playing normally";
 	String get add_bubble => "Add new bubble";
+	String get add_track => "Add music";
 	String get bubble_nickname => "Bubble nickname";
 	String get tip_bubble_nickname => "Hip-Hop NYC";
 	String get who_can_add_music => "Who can add music ?";
@@ -56,6 +57,10 @@ class En {
 	String get no_bubble_no_message => "No message. Get enter in a bubble first";
 	String get cant_send_message_no_connection => "Can't send message. Not connected";
 	String get no_bubble_no_content => "Nothing here, try to add a new bubble";
+	String get no_track_no_content => "Nothing here, try to add a new music";
 	String get kick_member => "Kick member";
+	String track_added(String track) => "Added ❝$track❞ to the playlist";
+	String get upvote => "Like";
+	String get downvote => "Dislike";
 }
 

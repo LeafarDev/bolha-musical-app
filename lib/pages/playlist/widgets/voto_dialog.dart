@@ -1,5 +1,7 @@
 // Define a custom Form widget.
 import 'package:bolha_musical/api/TrackApi.dart';
+import 'package:bolha_musical/i18n/t.dart';
+import 'package:bolha_musical/i18n/t.dart';
 import 'package:bolha_musical/model/Voto.dart';
 import 'package:bolha_musical/redux/app_state.dart';
 import 'package:flutter/cupertino.dart';
@@ -38,7 +40,7 @@ class VotoDialogState extends State<VotoDialog> {
         converter: (store) => store.state,
         builder: (context, state) {
           return AlertDialog(
-            title: Center(child: Text(_cimavoto ? 'Cimavotar' : 'Baixavotar')),
+            title: Center(child: Text(_cimavoto ? t.translate().upvote : t.translate().downvote)),
             content: Container(
               width: MediaQuery.of(context).size.width * 0.75,
               height: MediaQuery.of(context).size.height * 0.15,
@@ -72,7 +74,7 @@ class VotoDialogState extends State<VotoDialog> {
                 },
               ),
               FlatButton(
-                child: Text(_cimavoto ? 'Cimavotar' : 'Baixavotar'),
+                child: Text(_cimavoto ? t.translate().upvote : t.translate().downvote),
                 onPressed: () {
                   TrackApi.votar(Voto((b) => b
                     ..refletirSpotify = _refletir_spotify

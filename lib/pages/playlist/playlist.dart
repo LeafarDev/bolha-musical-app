@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bolha_musical/api/TrackApi.dart';
+import 'package:bolha_musical/i18n/t.dart';
 import 'package:bolha_musical/pages/playlist/widgets/playlist_item.dart';
 import 'package:bolha_musical/redux/app_state.dart';
 import 'package:bolha_musical/redux/store.dart';
@@ -35,7 +36,7 @@ class PlaylistState extends State<Playlist> {
     setState(() {
       _childButtons.add(UnicornButton(
           hasLabel: true,
-          labelText: "Nova música_",
+          labelText: t.translate().add_track,
           currentButton: FloatingActionButton(
             heroTag: "train",
             backgroundColor: Colors.redAccent,
@@ -165,11 +166,9 @@ class PlaylistState extends State<Playlist> {
                             ),
                           );
                         }
-                        var msg =
-                            "Nada aqui ainda, tente adicionar uma nova música na bolha ;)";
+                        var msg = t.translate().no_track_no_content;
                         if (state.bolhaAtual == null) {
-                          msg =
-                              "Nada aqui ainda, entre em uma bolha para adicionar músicas";
+                          msg = t.translate().no_bubble_no_content;
                         }
                         return Center(
                           child: Text(

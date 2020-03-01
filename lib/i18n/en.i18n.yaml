@@ -23,6 +23,7 @@ playback_only_premium: Spotify only allows playback in premium accounts :/
 muted: Muted
 non_muted: Now playing normally
 add_bubble: Add new bubble
+add_track: Add music
 bubble_nickname: Bubble nickname
 tip_bubble_nickname:  Hip-Hop NYC
 who_can_add_music: Who can add music ?
@@ -41,4 +42,8 @@ if_enter_new_bubble: Upon entering that bubble you will quit the current bubble,
 no_bubble_no_message: No message. Get enter in a bubble first
 cant_send_message_no_connection: Can't send message. Not connected
 no_bubble_no_content: Nothing here, try to add a new bubble
+no_track_no_content: Nothing here, try to add a new music
 kick_member: Kick member
+track_added(String track): "Added ❝$track❞ to the playlist"
+upvote: Like
+downvote: Dislike

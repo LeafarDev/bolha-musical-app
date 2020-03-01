@@ -38,6 +38,7 @@ class Pt {
 	String get muted => "Não iremos reproduzir no seu spotify";
 	String get non_muted => "Iremos reproduzir no seu spotify normalmente";
 	String get add_bubble => "Adicionar Bolha";
+	String get add_track => "Nova música";
 	String get bubble_nickname => "Apelido da Bolha";
 	String get tip_bubble_nickname => "Rap em Sampa";
 	String get who_can_add_music => "Quem pode adicionar música?";
@@ -55,7 +56,11 @@ class Pt {
 	String get if_enter_new_bubble => "Ao entrar nessa bolha você sairá da bolha atual, caso esteja em uma";
 	String get no_bubble_no_message => "Nenhuma mensagem. Entre em uma bolha primeiro o/";
 	String get cant_send_message_no_connection => "Impossível enviar mensagem, aguardando conexão";
-	String get no_bubble_no_content => "Nada aqui, tente entrar emm uma bolha";
+	String get no_bubble_no_content => "Nada aqui, tente entrar em uma bolha";
+	String get no_track_no_content => "Nada aqui ainda, tente adicionar uma nova música na bolha ;)";
 	String get kick_member => "Expulsar";
+	String track_added(String track) => "❝$track❞ adicionado a playlist";
+	String get upvote => "Cimavotar";
+	String get downvote => "Baixavotar";
 }
 

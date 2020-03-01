@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bolha_musical/api/TrackApi.dart';
+import 'package:bolha_musical/i18n/t.dart';
 import 'package:bolha_musical/model/Track.dart';
 import 'package:bolha_musical/redux/store.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -74,7 +75,7 @@ class PlayListSearchItem extends StatelessWidget {
                 ),
                 backgroundColor: Color.fromRGBO(1, 41, 51, 0.9),
                 flushbarPosition: FlushbarPosition.TOP,
-                message: "❝${track.shortname()}❞ foi adicionado com sucesso",
+                message: t.translate().track_added(track.shortname()),
                 duration: Duration(seconds: 3),
               )..show(context);
               FocusScopeNode currentFocus = FocusScope.of(context);

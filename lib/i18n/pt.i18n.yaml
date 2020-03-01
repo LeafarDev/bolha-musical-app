@@ -23,6 +23,7 @@ playback_only_premium: O Spotify só permite reproduzir em contas premium :/
 muted: Não iremos reproduzir no seu spotify
 non_muted: Iremos reproduzir no seu spotify normalmente
 add_bubble: Adicionar Bolha
+add_track: Nova música
 bubble_nickname: Apelido da Bolha
 tip_bubble_nickname: Rap em Sampa
 who_can_add_music: Quem pode adicionar música?
@@ -40,5 +41,9 @@ are_you_sure: Tem certeza?
 if_enter_new_bubble: Ao entrar nessa bolha você sairá da bolha atual, caso esteja em uma
 no_bubble_no_message: Nenhuma mensagem. Entre em uma bolha primeiro o/
 cant_send_message_no_connection: Impossível enviar mensagem, aguardando conexão
-no_bubble_no_content: Nada aqui, tente entrar emm uma bolha
+no_bubble_no_content: Nada aqui, tente entrar em uma bolha
+no_track_no_content: Nada aqui ainda, tente adicionar uma nova música na bolha ;)
 kick_member: Expulsar
+track_added(String track): "❝$track❞ adicionado a playlist"
+upvote: Cimavotar
+downvote: Baixavotar
