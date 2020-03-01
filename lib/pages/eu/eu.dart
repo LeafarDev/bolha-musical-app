@@ -36,7 +36,7 @@ class EuState extends State<Eu> {
     _initSomNotificacao();
   }
 
-  _initSomNotificacao () async {
+  _initSomNotificacao() async {
     final prefs = await SharedPreferences.getInstance();
     var prefAtivarSom = prefs.getString('_ativarSomNotificacao') ?? null;
     if (prefAtivarSom != null) {
@@ -145,15 +145,17 @@ class EuState extends State<Eu> {
                               ),
                               Container(
                                 height:
-                                MediaQuery.of(context).size.height * 0.08,
+                                    MediaQuery.of(context).size.height * 0.08,
                                 child: SwitchListTile(
                                   value: _ativarSomNotificacao,
                                   onChanged: (value) async {
                                     if (value != _ativarSomNotificacao) {
-                                      final prefs = await SharedPreferences.getInstance();
+                                      final prefs =
+                                          await SharedPreferences.getInstance();
                                       setState(() {
                                         _ativarSomNotificacao = value;
-                                        prefs.setString('_ativarSomNotificacao', value ? "1" : "0");
+                                        prefs.setString('_ativarSomNotificacao',
+                                            value ? "1" : "0");
                                         _updaTeUserConfigs(context);
                                       });
                                     }

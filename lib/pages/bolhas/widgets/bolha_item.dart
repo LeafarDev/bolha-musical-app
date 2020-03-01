@@ -1,4 +1,5 @@
 import 'package:bolha_musical/api/BolhaApi.dart';
+import 'package:bolha_musical/i18n/t.dart';
 import 'package:bolha_musical/model/Bolha.dart';
 import 'package:bolha_musical/redux/store.dart';
 import 'package:fancy_dialog/fancy_dialog.dart';
@@ -82,13 +83,13 @@ class BolhaItem extends StatelessWidget {
       if (atual.id == bolha.id) {
         lista.add(PopupMenuItem(
           value: 2,
-          child: Text("Sair"),
+          child: Text(t.translate().exit),
         ));
       } else {
         lista.add(
           PopupMenuItem(
             value: 1,
-            child: Text("Entrar"),
+            child: Text(t.translate().enter),
           ),
         );
       }
@@ -98,7 +99,7 @@ class BolhaItem extends StatelessWidget {
     lista.add(
       PopupMenuItem(
         value: 1,
-        child: Text("Entrar"),
+        child: Text(t.translate().enter),
       ),
     );
     return lista;
@@ -116,11 +117,11 @@ class BolhaItem extends StatelessWidget {
 
   _desejaSair(BuildContext context) {
     return FancyDialog(
-      ok: "Sim",
-      cancel: "Cancelar...",
+      ok: t.translate().yes,
+      cancel: "${t.translate().cancel}...",
       gifPath: "./assets/gifs/vetorizado-cat-bolha.gif",
-      title: "Sair da Bolha?",
-      descreption: "Deseja realmente sair??",
+      title: t.translate().are_you_sure,
+      descreption: t.translate().do_you_really_want_to_quit,
       okFun: () async {
         BolhaApi.sairBolha();
       },
@@ -130,12 +131,11 @@ class BolhaItem extends StatelessWidget {
 
   _desejaEntrar(BuildContext context) {
     return FancyDialog(
-      ok: "Entrar",
-      cancel: "Cancelar...",
+      ok: t.translate().yes,
+      cancel: "${t.translate().cancel}...",
       gifPath: "./assets/gifs/vetorizado-cat-bolha.gif",
-      title: "Entrar na bolha?",
-      descreption:
-          "Ao entrar nessa bolha você sairá da bolha atual, caso esteja em uma.",
+      title: t.translate().are_you_sure,
+      descreption: t.translate().if_enter_new_bubble,
       okFun: () async {
         BolhaApi.entrarBolha(bolha.id);
       },

@@ -181,13 +181,12 @@ class UsersApi {
 
   static follow(id) async {
     try {
-      final res = await http
-          .put("http://10.0.0.108:3001/api/v1/users/follow", headers: {
-        HttpHeaders.authorizationHeader: store.state.token.token,
-        HttpHeaders.contentTypeHeader: "application/json"
-      }, body: jsonEncode({
-        "id": id
-      }));
+      final res = await http.put("http://10.0.0.108:3001/api/v1/users/follow",
+          headers: {
+            HttpHeaders.authorizationHeader: store.state.token.token,
+            HttpHeaders.contentTypeHeader: "application/json"
+          },
+          body: jsonEncode({"id": id}));
       if (res.statusCode == 200) {
         return true;
       } else {
@@ -200,13 +199,12 @@ class UsersApi {
 
   static unfollow(id) async {
     try {
-      final res = await http
-          .put("http://10.0.0.108:3001/api/v1/users/unfollow", headers: {
-        HttpHeaders.authorizationHeader: store.state.token.token,
-        HttpHeaders.contentTypeHeader: "application/json"
-      }, body: jsonEncode({
-        "id": id
-      }));
+      final res = await http.put("http://10.0.0.108:3001/api/v1/users/unfollow",
+          headers: {
+            HttpHeaders.authorizationHeader: store.state.token.token,
+            HttpHeaders.contentTypeHeader: "application/json"
+          },
+          body: jsonEncode({"id": id}));
       if (res.statusCode == 200) {
         return true;
       } else {

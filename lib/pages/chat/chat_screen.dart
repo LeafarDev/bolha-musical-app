@@ -1,3 +1,4 @@
+import 'package:bolha_musical/i18n/t.dart';
 import 'package:bolha_musical/pages/app.dart';
 import 'package:bolha_musical/pages/chat/widgets/message_container_custom.dart';
 import 'package:bolha_musical/redux/app_state.dart';
@@ -81,7 +82,7 @@ class ChatScreenState extends State<ChatScreen> {
                       if (store.state.bolhaAtual == null) {
                         return Center(
                           child: Text(
-                            "Nenhuma mensagem. Entre em uma bolha primeiro o/",
+                            t.translate().no_bubble_no_message,
                             style: TextStyle(color: Colors.white),
                           ),
                         );
@@ -131,8 +132,9 @@ class ChatScreenState extends State<ChatScreen> {
                                             flushbarPosition:
                                                 FlushbarPosition.BOTTOM,
                                             backgroundColor: Colors.orange,
-                                            message:
-                                                "Impossível enviar mensagem, aguardando conexão",
+                                            message: t
+                                                .translate()
+                                                .cant_send_message_no_connection,
                                             duration: Duration(seconds: 3),
                                           )..show(context);
                                         });

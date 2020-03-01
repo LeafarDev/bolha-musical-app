@@ -1,4 +1,5 @@
 import 'package:bolha_musical/api/UsersApi.dart';
+import 'package:bolha_musical/i18n/t.dart';
 import 'package:bolha_musical/model/BolhaMembro.dart';
 import 'package:bolha_musical/redux/store.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -46,7 +47,7 @@ showCustomDialogWithImage(BuildContext context, BolhaMembro membro, seguindo) {
             children: <Widget>[
               FlatButton(
                 child: Text(
-                  "Fechar",
+                  t.translate().close,
                 ),
                 color: Colors.redAccent,
                 onPressed: () {
@@ -60,8 +61,8 @@ showCustomDialogWithImage(BuildContext context, BolhaMembro membro, seguindo) {
                 FlatButton(
                   color: Color.fromRGBO(30, 215, 96, 1),
                   child: seguindo == true
-                      ? Text('Deixar de Seguir')
-                      : Text('Seguir'), //`Text` to display
+                      ? Text(t.translate().unfollow)
+                      : Text(t.translate().follow), //`Text` to display
                   onPressed: () async {
                     Navigator.of(context).pop();
                     if (seguindo == true) {
@@ -72,7 +73,9 @@ showCustomDialogWithImage(BuildContext context, BolhaMembro membro, seguindo) {
                               color: Colors.white),
                           backgroundColor: Color.fromRGBO(1, 41, 51, 0.9),
                           flushbarPosition: FlushbarPosition.TOP,
-                          message: "Deixou de seguir ${membro.me.displayName}",
+                          message: t
+                              .translate()
+                              .no_more_following_fulano(membro.me.displayName),
                           duration: Duration(seconds: 3),
                         )..show(context);
                       }
@@ -83,12 +86,13 @@ showCustomDialogWithImage(BuildContext context, BolhaMembro membro, seguindo) {
                           icon: Icon(Icons.check_box, color: Colors.white),
                           backgroundColor: Color.fromRGBO(1, 41, 51, 0.9),
                           flushbarPosition: FlushbarPosition.TOP,
-                          message: "Seguindo ${membro.me.displayName}",
+                          message: t
+                              .translate()
+                              .following_fulano(membro.me.displayName),
                           duration: Duration(seconds: 3),
                         )..show(context);
                       }
                     }
-
                   },
                 ),
             ],

@@ -1,0 +1,44 @@
+me: Me
+map: Map
+chat: Chat
+bubbles: Bubbles
+playlist: Playlist
+no_connection: Not connected
+check_you_connection: Your connection is unavailable. Please check your connection
+bubble_running: Musical Bubble is running
+bubble_while_running: While it is open we will play the songs normally
+leader: Leader
+member: Member
+close: Close
+exit: Exit
+enter: Enter
+unfollow: Unfollow
+follow: Follow
+cancel: Cancel
+yes: Yes
+no_more_following_fulano(String fulano): "You are no more following $fulano"
+following_fulano(String fulano): "You are following $fulano"
+choose_device: Choose your device
+playback_only_premium: Spotify only allows playback in premium accounts :/
+muted: Muted
+non_muted: Now playing normally
+add_bubble: Add new bubble
+bubble_nickname: Bubble nickname
+tip_bubble_nickname:  Hip-Hop NYC
+who_can_add_music: Who can add music ?
+bubble_location: Bubble location ?
+bubble_size: Bubble size (meters)
+bubble_color: Bubble Color
+bubble_option_fixed: fixed location
+bubble_my_current_location: Move as my location changes
+everyone_can_add_music: All members
+only_me_can_add_music: Only me
+bubble_successfully_created: Bubble successfully created
+click_to_add_bubble: Click to create a new bubble
+do_you_really_want_to_quit: Do you really want to quit?
+are_you_sure: Are you sure?
+if_enter_new_bubble: Upon entering that bubble you will quit the current bubble, if you are in one.
+no_bubble_no_message: No message. Get enter in a bubble first
+cant_send_message_no_connection: Can't send message. Not connected
+no_bubble_no_content: Nothing here, try to add a new bubble
+kick_member: Kick member

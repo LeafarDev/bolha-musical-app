@@ -24,11 +24,14 @@ Marker MarkerMembro(BolhaMembro membro) {
         behavior: HitTestBehavior.translucent,
         onTap: () async {
           var seguindo = await UsersApi.following(membro.me.id);
-          showCustomDialogWithImage(locator<NavigationService>()
-              .navigatorKey
-              .currentState
-              .overlay
-              .context, membro, seguindo);
+          showCustomDialogWithImage(
+              locator<NavigationService>()
+                  .navigatorKey
+                  .currentState
+                  .overlay
+                  .context,
+              membro,
+              seguindo);
         },
         child: Container(
             decoration: BoxDecoration(

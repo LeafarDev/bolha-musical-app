@@ -3,6 +3,7 @@ import 'dart:collection';
 
 import 'package:bolha_musical/api/ApiDialogs.dart';
 import 'package:bolha_musical/api/BolhaApi.dart';
+import 'package:bolha_musical/i18n/t.dart';
 import 'package:bolha_musical/model/Bolha.dart';
 import 'package:bolha_musical/model/ReferenciaTamanhoBolha.dart';
 import 'package:bolha_musical/model/ValidationError.dart';
@@ -37,10 +38,10 @@ class BolhasFormState extends State<BolhasForm> {
   @override
   initState() {
     super.initState();
-    _opcoesLocalizacao["Parada"] = true;
-    _opcoesLocalizacao["Se moverá comigo"] = false;
-    _opcoesLiderTrack["Todos os membros"] = false;
-    _opcoesLiderTrack["Somente eu"] = true;
+    _opcoesLocalizacao[t.translate().bubble_option_fixed] = true;
+    _opcoesLocalizacao[t.translate().bubble_my_current_location] = false;
+    _opcoesLiderTrack[t.translate().everyone_can_add_music] = false;
+    _opcoesLiderTrack[t.translate().only_me_can_add_music] = true;
   }
 
   @override
@@ -53,7 +54,7 @@ class BolhasFormState extends State<BolhasForm> {
             backgroundColor: Color.fromRGBO(1, 41, 51, 1),
             title: Center(
               child: Text(
-                'Adicionar Bolha',
+                t.translate().add_bolha,
                 style: TextStyle(color: Colors.white),
               ),
             ),
@@ -66,7 +67,7 @@ class BolhasFormState extends State<BolhasForm> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        "Apelido da Bolha",
+                        t.translate().bubble_nickname,
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -78,7 +79,7 @@ class BolhasFormState extends State<BolhasForm> {
                           onChanged: (value) {},
                           textCapitalization: TextCapitalization.sentences,
                           decoration: InputDecoration(
-                            hintText: "Ex: Galera do Rap ZL",
+                            hintText: t.translate().tip_bubble_nickname,
                             enabledBorder: UnderlineInputBorder(
                                 borderSide:
                                     BorderSide(color: Color(0xFFBDBDBD))),
@@ -88,7 +89,7 @@ class BolhasFormState extends State<BolhasForm> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        "Quem pode adicionar música?",
+                        t.translate().who_can_add_music,
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -106,7 +107,7 @@ class BolhasFormState extends State<BolhasForm> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        "Tamanho da Bolha (metros)",
+                        t.translate().bubble_size,
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -125,7 +126,7 @@ class BolhasFormState extends State<BolhasForm> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        "Localização da Bolha",
+                        t.translate().bubble_location,
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -143,7 +144,7 @@ class BolhasFormState extends State<BolhasForm> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        "Cor da Bolha",
+                        t.translate().bubble_color,
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -191,7 +192,7 @@ class BolhasFormState extends State<BolhasForm> {
                     store.dispatch(SetBolhaAtual(result));
                     App.chatSocket.startSocketChannel();
                     ApiDialogs.sucessoDialog(
-                        "Bolha criada com sucesso, tente adicionar umas músicas o/");
+                        t.translate().bubble_successfully_created);
                   }
                 },
               )

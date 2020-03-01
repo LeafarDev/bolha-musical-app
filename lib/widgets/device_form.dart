@@ -1,5 +1,6 @@
 // Define a custom Form widget.
 import 'package:bolha_musical/api/UsersApi.dart';
+import 'package:bolha_musical/i18n/t.dart';
 import 'package:bolha_musical/model/Device.dart';
 import 'package:bolha_musical/redux/app_state.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,7 +24,7 @@ class DeviceFormState extends State<DeviceForm> {
         converter: (store) => store.state,
         builder: (context, state) {
           return AlertDialog(
-            title: Text('Selecione um Dispositivo'),
+            title: Text(t.translate().choose_device),
             content: Container(
               width: MediaQuery.of(context).size.width * 0.75,
               height: MediaQuery.of(context).size.height * 0.15,
@@ -47,7 +48,7 @@ class DeviceFormState extends State<DeviceForm> {
             ),
             actions: <Widget>[
               FlatButton(
-                child: Text('Fechar'),
+                child: Text(t.translate().close),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

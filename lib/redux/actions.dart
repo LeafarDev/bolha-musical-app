@@ -100,7 +100,7 @@ class SetMessages {
   SetMessages(this.payload);
 }
 
-class SetNotificacaoMessages{
+class SetNotificacaoMessages {
   final List<Message> payload;
 
   SetNotificacaoMessages(this.payload);
@@ -111,4 +111,3 @@ class SetCurrentAppState {
 
   SetCurrentAppState(this.payload);
 }
-

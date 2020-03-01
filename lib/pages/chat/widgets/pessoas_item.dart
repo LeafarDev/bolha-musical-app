@@ -1,5 +1,6 @@
 import 'package:bolha_musical/api/BolhaApi.dart';
 import 'package:bolha_musical/api/UsersApi.dart';
+import 'package:bolha_musical/i18n/t.dart';
 import 'package:bolha_musical/model/BolhaMembro.dart';
 import 'package:bolha_musical/redux/store.dart';
 import 'package:bolha_musical/utils/NavigationService.dart';
@@ -38,19 +39,22 @@ class PessoasItem extends StatelessWidget {
         child: ListTile(
           onTap: () async {
             var seguindo = await UsersApi.following(pessoa.me.id);
-            showCustomDialogWithImage(locator<NavigationService>()
-                .navigatorKey
-                .currentState
-                .overlay
-                .context, pessoa, seguindo);
+            showCustomDialogWithImage(
+                locator<NavigationService>()
+                    .navigatorKey
+                    .currentState
+                    .overlay
+                    .context,
+                pessoa,
+                seguindo);
           },
           leading: CircleAvatar(
               backgroundImage:
                   CachedNetworkImageProvider(pessoa.me.getImage())),
           subtitle: Text(
             store.state.bolhaAtual.userLiderId == pessoa.id
-                ? "Lider"
-                : "Membro",
+                ? t.translate().leader
+                : t.translate().member,
             style: TextStyle(color: Colors.white),
           ),
           title: Text(
@@ -87,7 +91,7 @@ class PessoasItem extends StatelessWidget {
       lista.add(
         PopupMenuItem(
           value: 1,
-          child: Text("Expulsar da bolha"),
+          child: Text(t.translate().kick_member),
         ),
       );
     }

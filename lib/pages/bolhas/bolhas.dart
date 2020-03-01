@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bolha_musical/api/BolhaApi.dart';
+import 'package:bolha_musical/i18n/t.dart';
 import 'package:bolha_musical/pages/bolhas/widgets/bolha_item.dart';
 import 'package:bolha_musical/redux/app_state.dart';
 import 'package:bolha_musical/widgets/player_bar.dart';
@@ -71,7 +72,7 @@ class BolhasState extends State<Bolhas> {
         Positioned(
             top: markRect.top - 55.0,
             right: 10.0,
-            child: Text("Aperte para criar uma bolha",
+            child: Text(t.translate().click_to_add_bubble,
                 style: const TextStyle(
                   fontSize: 24.0,
                   fontStyle: FontStyle.italic,
@@ -87,7 +88,7 @@ class BolhasState extends State<Bolhas> {
     var childButtons = List<UnicornButton>();
     childButtons.add(UnicornButton(
         hasLabel: true,
-        labelText: "Criar Bolha",
+        labelText: t.translate().add_bubble,
         currentButton: FloatingActionButton(
           heroTag: "train",
           backgroundColor: Colors.redAccent,

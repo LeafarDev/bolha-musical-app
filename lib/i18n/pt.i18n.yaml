@@ -1,0 +1,44 @@
+me: Eu
+map: Mapa
+chat: Chat
+bubbles: Bolhas
+playlist: Playlist
+no_connection: Sem conexão
+check_you_connection:  Sua conexão está indisponivel. Verifique sua conexão de dados ou wifi
+bubble_running: Bolha musical executando
+bubble_while_running: Equanto aberto vamos reproduzir as músicas normalmente
+leader: Lider
+member: Membro
+close: Fechar
+exit: Sair
+enter: Entrar
+unfollow: Deixar de Seguir
+follow: Seguir
+cancel: Cancelar
+yes: Sim
+no_more_following_fulano(String fulano): "Deixou de seguir $fulano"
+following_fulano(String fulano): "Seguindo $fulano"
+choose_device: Selecione seu dispositivo
+playback_only_premium: O Spotify só permite reproduzir em contas premium :/
+muted: Não iremos reproduzir no seu spotify
+non_muted: Iremos reproduzir no seu spotify normalmente
+add_bubble: Adicionar Bolha
+bubble_nickname: Apelido da Bolha
+tip_bubble_nickname: Rap em Sampa
+who_can_add_music: Quem pode adicionar música?
+bubble_location:  Localização da Bolha ?
+bubble_size: Tamanho da Bolha (metros)
+bubble_color: Cor da Bolha
+bubble_option_fixed: Parada
+bubble_my_current_location: Se moverá comigo
+everyone_can_add_music: Todos os membros
+only_me_can_add_music: Somente eu
+bubble_successfully_created: Bolha criada com sucesso, tente adicionar umas músicas o/
+click_to_add_bubble: Aperte para criar uma bolha
+do_you_really_want_to_quit: Deseja realmente sair ?
+are_you_sure: Tem certeza?
+if_enter_new_bubble: Ao entrar nessa bolha você sairá da bolha atual, caso esteja em uma
+no_bubble_no_message: Nenhuma mensagem. Entre em uma bolha primeiro o/
+cant_send_message_no_connection: Impossível enviar mensagem, aguardando conexão
+no_bubble_no_content: Nada aqui, tente entrar emm uma bolha
+kick_member: Expulsar

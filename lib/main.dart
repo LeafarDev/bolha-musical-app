@@ -41,7 +41,6 @@ Future onSelectNotification(String payload) async {
       store.dispatch(SetNotificacaoMessages([]));
     }
   }
-  print("onSelectNotification::payload");
 }
 
 class MyApp extends StatelessWidget {

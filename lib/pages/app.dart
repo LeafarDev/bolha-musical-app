@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bolha_musical/api/BolhaApi.dart';
 import 'package:bolha_musical/api/UsersApi.dart';
+import 'package:bolha_musical/i18n/t.dart';
 import 'package:bolha_musical/model/Localizacao.dart';
 import 'package:bolha_musical/pages/eu/eu.dart';
 import 'package:bolha_musical/pages/mapa/mapa.dart';
@@ -116,11 +117,8 @@ class _AppState extends State<App> {
     var iOSPlatformChannelSpecifics = IOSNotificationDetails(presentSound: som);
     var platformChannelSpecifics = NotificationDetails(
         androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-    await flutterLocalNotificationsPlugin.show(
-        0,
-        'Bolha musical executando',
-        'Equanto aberto vamos reproduzir as músicas normalmente',
-        platformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.show(0, t.translate().bubble_running,
+        t.translate().bubble_while_running, platformChannelSpecifics);
   }
 
   _apiInicial() async {
@@ -151,10 +149,9 @@ class _AppState extends State<App> {
                 color: Colors.white,
               ),
               flushbarPosition: FlushbarPosition.TOP,
-              title: "Sem conexão",
+              title: t.translate().no_connection,
               backgroundColor: Colors.red,
-              message:
-                  "Sua conexão está indisponivel, Verifique sua conexão de dados ou wifi",
+              message: t.translate().check_you_connection,
               duration: Duration(seconds: 3),
             ),
           ),
@@ -183,7 +180,7 @@ class _AppState extends State<App> {
     return [
       BottomNavigationBarItem(
           title: Text(
-            "Mapa",
+            t.translate().map,
             style: TextStyle(color: _itemBottomColor(0)),
           ),
           icon: Icon(
@@ -192,7 +189,7 @@ class _AppState extends State<App> {
           )),
       BottomNavigationBarItem(
           title: Text(
-            "Chat",
+            t.translate().chat,
             style: TextStyle(color: _itemBottomColor(1)),
           ),
           icon: Icon(
@@ -201,7 +198,7 @@ class _AppState extends State<App> {
           )),
       BottomNavigationBarItem(
           title: Text(
-            "Bolhas",
+            t.translate().bubbles,
             style: TextStyle(color: _itemBottomColor(2)),
           ),
           icon: Icon(
@@ -210,7 +207,7 @@ class _AppState extends State<App> {
           )),
       BottomNavigationBarItem(
           title: Text(
-            "Playlist",
+            t.translate().playlist,
             style: TextStyle(color: _itemBottomColor(3)),
           ),
           icon: Icon(
@@ -219,7 +216,7 @@ class _AppState extends State<App> {
           )),
       BottomNavigationBarItem(
           title: Text(
-            "Eu",
+            t.translate().me,
             style: TextStyle(color: _itemBottomColor(4)),
           ),
           icon: Icon(

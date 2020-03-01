@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bolha_musical/api/TrackApi.dart';
 import 'package:bolha_musical/api/UsersApi.dart';
+import 'package:bolha_musical/i18n/t.dart';
 import 'package:bolha_musical/model/Me.dart';
 import 'package:bolha_musical/model/Track.dart';
 import 'package:bolha_musical/redux/actions.dart';
@@ -154,8 +155,7 @@ class _PlayerBarState extends State<PlayerBar> {
                                 ),
                                 backgroundColor: Color.fromRGBO(1, 41, 51, 0.9),
                                 flushbarPosition: FlushbarPosition.TOP,
-                                message:
-                                    "O Spotify só permite reproduzir em contas premium :/",
+                                message: t.translate().playback_only_premium,
                                 duration: Duration(seconds: 3),
                               )..show(context);
                               return;
@@ -173,11 +173,10 @@ class _PlayerBarState extends State<PlayerBar> {
                                 prefs.setString('me', me.toJson());
                                 store.dispatch(SetME(me));
                               }
-                              var messageSuceeso = state
-                                          .me.tocar_track_automaticamente ==
-                                      true
-                                  ? "Não iremos reproduzir no seu spotify"
-                                  : "Iremos reproduzir no seu spotify normalmente";
+                              var messageSuceeso =
+                                  state.me.tocar_track_automaticamente == true
+                                      ? t.translate().muted
+                                      : t.translate().non_muted;
                               Flushbar(
                                 icon: Icon(
                                   state.me.tocar_track_automaticamente == true

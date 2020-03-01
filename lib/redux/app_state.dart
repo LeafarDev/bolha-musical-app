@@ -31,6 +31,7 @@ class AppState {
   Track currentPlaying = null;
   List<MessageObj> messages = [];
   List<ChatMessage> chatMessages = [];
+
   // esse será usado pra informar usuário sobre mensagens:
   List<Message> notificacaoMessages = List<Message>();
   String padraoPerfilFoto =

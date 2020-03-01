@@ -1,3 +1,4 @@
+import 'package:bolha_musical/i18n/t.dart';
 import 'package:bolha_musical/pages/chat/widgets/pessoas_item.dart';
 import 'package:bolha_musical/redux/app_state.dart';
 import 'package:flutter/cupertino.dart';
@@ -44,7 +45,7 @@ class PessoasState extends State<Pessoas> {
                     if (state.bolhaAtual == null) {
                       return Center(
                         child: Text(
-                          "Nada aqui, tente entrar emm uma bolha",
+                          t.translate().no_bubble_no_content,
                           style: TextStyle(color: Colors.white),
                         ),
                       );
