@@ -54,7 +54,7 @@ class BolhasFormState extends State<BolhasForm> {
             backgroundColor: Color.fromRGBO(1, 41, 51, 1),
             title: Center(
               child: Text(
-                t.translate().add_bolha,
+                t.translate().add_bubble,
                 style: TextStyle(color: Colors.white),
               ),
             ),

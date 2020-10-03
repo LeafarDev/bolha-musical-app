@@ -10,6 +10,7 @@ import 'package:bolha_musical/redux/actions.dart';
 import 'package:bolha_musical/redux/store.dart';
 import 'package:bolha_musical/utils/NavigationService.dart';
 import 'package:bolha_musical/utils/SetupLocator.dart';
+import 'package:connectivity_widget/connectivity_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_redux/flutter_redux.dart';

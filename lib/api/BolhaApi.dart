@@ -16,7 +16,7 @@ class BolhaApi {
   static Future<Bolha> getBolhaAtual() async {
     try {
       final res = await http.get(
-          "http://10.0.0.108:3001/api/v1/spotify/bolhas/atual",
+          store.state.base_url + "spotify/bolhas/atual",
           headers: {HttpHeaders.authorizationHeader: store.state.token.token});
       if (res.statusCode == 200) {
         Bolha bolha = Bolha.fromJson(res.body);
@@ -36,7 +36,7 @@ class BolhaApi {
   static Future<bool> getReferenciaTamanhoBolha() async {
     try {
       final res = await http.get(
-          "http://10.0.0.108:3001/api/v1/spotify/bolhas/referencias",
+          store.state.base_url +"spotify/bolhas/referencias",
           headers: {HttpHeaders.authorizationHeader: store.state.token.token});
       if (res.statusCode == 200) {
         var referenciasRaw = jsonDecode(res.body);
@@ -57,7 +57,7 @@ class BolhaApi {
   static Future<bool> getBolhasDisponiveis() async {
     try {
       final res = await http.get(
-          "http://10.0.0.108:3001/api/v1/spotify/bolhas/disponiveis",
+          store.state.base_url +"spotify/bolhas/disponiveis",
           headers: {HttpHeaders.authorizationHeader: store.state.token.token});
       if (res.statusCode == 200) {
         var bolhasRaw = jsonDecode(res.body);
@@ -76,7 +76,7 @@ class BolhaApi {
   static criarBolha(Bolha bolha) async {
     try {
       final res =
-          await http.post("http://10.0.0.108:3001/api/v1/spotify/bolhas",
+          await http.post(store.state.base_url +"spotify/bolhas",
               headers: {
                 HttpHeaders.authorizationHeader: store.state.token.token,
                 HttpHeaders.contentTypeHeader: "application/json"
@@ -103,7 +103,7 @@ class BolhaApi {
     String data = jsonEncode({'id': id});
     try {
       final res =
-          await http.post("http://10.0.0.108:3001/api/v1/spotify/bolhas/entrar",
+          await http.post(store.state.base_url +"spotify/bolhas/entrar",
               headers: {
                 HttpHeaders.authorizationHeader: store.state.token.token,
                 HttpHeaders.contentTypeHeader: "application/json"
@@ -133,7 +133,7 @@ class BolhaApi {
   static sairBolha() async {
     try {
       final res = await http
-          .post("http://10.0.0.108:3001/api/v1/spotify/bolhas/sair", headers: {
+          .post(store.state.base_url +"spotify/bolhas/sair", headers: {
         HttpHeaders.authorizationHeader: store.state.token.token,
         HttpHeaders.contentTypeHeader: "application/json"
       });
@@ -158,7 +158,7 @@ class BolhaApi {
     String data = jsonEncode({'id': id});
     try {
       final res = await http.post(
-          "http://10.0.0.108:3001/api/v1/spotify/bolhas/membro/expulsar",
+          store.state.base_url +"spotify/bolhas/membro/expulsar",
           headers: {
             HttpHeaders.authorizationHeader: store.state.token.token,
             HttpHeaders.contentTypeHeader: "application/json"

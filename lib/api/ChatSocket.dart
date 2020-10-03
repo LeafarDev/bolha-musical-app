@@ -53,7 +53,7 @@ class ChatSocket {
   void startSocketChannel() {
     try {
       _channel =
-          new IOWebSocketChannel.connect("ws://10.0.0.108:3080/websocket");
+            new IOWebSocketChannel.connect(store.state.ws_rocket_chat_url);
       _channel.sink.add(_connectString());
       _channel.sink.add(_loginString());
       _channel.stream.listen((message) {
@@ -117,7 +117,7 @@ class ChatSocket {
       }, onError: (error, StackTrace stackTrace) {
         // error handling
         // enquanto sem internet, ficar aguardando voltar pra rechamar conexão
-        // print(error);
+        print(error);
       }, onDone: () {
         // communication has been closed
         // print("i'm done");
@@ -161,7 +161,8 @@ class ChatSocket {
         'chat-notification-420n',
         'chat-notification-42d',
         category: 'msg',
-        style: AndroidNotificationStyle.Messaging,
+        importance: Importance.Max,
+        priority: Priority.High,
         styleInformation: messagingStyle,
         playSound: som);
     var platformChannelSpecifics =

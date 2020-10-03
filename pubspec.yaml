@@ -46,7 +46,7 @@ dependencies:
   dash_chat: ^1.0.14
   image_picker: 0.6.1
   connectivity_widget: ^0.1.2
-  flushbar: ^1.9.1
+  flushbar: ^1.6.0
   highlighter_coachmark: ^0.0.3
   flutter_material_color_picker: ^1.0.5
   grouped_buttons: ^1.0.4

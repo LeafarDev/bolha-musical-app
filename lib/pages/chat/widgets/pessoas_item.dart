@@ -20,6 +20,7 @@ class PessoasItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(pessoa);
     return Material(
       color: Colors.transparent,
       child: Container(
@@ -58,7 +59,7 @@ class PessoasItem extends StatelessWidget {
             style: TextStyle(color: Colors.white),
           ),
           title: Text(
-            pessoa != null ? pessoa.me.displayName : "??????????????",
+            pessoa.me.displayName != null ? pessoa.me.displayName : "unknown",
             style: TextStyle(color: Colors.white),
           ),
           trailing: _iconButtonBuild(context, pessoa),

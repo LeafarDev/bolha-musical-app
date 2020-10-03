@@ -17,7 +17,7 @@ class UsersApi {
   static Future<AuthState> getAuthState() async {
     try {
       final res = await http
-          .get("http://10.0.0.108:3001/api/v1/spotify/login/codigo/novo");
+          .get(store.state.base_url +"spotify/login/codigo/novo");
       if (res.statusCode == 200) {
         AuthState authstate = AuthState.fromJson(res.body);
         return authstate;
@@ -31,7 +31,7 @@ class UsersApi {
   static Future<Token> getToken() async {
     try {
       final res = await http.get(
-          "http://10.0.0.108:3001/api/v1/spotify/state/trocar/token?state=${store.state.authState.id}");
+          store.state.base_url +"spotify/state/trocar/token?state=${store.state.authState.id}");
       if (res.statusCode == 200) {
         Token tokenDto = Token.fromJson(res.body);
         return tokenDto;
@@ -45,15 +45,19 @@ class UsersApi {
 
   static Future<Me> getMe() async {
     try {
-      final resMe = await http.get("http://10.0.0.108:3001/api/v1/users/me",
+      print("get me");
+      final resMe = await http.get(store.state.base_url +"users/me",
           headers: {HttpHeaders.authorizationHeader: store.state.token.token});
       if (resMe.statusCode == 200) {
         Me me = Me.fromJson(resMe.body);
+        print(resMe.body);
         return me;
       } else {
+        print(resMe.body);
         return null;
       }
     } catch (error) {
+      print(error);
       return null;
     }
   }
@@ -62,7 +66,7 @@ class UsersApi {
     String localizacaoJson = store.state.localizacaoAtual.toJson();
     try {
       final res = await http.post(
-          "http://10.0.0.108:3001/api/v1/users/localizacao/atual",
+          store.state.base_url +"users/localizacao/atual",
           headers: {
             HttpHeaders.authorizationHeader: store.state.token.token,
             HttpHeaders.contentTypeHeader: "application/json"
@@ -81,7 +85,7 @@ class UsersApi {
   static Future<bool> ping() async {
     try {
       final resMe = await http.get(
-          "http://10.0.0.108:3001/api/v1/spotify/refresh/teste",
+          store.state.base_url +"spotify/refresh/teste",
           headers: {HttpHeaders.authorizationHeader: store.state.token.token});
       if (resMe.statusCode == 200) {
         return true;
@@ -96,7 +100,7 @@ class UsersApi {
   static devices() async {
     try {
       final res = await http
-          .get("http://10.0.0.108:3001/api/v1/users/devices", headers: {
+          .get(store.state.base_url +"users/devices", headers: {
         HttpHeaders.authorizationHeader: store.state.token.token,
         HttpHeaders.contentTypeHeader: "application/json"
       });
@@ -115,7 +119,7 @@ class UsersApi {
 
   static updateDevice(device_id) async {
     String data = jsonEncode({'device_id': device_id});
-    final res = await http.put("http://10.0.0.108:3001/api/v1/users/devices",
+    final res = await http.put(store.state.base_url +"users/devices",
         headers: {
           HttpHeaders.authorizationHeader: store.state.token.token,
           HttpHeaders.contentTypeHeader: "application/json"
@@ -141,7 +145,7 @@ class UsersApi {
       },
     );
     final res =
-        await http.put("http://10.0.0.108:3001/api/v1/users/preferences",
+        await http.put(store.state.base_url +"users/preferences",
             headers: {
               HttpHeaders.authorizationHeader: store.state.token.token,
               HttpHeaders.contentTypeHeader: "application/json"
@@ -163,7 +167,7 @@ class UsersApi {
   static following(id) async {
     try {
       final res = await http.get(
-          "http://10.0.0.108:3001/api/v1/users/following/contains?id=${id}",
+          store.state.base_url +"users/following/contains?id=${id}",
           headers: {
             HttpHeaders.authorizationHeader: store.state.token.token,
             HttpHeaders.contentTypeHeader: "application/json"
@@ -181,7 +185,7 @@ class UsersApi {
 
   static follow(id) async {
     try {
-      final res = await http.put("http://10.0.0.108:3001/api/v1/users/follow",
+      final res = await http.put(store.state.base_url +"users/follow",
           headers: {
             HttpHeaders.authorizationHeader: store.state.token.token,
             HttpHeaders.contentTypeHeader: "application/json"
@@ -199,7 +203,7 @@ class UsersApi {
 
   static unfollow(id) async {
     try {
-      final res = await http.put("http://10.0.0.108:3001/api/v1/users/unfollow",
+      final res = await http.put(store.state.base_url +"users/unfollow",
           headers: {
             HttpHeaders.authorizationHeader: store.state.token.token,
             HttpHeaders.contentTypeHeader: "application/json"

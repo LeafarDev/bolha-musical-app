@@ -13,6 +13,12 @@ import '../model/Me.dart';
 import '../model/Token.dart';
 
 class AppState {
+  // ENV
+  String ws_rocket_chat_url = "ws://bce35ef98c79.ngrok.io/websocket";
+  String base_url = "https://4ed3d4f995e9.ngrok.io/api/v1/";
+  String client_id = "4c113176ff8542c7a5e39682ebf60f14";
+
+  // OUTROS
   String currentAppState = 'resumed';
   List<ReferenciaTamanhoBolha> referenciasTamanhoBolha = [];
   AuthState authState = AuthState();
@@ -35,7 +41,7 @@ class AppState {
   // esse será usado pra informar usuário sobre mensagens:
   List<Message> notificacaoMessages = List<Message>();
   String padraoPerfilFoto =
-      "https://scontent-gru1-1.xx.fbcdn.net/v/t31.0-1/c47.0.160.160a/p160x160/10506738_10150004552801856_220367501106153455_o.jpg?_nc_cat=1&_nc_ohc=IPx3jo13vcMAQkPVjXxdnCBWbyWPNrV9Ja1GpNbHMk_tDGVrjWwdKmXuQ&_nc_ht=scontent-gru1-1.xx&oh=c6a0c59f4aad554cc29fa09ec49220a5&oe=5E75F250";
+      "https://i.stack.imgur.com/34AD2.jpg";
 
   AppState();
 

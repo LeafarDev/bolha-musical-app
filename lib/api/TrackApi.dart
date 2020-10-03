@@ -21,7 +21,7 @@ class TrackApi {
     try {
       store.dispatch(SetSearchingTrack(true));
       final res = await http.get(
-          "http://10.0.0.108:3001/api/v1/spotify/search?query=${search}",
+          store.state.base_url +"spotify/search?query=${search}",
           headers: {
             HttpHeaders.authorizationHeader: store.state.token.token,
             HttpHeaders.contentTypeHeader: "application/json"
@@ -44,7 +44,7 @@ class TrackApi {
     String data = jsonEncode({'id': trackId});
     try {
       final res = await http.post(
-          "http://10.0.0.108:3001/api/v1/spotify/bolhas/playlist/track",
+          store.state.base_url +"spotify/bolhas/playlist/track",
           headers: {
             HttpHeaders.authorizationHeader: store.state.token.token,
             HttpHeaders.contentTypeHeader: "application/json"
@@ -67,7 +67,7 @@ class TrackApi {
   static skip() async {
     try {
       final res = await http.post(
-          "http://10.0.0.108:3001/api/v1/spotify/bolhas/playlist/skip",
+          store.state.base_url +"spotify/bolhas/playlist/skip",
           headers: {
             HttpHeaders.authorizationHeader: store.state.token.token,
             HttpHeaders.contentTypeHeader: "application/json"
@@ -101,7 +101,7 @@ class TrackApi {
   static playlist() async {
     try {
       final res = await http.get(
-          "http://10.0.0.108:3001/api/v1/spotify/bolhas/playlist",
+          store.state.base_url +"spotify/bolhas/playlist",
           headers: {
             HttpHeaders.authorizationHeader: store.state.token.token,
             HttpHeaders.contentTypeHeader: "application/json"
@@ -122,7 +122,7 @@ class TrackApi {
   static currentPlaying() async {
     try {
       final res = await http.get(
-          "http://10.0.0.108:3001/api/v1/spotify/bolhas/playlist/current-playing",
+          store.state.base_url +"spotify/bolhas/playlist/current-playing",
           headers: {
             HttpHeaders.authorizationHeader: store.state.token.token,
             HttpHeaders.contentTypeHeader: "application/json"
@@ -147,7 +147,7 @@ class TrackApi {
         data = jsonEncode(voto);
       }
       final res = await http.post(
-          "http://10.0.0.108:3001/api/v1/spotify/bolhas/playlist/track/votar",
+          store.state.base_url +"spotify/bolhas/playlist/track/votar",
           headers: {
             HttpHeaders.authorizationHeader: store.state.token.token,
             HttpHeaders.contentTypeHeader: "application/json"

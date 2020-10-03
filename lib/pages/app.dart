@@ -14,6 +14,7 @@ import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -134,10 +135,6 @@ class _AppState extends State<App> {
     _chatSocket.setContext(context);
     _chatSocket.setCurrentIndex(_currentIndex);
     var paginas = [Mapa(), ChatScreen(), Bolhas(), Playlist(), Eu()];
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
     return new WillPopScope(
         onWillPop: () async => false,
         child: ConnectivityWidget(

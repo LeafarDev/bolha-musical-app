@@ -40,7 +40,7 @@ class _LoginState extends State<Login> {
     // Add a listener to on url changed
     _onUrlChanged = flutterWebviewPlugin.onUrlChanged.listen((String url) {
       if (url.startsWith(
-          "http://10.0.0.108:3001/api/v1/spotify/login/callback?code")) {
+          store.state.base_url +"spotify/login/callback?code")) {
         flutterWebviewPlugin.close();
         UsersSessaoUtils.inicializarSessaoComState();
       }
@@ -67,7 +67,7 @@ class _LoginState extends State<Login> {
                     child: FlatButton(
                       onPressed: () async {
                         String url =
-                            "https://accounts.spotify.com/authorize?client_id=c03736df76424cde8deda585b4bfbad8&response_type=code&redirect_uri=http://10.0.0.108:3001/api/v1/spotify/login/callback&scope=user-read-private playlist-read-private user-top-read user-follow-modify user-library-modify user-modify-playback-state user-read-playback-state user-read-currently-playing app-remote-control user-follow-read user-read-recently-played streaming user-library-read user-read-email&state=${state.authState.id}";
+                            "https://accounts.spotify.com/authorize?client_id=${state.client_id}&response_type=code&redirect_uri=${state.base_url}spotify/login/callback&scope=user-read-private playlist-read-private user-top-read user-follow-modify user-library-modify user-modify-playback-state user-read-playback-state user-read-currently-playing app-remote-control user-follow-read user-read-recently-played streaming user-library-read user-read-email&state=${state.authState.id}";
                         if (state.authState.id != null) {
                           flutterWebviewPlugin.launch(
                             url,

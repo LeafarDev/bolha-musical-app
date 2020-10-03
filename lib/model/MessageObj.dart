@@ -93,7 +93,7 @@ abstract class MessageObj implements Built<MessageObj, MessageObjBuilder> {
           name: "Visitante",
           key: "xx1112zz111zzabv",
           uri: '',
-          icon: "Visitante");
+          icon: DrawableResourceAndroidIcon("Visitante"));
     } else {
       return getUser().toNotificationMessagePerson();
     }

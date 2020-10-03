@@ -110,7 +110,7 @@ abstract class Me implements Built<Me, MeBuilder> {
   }
 
   toNotificationMessagePerson() {
-    return Person(name: displayName, key: id, uri: '', icon: displayName);
+    return Person(name: displayName, key: id, uri: '', icon: DrawableResourceAndroidIcon('displayName'));
   }
 
   static Me fromJson(String jsonString) {
